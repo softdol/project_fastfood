@@ -1,0 +1,21 @@
+[github]
+password : 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 
+
+[db ]
+host : 3.39.84.37
+id : fastfood
+password : fastfood!@
+
+
+[db seq]
+
+menu_idx_seq
+set_idx_seq
+menu_category_seq
+detail_idx_seq
+order_idx_seq
+order_idx_total_seq
+payment_list_seq
+payment_list_total_seq
+store_idx_seq
+member_list_idx_seq
