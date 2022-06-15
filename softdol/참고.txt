@@ -1,6 +1,3 @@
-[github]
-password : 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
-
 [db ]
 host : 3.39.84.37
 id : fastfood
