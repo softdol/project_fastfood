@@ -1,5 +1,5 @@
 [github]
-password : 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
+password : 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
 
 [db ]
 host : 3.39.84.37
