@@ -10,3 +10,11 @@ payment_list_seq
 payment_list_total_seq
 store_idx_seq
 member_list_idx_seq
+
+[site]
+
+use case : https://online.visual-paradigm.com/drive/#diagramlist:proj=0&dashboard
+db erd : https://www.erdcloud.com/
+aws : https://ap-northeast-2.console.aws.amazon.com/console/home?region=ap-northeast-2#
+
+프로그램 테스트 : https://programmers.co.kr/
