@@ -1,9 +1,3 @@
-[db ]
-host : 3.39.84.37
-id : fastfood
-password : fastfood!@
-
-
 [db seq]
 
 menu_idx_seq
