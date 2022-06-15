@@ -1,4 +1,4 @@
-package database;
+package database.resultset;
 
 public class PsInsert {
 	private char type;
