@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import database.resultset.PsInsert;
+import database.model.PsInsert;
 
 public class OjdbcConnection {
 	private static String driverName = "oracle.jdbc.driver.OracleDriver";
