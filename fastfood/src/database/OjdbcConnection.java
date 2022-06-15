@@ -27,7 +27,7 @@ public class OjdbcConnection {
 	/**
 	 * ArrayList ÀÌ¿כ DB insert
 	 * @param sql
-	 * @param psList
+	 * @param psList(I : number, S: varchar2, D:date)
 	 * @return
 	 */
 	public static boolean insert(String sql, ArrayList<PsInsert> psList) {	
