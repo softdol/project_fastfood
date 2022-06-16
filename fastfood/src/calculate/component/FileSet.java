@@ -1,4 +1,4 @@
-package calculate;
+package calculate.component;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class FileSet {
-
 	public static void fileSave(File file, String path, String name) {
 		File copyfile = new File(path);	// 디렉토리의 정보
 		
@@ -39,5 +38,4 @@ public class FileSet {
 		}
 		
 	}
-	
 }
