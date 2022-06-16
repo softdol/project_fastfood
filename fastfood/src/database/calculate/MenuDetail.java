@@ -1,5 +1,5 @@
 package database.calculate;
 
-public class menu {
+public class MenuDetail {
 
 }
