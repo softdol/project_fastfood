@@ -6,11 +6,13 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import database.OjdbcConnection;
+import database.manager.Member;
+import database.manager.ReturnModel;
 import database.model.PsList;
 
 public class LoginPanel extends JPanel {
@@ -37,7 +39,7 @@ public class LoginPanel extends JPanel {
 		btnLogin.addActionListener(new ActionListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {				
 				ArrayList<PsList> userInfo = new ArrayList<>();
 				userInfo.add(new PsList('S', txtId.getText()));
 				userInfo.add(new PsList('S', txtPassOn.getText()));				
@@ -55,11 +57,19 @@ public class LoginPanel extends JPanel {
 						
 	}
 	
-	public void loginCheck(ArrayList<PsList> userInfo) {		
-		if(OjdbcConnection.selectOne("select * from member_list where member_id = ? and member_pass = ?", userInfo) != null) {
+	public void loginCheck(ArrayList<PsList> userInfo) {
+		
+		Member mInfo = ReturnModel.selMember("select * from member_list where member_id = ? and member_pass = ?", userInfo);
+		
+		if(mInfo != null) {
 			System.out.println("로그인 성공");
+			System.out.println(mInfo.getMember_id() + " : " + mInfo.getMember_name());
+			JOptionPane.showMessageDialog(null, "로그인 성공 [" + mInfo.getMember_id() + " : " + mInfo.getMember_name() + "]", "성공",
+					JOptionPane.INFORMATION_MESSAGE);
 		}else {
 			System.out.println("로그인 실패");
+			JOptionPane.showMessageDialog(null, "로그인 실패", "실패",
+					JOptionPane.WARNING_MESSAGE);
 		}
 	}
 

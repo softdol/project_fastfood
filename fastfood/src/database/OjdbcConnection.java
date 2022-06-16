@@ -119,15 +119,14 @@ public class OjdbcConnection {
 	 * @param psList(I : number, S: varchar2, D:date)
 	 * @return ResultSet
 	 */	
-	public static ResultSet selectOne(String sql, ArrayList<PsList> psList) {
-		
+	public static ResultSet selectOne(String sql, ArrayList<PsList> psList) {		
 		try(
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt= conn.prepareStatement(sql);
 			){
 			
 			for(int i = 0; i < psList.size(); i++) {
-				PsList ps = psList.get(i); 
+				PsList ps = psList.get(i);
 				switch(ps.getType()) {
 					case 'i': case 'I':
 						pstmt.setInt(i + 1, Integer.parseInt(ps.getVal()));
@@ -145,11 +144,12 @@ public class OjdbcConnection {
 			}
 			
 			try(ResultSet rs = pstmt.executeQuery()){
-				if(rs.next()){
-					return rs;
-				}
-			}			
-			return null;
+				return rs;
+			}catch(SQLException e) {
+				e.printStackTrace();
+				return null;
+			}		
+			
 						
 		} catch(SQLException e) {
 			e.printStackTrace();

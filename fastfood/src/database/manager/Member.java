@@ -16,7 +16,7 @@ public class Member {
 	private Date MEMBER_IN_DATE;
 	
 	public Member(ResultSet rs) throws SQLException {
-		
+				
 		this.member_idx			= rs.getInt(1);
 		this.store_idx 			= rs.getInt(2);
 		this.member_id			= rs.getString(3);
@@ -27,4 +27,11 @@ public class Member {
 		
 	}
 	
+	public String getMember_id() {
+		return member_id;
+	}
+	
+	public String getMember_name() {
+		return member_name;
+	}
 }
