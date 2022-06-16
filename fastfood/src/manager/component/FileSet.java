@@ -1,4 +1,4 @@
-package calculate.component;
+package manager.component;
 
 import java.io.File;
 import java.io.FileInputStream;

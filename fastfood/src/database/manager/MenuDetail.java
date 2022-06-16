@@ -1,4 +1,4 @@
-package database.calculate;
+package database.manager;
 
 public class MenuDetail {
 

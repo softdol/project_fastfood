@@ -1,4 +1,4 @@
-package calculate;
+package manager;
 
 import java.awt.Container;
 import java.awt.event.ActionEvent;
