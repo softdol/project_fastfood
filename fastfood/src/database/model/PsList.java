@@ -1,10 +1,10 @@
 package database.model;
 
-public class PsInsert {
+public class PsList {
 	private char type;
 	private String val;
 	
-	public PsInsert(char type, String val) {
+	public PsList(char type, String val) {
 		this.type = type;
 		this.val = val;				
 	}
