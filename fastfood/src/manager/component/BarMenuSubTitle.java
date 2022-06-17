@@ -8,7 +8,7 @@ public class BarMenuSubTitle extends JMenu {
 	
 	public BarMenuSubTitle(String name) {
 		super(name);
-		setFont(new Font("±√º≠√º", Font.BOLD, 18));
+		setFont(new Font("∞ÌµÒ√º", Font.BOLD, 18));
 	}
 
 }

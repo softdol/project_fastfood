@@ -9,7 +9,7 @@ public class BarMenuSubItem extends JMenuItem{
 	public BarMenuSubItem(String name) {
 		
 		super(name);
-		setFont(new Font("±√º≠√º", Font.BOLD, 18));
+		setFont(new Font("∞ÌµÒ√º", Font.BOLD, 18));
 		
 	}
 
