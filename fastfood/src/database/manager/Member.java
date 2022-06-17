@@ -10,8 +10,7 @@ public class Member {
 	private Integer store_idx;
 	private String member_id;
 	private String member_name;
-	private String member_pass; 
-	  
+	private String member_pass;
 	private String MEMBER_USE_FLAG;   
 	private Date MEMBER_IN_DATE;
 	
