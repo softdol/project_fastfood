@@ -11,8 +11,9 @@ public class Member {
 	private String member_id;
 	private String member_name;
 	private String member_pass;
-	private String MEMBER_USE_FLAG;   
-	private Date MEMBER_IN_DATE;
+	private String member_user_flag;   
+	private Date member_in_date;
+	private boolean login;
 	
 	public Member(ResultSet rs) throws SQLException {
 				
@@ -21,9 +22,16 @@ public class Member {
 		this.member_id			= rs.getString(3);
 		this.member_name 		= rs.getString(4);
 		this.member_pass 		= rs.getString(5);		
-		this.MEMBER_USE_FLAG	= rs.getString(6);
-		this.MEMBER_IN_DATE		= rs.getDate(7);
+		this.member_user_flag	= rs.getString(6);
+		this.member_in_date		= rs.getDate(7);
 		
+		if(member_user_flag.equals("Y")) {
+			login = true;
+		}
+		
+	}
+	
+	public Member() {
 	}
 	
 	public String getMember_id() {
@@ -32,5 +40,9 @@ public class Member {
 	
 	public String getMember_name() {
 		return member_name;
+	}
+	
+	public boolean getLogin() {
+		return login;
 	}
 }

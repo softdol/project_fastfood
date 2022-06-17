@@ -17,7 +17,7 @@ import database.model.PsList;
 
 public class LoginPanel extends JPanel {
 	
-	ManagerMain main;
+	private ManagerMain main;
 	
 	public LoginPanel(ManagerMain main) {
 		this.main = main;
@@ -34,7 +34,7 @@ public class LoginPanel extends JPanel {
 		JTextField txtId = new JTextField();
 		txtId.setBounds(90, 30, 80, 45);
 		
-		JPasswordField txtPassOn = new JPasswordField();
+		JPasswordField txtPassOn = new JPasswordField();		
 		txtPassOn.setBounds(90, 85, 80, 45);		
 		
 		JButton btnLogin = new JButton("로그인");
@@ -48,6 +48,7 @@ public class LoginPanel extends JPanel {
 				userInfo.add(new PsList('S', txtPassOn.getText()));				
 				loginCheck(userInfo);
 			}
+			
 		});	
 		
 		add(lblId);
@@ -55,7 +56,6 @@ public class LoginPanel extends JPanel {
 		add(txtId);
 		add(txtPassOn);
 		add(btnLogin);
-						
 	}
 	
 	public void loginCheck(ArrayList<PsList> userInfo) {
@@ -68,9 +68,9 @@ public class LoginPanel extends JPanel {
 //			JOptionPane.showMessageDialog(null, "로그인 성공 [" + mInfo.getMember_id() + " : " + mInfo.getMember_name() + "]", "성공",
 //					JOptionPane.INFORMATION_MESSAGE);
 			setVisible(false);
-			main.loginOn();
+			main.loginOn(mInfo);
 		}else {
-			System.out.println("로그인 실패");
+//			System.out.println("로그인 실패");
 			JOptionPane.showMessageDialog(null, "로그인 실패", "실패",
 					JOptionPane.WARNING_MESSAGE);
 		}
