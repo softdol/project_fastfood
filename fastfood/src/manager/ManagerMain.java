@@ -2,6 +2,8 @@ package manager;
 
 import javax.swing.JFrame;
 
+import manager.menu.ManuMainPanel;
+
 public class ManagerMain extends JFrame {
 	
 	public ManagerMain() {
@@ -10,12 +12,17 @@ public class ManagerMain extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(null);
 		
-		LoginPanel login = new LoginPanel(getWidth(), getHeight());		
+		LoginPanel login = new LoginPanel(getWidth(), getHeight());
+		//add(login);
 		
-		add(login);
+		
+		ManuMainPanel menuMainPanel = new ManuMainPanel();  
+		add(menuMainPanel);
 		
 		setVisible(true);
 	}
+	
+	
 	
 	public static void main(String[] args) {
 		
