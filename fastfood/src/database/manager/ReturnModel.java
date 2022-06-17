@@ -11,6 +11,12 @@ import database.model.PsList;
 
 public class ReturnModel {
 	
+	/**
+	 * 직원 로그인 체크(직원 정보 리턴)
+	 * @param sql
+	 * @param psList
+	 * @return Member
+	 */	
 	public static Member selMember(String sql, ArrayList<PsList> psList) {		
 		try(
 				Connection conn = OjdbcConnection.getConnection();
@@ -51,6 +57,36 @@ public class ReturnModel {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	/**
+	 * 카테고리 리스트 불러오기
+	 * @param sql
+	 * @param psList
+	 * @return ArrayList<Catagory>
+	 */
+	public static ArrayList<Category> catagoryList(String sql){
+		ArrayList<Category> cateList = new ArrayList<>();
+		try(
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt= conn.prepareStatement(sql);
+			){
+			
+			try(ResultSet rs = pstmt.executeQuery()){
+				while(rs.next()) {
+					cateList.add(new Category(rs));					
+				}				
+				return cateList;
+			}catch(SQLException e) {
+				e.printStackTrace();
+				return null;
+			}		
+			
+						
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}	
 	}
 
 }

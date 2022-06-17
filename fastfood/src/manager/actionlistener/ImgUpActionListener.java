@@ -4,18 +4,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import manager.menu.ManuMainPanel;
+
 public class ImgUpActionListener implements ActionListener {
 	
 	JFileChooser chooser;
-	
-	public ImgUpActionListener() {
-		// 파일 다이얼로그 생성
+	ManuMainPanel main;
+
+	public ImgUpActionListener(ManuMainPanel main) {
 		chooser = new JFileChooser();
+		this.main = main;
 	}
 
 	@Override
@@ -35,15 +37,16 @@ public class ImgUpActionListener implements ActionListener {
 		}else {
 			// 사용자가 파일을 선택하고  "열기" 버튼을 누른 경우
 			String filePath = chooser.getSelectedFile().getPath();	// 파일 경로 명을 알아 온다
+			main.viewUpImg(filePath);
 			//imageLabel.setIcon(new ImageIcon(filePath));	// 파일을 로딩하여 이미지 레이블에 출력한다.
 			
-			System.out.println(filePath);
+//			System.out.println(filePath);
 			
-			File file = new File(filePath);
+//			File file = new File(filePath);
 			
-			System.out.println(file.getName());
-			System.out.println(file.getParent());
-			System.out.println(file.getUsableSpace());
+//			System.out.println(file.getName());
+//			System.out.println(file.getParent());
+//			System.out.println(file.getUsableSpace());
 			
 			//fileSave(filePath, "", "1.");
 			
