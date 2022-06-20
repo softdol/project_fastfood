@@ -1,12 +1,8 @@
 package manager;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -18,7 +14,6 @@ import javax.swing.JTextField;
 import database.manager.Member;
 import database.manager.ReturnModel;
 import database.model.PsList;
-import manager.component.ManagerFocusPolicy;
 
 public class LoginPanel extends JPanel {
 	
