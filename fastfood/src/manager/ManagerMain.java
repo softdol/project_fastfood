@@ -3,11 +3,11 @@ package manager;
 import javax.swing.JFrame;
 
 import database.manager.Member;
-import manager.menu.ManuMainPanel;
+import manager.menu.MenuMainPanel;
 
 public class ManagerMain extends JFrame {
 	
-	private ManuMainPanel menuMainPanel;
+	private MenuMainPanel menuMainPanel;
 	LoginPanel login;
 	private TopMenuBar  topBar;
 	public Member mInfo; 
@@ -47,7 +47,7 @@ public class ManagerMain extends JFrame {
 		this.mInfo = mInfo;
 		setBounds(300, 150, 1200, 800);
 		topBar = new TopMenuBar();
-		menuMainPanel = new ManuMainPanel(this); 
+		menuMainPanel = new MenuMainPanel(mInfo); 
 		setJMenuBar(topBar);
 		add(menuMainPanel);
 	}

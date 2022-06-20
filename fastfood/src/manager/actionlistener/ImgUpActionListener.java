@@ -2,20 +2,19 @@ package manager.actionlistener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import manager.menu.ManuMainPanel;
+import manager.menu.MenuMainPanel;
 
 public class ImgUpActionListener implements ActionListener {
 	
 	JFileChooser chooser;
-	ManuMainPanel main;
+	MenuMainPanel main;
 
-	public ImgUpActionListener(ManuMainPanel main) {
+	public ImgUpActionListener(MenuMainPanel main) {
 		chooser = new JFileChooser();
 		this.main = main;
 	}

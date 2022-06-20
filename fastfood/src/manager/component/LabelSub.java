@@ -7,11 +7,15 @@ import javax.swing.JLabel;
 
 public class LabelSub extends JLabel  {
 	
-	public LabelSub(String name) {
-		
+	public LabelSub(String name, int x, int y) {		
 		super(name);
 		setFont(new Font("∞ÌµÒ√º", Font.BOLD, 14));
-		
+		setBounds(x, y, 50, 40);
+	}
+	
+	public LabelSub(String name) {		
+		super(name);
+		setFont(new Font("∞ÌµÒ√º", Font.BOLD, 14));		
 	}
 
 }
