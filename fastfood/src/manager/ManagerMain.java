@@ -8,6 +8,7 @@ import manager.menu.ManuMainPanel;
 public class ManagerMain extends JFrame {
 	
 	private ManuMainPanel menuMainPanel;
+	LoginPanel login;
 	private TopMenuBar  topBar;
 	public Member mInfo; 
 	
@@ -19,14 +20,12 @@ public class ManagerMain extends JFrame {
 		
 		mInfo = new Member();
 		
-		System.out.println(mInfo.getLogin());
-		
 		if(mInfo.getLogin()) {
-			loginOn(mInfo);
+			//loginOn(mInfo);
 		}else {
-			loginOn(mInfo);
-			//LoginPanel login = new LoginPanel(this);
-			//add(login);
+			//loginOn(mInfo);
+			login = new LoginPanel(this);
+			add(login);
 		}
 		
 		// 상단메뉴(공통)
@@ -44,6 +43,7 @@ public class ManagerMain extends JFrame {
 	}
 	
 	public void loginOn(Member mInfo) {
+		//login.setVisible(false);	// 안되는 이유 찾기
 		this.mInfo = mInfo;
 		setBounds(300, 150, 1200, 800);
 		topBar = new TopMenuBar();

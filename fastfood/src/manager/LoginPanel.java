@@ -1,8 +1,12 @@
 package manager;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -14,6 +18,7 @@ import javax.swing.JTextField;
 import database.manager.Member;
 import database.manager.ReturnModel;
 import database.model.PsList;
+import manager.component.ManagerFocusPolicy;
 
 public class LoginPanel extends JPanel {
 	
@@ -21,7 +26,7 @@ public class LoginPanel extends JPanel {
 	
 	public LoginPanel(ManagerMain main) {
 		this.main = main;
-		//setBorder(new LineBorder(Color.RED));
+		
 		setLayout(null);
 		setBounds(0, 0, main.getWidth(), main.getHeight());
 		
@@ -33,9 +38,22 @@ public class LoginPanel extends JPanel {
 		
 		JTextField txtId = new JTextField();
 		txtId.setBounds(90, 30, 80, 45);
+		txtId.requestFocus();
 		
 		JPasswordField txtPassOn = new JPasswordField();		
-		txtPassOn.setBounds(90, 85, 80, 45);		
+		txtPassOn.setBounds(90, 85, 80, 45);
+		
+//		txtId.setFocusTraversalKeysEnabled(false);
+//		txtId.addKeyListener(new KeyAdapter() {			
+//			//키 입력시
+//			@Override
+//			public void keyPressed(KeyEvent e) {
+//				System.out.println("keyPressed");
+//				System.out.println(e.getKeyChar());
+//				if(e.getKeyCode() == KeyEvent.VK_TAB)
+//					txtPassOn.requestFocus();
+//			}
+//		});
 		
 		JButton btnLogin = new JButton("로그인");
 		btnLogin.setBounds(180, 30, 80, 100);
@@ -49,18 +67,34 @@ public class LoginPanel extends JPanel {
 				loginCheck(userInfo);
 			}
 			
-		});	
+		});
 		
 		add(lblId);
-		add(lblPass);
+		add(lblPass);		
 		add(txtId);
 		add(txtPassOn);
 		add(btnLogin);
+		
+		
+		
+//		Vector<Component> order = new Vector<>();
+//		order.add(txtId);
+//		order.add(txtPassOn);
+//		order.add(btnLogin);		
+//		ManagerFocusPolicy newPolicy = new ManagerFocusPolicy(order);
+//		
+//		setFocusTraversalPolicy(newPolicy);
+		
+		// 자동 로그인 임시
+		ArrayList<PsList> loginInfo = new ArrayList<>();
+		loginInfo.add(new PsList('S', "admin"));
+		loginInfo.add(new PsList('I', "1234"));		
+		loginCheck(loginInfo);
 	}
 	
-	public void loginCheck(ArrayList<PsList> userInfo) {
+	public void loginCheck(ArrayList<PsList> loginInfo) {
 		
-		Member mInfo = ReturnModel.selMember("select * from member_list where member_id = ? and member_pass = ?", userInfo);
+		Member mInfo = ReturnModel.selMember("select * from member_list where member_id = ? and member_pass = ?", loginInfo);
 		
 		if(mInfo != null) {
 //			System.out.println("로그인 성공");
@@ -75,6 +109,11 @@ public class LoginPanel extends JPanel {
 					JOptionPane.WARNING_MESSAGE);
 		}
 	}
+	
+
+		
+		
+		
 
 	
 }

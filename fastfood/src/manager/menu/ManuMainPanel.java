@@ -10,17 +10,18 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
+import database.OjdbcConnection;
 import database.manager.Category;
 import database.manager.ReturnModel;
 import database.model.PsList;
@@ -45,6 +46,7 @@ public class ManuMainPanel extends JPanel{
 		ArrayList<Category> cataList = ReturnModel.catagoryList(sql);
 
 		JComboBox cateList = new JComboBox();
+		cateList.addItem("--대분류--");
 		for(Category c : cataList) {
 			cateList.addItem(c.getMenu_category_name());
 		}
@@ -68,7 +70,7 @@ public class ManuMainPanel extends JPanel{
 		
 		LabelSub lblSale = new LabelSub("할인율");
 		lblSale.setBounds(lblPrice.getX(), lblPrice.getY() + lblPrice.getHeight() + 20 , 50, 40);
-		JTextField txtSale = new JTextField();
+		JTextField txtSale = new JTextField("0");
 		txtSale.setFont(new Font("고딕체", Font.BOLD, 14));
 		txtSale.setBounds(lblSale.getX() + lblSale.getWidth() + 10, lblSale.getY() , 120, 40);
 		
@@ -89,27 +91,78 @@ public class ManuMainPanel extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String sql = "iinsert into menu values(menu_idx_seq.nextval, ";
-						sql += " ?, ?, ?, ?, ?, 'Y', sysdate, ?)";
-				ArrayList<PsList> psList = new ArrayList<>();
-				psList.add(new PsList('I', String.valueOf(cataList.get(cateList.getSelectedIndex()).getMenu_category_idx())));
 				
-				String[] fileName = txtImgPath.getText().split("\\.");
-				String fileExt = "";
-				if(fileName.length > 1) {					
-					//System.out.println(System.currentTimeMillis() + "." + fileName[1]);
-					fileExt = System.currentTimeMillis() + "." + fileName[1];
-					//fileSave(new File(txtImgPath.getText()), "imgUpload",fileExt);					
-					fileExt = "imgUpload\\" + fileExt;
-				}				
-				psList.add(new PsList('S',fileExt));
-				psList.add(new PsList('S',txtName.getText()));
-				psList.add(new PsList('I',txtPrice.getText()));
-				psList.add(new PsList('I',txtSale.getText()));
-				psList.add(new PsList('S',"localadmin"));
+				boolean inputChk = true;
 				
-				for(PsList p : psList) {
-					System.out.println(p.getType() + " : " + p.getVal());
+				if(cateList.getSelectedIndex() == 0) {					
+					viewError("대분류를 선택해 주세요.","입력오류");					
+					cateList.requestFocus();
+					inputChk = false;
+					return;
+				}
+				if(txtName.getText().trim().length() == 0) {					
+					viewError("메뉴명을 입력해 주세요.","입력오류");
+					txtName.requestFocus();
+					inputChk = false;
+					return;
+				}
+				if(txtPrice.getText().trim().length() == 0) {
+					viewError("가격을 입력해 주세요.","입력오류");
+					txtPrice.requestFocus();
+					inputChk = false;
+					return;
+				}
+				if(txtSale.getText().trim().length() == 0) {
+					viewError("할인율을 입력해 주세요.","입력오류");
+					txtSale.requestFocus();
+					inputChk = false;
+					return;
+				}
+				if(txtImgPath.getText().trim().length() == 0) {
+					viewError("이미지가 입력 되지 않았습니다.","입력오류");
+					inputChk = false;
+					return;
+				}
+				if(!main.mInfo.getLogin()) {
+					viewError("담당자 정보가 없습니다.","로그인 오류");
+					inputChk = false;
+					return;
+				}
+				
+				if(inputChk) {				
+					String sql = "iinsert into menu values(menu_idx_seq.nextval, ";
+							sql += " ?, ?, ?, ?, ?, 'Y', sysdate, ?)";
+					ArrayList<PsList> psList = new ArrayList<>();
+					psList.add(new PsList('I', String.valueOf(cataList.get(cateList.getSelectedIndex() + 1).getMenu_category_idx())));
+					
+					String[] fileName = txtImgPath.getText().split("\\.");
+					String fileExt = "";
+					String filePath = "imgUpload";
+					if(fileName.length > 1) {					
+						//System.out.println(System.currentTimeMillis() + "." + fileName[1]);
+						fileExt = System.currentTimeMillis() + "." + fileName[1];
+						fileSave(new File(txtImgPath.getText()), filePath,fileExt);
+					}
+					
+					psList.add(new PsList('S',filePath + "\\" + fileExt));
+					psList.add(new PsList('S',txtName.getText()));
+					psList.add(new PsList('I',txtPrice.getText()));
+					psList.add(new PsList('I',txtSale.getText()));
+					psList.add(new PsList('S',main.mInfo.getMember_id()));
+					//psList.add(new PsList('S',"localadmin"));
+					
+					String sqi_menuIns = "insert into menu (MENU_IDX, MENU_CATEGORY_IDX, IMG_BIG_PATH, MENU_NAME, MENU_PRICE, MENU_SALE, MENU_USE_FLAG, MENU_IN_DATE, MENU_IN_ID ) ";
+						   sqi_menuIns += "values(MENU_IDX_SEQ.nextval, ?, ?, ?, ?, ?, 'Y', sysdate, ?)";
+				    //System.out.println();   
+					if(OjdbcConnection.insert(sqi_menuIns, psList)) {
+						viewSuccess("상품이 등록 되었습니다.","상품등록");
+					}else{
+						viewError("상품 등록에 실패했습니다.","실패");
+					};
+					
+//					for(PsList p : psList) {
+//						System.out.println(p.getType() + " : " + p.getVal());
+//					}
 				}
 				//System.out.println("카테고리 : " + cataList.get(cateList.getSelectedIndex()).getMenu_category_idx());
 				//System.out.println("메뉴명 : " + txtName.getText());
@@ -180,6 +233,20 @@ public class ManuMainPanel extends JPanel{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+	}
+	
+	public void viewError(String strVal, String strState) {
+		
+		JOptionPane.showMessageDialog(null, strVal, strState,
+				JOptionPane.INFORMATION_MESSAGE);
+		
+	}
+	
+	public void viewSuccess(String strVal, String strState) {
+		
+		JOptionPane.showMessageDialog(null, strVal, strState,
+				JOptionPane.OK_OPTION);
 		
 	}
 
