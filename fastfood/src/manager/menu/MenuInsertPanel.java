@@ -138,10 +138,17 @@ public class MenuInsertPanel extends JPanel {
 					String sqi_menuIns = "insert into menu (MENU_IDX, MENU_CATEGORY_IDX, IMG_BIG_PATH, MENU_NAME, MENU_PRICE, MENU_SALE, MENU_USE_FLAG, MENU_IN_DATE, MENU_IN_ID ) ";
 						   sqi_menuIns += "values(MENU_IDX_SEQ.nextval, ?, ?, ?, ?, ?, 'Y', sysdate, ?)";
 					if(OjdbcConnection.insert(sqi_menuIns, psList)) {
-						ManagerCP.viewSuccess("상품이 등록 되었습니다.","상품등록");						
+						ManagerCP.viewSuccess("상품이 등록 되었습니다.","상품등록");
+						cateList.setSelectedIndex(0);
+						txtName.setText("");
+						txtPrice.setText("");
+						txtSale.setText("0");
+						txtImgPath.setText("");
+						lblImg.setIcon(null);
 					}else{
 						ManagerCP.viewError("상품 등록에 실패했습니다.","실패");
 					};
+					
 //					for(PsList p : psList) {
 //						System.out.println(p.getType() + " : " + p.getVal());
 //					}
