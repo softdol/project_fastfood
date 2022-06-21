@@ -28,23 +28,7 @@ public class BarActionListener implements ActionListener {
 //		if(thisBtn.getText().equals("상품등록")) {
 //			System.out.println("");
 //		}
-		switch (thisBtn.getText()) {
-			case "상품등록":
-				main.menuMainPanel.jpMainMiddle.add(new MenuInsertPanel(main));
-			break;
-			case "상품목록":
-				main.menuMainPanel.jpMainMiddle.add(new MenuList(main));
-			break;
-			case "셋트메뉴등록":
-				main.menuMainPanel.jpMainMiddle.add(new MenuSetInsert(main));
-			break;			
-			case "셋트메뉴목록":
-				main.menuMainPanel.jpMainMiddle.add(new MenuSetInsert(main));
-			break;			
-			default :
-				main.menuMainPanel.jpMainMiddle.add(new MenuSetList(main));
-			break;
-		}
+		main.viewPanel(thisBtn.getText());
 		
 	}
 

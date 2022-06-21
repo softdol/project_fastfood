@@ -1,17 +1,13 @@
 package manager.menu;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
 import database.manager.Category;
@@ -21,12 +17,7 @@ import manager.component.ManagerCP;
 
 public class MenuList extends JPanel {
 	
-	public JLabel lblImg;
-	public JTextField txtImgPath;
-	private ManagerMain main;
-	
-	GridBagLayout gbl= new GridBagLayout();
-    GridBagConstraints gbc= new GridBagConstraints();
+	ManagerMain main;	
     JPanel mainSubList;
     
 	public MenuList(ManagerMain main) {

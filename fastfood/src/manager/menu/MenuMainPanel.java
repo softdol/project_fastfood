@@ -2,7 +2,6 @@ package manager.menu;
 
 import javax.swing.JPanel;
 
-import database.manager.Member;
 import manager.ManagerMain;
 
 public class MenuMainPanel extends JPanel{

@@ -3,7 +3,11 @@ package manager;
 import javax.swing.JFrame;
 
 import database.manager.Member;
+import manager.menu.MenuInsertPanel;
+import manager.menu.MenuList;
 import manager.menu.MenuMainPanel;
+import manager.menu.MenuSetInsert;
+import manager.menu.MenuSetList;
 
 public class ManagerMain extends JFrame {
 	
@@ -51,4 +55,27 @@ public class ManagerMain extends JFrame {
 		setJMenuBar(topBar);
 		add(menuMainPanel);
 	}
+	
+	public void viewPanel(String pName) {
+		
+		switch (pName) {
+		case "상품등록":
+			menuMainPanel.jpMainMiddle.add(new MenuInsertPanel(this));
+		break;
+		case "상품목록":
+			menuMainPanel.jpMainMiddle.add(new MenuList(this));
+		break;
+		case "셋트메뉴등록":
+			menuMainPanel.jpMainMiddle.add(new MenuSetInsert(this));
+		break;			
+		case "셋트메뉴목록":
+			menuMainPanel.jpMainMiddle.add(new MenuSetList(this));
+		break;			
+		default :
+			menuMainPanel.jpMainMiddle.add(new MenuInsertPanel(this));
+		break;
+		}
+		
+	}
+
 }

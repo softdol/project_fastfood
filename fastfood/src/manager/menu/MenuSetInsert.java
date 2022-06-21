@@ -119,7 +119,7 @@ public class MenuSetInsert extends JPanel {
 					psList.add(new PsList('I',txtSale.getText()));
 					psList.add(new PsList('S',main.mInfo.getMember_id()));
 					
-					String sqi_menuIns = "insert into menu_set (SET_IDX, SET_IMG_PATH, SET_NAME, SET_PRICE, SET_SALE, SET_USE_FLAG, SET_IN_DATE, SET_ID_ID) ";
+					String sqi_menuIns = "insert into menu_set (SET_IDX, SET_IMG_PATH, SET_NAME, SET_PRICE, SET_SALE, SET_USE_FLAG, SET_IN_DATE, SET_IN_ID) ";
 						   sqi_menuIns += "values(SET_IDX_SEQ.nextval, ?, ?, ?, ?, 'Y', sysdate, ?)";
 					if(OjdbcConnection.insert(sqi_menuIns, psList)) {
 						ManagerCP.viewSuccess("상품이 등록 되었습니다.","상품등록");
