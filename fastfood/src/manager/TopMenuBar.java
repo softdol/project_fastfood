@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JMenuBar;
 
-import manager.component.bar.BarActionListener;
+import manager.actionlistener.BarActionListener;
 import manager.component.bar.BarMenuSubItem;
 import manager.component.bar.BarMenuSubTitle;
 import manager.component.bar.BarMenuTitle;

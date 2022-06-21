@@ -1,10 +1,11 @@
-package manager.component.bar;
+package manager.actionlistener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import manager.ManagerMain;
 import manager.component.ManagerCP;
+import manager.component.bar.BarMenuSubItem;
 import manager.menu.MenuInsertPanel;
 import manager.menu.MenuList;
 
