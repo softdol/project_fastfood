@@ -1,4 +1,4 @@
-package manager.component;
+package manager.component.bar;
 
 import java.awt.Font;
 

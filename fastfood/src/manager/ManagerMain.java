@@ -7,10 +7,10 @@ import manager.menu.MenuMainPanel;
 
 public class ManagerMain extends JFrame {
 	
-	private MenuMainPanel menuMainPanel;
+	public MenuMainPanel menuMainPanel;
 	LoginPanel login;
-	private TopMenuBar  topBar;
-	public Member mInfo; 
+	TopMenuBar  topBar;
+	Member mInfo; 
 	
 	public ManagerMain() {
 		setTitle("관라지 페이지");
@@ -46,7 +46,7 @@ public class ManagerMain extends JFrame {
 		//login.setVisible(false);	// 안되는 이유 찾기
 		this.mInfo = mInfo;
 		setBounds(300, 150, 1200, 800);
-		topBar = new TopMenuBar();
+		topBar = new TopMenuBar(this);
 		menuMainPanel = new MenuMainPanel(mInfo); 
 		setJMenuBar(topBar);
 		add(menuMainPanel);

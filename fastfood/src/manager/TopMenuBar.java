@@ -6,19 +6,28 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JMenuBar;
 
-import manager.component.BarMenuSubItem;
-import manager.component.BarMenuSubTitle;
-import manager.component.BarMenuTitle;
+import manager.component.bar.BarActionListener;
+import manager.component.bar.BarMenuSubItem;
+import manager.component.bar.BarMenuSubTitle;
+import manager.component.bar.BarMenuTitle;
 
 public class TopMenuBar extends JMenuBar {
 	
-	public TopMenuBar() {
+	ManagerMain main;
+	
+	public TopMenuBar(ManagerMain main) {
+		
+		this.main = main;
+		
+		BarActionListener barAction = new BarActionListener(main);		
 		
 		BarMenuTitle menuAll = new BarMenuTitle("메뉴");
 		
 		BarMenuSubTitle menuTitle = new BarMenuSubTitle("상품관리");		
-		BarMenuSubItem menuList = new BarMenuSubItem("상품목록");		
+		BarMenuSubItem menuList = new BarMenuSubItem("상품목록");
+		menuList.addActionListener(barAction);
 		BarMenuSubItem menuInsert = new BarMenuSubItem("상품등록");
+		menuInsert.addActionListener(barAction);
 		//menuItem = new JMenuItem(“메뉴항목1”, KeyEvent.VK_T); ->키보드 단축키 설정 가능
 		
 		menuTitle.add(menuList);

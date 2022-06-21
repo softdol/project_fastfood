@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class ManagerCP {
 	
@@ -53,6 +54,14 @@ public class ManagerCP {
 		
 		JOptionPane.showMessageDialog(null, strVal, strState,
 				JOptionPane.OK_OPTION);
+		
+	}
+	
+	public static void reFresh(JPanel jp) {
+		
+		jp.removeAll();
+		jp.revalidate();
+		jp.repaint();
 		
 	}
 

@@ -18,7 +18,7 @@ import javax.swing.border.LineBorder;
 
 import database.manager.Category;
 import database.manager.ReturnModel;
-import manager.component.ManagerComp;
+import manager.component.ManagerCP;
 
 public class MenuList extends JPanel {
 	
@@ -30,8 +30,6 @@ public class MenuList extends JPanel {
     GridBagConstraints gbc= new GridBagConstraints();
     JPanel mainSubList;
     
-    JScrollPane scPane;
-	
 	public MenuList(MenuMainPanel menuMain) {
 		
 		this.menuMain = menuMain;
@@ -72,7 +70,7 @@ public class MenuList extends JPanel {
 		
 		mainSubList.add(new MenuSubList(0));
 		
-		scPane = new JScrollPane(mainSubList, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+		JScrollPane scPane = new JScrollPane(mainSubList, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scPane.getVerticalScrollBar().setUnitIncrement(16);
 		
@@ -83,7 +81,7 @@ public class MenuList extends JPanel {
 	}
 
 	public void viewMenuList(int cate) {
-		ManagerComp.reFresh(mainSubList);
+		ManagerCP.reFresh(mainSubList);
 		mainSubList.add(new MenuSubList(cate));
 	}
 }
