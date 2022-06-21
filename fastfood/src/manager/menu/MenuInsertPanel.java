@@ -2,13 +2,11 @@ package manager.menu;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -41,8 +39,7 @@ public class MenuInsertPanel extends JPanel {
 		setBorder(new LineBorder(Color.BLACK));
 		LabelTitle lblTitle = new LabelTitle("상품 등록");
 		
-		String sql = "select * from menu_catagory";
-		ArrayList<Category> cataList = ReturnModel.catagoryList(sql);
+		ArrayList<Category> cataList = ReturnModel.catagoryList();
 
 		JComboBox cateList = new JComboBox();
 		cateList.addItem("--대분류--");
@@ -177,15 +174,5 @@ public class MenuInsertPanel extends JPanel {
 		add(btnInsert);
 		
 	}
-	
-//	public void viewUpImg(String path) {
-//		ImageIcon icon = new ImageIcon(path);
-//		txtImgPath.setText(path);
-//		
-//		Image img = icon.getImage();
-//		System.out.println("img path : " + txtImgPath.getText());
-//		Image cimg = img.getScaledInstance(lblImg.getWidth(),lblImg.getHeight(),img.SCALE_SMOOTH);		
-//		lblImg.setIcon(new ImageIcon(cimg));
-//	}
 
 }

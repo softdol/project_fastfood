@@ -11,6 +11,7 @@ import manager.ManagerMain;
 public class MenuMainPanel extends JPanel{
 	
 	MenuInsertPanel menuIns;
+	MenuList		menuList;
 	public Member mInfo;
 	
 	public void viewUpImg(String path) {
@@ -18,7 +19,7 @@ public class MenuMainPanel extends JPanel{
 		menuIns.txtImgPath.setText(path);
 		
 		Image img = icon.getImage();
-		System.out.println("img path : " + menuIns.txtImgPath.getText());
+		//System.out.println("img path : " + menuIns.txtImgPath.getText());
 		Image cimg = img.getScaledInstance(menuIns.lblImg.getWidth(),menuIns.lblImg.getHeight(),img.SCALE_SMOOTH);		
 		menuIns.lblImg.setIcon(new ImageIcon(cimg));
 	}
@@ -28,9 +29,13 @@ public class MenuMainPanel extends JPanel{
 		setBounds(0,0,1185,730);
 		
 		this.mInfo = mInfo;
-		menuIns = new MenuInsertPanel(this);
+		// 상품 등록
+		//menuIns = new MenuInsertPanel(this);
+		//add(menuIns);
 		
-		add(menuIns);
+		// 상품 목록
+		menuList = new MenuList(this);
+		add(menuList);
 		
 	}
 	

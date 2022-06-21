@@ -61,15 +61,15 @@ public class ReturnModel {
 	
 	/**
 	 * 카테고리 리스트 불러오기
-	 * @param sql
+	 * @param 
 	 * @param psList
 	 * @return ArrayList<Catagory>
 	 */
-	public static ArrayList<Category> catagoryList(String sql){
+	public static ArrayList<Category> catagoryList(){
 		ArrayList<Category> cateList = new ArrayList<>();
 		try(
 				Connection conn = OjdbcConnection.getConnection();
-				PreparedStatement pstmt= conn.prepareStatement(sql);
+				PreparedStatement pstmt= conn.prepareStatement("select * from menu_catagory");
 			){
 			
 			try(ResultSet rs = pstmt.executeQuery()){
@@ -87,6 +87,57 @@ public class ReturnModel {
 			e.printStackTrace();
 			return null;
 		}	
+	}
+	
+	/**
+	 * 메뉴 목록 불러오기
+	 * @param sql
+	 * @param psList
+	 * @return 메뉴 목록
+	 */
+	public static ArrayList<Menu> selMenuList(String sql, ArrayList<PsList> psList) {
+		ArrayList<Menu> menuList = new ArrayList<>();
+		try(
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt= conn.prepareStatement(sql);
+			){
+			
+			for(int i = 0; i < psList.size(); i++) {
+				PsList ps = psList.get(i);
+				switch(ps.getType()) {
+					case 'i': case 'I':
+						pstmt.setInt(i + 1, Integer.parseInt(ps.getVal()));
+						break;
+					case 's': case 'S':
+						pstmt.setString(i + 1, ps.getVal());
+						break;
+					case 'd': case 'D':
+						pstmt.setDate(i + 1, java.sql.Date.valueOf(ps.getVal()));
+						break;
+					default:
+						pstmt.setString(i + 1, ps.getVal());
+						break;				
+				}
+			}
+			
+			try(ResultSet rs = pstmt.executeQuery()){
+
+				while(rs.next()) {
+					menuList.add(new Menu(rs));					
+				}
+				
+				return menuList;
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+				return null;
+			}		
+			
+						
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

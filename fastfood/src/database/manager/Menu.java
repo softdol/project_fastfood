@@ -88,15 +88,20 @@ public class Menu {
 	
 	public Menu(ResultSet rs) throws SQLException {
 		this.menu_idx = rs.getInt(1);    
-		this.menu_category = rs.getInt(1);
-		this.img_big_path = rs.getString(1);
-		this.menu_name = rs.getString(1);
-		this.menu_price = rs.getInt(1);
-		this.menu_sale = rs.getInt(1);
-		this.menu_use = rs.getString(1);
-		this.menu_in_date = rs.getDate(1);
-		this.menu_in_id = rs.getString(1);
-		this.menu_mod_date = rs.getDate(1);
-		this.menu_mod_id = rs.getString(1);
+		this.menu_category = rs.getInt(2);
+		this.img_big_path = rs.getString(3);
+		this.menu_name = rs.getString(4);
+		this.menu_price = rs.getInt(5);
+		this.menu_sale = rs.getInt(6);
+		this.menu_use = rs.getString(7);
+		this.menu_in_date = rs.getDate(8);
+		this.menu_in_id = rs.getString(9);
+		this.menu_mod_date = rs.getDate(10);
+		this.menu_mod_id = rs.getString(11);
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("idx : %d cate : %d name : %s", menu_idx, menu_category, menu_name );
 	}
 }

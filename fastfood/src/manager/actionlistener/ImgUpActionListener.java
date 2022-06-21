@@ -37,17 +37,6 @@ public class ImgUpActionListener implements ActionListener {
 			// 사용자가 파일을 선택하고  "열기" 버튼을 누른 경우
 			String filePath = chooser.getSelectedFile().getPath();	// 파일 경로 명을 알아 온다
 			main.viewUpImg(filePath);
-			//imageLabel.setIcon(new ImageIcon(filePath));	// 파일을 로딩하여 이미지 레이블에 출력한다.
-			
-//			System.out.println(filePath);
-			
-//			File file = new File(filePath);
-			
-//			System.out.println(file.getName());
-//			System.out.println(file.getParent());
-//			System.out.println(file.getUsableSpace());
-			
-			//fileSave(filePath, "", "1.");
 			
 			//pack();	// 이미지 크기에 맞추어 프레임의 크기 조절				
 		}
