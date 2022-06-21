@@ -14,6 +14,7 @@ import database.manager.MenuSet;
 import database.manager.ReturnModel;
 import database.model.PsList;
 import manager.ManagerMain;
+import manager.actionlistener.ModifyActionListener;
 import manager.component.ManagerCP;
 
 public class MenuSetList extends JPanel {
@@ -34,11 +35,6 @@ public class MenuSetList extends JPanel {
 		
 		String sql = "select * from menu_set";
 		
-//		if(cate > 0) {
-//			sql += " where MENU_CATEGORY_IDX = ?";
-//			psList.add(new PsList('I', String.valueOf(cate)));
-//		}
-		
 		JPanel jpList = new JPanel();
 		
 		ArrayList<MenuSet> menuList = ReturnModel.selMenuSetList(sql, psList);
@@ -56,6 +52,7 @@ public class MenuSetList extends JPanel {
 				Image cimg = img.getScaledInstance(130,200,img.SCALE_SMOOTH);
 				
 				JButton btn = new JButton(new ImageIcon(cimg));
+				btn.addActionListener(new ModifyActionListener(main,"세트메뉴수정",m.getSet_idx()));
 				
 				jpList.add(btn);
 			}else {

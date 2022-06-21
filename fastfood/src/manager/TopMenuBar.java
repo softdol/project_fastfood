@@ -26,8 +26,8 @@ public class TopMenuBar extends JMenuBar {
 		BarMenuSubTitle menuTitle = new BarMenuSubTitle("상품관리");		
 		BarMenuSubItem menuList = new BarMenuSubItem("상품목록");		
 		BarMenuSubItem menuInsert = new BarMenuSubItem("상품등록");
-		BarMenuSubItem menuSetList = new BarMenuSubItem("셋트메뉴목록");
-		BarMenuSubItem menuSetInsert = new BarMenuSubItem("셋트메뉴등록");
+		BarMenuSubItem menuSetList = new BarMenuSubItem("세트메뉴목록");
+		BarMenuSubItem menuSetInsert = new BarMenuSubItem("세트메뉴등록");
 		//menuItem = new JMenuItem(“메뉴항목1”, KeyEvent.VK_T); ->키보드 단축키 설정 가능
 //		System.out.println(menuTitle.getMenuComponentCount());
 //		System.out.println(menuTitle.getItem(1).getText());

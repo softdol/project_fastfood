@@ -2,13 +2,11 @@ package manager.menu;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,7 +16,7 @@ import javax.swing.border.LineBorder;
 import database.OjdbcConnection;
 import database.model.PsList;
 import manager.ManagerMain;
-import manager.actionlistener.ImgUpActionListenerSet;
+import manager.actionlistener.ImgUpActionListener;
 import manager.component.LabelSub;
 import manager.component.LabelTitle;
 import manager.component.ManagerCP;
@@ -29,22 +27,13 @@ public class MenuSetInsert extends JPanel {
 	public JLabel lblImg;
 	public JTextField txtImgPath;
 	ManagerMain main;
-	
-	public void viewUpImg(String path) {
-		ImageIcon icon = new ImageIcon(path);
-		txtImgPath.setText(path);
 		
-		Image img = icon.getImage();
-		Image cimg = img.getScaledInstance(lblImg.getWidth(),lblImg.getHeight(),img.SCALE_SMOOTH);		
-		lblImg.setIcon(new ImageIcon(cimg));
-	}
-	
 	public MenuSetInsert(ManagerMain main) {
 		this.main = main;
 		setLayout(null);
 		setBounds(0,0,565,730);
 		setBorder(new LineBorder(Color.BLACK));
-		LabelTitle lblTitle = new LabelTitle("셋트 상품 등록");
+		LabelTitle lblTitle = new LabelTitle("세트 상품 등록");
 	
 		LabelSub lblName = new LabelSub("메뉴명", lblTitle.getX(), lblTitle.getY() + lblTitle.getHeight() + 20);
 		LabelSub lblPrice = new LabelSub("가격", lblName.getX(), lblName.getY() + lblName.getHeight() + 20);
@@ -60,7 +49,7 @@ public class MenuSetInsert extends JPanel {
 		
 		JButton btnImg = new JButton("이미지 찾기");
 		btnImg.setBounds(lblImg.getX() + 30, lblImg.getY() + lblImg.getHeight() + 20 , 100, 40);
-		btnImg.addActionListener(new ImgUpActionListenerSet(this));
+		btnImg.addActionListener(new ImgUpActionListener(this));
 		
 		JButton btnInsert = new JButton("등록");
 		btnInsert.setFont(new Font("고딕체", Font.BOLD, 14));
@@ -132,9 +121,6 @@ public class MenuSetInsert extends JPanel {
 						ManagerCP.viewError("상품 등록에 실패했습니다.","실패");
 					};
 					
-//					for(PsList p : psList) {
-//						System.out.println(p.getType() + " : " + p.getVal());
-//					}
 				}
 			}
 		});
@@ -143,7 +129,6 @@ public class MenuSetInsert extends JPanel {
 		txtImgPath.setVisible(false);
 		
 		add(lblTitle);
-		//add(cateList);
 		
 		add(lblName);
 		add(lblPrice);

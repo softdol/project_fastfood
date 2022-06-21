@@ -21,7 +21,6 @@ public class BarActionListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		ManagerCP.reFresh(main.menuMainPanel.jpMainMiddle);
 		//System.out.println(main.menuMainPanel.jpMainMiddle.getWidth());		
 		//System.out.println(e.getSource());
 		BarMenuSubItem thisBtn = (BarMenuSubItem)e.getSource();

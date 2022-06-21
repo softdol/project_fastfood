@@ -1,11 +1,13 @@
 package manager.component;
 
+import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -63,6 +65,13 @@ public class ManagerCP {
 		jp.revalidate();
 		jp.repaint();
 		
+	}
+	
+	public static Image imgResize(String path, int width, int height) {
+		ImageIcon icon = new ImageIcon(path);
+		Image img = icon.getImage();
+		
+		return img.getScaledInstance(width,height,img.SCALE_SMOOTH);
 	}
 
 }

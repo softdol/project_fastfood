@@ -3,11 +3,13 @@ package manager;
 import javax.swing.JFrame;
 
 import database.manager.Member;
+import manager.component.ManagerCP;
 import manager.menu.MenuInsertPanel;
 import manager.menu.MenuList;
 import manager.menu.MenuMainPanel;
 import manager.menu.MenuSetInsert;
 import manager.menu.MenuSetList;
+import manager.menu.MenuSetModify;
 
 public class ManagerMain extends JFrame {
 	
@@ -57,6 +59,7 @@ public class ManagerMain extends JFrame {
 	}
 	
 	public void viewPanel(String pName) {
+		ManagerCP.reFresh(menuMainPanel.jpMainMiddle);
 		
 		switch (pName) {
 		case "상품등록":
@@ -65,17 +68,32 @@ public class ManagerMain extends JFrame {
 		case "상품목록":
 			menuMainPanel.jpMainMiddle.add(new MenuList(this));
 		break;
-		case "셋트메뉴등록":
+		case "세트메뉴등록":
 			menuMainPanel.jpMainMiddle.add(new MenuSetInsert(this));
 		break;			
-		case "셋트메뉴목록":
+		case "세트메뉴목록":
 			menuMainPanel.jpMainMiddle.add(new MenuSetList(this));
 		break;			
 		default :
-			menuMainPanel.jpMainMiddle.add(new MenuInsertPanel(this));
+			menuMainPanel.jpMainMiddle.add(new MenuList(this));
 		break;
 		}
 		
+	}
+	
+	public void viewModifyPanel(String pName, int idx) {
+		ManagerCP.reFresh(menuMainPanel.jpMainMiddle);
+		switch (pName) {
+		case "상품수정":
+			menuMainPanel.jpMainMiddle.add(new MenuInsertPanel(this));
+		break;
+		case "세트메뉴수정":
+			menuMainPanel.jpMainMiddle.add(new MenuSetModify(this, idx));
+		break;			
+		default :
+			menuMainPanel.jpMainMiddle.add(new MenuList(this));
+		break;
+		}
 	}
 
 }
