@@ -65,7 +65,7 @@ public class ReturnModel {
 	 * @param psList
 	 * @return ArrayList<Catagory>
 	 */
-	public static ArrayList<Category> catagoryList(){
+	public static ArrayList<Category> categoryList(){
 		ArrayList<Category> cateList = new ArrayList<>();
 		try(
 				Connection conn = OjdbcConnection.getConnection();
@@ -225,6 +225,56 @@ public class ReturnModel {
 
 				if(rs.next()) {
 					return new MenuSet(rs);					
+				}else {
+					return null;
+				}
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+				return null;
+			}		
+			
+						
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * 메뉴 정보 불러오기
+	 * @param sql
+	 * @param psList
+	 * @return
+	 */
+	public static Menu selMenu(String sql, ArrayList<PsList> psList) {		
+		try(
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt= conn.prepareStatement(sql);
+			){
+			
+			for(int i = 0; i < psList.size(); i++) {
+				PsList ps = psList.get(i);
+				switch(ps.getType()) {
+					case 'i': case 'I':
+						pstmt.setInt(i + 1, Integer.parseInt(ps.getVal()));
+						break;
+					case 's': case 'S':
+						pstmt.setString(i + 1, ps.getVal());
+						break;
+					case 'd': case 'D':
+						pstmt.setDate(i + 1, java.sql.Date.valueOf(ps.getVal()));
+						break;
+					default:
+						pstmt.setString(i + 1, ps.getVal());
+						break;				
+				}
+			}
+			
+			try(ResultSet rs = pstmt.executeQuery()){
+
+				if(rs.next()) {
+					return new Menu(rs);					
 				}else {
 					return null;
 				}

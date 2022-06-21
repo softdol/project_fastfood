@@ -11,10 +11,12 @@ import javax.swing.JPanel;
 import database.manager.Menu;
 import database.manager.ReturnModel;
 import database.model.PsList;
+import manager.ManagerMain;
+import manager.actionlistener.ModifyActionListener;
 
 public class MenuSubList extends JPanel {
 
-	public MenuSubList(int cate) {
+	public MenuSubList(ManagerMain main, int cate) {
 		
 		ArrayList<PsList> psList = new ArrayList<>();
 		
@@ -40,6 +42,7 @@ public class MenuSubList extends JPanel {
 				Image cimg = img.getScaledInstance(130,200,img.SCALE_SMOOTH);
 				
 				JButton btn = new JButton(new ImageIcon(cimg));
+				btn.addActionListener(new ModifyActionListener(main,"상품수정",m.getMenu_idx()));
 				
 				add(btn);
 			}else {

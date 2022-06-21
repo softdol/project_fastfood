@@ -2,7 +2,6 @@ package manager.menu;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -18,6 +17,7 @@ import javax.swing.border.LineBorder;
 
 import database.OjdbcConnection;
 import database.manager.Category;
+import database.manager.Menu;
 import database.manager.ReturnModel;
 import database.model.PsList;
 import manager.ManagerMain;
@@ -27,27 +27,42 @@ import manager.component.LabelTitle;
 import manager.component.ManagerCP;
 import manager.component.TextFieldSub;
 
-public class MenuInsertPanel extends JPanel {
-	
+public class MenuModify extends JPanel {
+
 	public JLabel lblImg;
 	public JTextField txtImgPath;
 	ManagerMain main;
 	
-	public MenuInsertPanel(ManagerMain main) {
-		
+	public MenuModify(ManagerMain main, int idx) {
 		this.main = main;
 		
 		setLayout(null);
 		setBounds(0,0,565,730);
 		setBorder(new LineBorder(Color.BLACK));
-		LabelTitle lblTitle = new LabelTitle("상품 등록");
+		LabelTitle lblTitle = new LabelTitle("상품 수정");
+		
+		ArrayList<PsList> psList = new ArrayList<>();
+		String sql = "select * from menu where menu_idx = ?";
+		psList.add(new PsList('I', String.valueOf(idx)));
+		
+		Menu menuInfo = ReturnModel.selMenu(sql, psList);
+		
+		if(menuInfo == null) {
+			System.out.println("상품 정보가 없습니다.");
+			//main.viewPanel("세트메뉴목록");
+			return;
+		}
 		
 		ArrayList<Category> cataList = ReturnModel.categoryList();
 
 		JComboBox cateList = new JComboBox();
 		cateList.addItem("--대분류--");
-		for(Category c : cataList) {
-			cateList.addItem(c.getMenu_category_name());
+		
+		for(int i = 0; i < cataList.size(); i++) {
+			cateList.addItem(cataList.get(i).getMenu_category_name());			
+			if(cataList.get(i).getMenu_category_idx() == menuInfo.getMenu_category()) {
+				cateList.setSelectedIndex(i + 1);
+			}
 		}
 		
 		cateList.setBounds(lblTitle.getX(), lblTitle.getY() + lblTitle.getHeight() + 20 , 80, 50);
@@ -57,11 +72,11 @@ public class MenuInsertPanel extends JPanel {
 		LabelSub lblPrice = new LabelSub("가격", lblName.getX(), lblName.getY() + lblName.getHeight() + 20);
 		LabelSub lblSale = new LabelSub("할인율", lblPrice.getX(), lblPrice.getY() + lblPrice.getHeight() + 20);
 		
-		TextFieldSub txtName = new TextFieldSub("", lblName.getX() + lblName.getWidth() + 10, lblName.getY());
-		TextFieldSub txtPrice = new TextFieldSub("", lblPrice.getX() + lblPrice.getWidth() + 10, lblPrice.getY());
-		TextFieldSub txtSale = new TextFieldSub("0", lblSale.getX() + lblSale.getWidth() + 10, lblSale.getY());
+		TextFieldSub txtName = new TextFieldSub(menuInfo.getMenu_name(), lblName.getX() + lblName.getWidth() + 10, lblName.getY());
+		TextFieldSub txtPrice = new TextFieldSub(String.valueOf(menuInfo.getMenu_price()), lblPrice.getX() + lblPrice.getWidth() + 10, lblPrice.getY());
+		TextFieldSub txtSale = new TextFieldSub(String.valueOf(menuInfo.getMenu_sale()), lblSale.getX() + lblSale.getWidth() + 10, lblSale.getY());
 		
-		lblImg = new JLabel("   이미지");
+		lblImg = new JLabel(new ImageIcon(ManagerCP.imgResize(menuInfo.getImg_big_path(),80,160)));
 		lblImg.setBorder(new LineBorder(Color.BLACK));
 		lblImg.setBounds(txtSale.getX() + txtSale.getWidth() + 30, cateList.getY() , 180, 200);
 		
@@ -69,7 +84,7 @@ public class MenuInsertPanel extends JPanel {
 		btnImg.setBounds(lblImg.getX() + 30, lblImg.getY() + lblImg.getHeight() + 20 , 100, 40);
 		btnImg.addActionListener(new ImgUpActionListener(this));
 		
-		JButton btnInsert = new JButton("등록");
+		JButton btnInsert = new JButton("수정");
 		btnInsert.setFont(new Font("고딕체", Font.BOLD, 14));
 		btnInsert.setBounds(txtSale.getX() - 30, btnImg.getY() + btnImg.getHeight() + 40 , 80, 40);
 		
@@ -104,16 +119,12 @@ public class MenuInsertPanel extends JPanel {
 					inputChk = false;
 					return;
 				}
-				if(txtImgPath.getText().trim().length() == 0) {
-					ManagerCP.viewError("이미지가 입력 되지 않았습니다.","입력오류");
-					inputChk = false;
-					return;
-				}
+				
 				if(!main.mInfo.getLogin()) {
 					ManagerCP.viewError("담당자 정보가 없습니다.","로그인 오류");
 					inputChk = false;
 					return;
-				}
+				}				
 				
 				if(inputChk) {
 					ArrayList<PsList> psList = new ArrayList<>();
@@ -125,32 +136,56 @@ public class MenuInsertPanel extends JPanel {
 					if(fileName.length > 1) {
 						fileExt = System.currentTimeMillis() + "." + fileName[1];
 						ManagerCP.fileSave(new File(txtImgPath.getText()), filePath,fileExt);
+						File delFile = new File(menuInfo.getImg_big_path());
+						
+						if(delFile.exists()) {
+							delFile.delete();
+						}
+						
+						psList.add(new PsList('S',filePath + "\\" + fileExt));
+					}else {
+						psList.add(new PsList('S',menuInfo.getImg_big_path()));
 					}
 					
-					psList.add(new PsList('S',filePath + "\\" + fileExt));
 					psList.add(new PsList('S',txtName.getText()));
 					psList.add(new PsList('I',txtPrice.getText()));
 					psList.add(new PsList('I',txtSale.getText()));
 					psList.add(new PsList('S',main.mInfo.getMember_id()));
+					psList.add(new PsList('I',String.valueOf(menuInfo.getMenu_idx())));
 					
-					String sqi_menuIns = "insert into menu (MENU_IDX, MENU_CATEGORY_IDX, IMG_BIG_PATH, MENU_NAME, MENU_PRICE, MENU_SALE, MENU_USE_FLAG, MENU_IN_DATE, MENU_IN_ID ) ";
-						   sqi_menuIns += "values(MENU_IDX_SEQ.nextval, ?, ?, ?, ?, ?, 'Y', sysdate, ?)";
-					if(OjdbcConnection.insert(sqi_menuIns, psList)) {
-						ManagerCP.viewSuccess("상품이 등록 되었습니다.","상품등록");
-						cateList.setSelectedIndex(0);
-						txtName.setText("");
-						txtPrice.setText("");
-						txtSale.setText("0");
-						txtImgPath.setText("");
-						lblImg.setIcon(null);
-					}else{
-						ManagerCP.viewError("상품 등록에 실패했습니다.","실패");
-					};
+					String sqi_menuUpt = "update menu";
+					sqi_menuUpt += " set MENU_CATEGORY_IDX = ?";
+					sqi_menuUpt += " , IMG_BIG_PATH = ?";
+					sqi_menuUpt += " , MENU_NAME = ?";
+					sqi_menuUpt += " , MENU_PRICE = ?";
+					sqi_menuUpt += " , MENU_SALE = ?";
+					sqi_menuUpt += " , MENU_MOD_DATE = sysdate";
+					sqi_menuUpt += " , MENU_MOD_ID = ?";
+					sqi_menuUpt += " where MENU_IDX = ?";
 					
+//					System.out.println(sqi_menuUpt);
+//					
 //					for(PsList p : psList) {
 //						System.out.println(p.getType() + " : " + p.getVal());
 //					}
+
+					if(OjdbcConnection.insert(sqi_menuUpt, psList)) {
+						ManagerCP.viewSuccess("상품이 수정 되었습니다.","상품등록");
+						main.viewPanel("상품목록");
+					}else{
+						ManagerCP.viewError("상품 등록에 실패했습니다.","실패");
+					};
 				}
+			}
+		});
+		
+		JButton btnSetList = new JButton("목록 보기");
+		btnSetList.setFont(new Font("고딕체", Font.BOLD, 14));
+		btnSetList.setBounds(btnInsert.getX() + btnInsert.getWidth() + 20, btnInsert.getY() , 120, 40);
+		btnSetList.addActionListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				main.viewPanel("상품목록");
 			}
 		});
 		
@@ -173,7 +208,6 @@ public class MenuInsertPanel extends JPanel {
 		add(txtImgPath);
 		
 		add(btnInsert);
-		
+		add(btnSetList);
 	}
-
 }

@@ -30,7 +30,7 @@ public class MenuList extends JPanel {
 		
 		JPanel menuCategory = new JPanel();
 		
-		ArrayList<Category> cataList = ReturnModel.catagoryList();
+		ArrayList<Category> cataList = ReturnModel.categoryList();
 		
 		int cateMax = cataList.size() + 1;
 		menuCategory.setLayout(new GridLayout(1, cateMax, 15, 15));
@@ -58,7 +58,7 @@ public class MenuList extends JPanel {
 		
 		mainSubList = new JPanel();
 		
-		mainSubList.add(new MenuSubList(0));
+		mainSubList.add(new MenuSubList(main, 0));
 		
 		JScrollPane scPane = new JScrollPane(mainSubList, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -72,6 +72,6 @@ public class MenuList extends JPanel {
 
 	public void viewMenuList(int cate) {
 		ManagerCP.reFresh(mainSubList);
-		mainSubList.add(new MenuSubList(cate));
+		mainSubList.add(new MenuSubList(main, cate));
 	}
 }

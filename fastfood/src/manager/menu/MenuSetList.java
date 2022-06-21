@@ -77,7 +77,7 @@ public class MenuSetList extends JPanel {
 	
 	public void viewMenuList(int cate) {
 		ManagerCP.reFresh(mainSubList);
-		mainSubList.add(new MenuSubList(cate));
+		mainSubList.add(new MenuSubList(main, cate));
 	}
 	
 }

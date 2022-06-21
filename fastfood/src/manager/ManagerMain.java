@@ -7,6 +7,7 @@ import manager.component.ManagerCP;
 import manager.menu.MenuInsertPanel;
 import manager.menu.MenuList;
 import manager.menu.MenuMainPanel;
+import manager.menu.MenuModify;
 import manager.menu.MenuSetInsert;
 import manager.menu.MenuSetList;
 import manager.menu.MenuSetModify;
@@ -85,7 +86,7 @@ public class ManagerMain extends JFrame {
 		ManagerCP.reFresh(menuMainPanel.jpMainMiddle);
 		switch (pName) {
 		case "상품수정":
-			menuMainPanel.jpMainMiddle.add(new MenuInsertPanel(this));
+			menuMainPanel.jpMainMiddle.add(new MenuModify(this, idx));
 		break;
 		case "세트메뉴수정":
 			menuMainPanel.jpMainMiddle.add(new MenuSetModify(this, idx));

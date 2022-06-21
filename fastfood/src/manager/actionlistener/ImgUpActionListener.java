@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import manager.menu.MenuInsertPanel;
+import manager.menu.MenuModify;
 import manager.menu.MenuSetInsert;
 import manager.menu.MenuSetModify;
 
@@ -76,6 +77,15 @@ public class ImgUpActionListener implements ActionListener {
 				cimg = img.getScaledInstance(sModPanel.lblImg.getWidth(),sModPanel.lblImg.getHeight(),img.SCALE_SMOOTH);		
 				sModPanel.lblImg.setIcon(new ImageIcon(cimg));
 			break;
+			case "MenuModify":
+				MenuModify nModPanel = (MenuModify)main;
+				nModPanel.txtImgPath.setText(path);
+				
+				cimg = img.getScaledInstance(nModPanel.lblImg.getWidth(),nModPanel.lblImg.getHeight(),img.SCALE_SMOOTH);		
+				nModPanel.lblImg.setIcon(new ImageIcon(cimg));
+			break;
+			
+			
 			
 			
 			
