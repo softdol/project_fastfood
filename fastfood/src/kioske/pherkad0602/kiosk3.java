@@ -12,9 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-public class kiosk1 extends JFrame{
+public class kiosk3 extends JFrame{
 	
-	public kiosk1() {
+	public kiosk3() {
 		
 		LayoutManager manager = new GridLayout(4, 3);
 		
@@ -62,7 +62,7 @@ public class kiosk1 extends JFrame{
 		for(int i = 0; i <3; ++i) {
 			
 			JButton btn2 = new JButton("이벤트 배너");
-			btn2.setBounds(0, i*150, 800, 150);
+			btn2.setBounds(0, i*150, 670, 150);
 			btn2.setBackground(Color.white);
 			mainPanel.add(btn2);
 		}
@@ -118,14 +118,16 @@ public class kiosk1 extends JFrame{
 		
 		
 		//
-		setBounds(500,0,900,1040);
+		setBounds(510,0,900,1040);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
+	    setResizable(false);
+
 	}
 	
 	public static void main(String[] args) {
 		
-		new kiosk1();
+		new kiosk3();
 
 	}
 }
