@@ -10,25 +10,22 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
 import database.OjdbcConnection;
-import database.manager.Category;
-import database.manager.ReturnModel;
 import database.model.PsList;
 import manager.ManagerMain;
-import manager.actionlistener.ImgUpActionListener;
+import manager.actionlistener.ImgUpActionListenerSet;
 import manager.component.LabelSub;
 import manager.component.LabelTitle;
 import manager.component.ManagerCP;
 import manager.component.TextFieldSub;
 
-public class MenuInsertPanel extends JPanel {
-	
+public class MenuSetInsert extends JPanel {
+		
 	public JLabel lblImg;
 	public JTextField txtImgPath;
 	ManagerMain main;
@@ -42,27 +39,14 @@ public class MenuInsertPanel extends JPanel {
 		lblImg.setIcon(new ImageIcon(cimg));
 	}
 	
-	public MenuInsertPanel(ManagerMain main) {
-		
+	public MenuSetInsert(ManagerMain main) {
 		this.main = main;
-		
 		setLayout(null);
 		setBounds(0,0,565,730);
 		setBorder(new LineBorder(Color.BLACK));
-		LabelTitle lblTitle = new LabelTitle("상품 등록");
-		
-		ArrayList<Category> cataList = ReturnModel.catagoryList();
-
-		JComboBox cateList = new JComboBox();
-		cateList.addItem("--대분류--");
-		for(Category c : cataList) {
-			cateList.addItem(c.getMenu_category_name());
-		}
-		
-		cateList.setBounds(lblTitle.getX(), lblTitle.getY() + lblTitle.getHeight() + 20 , 80, 50);
-		cateList.setFont(new Font("고딕체", Font.BOLD, 14));
-		
-		LabelSub lblName = new LabelSub("메뉴명", cateList.getX(), cateList.getY() + cateList.getHeight() + 20);
+		LabelTitle lblTitle = new LabelTitle("셋트 상품 등록");
+	
+		LabelSub lblName = new LabelSub("메뉴명", lblTitle.getX(), lblTitle.getY() + lblTitle.getHeight() + 20);
 		LabelSub lblPrice = new LabelSub("가격", lblName.getX(), lblName.getY() + lblName.getHeight() + 20);
 		LabelSub lblSale = new LabelSub("할인율", lblPrice.getX(), lblPrice.getY() + lblPrice.getHeight() + 20);
 		
@@ -72,11 +56,11 @@ public class MenuInsertPanel extends JPanel {
 		
 		lblImg = new JLabel("   이미지");
 		lblImg.setBorder(new LineBorder(Color.BLACK));
-		lblImg.setBounds(txtSale.getX() + txtSale.getWidth() + 30, cateList.getY() , 180, 200);
+		lblImg.setBounds(txtSale.getX() + txtSale.getWidth() + 30, txtName.getY() , 180, 160);
 		
 		JButton btnImg = new JButton("이미지 찾기");
 		btnImg.setBounds(lblImg.getX() + 30, lblImg.getY() + lblImg.getHeight() + 20 , 100, 40);
-		btnImg.addActionListener(new ImgUpActionListener(this));
+		btnImg.addActionListener(new ImgUpActionListenerSet(this));
 		
 		JButton btnInsert = new JButton("등록");
 		btnInsert.setFont(new Font("고딕체", Font.BOLD, 14));
@@ -89,12 +73,6 @@ public class MenuInsertPanel extends JPanel {
 				
 				boolean inputChk = true;
 				
-				if(cateList.getSelectedIndex() == 0) {					
-					ManagerCP.viewError("대분류를 선택해 주세요.","입력오류");					
-					cateList.requestFocus();
-					inputChk = false;
-					return;
-				}
 				if(txtName.getText().trim().length() == 0) {					
 					ManagerCP.viewError("메뉴명을 입력해 주세요.","입력오류");
 					txtName.requestFocus();
@@ -126,11 +104,10 @@ public class MenuInsertPanel extends JPanel {
 				
 				if(inputChk) {
 					ArrayList<PsList> psList = new ArrayList<>();
-					psList.add(new PsList('I', String.valueOf(cataList.get(cateList.getSelectedIndex() - 1).getMenu_category_idx())));
 					
 					String[] fileName = txtImgPath.getText().split("\\.");
 					String fileExt = "";
-					String filePath = "imgUpload";
+					String filePath = "imgSetUpload";
 					if(fileName.length > 1) {
 						fileExt = System.currentTimeMillis() + "." + fileName[1];
 						ManagerCP.fileSave(new File(txtImgPath.getText()), filePath,fileExt);
@@ -142,11 +119,10 @@ public class MenuInsertPanel extends JPanel {
 					psList.add(new PsList('I',txtSale.getText()));
 					psList.add(new PsList('S',main.mInfo.getMember_id()));
 					
-					String sqi_menuIns = "insert into menu (MENU_IDX, MENU_CATEGORY_IDX, IMG_BIG_PATH, MENU_NAME, MENU_PRICE, MENU_SALE, MENU_USE_FLAG, MENU_IN_DATE, MENU_IN_ID ) ";
-						   sqi_menuIns += "values(MENU_IDX_SEQ.nextval, ?, ?, ?, ?, ?, 'Y', sysdate, ?)";
+					String sqi_menuIns = "insert into menu_set (SET_IDX, SET_IMG_PATH, SET_NAME, SET_PRICE, SET_SALE, SET_USE_FLAG, SET_IN_DATE, SET_ID_ID) ";
+						   sqi_menuIns += "values(SET_IDX_SEQ.nextval, ?, ?, ?, ?, 'Y', sysdate, ?)";
 					if(OjdbcConnection.insert(sqi_menuIns, psList)) {
 						ManagerCP.viewSuccess("상품이 등록 되었습니다.","상품등록");
-						cateList.setSelectedIndex(0);
 						txtName.setText("");
 						txtPrice.setText("");
 						txtSale.setText("0");
@@ -167,7 +143,7 @@ public class MenuInsertPanel extends JPanel {
 		txtImgPath.setVisible(false);
 		
 		add(lblTitle);
-		add(cateList);
+		//add(cateList);
 		
 		add(lblName);
 		add(lblPrice);
@@ -182,7 +158,6 @@ public class MenuInsertPanel extends JPanel {
 		add(txtImgPath);
 		
 		add(btnInsert);
-		
 	}
 
 }

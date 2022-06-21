@@ -24,14 +24,22 @@ public class TopMenuBar extends JMenuBar {
 		BarMenuTitle menuAll = new BarMenuTitle("메뉴");
 		
 		BarMenuSubTitle menuTitle = new BarMenuSubTitle("상품관리");		
-		BarMenuSubItem menuList = new BarMenuSubItem("상품목록");
-		menuList.addActionListener(barAction);
+		BarMenuSubItem menuList = new BarMenuSubItem("상품목록");		
 		BarMenuSubItem menuInsert = new BarMenuSubItem("상품등록");
-		menuInsert.addActionListener(barAction);
+		BarMenuSubItem menuSetList = new BarMenuSubItem("셋트메뉴목록");
+		BarMenuSubItem menuSetInsert = new BarMenuSubItem("셋트메뉴등록");
 		//menuItem = new JMenuItem(“메뉴항목1”, KeyEvent.VK_T); ->키보드 단축키 설정 가능
+//		System.out.println(menuTitle.getMenuComponentCount());
+//		System.out.println(menuTitle.getItem(1).getText());
 		
 		menuTitle.add(menuList);
 		menuTitle.add(menuInsert);
+		menuTitle.add(menuSetList);
+		menuTitle.add(menuSetInsert);
+		
+		for(int i = 0; i < menuTitle.getMenuComponentCount(); i++) {
+			menuTitle.getItem(i).addActionListener(barAction);
+		}
 		
 		BarMenuSubItem salesTitle = new BarMenuSubItem("매출조회");
 		BarMenuSubItem calculateTitle = new BarMenuSubItem("정산");		

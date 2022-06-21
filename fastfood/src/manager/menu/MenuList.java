@@ -1,6 +1,5 @@
 package manager.menu;
 
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -14,29 +13,29 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.LineBorder;
 
 import database.manager.Category;
 import database.manager.ReturnModel;
+import manager.ManagerMain;
 import manager.component.ManagerCP;
 
 public class MenuList extends JPanel {
 	
 	public JLabel lblImg;
 	public JTextField txtImgPath;
-	private MenuMainPanel menuMain;
+	private ManagerMain main;
 	
 	GridBagLayout gbl= new GridBagLayout();
     GridBagConstraints gbc= new GridBagConstraints();
     JPanel mainSubList;
     
-	public MenuList(MenuMainPanel menuMain) {
+	public MenuList(ManagerMain main) {
 		
-		this.menuMain = menuMain;
+		this.main = main;
 		
 		setLayout(null);
 		setBounds(0,0,565,730);
-		setBorder(new LineBorder(Color.BLACK));
+		//setBorder(new LineBorder(Color.BLACK));
 		
 		JPanel menuCategory = new JPanel();
 		
@@ -74,7 +73,7 @@ public class MenuList extends JPanel {
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scPane.getVerticalScrollBar().setUnitIncrement(16);
 		
-		scPane.setBounds(0,80,565,645);
+		scPane.setBounds(0,100,565,625);
 		
 		add(menuCategory);		
 		add(scPane);

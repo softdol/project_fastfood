@@ -10,7 +10,7 @@ public class ManagerMain extends JFrame {
 	public MenuMainPanel menuMainPanel;
 	LoginPanel login;
 	TopMenuBar  topBar;
-	Member mInfo; 
+	public Member mInfo; 
 	
 	public ManagerMain() {
 		setTitle("관라지 페이지");
@@ -47,7 +47,7 @@ public class ManagerMain extends JFrame {
 		this.mInfo = mInfo;
 		setBounds(300, 150, 1200, 800);
 		topBar = new TopMenuBar(this);
-		menuMainPanel = new MenuMainPanel(mInfo); 
+		menuMainPanel = new MenuMainPanel(this); 
 		setJMenuBar(topBar);
 		add(menuMainPanel);
 	}

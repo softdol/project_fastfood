@@ -7,15 +7,14 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import manager.menu.MenuInsertPanel;
-import manager.menu.MenuMainPanel;
+import manager.menu.MenuSetInsert;
 
-public class ImgUpActionListener implements ActionListener {
+public class ImgUpActionListenerSet implements ActionListener {
 	
 	JFileChooser chooser;
-	MenuInsertPanel main;
+	MenuSetInsert main;
 
-	public ImgUpActionListener(MenuInsertPanel main) {
+	public ImgUpActionListenerSet(MenuSetInsert main) {
 		chooser = new JFileChooser();
 		this.main = main;
 	}

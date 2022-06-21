@@ -8,6 +8,8 @@ import manager.component.ManagerCP;
 import manager.component.bar.BarMenuSubItem;
 import manager.menu.MenuInsertPanel;
 import manager.menu.MenuList;
+import manager.menu.MenuSetInsert;
+import manager.menu.MenuSetList;
 
 public class BarActionListener implements ActionListener {
 	
@@ -28,13 +30,19 @@ public class BarActionListener implements ActionListener {
 //		}
 		switch (thisBtn.getText()) {
 			case "상품등록":
-				main.menuMainPanel.jpMainMiddle.add(new MenuInsertPanel(main.menuMainPanel));
+				main.menuMainPanel.jpMainMiddle.add(new MenuInsertPanel(main));
 			break;
 			case "상품목록":
-				main.menuMainPanel.jpMainMiddle.add(new MenuList(main.menuMainPanel));
+				main.menuMainPanel.jpMainMiddle.add(new MenuList(main));
 			break;
+			case "셋트메뉴등록":
+				main.menuMainPanel.jpMainMiddle.add(new MenuSetInsert(main));
+			break;			
+			case "셋트메뉴목록":
+				main.menuMainPanel.jpMainMiddle.add(new MenuSetInsert(main));
+			break;			
 			default :
-				main.menuMainPanel.jpMainMiddle.add(new MenuList(main.menuMainPanel));
+				main.menuMainPanel.jpMainMiddle.add(new MenuSetList(main));
 			break;
 		}
 		
