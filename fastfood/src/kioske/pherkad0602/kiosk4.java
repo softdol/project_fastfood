@@ -16,9 +16,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class kiosk2 extends JFrame {
+public class kiosk4 extends JFrame {
 	
-	public kiosk2() {
+	public kiosk4() {
 			
 			LayoutManager manager = new GridLayout(3,3);
 			
@@ -112,14 +112,16 @@ public class kiosk2 extends JFrame {
 			
 			
 			//
-			setBounds(500,0,900,1040);
+			setBounds(510,0,900,1040);
 			setDefaultCloseOperation(EXIT_ON_CLOSE);
 			setVisible(true);
+		    setResizable(false);
+
 		}
 	
 	public static void main(String[] args) {
 		
-		new kiosk2();
+		new kiosk4();
 
 	}
 }
