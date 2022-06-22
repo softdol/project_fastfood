@@ -112,11 +112,7 @@ public class MenuSetInsert extends JPanel {
 						   sqi_menuIns += "values(SET_IDX_SEQ.nextval, ?, ?, ?, ?, 'Y', sysdate, ?)";
 					if(OjdbcConnection.insert(sqi_menuIns, psList)) {
 						ManagerCP.viewSuccess("상품이 등록 되었습니다.","상품등록");
-						txtName.setText("");
-						txtPrice.setText("");
-						txtSale.setText("0");
-						txtImgPath.setText("");
-						lblImg.setIcon(null);
+						main.viewPanel("세트메뉴목록");
 					}else{
 						ManagerCP.viewError("상품 등록에 실패했습니다.","실패");
 					};

@@ -52,7 +52,7 @@ public class ManagerMain extends JFrame {
 	public void loginOn(Member mInfo) {
 		//login.setVisible(false);	// 안되는 이유 찾기
 		this.mInfo = mInfo;
-		setBounds(300, 150, 1200, 800);
+		setBounds(300, 150, 1000, 800);
 		topBar = new TopMenuBar(this);
 		menuMainPanel = new MenuMainPanel(this); 
 		setJMenuBar(topBar);
