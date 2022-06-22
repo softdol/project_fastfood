@@ -134,9 +134,15 @@ public class MemberMain extends JPanel {
 		
 		add(scPane);
 		
+		JButton btnNew = new JButton("직원 추가(새로고침)");
+		btnNew.setBounds(20, scPane.getY() + scPane.getHeight() + 10, 180, 40);
+		btnNew.addActionListener(new MemberActionListener(this, storeInfo.getStore_idx(), 'N'));
+		
+		add(btnNew);
+		
 		JPanel jpBottomTitle = new JPanel();
 		jpBottomTitle.setLayout(null);		
-		jpBottomTitle.setBounds(20, scPane.getY() + scPane.getHeight() + 40 , 540, 40);
+		jpBottomTitle.setBounds(20, btnNew.getY() + btnNew.getHeight() + 10 , 540, 40);
 		
 		topBottomNum = new JLabel("0",0);
 		topBottoId = new JTextField();
@@ -288,12 +294,7 @@ public class MemberMain extends JPanel {
 			ManagerCP.viewError("장애가 발생하셨습니다.", "에러");
 		}
 		
-		topBottomNum.setText("0");
-		topBottoId.setText("");
-		topBottoName.setText("");
-		topBottoPass.setText("");
-		topBottoEtc.setText("등록");
-		
+		newMember();		
 		setMember();
 	}
 	
@@ -304,8 +305,17 @@ public class MemberMain extends JPanel {
 		topBottoName.setText(m.getMember_name());
 		topBottoPass.setText("");
 		topBottoEtc.setText("수정");
-		System.out.println("직원 정보 수정 : " + m);
 		
+		topBottoId.setEnabled(false);
+	}
+	
+	public void newMember() {
+		topBottomNum.setText("0");
+		topBottoId.setText("");
+		topBottoId.setEnabled(true);
+		topBottoName.setText("");
+		topBottoPass.setText("");
+		topBottoEtc.setText("등록");
 	}
 	
 }

@@ -30,6 +30,9 @@ public class MemberActionListener implements ActionListener {
 			case 'U':
 				memberMain.uptMember(idx);
 				break;
+			case 'N':
+				memberMain.newMember();
+				break;
 		}
 		
 	}
