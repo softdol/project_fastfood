@@ -15,8 +15,7 @@ public class Member {
 	private Date member_in_date;
 	private boolean login;
 	
-	public Member(ResultSet rs) throws SQLException {
-				
+	public Member(ResultSet rs) throws SQLException {				
 		this.member_idx			= rs.getInt(1);
 		this.store_idx 			= rs.getInt(2);
 		this.member_id			= rs.getString(3);
@@ -28,9 +27,28 @@ public class Member {
 		if(member_user_flag.equals("Y")) {
 			login = true;
 		}
-		
 	}
 	
+	public Integer getMember_idx() {
+		return member_idx;
+	}
+
+	public Integer getStore_idx() {
+		return store_idx;
+	}
+
+	public String getMember_pass() {
+		return member_pass;
+	}
+
+	public String getMember_user_flag() {
+		return member_user_flag;
+	}
+
+	public Date getMember_in_date() {
+		return member_in_date;
+	}
+
 	public Member() {
 	}
 	
@@ -44,5 +62,10 @@ public class Member {
 	
 	public boolean getLogin() {
 		return login;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s(%s)", member_id, member_name);
 	}
 }

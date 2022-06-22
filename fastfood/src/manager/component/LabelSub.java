@@ -13,6 +13,12 @@ public class LabelSub extends JLabel  {
 		setBounds(x, y, 50, 40);
 	}
 	
+	public LabelSub(String name, int x, int y, int w, int h) {		
+		super(name);
+		setFont(new Font("∞ÌµÒ√º", Font.BOLD, 14));
+		setBounds(x, y, w, h);
+	}
+	
 	public LabelSub(String name) {		
 		super(name);
 		setFont(new Font("∞ÌµÒ√º", Font.BOLD, 14));		

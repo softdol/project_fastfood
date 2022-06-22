@@ -60,6 +60,54 @@ public class ReturnModel {
 	}
 	
 	/**
+	 * 직원 목록 불러오기
+	 * @param sql
+	 * @param psList
+	 * @return
+	 */
+	public static ArrayList<Member> selMemberList(String sql, ArrayList<PsList> psList) {
+		ArrayList<Member> memberList = new ArrayList<>();
+		try(
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt= conn.prepareStatement(sql);
+			){
+			
+			for(int i = 0; i < psList.size(); i++) {
+				PsList ps = psList.get(i);
+				switch(ps.getType()) {
+					case 'i': case 'I':
+						pstmt.setInt(i + 1, Integer.parseInt(ps.getVal()));
+						break;
+					case 's': case 'S':
+						pstmt.setString(i + 1, ps.getVal());
+						break;
+					case 'd': case 'D':
+						pstmt.setDate(i + 1, java.sql.Date.valueOf(ps.getVal()));
+						break;
+					default:
+						pstmt.setString(i + 1, ps.getVal());
+						break;				
+				}
+			}
+			
+			try(ResultSet rs = pstmt.executeQuery()){
+				while(rs.next()) {
+					memberList.add(new Member(rs));					
+				}				
+				return memberList;				
+			}catch(SQLException e) {
+				e.printStackTrace();
+				return null;
+			}		
+			
+						
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
 	 * 카테고리 리스트 불러오기
 	 * @param 
 	 * @param psList
@@ -275,6 +323,56 @@ public class ReturnModel {
 
 				if(rs.next()) {
 					return new Menu(rs);					
+				}else {
+					return null;
+				}
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+				return null;
+			}		
+			
+						
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * 매장 정보 불러오기
+	 * @param sql
+	 * @param psList
+	 * @return
+	 */
+	public static Store selStore(String sql, ArrayList<PsList> psList) {		
+		try(
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt= conn.prepareStatement(sql);
+			){
+			
+			for(int i = 0; i < psList.size(); i++) {
+				PsList ps = psList.get(i);
+				switch(ps.getType()) {
+					case 'i': case 'I':
+						pstmt.setInt(i + 1, Integer.parseInt(ps.getVal()));
+						break;
+					case 's': case 'S':
+						pstmt.setString(i + 1, ps.getVal());
+						break;
+					case 'd': case 'D':
+						pstmt.setDate(i + 1, java.sql.Date.valueOf(ps.getVal()));
+						break;
+					default:
+						pstmt.setString(i + 1, ps.getVal());
+						break;				
+				}
+			}
+			
+			try(ResultSet rs = pstmt.executeQuery()){
+
+				if(rs.next()) {
+					return new Store(rs);					
 				}else {
 					return null;
 				}

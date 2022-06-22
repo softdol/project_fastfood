@@ -6,10 +6,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import database.model.PsList;
 
 public class ManagerCP {
 	
@@ -48,14 +51,14 @@ public class ManagerCP {
 	public static void viewError(String strVal, String strState) {
 		
 		JOptionPane.showMessageDialog(null, strVal, strState,
-				JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.OK_OPTION);
 		
 	}
 	
 	public static void viewSuccess(String strVal, String strState) {
 		
 		JOptionPane.showMessageDialog(null, strVal, strState,
-				JOptionPane.OK_OPTION);
+				JOptionPane.INFORMATION_MESSAGE);
 		
 	}
 	
@@ -72,6 +75,12 @@ public class ManagerCP {
 		Image img = icon.getImage();
 		
 		return img.getScaledInstance(width,height,img.SCALE_SMOOTH);
+	}
+	
+	public static void viewPs(ArrayList<PsList> ps) {
+		for(PsList p : ps) {
+			System.out.println("type = " + p.getType() + " : val = " + p.getVal());
+		}
 	}
 
 }
