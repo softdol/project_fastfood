@@ -1,11 +1,9 @@
-package kioske.YounukLee7;
+package kioske.YounukLee7.dbtablePocket;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-// 이벤트 페이지 큰화면, 작은화면
 public class EventPage {
-
 	private Integer event_page_number;
 	private String big_event_page;
 	private String small_event_page;
@@ -45,9 +43,4 @@ public class EventPage {
 	public void setSmall_event_page(String small_event_page) {
 		this.small_event_page = small_event_page;
 	}
-	
-//	@Override
-//	public String toString() {
-//		return String.format("%s", big_event_page);
-//	}
 }
