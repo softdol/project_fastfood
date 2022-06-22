@@ -6,6 +6,13 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,6 +20,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import database.OjdbcConnection;
+import kioske.pherkad0602.kiosk3;
 
 public class Select_Takeout extends JFrame{
 	
@@ -25,7 +35,21 @@ public class Select_Takeout extends JFrame{
 	
 	public Select_Takeout() {
 		
-		pNorth.setBackground(new Color(0XFFFFFF));
+		String sql = "SELECT * FROM event_page";
+		ArrayList<EventPage> event_page_list = new ArrayList<>();
+		try (
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery();
+				) 
+		{
+				while (rs.next()) {
+					 event_page_list.add(new EventPage(rs));
+				}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		
         pNorth.setBounds(0,0,900,300);
         pNorth.setLayout(cardLayout);
         
@@ -37,37 +61,47 @@ public class Select_Takeout extends JFrame{
 		});
         
         time.start();
-		
-        pNorth.add(new ImageLabel("image/5.jpg"));
-        pNorth.add(new ImageLabel("image/6.jpg"));
-        pNorth.add(new ImageLabel("image/7.jpg"));
+        
+        for (int i = 0; i < event_page_list.size(); i++) {
+        	 pNorth.add(new ImageLabel(event_page_list.get(i).getSmall_event_page()));
+		}
 		
 		pSouth.setBackground(new Color(0XFFE7DF));
 		pSouth.setBounds(0,300,900,770);
 		pSouth.setLayout(null);
 		
-		label.setFont(new Font("맑은 고딕 굵게", Font.PLAIN, 50));
+		label.setFont(new Font("HY견고딕", Font.PLAIN, 50));
 		label.setBounds(280, 50, 300,200);
 		
-		button1.setForeground(new Color(0x000000));
-		button1.setBackground(new Color(0xFFFFFF));
 		button1.setBounds(173, 200, 250, 350);
-		
-		button2.setForeground(new Color(0x000000));
-		button2.setBackground(new Color(0xFFFFFF));
 		button2.setBounds(463, 200, 250, 350);
 		
 		button1.setIcon(new ImageIcon("image/8.first.jpg"));
 		button2.setIcon(new ImageIcon("image/8.second.jpg"));
 		
+		
+		button1.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e){  
+				new kiosk3();
+				setVisible(false); // 다음화면으로 넘어가면 이전화면 안보이게 하기
+			}  
+		});
+		
+		button2.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e){  
+				new kiosk3();
+				setVisible(false); // 다음화면으로 넘어가면 이전화면 안보이게 하기
+			}  
+		});
+		
 		add(pNorth, BorderLayout.NORTH);
 		add(pSouth, BorderLayout.SOUTH);
+		pSouth.add(label);
 		pSouth.add(button1);
 		pSouth.add(button2);
-		pSouth.add(label);
 		
 		setLayout(null);
-		setTitle("Select_Takeout");
+		setTitle("매장식사 또는 포장");
 		setBounds(510,0,900,1040);
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
