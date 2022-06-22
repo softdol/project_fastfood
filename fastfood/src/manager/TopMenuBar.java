@@ -43,7 +43,8 @@ public class TopMenuBar extends JMenuBar {
 		
 		BarMenuSubItem salesTitle = new BarMenuSubItem("매출조회");
 		BarMenuSubItem calculateTitle = new BarMenuSubItem("정산");		
-		BarMenuSubItem memberTitle = new BarMenuSubItem("매장관리");		
+		BarMenuSubItem memberTitle = new BarMenuSubItem("매장관리");
+		memberTitle.addActionListener(barAction);
 		
 		//openItem.addActionListener(new OpenActionListener());
 		menuAll.add(menuTitle);

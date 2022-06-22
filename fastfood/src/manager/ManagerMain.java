@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 import database.manager.Member;
 import manager.component.ManagerCP;
+import manager.member.MemberMain;
 import manager.menu.MenuInsertPanel;
 import manager.menu.MenuList;
 import manager.menu.MenuMainPanel;
@@ -74,7 +75,10 @@ public class ManagerMain extends JFrame {
 		break;			
 		case "세트메뉴목록":
 			menuMainPanel.jpMainMiddle.add(new MenuSetList(this));
-		break;			
+		break;
+		case "매장관리":
+			menuMainPanel.jpMainMiddle.add(new MemberMain(this));
+		break;
 		default :
 			menuMainPanel.jpMainMiddle.add(new MenuList(this));
 		break;
