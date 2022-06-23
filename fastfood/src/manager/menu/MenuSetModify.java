@@ -51,11 +51,11 @@ public class MenuSetModify extends JPanel {
 	
 	public MenuSetModify(ManagerMain main, int idx) {
 		this.main = main;
-		main.setSize(585,730);
+		main.setSize(585,780);
 		
 		setLayout(null);
 		setBounds(0,0,565,730);
-		setBorder(new LineBorder(Color.BLACK));
+		//setBorder(new LineBorder(Color.BLACK));
 		
 		ArrayList<PsList> psList = new ArrayList<>();
 		String sql = "select * from menu_set where set_idx = ?";
@@ -251,14 +251,14 @@ public class MenuSetModify extends JPanel {
 		jpTopTitle.setLayout(null);
 		
 		jpTopTitle.setBounds(0, btnSetList.getY() + btnSetList.getHeight() + 20, 565, 40);
-		jpTopTitle.setBackground(Color.GREEN);
+		//jpTopTitle.setBackground(Color.GREEN);
 		
 		topTitleCate.setBounds(0, 0, 160, 40);
-		topTitleCate.setBorder(new LineBorder(Color.red));
+		//topTitleCate.setBorder(new LineBorder(Color.red));
 		topTitleInfo.setBounds(180, 0, 230, 40);
-		topTitleInfo.setBorder(new LineBorder(Color.red));
+		//topTitleInfo.setBorder(new LineBorder(Color.red));
 		topTitleBtn.setBounds(430, 0, 110, 40);
-		topTitleBtn.setBorder(new LineBorder(Color.red));
+		//topTitleBtn.setBorder(new LineBorder(Color.red));
 		
 		jpTopTitle.add(topTitleCate);
 		jpTopTitle.add(topTitleInfo);
@@ -329,14 +329,14 @@ public class MenuSetModify extends JPanel {
 		jpBottomInput.setLayout(null);
 		
 		jpBottomInput.setBounds(0, scPane.getY() + scPane.getHeight(), 565, 40);
-		jpBottomInput.setBackground(Color.GREEN);
+		//jpBottomInput.setBackground(Color.GREEN);
 		
 		bottomTitleCate.setBounds(0, 0, 160, 40);
-		bottomTitleCate.setBorder(new LineBorder(Color.red));
+		//bottomTitleCate.setBorder(new LineBorder(Color.red));
 		bottomTitleInfo.setBounds(180, 0, 230, 40);
-		bottomTitleInfo.setBorder(new LineBorder(Color.red));
+		//bottomTitleInfo.setBorder(new LineBorder(Color.red));
 		bottomTitleBtn.setBounds(430, 0, 110, 40);
-		bottomTitleBtn.setBorder(new LineBorder(Color.red));
+		//bottomTitleBtn.setBorder(new LineBorder(Color.red));
 		
 		jpBottomInput.add(bottomTitleCate);
 		jpBottomInput.add(bottomTitleInfo);
@@ -365,26 +365,26 @@ public class MenuSetModify extends JPanel {
 	public void setView() {
 		ManagerCP.reFresh(jpSetList);
 		int listCount = setMenuList.size();
-		jpSetList.setPreferredSize(new Dimension(565, listCount * 50 + 50));
+		jpSetList.setPreferredSize(new Dimension(565, listCount * 45 + 45));
 		
 		for(int i = 0; i < listCount; i++) {
 			Menu m = setMenuList.get(i);
 			JPanel tempJp = new JPanel();
 			
 			tempJp.setLayout(null);				
-			tempJp.setBounds(0, 50 * i, 560, 40);
-			tempJp.setBorder(new LineBorder(Color.RED));
+			tempJp.setBounds(0, 45 * i, 560, 40);
+			//tempJp.setBorder(new LineBorder(Color.RED));
 			
 			JLabel tempCate = new JLabel(getCateName(m.getMenu_category()), 0); 
 			JLabel tempInfo = new JLabel(m.getMenu_name() + "("+m.getMenu_price()+")", 0);
 			JButton tempBtn = new JButton("»èÁ¦");
 			
 			tempCate.setBounds(0, 0, 160, 40);
-			tempCate.setBorder(new LineBorder(Color.red));
+			//tempCate.setBorder(new LineBorder(Color.red));
 			tempInfo.setBounds(180, 0, 230, 40);
-			tempInfo.setBorder(new LineBorder(Color.red));
+			//tempInfo.setBorder(new LineBorder(Color.red));
 			tempBtn.setBounds(430, 0, 110, 40);
-			tempBtn.setBorder(new LineBorder(Color.red));
+			//tempBtn.setBorder(new LineBorder(Color.red));
 			
 			tempJp.add(tempCate);
 			tempJp.add(tempInfo);

@@ -23,7 +23,7 @@ public class MenuList extends JPanel {
 	public MenuList(ManagerMain main) {
 		
 		this.main = main;
-		main.setSize(585,730);
+		main.setSize(585,770);
 		setLayout(null);
 		setBounds(0,0,565,730);
 		//setBorder(new LineBorder(Color.BLACK));
