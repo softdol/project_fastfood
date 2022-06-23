@@ -25,7 +25,7 @@ public class MenuSetList extends JPanel {
 	public MenuSetList(ManagerMain main) {
 		
 		this.main = main;
-		
+		main.setSize(585,730);
 		setLayout(null);
 		setBounds(0,0,565,730);
 		

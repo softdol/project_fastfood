@@ -34,7 +34,8 @@ public class MenuSetInsert extends JPanel {
 		
 	public MenuSetInsert(ManagerMain main) {
 		this.main = main;
-		setLayout(null);
+		main.setSize(585,730);
+		setLayout(null);	
 		setBounds(0,0,565,730);
 		setBorder(new LineBorder(Color.BLACK));
 		LabelTitle lblTitle = new LabelTitle("세트 상품 등록");

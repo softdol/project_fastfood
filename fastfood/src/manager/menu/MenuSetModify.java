@@ -51,6 +51,7 @@ public class MenuSetModify extends JPanel {
 	
 	public MenuSetModify(ManagerMain main, int idx) {
 		this.main = main;
+		main.setSize(585,730);
 		
 		setLayout(null);
 		setBounds(0,0,565,730);
