@@ -12,6 +12,7 @@ import manager.menu.MenuModify;
 import manager.menu.MenuSetInsert;
 import manager.menu.MenuSetList;
 import manager.menu.MenuSetModify;
+import manager.sales.SalesMain;
 
 public class ManagerMain extends JFrame {
 	
@@ -78,6 +79,9 @@ public class ManagerMain extends JFrame {
 		break;
 		case "매장관리":
 			menuMainPanel.jpMainMiddle.add(new MemberMain(this));
+		break;
+		case "월 매출조회":
+			menuMainPanel.jpMainMiddle.add(new SalesMain(this));
 		break;
 		default :
 			menuMainPanel.jpMainMiddle.add(new MenuList(this));

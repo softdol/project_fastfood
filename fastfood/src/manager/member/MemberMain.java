@@ -49,10 +49,11 @@ public class MemberMain extends JPanel {
 	
 	public MemberMain(ManagerMain main) {
 		this.main = main;
+		main.setSize(585,730);
 		
 		setLayout(null);
 		setBounds(0,0,565,726);
-		setBorder(new LineBorder(Color.BLACK));
+		//setBorder(new LineBorder(Color.BLACK));
 		
 		LabelTitle lblTitle = new LabelTitle("매장 관리");
 		

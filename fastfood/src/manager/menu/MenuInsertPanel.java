@@ -36,10 +36,10 @@ public class MenuInsertPanel extends JPanel {
 	public MenuInsertPanel(ManagerMain main) {
 		
 		this.main = main;
+		main.setSize(585,730);
 		
 		setLayout(null);
 		setBounds(0,0,565,730);
-		setBorder(new LineBorder(Color.BLACK));
 		LabelTitle lblTitle = new LabelTitle("상품 등록");
 		
 		ArrayList<Category> cataList = ReturnModel.categoryList();
