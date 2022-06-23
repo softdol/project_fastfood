@@ -185,9 +185,9 @@ public class MenuSetModify extends JPanel {
 					psList.add(new PsList('S',txtName.getText()));
 					psList.add(new PsList('I',txtPrice.getText()));
 					psList.add(new PsList('I',txtSale.getText()));
-					psList.add(new PsList('S',main.mInfo.getMember_id()));
-					psList.add(new PsList('I',String.valueOf(menuInfo.getSet_idx())));
+					psList.add(new PsList('S',main.mInfo.getMember_id()));					
 					psList.add(new PsList('I',repList.get(cbRep.getSelectedIndex()).getMenu_idx().toString()));
+					psList.add(new PsList('I',String.valueOf(menuInfo.getSet_idx())));
 					
 					String sqi_menuUpt = "update menu_set";
 							sqi_menuUpt += " set SET_IMG_PATH = ?";

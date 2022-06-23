@@ -8,12 +8,15 @@ import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
 import database.OjdbcConnection;
+import database.manager.Menu;
+import database.manager.ReturnModel;
 import database.model.PsList;
 import manager.ManagerMain;
 import manager.actionlistener.ImgUpActionListener;
@@ -27,6 +30,7 @@ public class MenuSetInsert extends JPanel {
 	public JLabel lblImg;
 	public JTextField txtImgPath;
 	ManagerMain main;
+	ArrayList<Menu> repList;
 		
 	public MenuSetInsert(ManagerMain main) {
 		this.main = main;
@@ -38,10 +42,26 @@ public class MenuSetInsert extends JPanel {
 		LabelSub lblName = new LabelSub("메뉴명", lblTitle.getX(), lblTitle.getY() + lblTitle.getHeight() + 20);
 		LabelSub lblPrice = new LabelSub("가격", lblName.getX(), lblName.getY() + lblName.getHeight() + 20);
 		LabelSub lblSale = new LabelSub("할인율", lblPrice.getX(), lblPrice.getY() + lblPrice.getHeight() + 20);
+		LabelSub lblRep = new LabelSub("대표메뉴", lblSale.getX(), lblSale.getY() + lblSale.getHeight() + 20, 100, 40);
 		
 		TextFieldSub txtName = new TextFieldSub("", lblName.getX() + lblName.getWidth() + 10, lblName.getY());
 		TextFieldSub txtPrice = new TextFieldSub("", lblPrice.getX() + lblPrice.getWidth() + 10, lblPrice.getY());
 		TextFieldSub txtSale = new TextFieldSub("0", lblSale.getX() + lblSale.getWidth() + 10, lblSale.getY());
+		JComboBox cbRep = new JComboBox();
+		
+		String sqlRep = "select * from menu where MENU_CATEGORY_IDX = ?";
+		repList = new ArrayList<>();
+		
+		ArrayList<PsList> psList = new ArrayList<>();
+		psList.add(new PsList('I',"1"));
+		
+		repList = ReturnModel.selMenuList(sqlRep, psList);
+		
+		cbRep.setBounds(txtName.getX(),lblRep.getY(),160,40);
+		cbRep.addItem("----------대표메뉴----------");
+		for(int i = 0; i < repList.size(); i++) {
+			cbRep.addItem(repList.get(i).getMenu_name() + "("+ repList.get(i).getMenu_price()  +")");
+		}
 		
 		lblImg = new JLabel("   이미지");
 		lblImg.setBorder(new LineBorder(Color.BLACK));
@@ -85,6 +105,12 @@ public class MenuSetInsert extends JPanel {
 					inputChk = false;
 					return;
 				}
+				if(cbRep.getSelectedIndex() == 0) {
+					ManagerCP.viewError("대표 메뉴를 선택해 주세요.","입력오류");
+					cbRep.requestFocus();
+					inputChk = false;
+					return;		
+				}
 				if(!main.mInfo.getLogin()) {
 					ManagerCP.viewError("담당자 정보가 없습니다.","로그인 오류");
 					inputChk = false;
@@ -107,9 +133,10 @@ public class MenuSetInsert extends JPanel {
 					psList.add(new PsList('I',txtPrice.getText()));
 					psList.add(new PsList('I',txtSale.getText()));
 					psList.add(new PsList('S',main.mInfo.getMember_id()));
+					psList.add(new PsList('I',repList.get(cbRep.getSelectedIndex()).getMenu_idx().toString()));
 					
-					String sqi_menuIns = "insert into menu_set (SET_IDX, SET_IMG_PATH, SET_NAME, SET_PRICE, SET_SALE, SET_USE_FLAG, SET_IN_DATE, SET_IN_ID) ";
-						   sqi_menuIns += "values(SET_IDX_SEQ.nextval, ?, ?, ?, ?, 'Y', sysdate, ?)";
+					String sqi_menuIns = "insert into menu_set (SET_IDX, SET_IMG_PATH, SET_NAME, SET_PRICE, SET_SALE, SET_USE_FLAG, SET_IN_DATE, SET_IN_ID, SET_REP) ";
+						   sqi_menuIns += "values(SET_IDX_SEQ.nextval, ?, ?, ?, ?, 'Y', sysdate, ?, ?)";
 					if(OjdbcConnection.insert(sqi_menuIns, psList)) {
 						ManagerCP.viewSuccess("상품이 등록 되었습니다.","상품등록");
 						main.viewPanel("세트메뉴목록");
@@ -129,10 +156,12 @@ public class MenuSetInsert extends JPanel {
 		add(lblName);
 		add(lblPrice);
 		add(lblSale);
+		add(lblRep);
 		
 		add(txtName);
 		add(txtPrice);
 		add(txtSale);
+		add(cbRep);
 		
 		add(btnImg);
 		add(lblImg);
