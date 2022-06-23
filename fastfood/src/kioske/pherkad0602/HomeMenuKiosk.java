@@ -6,9 +6,9 @@ import kioske.pherkad0602.ui.Category;
 import kioske.pherkad0602.ui.HomePanel;
 import kioske.pherkad0602.ui.PayPanel;
 
-public class HomeMunuKiosk extends JFrame{
+public class HomeMenuKiosk extends JFrame{
 	
-	public HomeMunuKiosk() {
+	public HomeMenuKiosk() {
 			
 		setLayout(null);
 		
@@ -33,7 +33,7 @@ public class HomeMunuKiosk extends JFrame{
 	
 	public static void main(String[] args) {
 		
-		new HomeMunuKiosk();
+		new HomeMenuKiosk();
 
 	}
 }

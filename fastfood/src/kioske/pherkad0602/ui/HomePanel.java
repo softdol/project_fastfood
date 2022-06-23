@@ -8,49 +8,62 @@ import java.awt.GridLayout;
 import java.awt.LayoutManager;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
 
 public class HomePanel extends JPanel{
 
 	public Component HomePanel() {
+		EmptyBorder border = new EmptyBorder(getInsets());
+		
 		LayoutManager manager = new GridLayout(4, 3);
 		
 		JPanel mainPanel = new JPanel();
 		
+		int a = MenuDatabase.size("SELECT * FROM Menu WHERE Menu_Category_IDX = 1");
 		
-		mainPanel.setBounds(200, 0, 684, 1200);
+		mainPanel.setBounds(200, 0, 684, 800);
 		mainPanel.setLayout(null);
-
+		mainPanel.setBackground(Color.white);
+		mainPanel.setBorder(border);
 		
+		SmallEventBanner seb = new SmallEventBanner();
 		for(int i = 0; i <3; ++i) {
-			
-			JButton btn2 = new JButton("이벤트 배너");
-			btn2.setBounds(0, i*150, 670, 150);
-			btn2.setBackground(Color.white);
-			mainPanel.add(btn2);
+			mainPanel.add(seb.SmallEventBanner(i));
 		}
 		
-
-		JPanel menuPanel = new JPanel();
-		mainPanel.add(menuPanel);
-		menuPanel.setBounds(0, 450, 670, 800);
-		menuPanel.setLayout(manager);
+		JPanel titlePanel = new JPanel();
+		
+		titlePanel.setBounds(0, 450, 684, 100);
+		titlePanel.setLayout(null);
+		titlePanel.setBackground(Color.white);
+		titlePanel.setBorder(border);
+		
+		JLabel title = new JLabel(" 인기 메뉴");
+		
+		title.setBounds(20,10,500,80);
+		title.setBackground(Color.white);
+		title.setFont(new Font("궁서체", Font.PLAIN,40));
+		titlePanel.add(title);
+		
+		mainPanel.add(titlePanel);
+		
+		Menu menu= new Menu();
+		
+		mainPanel.add(menu.Menu());
+		
 		
 		JScrollPane scrollPane = new JScrollPane(mainPanel);
 		scrollPane.setBounds(200, 0, 684, 800);
+		scrollPane.setBorder(border);
 		Dimension size = new Dimension();
-				size.setSize(600,1250);
+				size.setSize(600,550+(200*(a/3)+1));
 		mainPanel.setPreferredSize(size);
+		
+		scrollPane.getVerticalScrollBar().setUnitIncrement(16);	
 	
-	
-		for(int i = 0; i <12; ++i) {
-			
-			JButton btn3 = new JButton("메뉴");
-			btn3.setFont(new Font("궁서체", Font.PLAIN,40));
-			btn3.setBackground(new Color(0xFFFFFF));
-			menuPanel.add(btn3);
-		}
 		
 		return scrollPane;
 	}

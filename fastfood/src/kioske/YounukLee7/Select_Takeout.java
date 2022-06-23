@@ -23,7 +23,7 @@ import javax.swing.Timer;
 
 import database.OjdbcConnection;
 import kioske.YounukLee7.dbtablePocket.EventPage;
-import kioske.pherkad0602.kiosk3;
+import kioske.pherkad0602.HomeMenuKiosk;
 
 public class Select_Takeout extends JFrame{
 	
@@ -83,14 +83,14 @@ public class Select_Takeout extends JFrame{
 		
 		button1.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e){  
-				new kiosk3();
+				new HomeMenuKiosk();
 				setVisible(false); // 다음화면으로 넘어가면 이전화면 안보이게 하기
 			}  
 		});
 		
 		button2.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e){  
-				new kiosk3();
+				new HomeMenuKiosk();
 				setVisible(false); // 다음화면으로 넘어가면 이전화면 안보이게 하기
 			}  
 		});
