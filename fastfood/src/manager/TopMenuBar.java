@@ -1,10 +1,13 @@
 package manager;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JMenuBar;
+import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 import manager.actionlistener.BarActionListener;
 import manager.component.bar.BarMenuSubItem;
@@ -41,7 +44,11 @@ public class TopMenuBar extends JMenuBar {
 			menuTitle.getItem(i).addActionListener(barAction);
 		}
 		
-		BarMenuSubItem salesTitle = new BarMenuSubItem("매출조회");
+		BarMenuSubTitle salesTitle = new BarMenuSubTitle("매출조회");
+		BarMenuSubItem salesMonth = new BarMenuSubItem("월 매출조회");
+		salesMonth.addActionListener(barAction);
+		salesTitle.add(salesMonth);
+		
 		BarMenuSubItem calculateTitle = new BarMenuSubItem("정산");		
 		BarMenuSubItem memberTitle = new BarMenuSubItem("매장관리");
 		memberTitle.addActionListener(barAction);
@@ -51,6 +58,13 @@ public class TopMenuBar extends JMenuBar {
 		menuAll.add(salesTitle);
 		menuAll.add(calculateTitle);
 		menuAll.add(memberTitle);
+		
+		add(menuAll, LEFT_ALIGNMENT);
+		
+		JPanel jpSpace = new JPanel();
+		//jpSpace.setBorder(new LineBorder(Color.red));
+		
+		add(jpSpace);
 		
 		JButton menuBanner = new JButton("              로고 이미지");
 		menuBanner.setEnabled(false);
@@ -66,11 +80,10 @@ public class TopMenuBar extends JMenuBar {
 			}
 		});
 		
-		add(menuAll, LEFT_ALIGNMENT);
 		add(menuBanner);
 		add(menuOrder);
 		add(menuOpenClose);
-		add(menuExit);
+		add(menuExit, RIGHT_ALIGNMENT);
 		
 	}
 

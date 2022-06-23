@@ -23,7 +23,7 @@ public class MenuList extends JPanel {
 	public MenuList(ManagerMain main) {
 		
 		this.main = main;
-		
+		main.setSize(585,770);
 		setLayout(null);
 		setBounds(0,0,565,730);
 		//setBorder(new LineBorder(Color.BLACK));
@@ -64,7 +64,7 @@ public class MenuList extends JPanel {
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scPane.getVerticalScrollBar().setUnitIncrement(16);
 		
-		scPane.setBounds(0,100,565,625);
+		scPane.setBounds(0,menuCategory.getY() + menuCategory.getHeight() + 10,565,625);
 		
 		add(menuCategory);		
 		add(scPane);
