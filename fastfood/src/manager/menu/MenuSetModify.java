@@ -41,6 +41,7 @@ public class MenuSetModify extends JPanel {
 	JPanel jpSetList;
 	ArrayList<Menu> menuList;
 	ArrayList<Menu> setMenuList;
+	ArrayList<Menu> repList;
 	
 	JComboBox<String> bottomTitleCate;
 	JComboBox<String> bottomTitleInfo;
@@ -67,15 +68,44 @@ public class MenuSetModify extends JPanel {
 			return;
 		}
 		
-		LabelTitle lblTitle = new LabelTitle("세트 상품 수정");
+		LabelTitle lblTitle = new LabelTitle("세트 상품 수정");		
+		add(lblTitle);
 	
 		LabelSub lblName = new LabelSub("메뉴명", lblTitle.getX(), lblTitle.getY() + lblTitle.getHeight() + 20);
 		LabelSub lblPrice = new LabelSub("가격", lblName.getX(), lblName.getY() + lblName.getHeight() + 20);
 		LabelSub lblSale = new LabelSub("할인율", lblPrice.getX(), lblPrice.getY() + lblPrice.getHeight() + 20);
+		LabelSub lblRep = new LabelSub("대표메뉴", lblSale.getX(), lblSale.getY() + lblSale.getHeight() + 20, 100, 40);
+		add(lblName);
+		add(lblPrice);
+		add(lblSale);
+		add(lblRep);
 		
-		TextFieldSub txtName = new TextFieldSub(menuInfo.getSet_name(), lblName.getX() + lblName.getWidth() + 10, lblName.getY());
-		TextFieldSub txtPrice = new TextFieldSub(String.valueOf(menuInfo.getSet_price()), lblPrice.getX() + lblPrice.getWidth() + 10, lblPrice.getY());
-		TextFieldSub txtSale = new TextFieldSub(String.valueOf(menuInfo.getSet_sale()), lblSale.getX() + lblSale.getWidth() + 10, lblSale.getY());
+		TextFieldSub txtName = new TextFieldSub(menuInfo.getSet_name(), lblName.getX() + lblName.getWidth() + 20, lblName.getY());
+		TextFieldSub txtPrice = new TextFieldSub(String.valueOf(menuInfo.getSet_price()), txtName.getX(), lblPrice.getY());
+		TextFieldSub txtSale = new TextFieldSub(String.valueOf(menuInfo.getSet_sale()), txtName.getX(), lblSale.getY());
+		JComboBox cbRep = new JComboBox();
+		
+		String sqlRep = "select * from menu where MENU_CATEGORY_IDX = ?";
+		repList = new ArrayList<>();
+		
+		psList = new ArrayList<>();
+		psList.add(new PsList('I',"1"));
+		
+		repList = ReturnModel.selMenuList(sqlRep, psList);
+		
+		cbRep.setBounds(txtName.getX(),lblRep.getY(),160,40);
+		cbRep.addItem("----------대표메뉴----------");
+		for(int i = 0; i < repList.size(); i++) {
+			cbRep.addItem(repList.get(i).getMenu_name() + "("+ repList.get(i).getMenu_price()  +")");
+		}
+		
+		add(txtName);
+		add(txtPrice);
+		add(txtSale);
+		add(cbRep);
+		//JComboBox
+		
+		System.out.println(menuInfo.getSet_rep());
 		
 		lblImg = new JLabel(new ImageIcon(ManagerCP.imgResize(menuInfo.getSet_img_path(),180,160)));
 		lblImg.setBorder(new LineBorder(Color.BLACK));
@@ -116,12 +146,19 @@ public class MenuSetModify extends JPanel {
 					inputChk = false;
 					return;
 				}
+				if(cbRep.getSelectedIndex() == 0) {
+					ManagerCP.viewError("대표 메뉴를 선택해 주세요.","입력오류");
+					cbRep.requestFocus();
+					inputChk = false;
+					return;		
+				}
 				
 				if(!main.mInfo.getLogin()) {
 					ManagerCP.viewError("담당자 정보가 없습니다.","로그인 오류");
 					inputChk = false;
 					return;
 				}
+				
 				
 				if(inputChk) {
 					ArrayList<PsList> psList = new ArrayList<>();
@@ -150,6 +187,7 @@ public class MenuSetModify extends JPanel {
 					psList.add(new PsList('I',txtSale.getText()));
 					psList.add(new PsList('S',main.mInfo.getMember_id()));
 					psList.add(new PsList('I',String.valueOf(menuInfo.getSet_idx())));
+					psList.add(new PsList('I',repList.get(cbRep.getSelectedIndex()).getMenu_idx().toString()));
 					
 					String sqi_menuUpt = "update menu_set";
 							sqi_menuUpt += " set SET_IMG_PATH = ?";
@@ -158,6 +196,7 @@ public class MenuSetModify extends JPanel {
 							sqi_menuUpt += " ,SET_SALE = ?";
 							sqi_menuUpt += " ,SET_MOD_DATE = sysdate";
 							sqi_menuUpt += " ,SET_MOD_ID = ?";
+							sqi_menuUpt += " ,SET_REP = ?";
 							sqi_menuUpt += " where SET_IDX = ?";
 		
 					if(OjdbcConnection.insert(sqi_menuUpt, psList)) {
@@ -184,15 +223,6 @@ public class MenuSetModify extends JPanel {
 		txtImgPath = new JTextField();
 		txtImgPath.setVisible(false);
 		
-		add(lblTitle);
-		
-		add(lblName);
-		add(lblPrice);
-		add(lblSale);
-		
-		add(txtName);
-		add(txtPrice);
-		add(txtSale);
 		
 		add(btnImg);
 		add(lblImg);

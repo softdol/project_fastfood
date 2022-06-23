@@ -50,6 +50,9 @@ public class ManagerCP {
 	
 	public static void viewError(String strVal, String strState) {
 		
+		//int n = JOptionPane.showConfirmDialog(frame,    "예/아니오?",    "선택하세요",    JOptionPane.YES_NO_OPTION);
+		
+		
 		JOptionPane.showMessageDialog(null, strVal, strState,
 				JOptionPane.OK_OPTION);
 		

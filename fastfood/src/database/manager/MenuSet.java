@@ -16,6 +16,7 @@ public class MenuSet {
 	private String set_mod_id;         
 	private Integer set_price;    
 	private String set_img_path;
+	private Integer set_rep;
 	
 	public MenuSet(ResultSet rs) throws SQLException {
 		
@@ -29,6 +30,7 @@ public class MenuSet {
 		this.set_mod_id 	= rs.getString(8);
 		this.set_price 		= rs.getInt(9);
 		this.set_img_path 	= rs.getString(10);
+		this.set_rep 	= rs.getInt(11);
 		
 	}
 
@@ -72,5 +74,8 @@ public class MenuSet {
 		return set_img_path;
 	}
 
+	public Integer getSet_rep() {
+		return set_rep;
+	}
 	
 }
