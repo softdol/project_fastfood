@@ -3,6 +3,8 @@ package kioske.YounukLee7;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -10,18 +12,20 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+
 public class Select_Side_Drink extends JFrame{
 
 	JPanel pNorth = new JPanel();
 	JPanel pSouth = new JPanel();
-	JButton button1 = new JButton("사이드변경");
-	JButton button2 = new JButton("음료변경");
-	JButton button3 = new JButton("카트 담기");
+	JButton side_button = new JButton("사이드변경");
+	JButton drink_button = new JButton("음료변경");
+	JButton cart_button = new JButton("카트 담기");
 	JLabel logo = new JLabel("로고");
-	JLabel menuName = new JLabel("크리스피 버거");
-	JLabel label1 = new JLabel("햄버거 사진");
-	JLabel label2 = new JLabel("사이드 사진");
-	JLabel label3 = new JLabel("음료 사진");
+	JLabel menuName = new JLabel("세트 매뉴 이름");
+	JLabel burgerlabel = new JLabel("햄버거 사진");
+	JLabel side_label = new JLabel("사이드 사진");
+	JLabel drink_label = new JLabel("음료 사진");
+	String check;
 	
 	public Select_Side_Drink() {
 		
@@ -33,38 +37,56 @@ public class Select_Side_Drink extends JFrame{
 		pSouth.setBounds(0,300,900,740);
 		pSouth.setLayout(null);
 		
-		label1.setFont(new Font("맑은 고딕 굵게", Font.PLAIN, 50));
-		label1.setIcon(new ImageIcon("image/solo1.png"));
-		label1.setBounds(100, 150, 200, 170);
+		burgerlabel.setIcon(new ImageIcon("image/solo1.png"));
+		burgerlabel.setBounds(100, 150, 200, 170);
 		
-		label2.setFont(new Font("맑은 고딕 굵게", Font.PLAIN, 50));
-		label2.setIcon(new ImageIcon("image/side.png"));
-		label2.setBounds(350, 150, 200, 170);
+		side_label.setIcon(new ImageIcon("image/side.png"));
+		side_label.setBounds(350, 150, 200, 170);
 		
-		label3.setFont(new Font("맑은 고딕 굵게", Font.PLAIN, 50));
-		label3.setIcon(new ImageIcon("image/coke.jpg"));
-		label3.setBounds(600, 150, 200, 170);
+		drink_label.setIcon(new ImageIcon("image/coke.jpg"));
+		drink_label.setBounds(600, 150, 200, 170);
 		
 		logo.setBounds(50, 50, 200, 200);
 		logo.setIcon(new ImageIcon("image/logo.png"));
 		
 		menuName.setBounds(280, 50, 500, 200);
-		menuName.setFont(new Font("맑은 고딕 굵게", Font.PLAIN, 30));
+		menuName.setFont(new Font("HY견고딕", Font.PLAIN, 30));
 		
-		button1.setForeground(new Color(0x000000));
-		button1.setBackground(new Color(0xCCCCCC));
-		button1.setFont(new Font("맑은 고딕 굵게", Font.PLAIN, 20));
-		button1.setBounds(375, 330, 150, 50);
+		side_button.setForeground(new Color(0x000000));
+		side_button.setBackground(new Color(0xCCCCCC));
+		side_button.setFont(new Font("HY견고딕", Font.PLAIN, 20));
+		side_button.setBounds(375, 330, 150, 50);
 		
-		button2.setForeground(new Color(0x000000));
-		button2.setBackground(new Color(0xCCCCCC));
-		button2.setFont(new Font("맑은 고딕 굵게", Font.PLAIN, 20));
-		button2.setBounds(625, 330, 150, 50);
+		side_button.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e){  
+				
+				setVisible(false); // 다음화면으로 넘어가면 이전화면 안보이게 하기
+			}  
+		});
 		
-		button3.setForeground(new Color(0xFFFFFF));
-		button3.setBackground(new Color(0x000000));
-		button3.setFont(new Font("맑은 고딕 굵게", Font.PLAIN, 30));
-		button3.setBounds(150, 400, 590, 70);
+		drink_button.setForeground(new Color(0x000000));
+		drink_button.setBackground(new Color(0xCCCCCC));
+		drink_button.setFont(new Font("HY견고딕", Font.PLAIN, 20));
+		drink_button.setBounds(625, 330, 150, 50);
+		
+		drink_button.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e){  
+				
+				setVisible(false); // 다음화면으로 넘어가면 이전화면 안보이게 하기
+			}  
+		});
+		
+		cart_button.setForeground(new Color(0xFFFFFF));
+		cart_button.setBackground(new Color(0x000000));
+		cart_button.setFont(new Font("HY견고딕", Font.PLAIN, 30));
+		cart_button.setBounds(150, 400, 590, 70);
+		
+		cart_button.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e){  
+				
+				setVisible(false); // 다음화면으로 넘어가면 이전화면 안보이게 하기
+			}  
+		});
 		
 		add(pNorth, BorderLayout.NORTH);
 		add(pSouth, BorderLayout.SOUTH);
@@ -72,15 +94,15 @@ public class Select_Side_Drink extends JFrame{
 		pNorth.add(logo);
 		pNorth.add(menuName);
 		
-		pSouth.add(button1);
-		pSouth.add(button2);
-		pSouth.add(button3);
-		pSouth.add(label1);
-		pSouth.add(label2);
-		pSouth.add(label3);
+		pSouth.add(side_button);
+		pSouth.add(drink_button);
+		pSouth.add(cart_button);
+		pSouth.add(burgerlabel);
+		pSouth.add(side_label);
+		pSouth.add(drink_label);
 		
 		setLayout(null);
-		setTitle("Select_Side_Drink");
+		setTitle("사이드 또는 음료 변경 후 담기");
 		setBounds(510,0,900,1040);
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);

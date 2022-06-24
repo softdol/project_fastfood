@@ -23,16 +23,16 @@ import javax.swing.Timer;
 
 import database.OjdbcConnection;
 import kioske.YounukLee7.dbtablePocket.EventPage;
-import kioske.pherkad0602.HomeMenuKiosk;
 
 public class Select_Takeout extends JFrame{
 	
 	JPanel pNorth = new JPanel();
 	JPanel pSouth = new JPanel();
-	JButton button1 = new JButton("매장 식사");
-	JButton button2 = new JButton("포장 주문");
-	JLabel label = new JLabel("선택해주세요");
+	JButton storeOrder_button = new JButton("매장 식사 H");
+	JButton takeout_button = new JButton("포장 주문 T");
+	JLabel select_label = new JLabel("선택해주세요");
 	CardLayout cardLayout = new CardLayout();
+	String check;
 	
 	public Select_Takeout() {
 		
@@ -71,35 +71,37 @@ public class Select_Takeout extends JFrame{
 		pSouth.setBounds(0,300,900,770);
 		pSouth.setLayout(null);
 		
-		label.setFont(new Font("HY견고딕", Font.PLAIN, 50));
-		label.setBounds(280, 50, 300,200);
+		select_label.setFont(new Font("HY견고딕", Font.PLAIN, 50));
+		select_label.setBounds(280, 50, 300,200);
 		
-		button1.setBounds(173, 200, 250, 350);
-		button2.setBounds(463, 200, 250, 350);
+		storeOrder_button.setBounds(173, 200, 250, 350);
+		takeout_button.setBounds(463, 200, 250, 350);
 		
-		button1.setIcon(new ImageIcon("image/8.first.jpg"));
-		button2.setIcon(new ImageIcon("image/8.second.jpg"));
+		storeOrder_button.setIcon(new ImageIcon("image/8.first.jpg"));
+		takeout_button.setIcon(new ImageIcon("image/8.second.jpg"));
 		
 		
-		button1.addMouseListener(new MouseAdapter() {
+		storeOrder_button.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e){  
-				new HomeMenuKiosk();
+				check = "H"; // String 매장식사
+				
 				setVisible(false); // 다음화면으로 넘어가면 이전화면 안보이게 하기
 			}  
 		});
 		
-		button2.addMouseListener(new MouseAdapter() {
+		takeout_button.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e){  
-				new HomeMenuKiosk();
+				check = "T"; // String 포장 주문
+				
 				setVisible(false); // 다음화면으로 넘어가면 이전화면 안보이게 하기
 			}  
 		});
 		
 		add(pNorth, BorderLayout.NORTH);
 		add(pSouth, BorderLayout.SOUTH);
-		pSouth.add(label);
-		pSouth.add(button1);
-		pSouth.add(button2);
+		pSouth.add(select_label);
+		pSouth.add(storeOrder_button);
+		pSouth.add(takeout_button);
 		
 		setLayout(null);
 		setTitle("매장식사 또는 포장");
