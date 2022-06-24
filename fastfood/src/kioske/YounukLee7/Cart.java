@@ -59,7 +59,7 @@ public class Cart extends JFrame{
 		order.setFont(new Font("HY견고딕", Font.PLAIN, 30));
 		
 		                 // 매뉴 추가한 만큼
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 1; i++) {
 			cartButton = new CartButton(arrpanel, pCenter, i);
 			total = total + cartButton.getSub_money();
 		}
@@ -92,6 +92,7 @@ public class Cart extends JFrame{
 		order_completed_button.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e){  
 				
+				new Select_Payment();
 				setVisible(false); // 다음화면으로 넘어가면 이전화면 안보이게 하기
 			}  
 		});
