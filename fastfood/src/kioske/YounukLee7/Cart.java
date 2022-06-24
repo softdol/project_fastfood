@@ -1,7 +1,10 @@
 package kioske.YounukLee7;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -13,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 import kioske.YounukLee7.cartButton.CartButton;
+import kioske.pherkad0602.MainMenuKiosk;
 
 public class Cart extends JFrame{
 
@@ -20,24 +24,16 @@ public class Cart extends JFrame{
 	JPanel pCenter = new JPanel();
 	JPanel pSouth = new JPanel();
 
-	ArrayList<JPanel> panel = new ArrayList<>();
-	JPanel panel2 = new JPanel();
-	
-	JPanel scrollJPanel = new JPanel();
+	ArrayList<JPanel> arrpanel = new ArrayList<>();
 	
 	JLabel logo = new JLabel("로고");
 	JLabel order = new JLabel("주문 내역");
 	JLabel allpay = new JLabel("총 결제금액");
-	JLabel money = new JLabel("17000원");
-	JButton button1 = new JButton("주문 완료");
-	JButton button2 = new JButton("추가 주문");
-//	JLabel menuImg = new JLabel("매뉴 이미지");
-//  JLabel menuName = new JLabel("크리스피 버거 세트 사이다 감자튀김");
-//	JLabel cnt = new JLabel("1");
-//	JLabel menuMoney = new JLabel("5500원");
-//  JButton cancel = new JButton("취소");
-//	JButton plus = new JButton("+");
-//	JButton minus = new JButton("-");
+	JLabel allmoney = new JLabel();
+	JButton order_completed_button = new JButton("주문 완료");
+	JButton more_order_button = new JButton("추가 주문");
+	int total = 0;
+	CartButton cartButton;
 	
 	public Cart() {
 		
@@ -46,8 +42,11 @@ public class Cart extends JFrame{
         pNorth.setLayout(null);
         
         pCenter.setBackground(new Color(0XFFE7DF));
-        pCenter.setBounds(0,300,900,500);
+        pCenter.setBounds(0,300,900,2000);
+        // 이 패널의 layout이 null이기 때문에 아래 코드로 사이즈를 지정해주어야 한다
+        pCenter.setPreferredSize(new Dimension(900, 2000));
         pCenter.setLayout(null);
+        
         
 		pSouth.setBackground(new Color(0XFFF2DD));
 		pSouth.setBounds(0,800,900,240);
@@ -57,56 +56,71 @@ public class Cart extends JFrame{
 		logo.setIcon(new ImageIcon("image/logo.png"));
 		
 		order.setBounds(280, 50, 500, 200);
-		order.setFont(new Font("맑은 고딕 굵게", Font.PLAIN, 30));
+		order.setFont(new Font("HY견고딕", Font.PLAIN, 30));
+		
+		                 // 매뉴 추가한 만큼
+		for (int i = 0; i < 5; i++) {
+			cartButton = new CartButton(arrpanel, pCenter, i);
+			total = total + cartButton.getSub_money();
+		}
+		
 		
 		JScrollPane scrollPane = new JScrollPane(pCenter, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.getVerticalScrollBar().setUnitIncrement(16);
-		scrollPane.setBounds(0, 300, 900, 500);
-		add(pCenter);
+		scrollPane.getVerticalScrollBar().setUnitIncrement(150);
+		scrollPane.setBounds(0, 300, 885, 500);
 		
+		add(scrollPane);
 		
-		CartButton button = new CartButton(pCenter, 4);
-			
-		// panel.add(p);
-		
-		// panel.size();
-		
-		allpay.setFont(new Font("맑은 고딕 굵게", Font.PLAIN, 30));
+		allpay.setFont(new Font("HY견고딕", Font.PLAIN, 30));
 		allpay.setOpaque(true);
 		allpay.setForeground(Color.black);
 		allpay.setBackground(new Color(0XFFF2DD));
 		allpay.setBounds(40, 30, 180, 30);
 		
-		money.setFont(new Font("맑은 고딕 굵게", Font.PLAIN, 30));
-		money.setOpaque(true);
-		money.setForeground(Color.RED);
-		money.setBackground(new Color(0XFFF2DD));
-		money.setBounds(720, 30, 300, 30);
+		allmoney.setText(String.valueOf(total) + "원");
+		allmoney.setFont(new Font("HY견고딕", Font.PLAIN, 30));
+		allmoney.setOpaque(true);
+		allmoney.setForeground(Color.RED);
+		allmoney.setBackground(new Color(0XFFF2DD));
+		allmoney.setBounds(720, 30, 300, 30);
 	
-		button1.setForeground(new Color(0xFFFFFF));
-		button1.setBackground(new Color(0XFF0000));
-		button1.setFont(new Font("맑은 고딕 굵게", Font.PLAIN, 40));
-		button1.setBounds(450, 100, 380, 80);
+		order_completed_button.setForeground(new Color(0xFFFFFF));
+		order_completed_button.setBackground(new Color(0XFF0000));
+		order_completed_button.setFont(new Font("HY견고딕", Font.PLAIN, 40));
+		order_completed_button.setBounds(450, 100, 380, 80);
 		
-		button2.setForeground(new Color(0xFFFFFF));
-		button2.setBackground(new Color(0X000000));
-		button2.setFont(new Font("맑은 고딕 굵게", Font.PLAIN, 40));
-		button2.setBounds(40, 100, 380, 80);
+		order_completed_button.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e){  
+				
+				setVisible(false); // 다음화면으로 넘어가면 이전화면 안보이게 하기
+			}  
+		});
+		
+		more_order_button.setForeground(new Color(0xFFFFFF));
+		more_order_button.setBackground(new Color(0X000000));
+		more_order_button.setFont(new Font("HY견고딕", Font.PLAIN, 40));
+		more_order_button.setBounds(40, 100, 380, 80);
+		
+		more_order_button.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e){  
+				
+				setVisible(false); // 다음화면으로 넘어가면 이전화면 안보이게 하기
+			}  
+		});
 		
 		pNorth.add(logo);
 		pNorth.add(order);
 		
 		pSouth.add(allpay);
-		pSouth.add(money);
-		pSouth.add(button1);
-		pSouth.add(button2);
+		pSouth.add(allmoney);
+		pSouth.add(order_completed_button);
+		pSouth.add(more_order_button);
 		
 		add(pNorth);
-		add(pCenter);
 		add(pSouth);
 		
 		setLayout(null);
-		setTitle("Cart");
+		setTitle("장바구니");
 		setBounds(510,0,900,1040);
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
