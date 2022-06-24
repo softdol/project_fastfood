@@ -30,29 +30,9 @@ public class Menu extends JPanel {
 		
 		String sql = "SELECT * FROM Menu WHERE Menu_Category_IDX = 1";
 		
-		ArrayList menuImage = new ArrayList<>();
-		ArrayList menuName = new ArrayList<>();
-		ArrayList menuIdxNum = new ArrayList<>();
-
-		ArrayList menuImage1 = MenuDatabase.menuImageArray(sql);
-	//	ArrayList menuName1 = MenuDatabase.menuNameArray(sql);
-
-		
-		try(
-				Connection conn = ojdbcConnection.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sql);
-				ResultSet rs = pstmt.executeQuery();
-		){
-			while(rs.next()) {
-				menuImage.add(rs.getString(3));
-				menuName.add(rs.getString(4));
-				menuIdxNum.add(rs.getInt(1));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		//int a = MenuDatabase.size(sql);
+		ArrayList menuImage = MenuDatabase.menuImageArray(sql);
+		ArrayList menuName = MenuDatabase.menuNameArray(sql);
+		ArrayList menuIdxNum = MenuDatabase.menuIdxNum(sql);
 		
 		int a = menuImage.size();
 		int b = (a/3)+1;
