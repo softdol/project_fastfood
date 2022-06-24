@@ -3,18 +3,19 @@ package manager.sales;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import database.manager.Calculate;
+import database.manager.ReturnModel;
+import database.model.PsList;
 import manager.ManagerMain;
 import manager.actionlistener.SaleActionListener;
 import manager.component.ManagerCP;
@@ -133,6 +134,7 @@ public class SalesMain extends JPanel {
 				break;
 			case "PY":
 				cal.add(Calendar.YEAR, -1);
+				break;
 			case "N":
 				cal = Calendar.getInstance();
 				break;
@@ -144,21 +146,30 @@ public class SalesMain extends JPanel {
 		ManagerCP.reFresh(jpCalendar);	
 		
 		DateFormat format = new SimpleDateFormat("yyyy-MM");
+		DateFormat formatTime = new SimpleDateFormat("HH : mm");
+		
+		String sqlSel = "select * from calculate";
+			sqlSel +=  " where calculate_in_date >= ? order by calculate_in_date";
+		ArrayList<PsList> psList = new ArrayList<>();
+		psList.add(new PsList('D', String.valueOf(format.format(cal.getTime()))));		
+		ArrayList<Calculate> calculateList = ReturnModel.selCalculateMonth(sqlSel, psList);
 		
 		jlViewDate.setText(format.format(cal.getTime()));
 		
 		cal.set(Calendar.DAY_OF_MONTH,1); //DAY_OF_MONTH를 1로 설정 (월의 첫날)
 		int week = cal.get(Calendar.DAY_OF_WEEK) - 1; //그 주의 요일 반환 (일:1 ~ 토:7)
 		int endDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH) + week;
+		int listMax = calculateList.size();
 		
 		for(int i = 1; i <= 42; i++) {
 			
 			JPanel jpDay = new JPanel();
 			jpDay.setLayout(null);
 			jpDay.setBorder(new LineBorder(Color.BLACK));
+			int chkDay = i - week;
 			if(i > week && i <= endDay) {
 				jpDay.setBackground(Color.WHITE);
-				JLabel jlDayNum = new JLabel(String.valueOf(i - week));
+				JLabel jlDayNum = new JLabel(String.valueOf(chkDay));
 				if(i % 7 == 0) {
 					jlDayNum.setForeground(Color.BLUE);
 				}else if(i % 7 == 1) {
@@ -166,20 +177,22 @@ public class SalesMain extends JPanel {
 				}
 				jlDayNum.setFont(new Font("고딕체", Font.BOLD, 14));
 				jlDayNum.setBounds(5,0, 100, 20);
-				
-				JLabel jlOpen = new JLabel("오픈: 06:10");
-				jlOpen.setBounds(jlDayNum.getX(),jlDayNum.getY() + jlDayNum.getHeight(), 100, 20);
-				
-				JLabel jlEnd = new JLabel("마감: 06:10");
-				jlEnd.setBounds(jlDayNum.getX(),jlOpen.getY() + jlOpen.getHeight(), 100, 20);
-				
-				JLabel jlSale = new JLabel("매출: 12,152,100원");
-				jlSale.setBounds(jlDayNum.getX(),jlEnd.getY() + jlEnd.getHeight(), 140, 20);
-				
 				jpDay.add(jlDayNum);
-				jpDay.add(jlOpen);
-				jpDay.add(jlEnd);
-				jpDay.add(jlSale);
+				if(chkDay < listMax) {
+					Calculate c = calculateList.get(chkDay);
+					JLabel jlOpen = new JLabel("오픈: " + formatTime.format(c.getCalculate_in_date()));
+					jlOpen.setBounds(jlDayNum.getX(),jlDayNum.getY() + jlDayNum.getHeight(), 100, 20);
+					
+					JLabel jlEnd = new JLabel("마감: " + formatTime.format(c.getCalculate_out_date()));
+					jlEnd.setBounds(jlDayNum.getX(),jlOpen.getY() + jlOpen.getHeight(), 100, 20);
+					
+					JLabel jlSale = new JLabel("매출: " + ManagerCP.viewWon(c.getCalculate_total_price()) + "원");
+					jlSale.setBounds(jlDayNum.getX(),jlEnd.getY() + jlEnd.getHeight(), 140, 20);
+					
+					jpDay.add(jlOpen);
+					jpDay.add(jlEnd);
+					jpDay.add(jlSale);
+				}				
 			}
 			
 			jpCalendar.add(jpDay);
