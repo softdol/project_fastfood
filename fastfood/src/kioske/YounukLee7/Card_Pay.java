@@ -23,7 +23,7 @@ public class Card_Pay extends JFrame{
 	JLabel money = new JLabel("17000원");
 	JButton button1 = new JButton("결제 하기");
 	JButton button2 = new JButton("결제 취소");
-	
+	//xddx
 	public Card_Pay() {
 		pNorth.setBackground(new Color(0XFFF2DD));
         pNorth.setBounds(0,0,900,300);
