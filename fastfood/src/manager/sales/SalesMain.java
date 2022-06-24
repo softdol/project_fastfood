@@ -98,7 +98,7 @@ public class SalesMain extends JPanel {
 		DateFormat format = new SimpleDateFormat("yyyy-MM");
 		DateFormat formatTime = new SimpleDateFormat("HH : mm");
 		
-		System.out.println(format.format(cal.getTime()));
+		//System.out.println(format.format(cal.getTime()));
 		
 		String sqlSel = "select * from calculate";
 			sqlSel +=  " where calculate_in_date >= ? order by calculate_in_date";
