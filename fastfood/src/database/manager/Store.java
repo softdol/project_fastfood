@@ -23,7 +23,7 @@ public class Store {
 		this.store_phone = rs.getString(6);
 		this.store_in_date = rs.getDate(7);
 	}
-
+//???
 	public Integer getStore_idx() {
 		return store_idx;
 	}

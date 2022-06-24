@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -84,6 +85,11 @@ public class ManagerCP {
 		for(PsList p : ps) {
 			System.out.println("type = " + p.getType() + " : val = " + p.getVal());
 		}
+	}
+	
+	public static String viewWon(int num) {
+		DecimalFormat dcf = new DecimalFormat("###,###,###,###");
+		return dcf.format(num);
 	}
 
 }
