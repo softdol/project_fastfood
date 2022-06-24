@@ -4,6 +4,8 @@ import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,9 +17,11 @@ import javax.swing.Timer;
 
 import database.OjdbcConnection;
 import kioske.YounukLee7.ImageLabel;
+import kioske.YounukLee7.Select_Side_Drink;
+import kioske.YounukLee7.Select_Takeout;
 import kioske.YounukLee7.dbtablePocket.EventPage;
 
-public class Start_Screen_kiosk {
+public class Start_Screen_kiosk extends JPanel{
 	
 	public Component Start_Screen_kiosk() {
 		
@@ -61,12 +65,14 @@ public class Start_Screen_kiosk {
 			start_screen_panel.add(new ImageLabel(event_page_list.get(i).getBig_event_page()));
 		}
 		
-		// 화면 아무곳이나 클릭시 다음 화면으로 넘어감
-//		start_screen_panel.addMouseListener(new MouseAdapter() {
-//			public void mouseClicked(MouseEvent e){  
-//				new Select_Takeout();
-//			}  
-//		});
+		start_screen_panel.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e){  
+				
+				new Select_Takeout();
+				setVisible(false); // 다음화면으로 넘어가면 이전화면 안보이게 하기
+			}  
+		});
+		
 		
 		return start_screen_panel;
 	}

@@ -12,7 +12,7 @@ public class Start_Screen extends JFrame{
 		add(start_Screen_kiosk.Start_Screen_kiosk());
 		
 		setLayout(null);
-		setTitle("첫화면");
+		setTitle("첫 화면");
 		setBounds(510,0,900,1040);
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
