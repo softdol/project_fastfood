@@ -53,7 +53,7 @@ public class SalesGraph extends JPanel {
 				saleList.get(i).setiX(lineX);
 			}
 			
-			System.out.println(i + " : " + lineX);
+			//System.out.println(i + " : " + lineX);
 		}
 		
 		// ±Ý¾× ¼±
@@ -70,7 +70,7 @@ public class SalesGraph extends JPanel {
 			add(jlWon);
 		}
 		
-		System.out.println("--");
+		//System.out.println("--");
 		
 		g.setColor(Color.red);
 		
