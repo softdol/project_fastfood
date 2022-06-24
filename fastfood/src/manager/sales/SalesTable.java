@@ -96,22 +96,44 @@ public class SalesTable extends JPanel  {
 			
 		});
 		
-//		String sqlIns = "insert into payment_list values(PAYMENT_LIST_SEQ.nextval, ?, ?, ?, sysdate - 60)";
-//		ArrayList<PsList> pslist;
-//		
-//		for(int i = 0; i < 150; i++) {		
-//			String[] ptype = {"P","S","B"};
-//			String[] ntype = {"Y","N"};
-//			int price = ((int)(Math.random() * 100) + 1) * 1000;
+		
+//		for(int j = 0; j < 100; j++) {
 //			
+//			String sqlIns = "insert into payment_list values(PAYMENT_LIST_SEQ.nextval, ?, ?, ?, sysdate - "+j+")";
+//			ArrayList<PsList> pslist;
+//			
+//			for(int i = 0; i < 50; i++) {		
+//				String[] ptype = {"P","S","B"};
+//				String[] ntype = {"Y","N"};
+//				int price = ((int)(Math.random() * 100) + 1) * 1000;
+//				
+//				pslist = new ArrayList<>();
+//				pslist.add(new PsList('S', ptype[(int)(Math.random() * ptype.length)])); // P S B
+//				pslist.add(new PsList('S', ntype[(int)(Math.random() * ntype.length)])); // N Y 
+//				pslist.add(new PsList('I', String.valueOf(price)));
+//				
+//				//ManagerCP.viewPs(pslist);
+//				OjdbcConnection.insert(sqlIns, pslist);
+//			}
+//			
+//		}
+//		ArrayList<PsList> pslist;
+//		for(int j = 1; j < 200; j++) {
+//			String sqlIns ="insert into calculate values(calculate_idx_seq.nextval";
+//			sqlIns += ", sysdate -" + j + ", ?, sysdate - " + (j - 1) + ", ?, 'Y', ?)";
+//			
+//			int price = ((int)(Math.random() * 450 + 50) * 10000);
 //			pslist = new ArrayList<>();
-//			pslist.add(new PsList('S', ptype[(int)(Math.random() * ptype.length)])); // P S B
-//			pslist.add(new PsList('S', ntype[(int)(Math.random() * ntype.length)])); // N Y 
+//			pslist.add(new PsList('S', main.mInfo.getMember_id()));
+//			pslist.add(new PsList('S', main.mInfo.getMember_id()));
 //			pslist.add(new PsList('I', String.valueOf(price)));
 //			
-//			//ManagerCP.viewPs(pslist);
-//			OjdbcConnection.insert(sqlIns, pslist);
+////			System.out.println(sqlIns);
+////			System.out.println(price);
+//			//OjdbcConnection.insert(sqlIns, pslist);
 //		}
+		
+		
 		
 		
 		
