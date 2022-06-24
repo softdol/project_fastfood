@@ -30,7 +30,8 @@ public class SalesMain extends JPanel {
 	public SalesMain(ManagerMain main) {
 		
 		this.main = main;
-		main.setBounds(200,150,885,786);
+		//main.setBounds(200,150,885,786);
+		main.setSize(885,786);
 		setLayout(null);
 		setBounds(0,0,865,726);
 		//setBorder(new LineBorder(Color.BLACK));
