@@ -17,8 +17,11 @@ import javax.swing.Timer;
 
 import database.OjdbcConnection;
 import kioske.YounukLee7.ImageLabel;
+import kioske.YounukLee7.Main_JPanel;
 import kioske.YounukLee7.Select_Side_Drink;
 import kioske.YounukLee7.Select_Takeout;
+import kioske.YounukLee7.Start_Screen;
+import kioske.YounukLee7.Sub_JPanel;
 import kioske.YounukLee7.dbtablePocket.EventPage;
 
 public class Start_Screen_kiosk extends JPanel{
@@ -68,8 +71,11 @@ public class Start_Screen_kiosk extends JPanel{
 		start_screen_panel.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e){  
 				
-				new Select_Takeout();
-				setVisible(false); // 다음화면으로 넘어가면 이전화면 안보이게 하기
+				start_screen_panel.setVisible(false);
+				Main_JPanel panel = new Main_JPanel();
+				Sub_JPanel sub_JPanel = new Sub_JPanel();
+				sub_JPanel.add(panel);
+				//setVisible(false); // 다음화면으로 넘어가면 이전화면 안보이게 하기
 			}  
 		});
 		
