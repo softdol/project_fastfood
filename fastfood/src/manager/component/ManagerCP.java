@@ -87,7 +87,7 @@ public class ManagerCP {
 		}
 	}
 	
-	public static String viewWon(int num) {
+	public static String viewWon(long num) {
 		DecimalFormat dcf = new DecimalFormat("###,###,###,###");
 		return dcf.format(num);
 	}
