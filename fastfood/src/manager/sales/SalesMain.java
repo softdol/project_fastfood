@@ -26,72 +26,24 @@ public class SalesMain extends JPanel {
 	
 	Calendar cal;
 	JPanel jpCalendar;
-	JLabel jlViewDate;
+	//JLabel jlViewDate;
+	SalesTopCalendar topCalendar;
 	
 	public SalesMain(ManagerMain main) {
 		
 		this.main = main;
-		//main.setBounds(200,150,885,786);
 		main.setSize(885,786);
 		setLayout(null);
 		setBounds(0,0,865,726);
-		//setBorder(new LineBorder(Color.BLACK));
+		
+		SalesTopCalendar topCalendar = new SalesTopCalendar(this);
 		
 		cal = Calendar.getInstance();
 		
-		JPanel jpSelCalendar = new JPanel();
-		jpSelCalendar.setLayout(null);
-		jpSelCalendar.setBounds(0, 5, getWidth(), 50);
-		//jpSelCalendar.setBorder(new LineBorder(Color.GREEN));
-		JButton btnPrevY = new JButton("<<");
-		btnPrevY.setBounds(20, 5, 50, 40);
-		btnPrevY.addActionListener(new SaleActionListener(this, "PY"));
-		JButton btnPrevM = new JButton("<");		
-		btnPrevM.setBounds(btnPrevY.getX() + btnPrevY.getWidth() + 5, btnPrevY.getY(), 50, 40);
-		btnPrevM.addActionListener(new SaleActionListener(this, "PM"));
-		jlViewDate = new JLabel("", 0);
-		jlViewDate.setBounds(btnPrevM.getX() + btnPrevM.getWidth() + 5, btnPrevY.getY(), 120, 40);
-		jlViewDate.setOpaque(true);
-		jlViewDate.setBackground(Color.white);
-		jlViewDate.setFont(new Font("고딕체", Font.BOLD, 20));
-		JButton btnNextM = new JButton(">");
-		btnNextM.setBounds(jlViewDate.getX() + jlViewDate.getWidth() + 5, btnPrevY.getY(), 50, 40);
-		btnNextM.addActionListener(new SaleActionListener(this, "NM"));
-		JButton btnNextY = new JButton(">>");
-		btnNextY.setBounds(btnNextM.getX() + btnNextM.getWidth() + 5, btnPrevY.getY(), 50, 40);
-		btnNextY.addActionListener(new SaleActionListener(this, "NY"));
-		
-		JButton btnNow = new JButton("이번달");
-		btnNow.setBounds(btnNextY.getX() + btnNextY.getWidth() + 5, btnPrevY.getY(), 80, 40);
-		btnNow.addActionListener(new SaleActionListener(this, "N"));
-		
-		
-		jpSelCalendar.add(btnPrevY);
-		jpSelCalendar.add(btnPrevM);
-		jpSelCalendar.add(jlViewDate);
-		jpSelCalendar.add(btnNextM);
-		jpSelCalendar.add(btnNextY);
-		jpSelCalendar.add(btnNow);
-
-		// 오픈 마감 오픈취소 마감해지
-		JButton btnOpen = new JButton("오픈");
-		btnOpen.setBounds(btnNextY.getX() + btnNextY.getWidth() + 180, btnPrevY.getY(), 60, 40);
-		JButton btnClose = new JButton("마감");
-		btnClose.setBounds(btnOpen.getX() + btnOpen.getWidth() + 5, btnPrevY.getY(), 60, 40);
-		JButton btnOpenC = new JButton("오픈취소");
-		btnOpenC.setBounds(btnClose.getX() + btnClose.getWidth() + 5, btnPrevY.getY(), 90, 40);
-		JButton btnCloseC = new JButton("마감해지");
-		btnCloseC.setBounds(btnOpenC.getX() + btnOpenC.getWidth() + 5, btnPrevY.getY(), 90, 40);
-
-		jpSelCalendar.add(btnOpen);
-		jpSelCalendar.add(btnClose);
-		jpSelCalendar.add(btnOpenC);
-		jpSelCalendar.add(btnCloseC);
-		
-		add(jpSelCalendar);
+		add(topCalendar);
 		
 		JPanel jpDayofweek = new JPanel();
-		jpDayofweek.setBounds(0, jpSelCalendar.getY() + jpSelCalendar.getHeight(), getWidth(), 30);
+		jpDayofweek.setBounds(0, topCalendar.getY() + topCalendar.getHeight(), getWidth(), 30);
 		jpDayofweek.setLayout(new GridLayout(1,7));
 		JButton btn1 = new JButton("일요일");
 		JButton btn2 = new JButton("월요일");
@@ -107,8 +59,6 @@ public class SalesMain extends JPanel {
 		jpDayofweek.add(btn5);
 		jpDayofweek.add(btn6);
 		jpDayofweek.add(btn7);
-		
-		//jpDayofweek.setBorder(new LineBorder(Color.RED));
 		
 		add(jpDayofweek);
 				
@@ -143,10 +93,12 @@ public class SalesMain extends JPanel {
 	}
 	
 	public void viewMonSale() {
-		ManagerCP.reFresh(jpCalendar);	
+		ManagerCP.reFresh(jpCalendar);
 		
 		DateFormat format = new SimpleDateFormat("yyyy-MM");
 		DateFormat formatTime = new SimpleDateFormat("HH : mm");
+		
+		System.out.println(format.format(cal.getTime()));
 		
 		String sqlSel = "select * from calculate";
 			sqlSel +=  " where calculate_in_date >= ? order by calculate_in_date";
@@ -154,7 +106,7 @@ public class SalesMain extends JPanel {
 		psList.add(new PsList('D', String.valueOf(format.format(cal.getTime()))));		
 		ArrayList<Calculate> calculateList = ReturnModel.selCalculateMonth(sqlSel, psList);
 		
-		jlViewDate.setText(format.format(cal.getTime()));
+		topCalendar.jlViewDate.setText(format.format(cal.getTime()));
 		
 		cal.set(Calendar.DAY_OF_MONTH,1); //DAY_OF_MONTH를 1로 설정 (월의 첫날)
 		int week = cal.get(Calendar.DAY_OF_WEEK) - 1; //그 주의 요일 반환 (일:1 ~ 토:7)
