@@ -24,10 +24,6 @@ public class SalesGraph extends JPanel {
 			saleList.add(new SaleMonth(i+1, (long)(Math.random() * 90000000 + 10000000)));
 		}
 		
-		for(SaleMonth s : saleList) {
-			System.out.println(s);
-		}
-		
 		//System.out.println("width : " + super.getWidth() + " , height : " + super.getHeight());
 		g.setColor(Color.BLUE);		
 		g.drawRect(0, 0, endRectX, endRectY);
@@ -44,6 +40,8 @@ public class SalesGraph extends JPanel {
 			jlMonth.setBounds(lineX - startRectX + 15, endRectY - 10, 40, 40);
 			
 			add(jlMonth);
+			
+			
 		}
 		
 		// ±Ý¾× ¼±

@@ -6,6 +6,8 @@ import java.sql.SQLException;
 public class SaleMonth {
 	private Integer iMonth;
 	private Long	lPrice;
+	private Integer iX;
+	private Integer iY;
 	
 	public SaleMonth(ResultSet rs) throws SQLException {
 		this.iMonth = rs.getInt(1);
@@ -23,6 +25,22 @@ public class SaleMonth {
 
 	public Long getlPrice() {
 		return lPrice;
+	}
+	
+	public Integer getiX() {
+		return iX;
+	}
+	
+	public Integer getiY() {
+		return iY;
+	}
+	
+	public void setiX(Integer iX) {
+		this.iX = iX;
+	}
+	
+	public void setiY(Integer iY) {
+		this.iY = iY;
 	}
 	
 	@Override

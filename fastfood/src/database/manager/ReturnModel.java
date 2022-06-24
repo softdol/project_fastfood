@@ -111,13 +111,13 @@ public class ReturnModel {
 	 * 카테고리 리스트 불러오기
 	 * @param 
 	 * @param psList
-	 * @return ArrayList<Catagory>
+	 * @return ArrayList<Category>
 	 */
 	public static ArrayList<Category> categoryList(){
 		ArrayList<Category> cateList = new ArrayList<>();
 		try(
 				Connection conn = OjdbcConnection.getConnection();
-				PreparedStatement pstmt= conn.prepareStatement("select * from menu_catagory");
+				PreparedStatement pstmt= conn.prepareStatement("select * from menu_category");
 			){
 			
 			try(ResultSet rs = pstmt.executeQuery()){
