@@ -6,22 +6,21 @@ import javax.swing.JPanel;
 
 public class MenuPanel extends JPanel{
 
-	public Component MenuPanel(){
+	public Component MenuPanel(String sql1, String sql2){
 		
 		JPanel mainPanel = new JPanel();
 
 		add(mainPanel);
 		
-		String[] subMenu = {"비프","치킨","씨푸드"};// db받아오기
 		
 		SubMenuPanel sub = new SubMenuPanel();
-		mainPanel.add(sub.SubMenuPanel(subMenu));
+		mainPanel.add(sub.SubMenuPanel(sql2));
 		
 		MenuNamePanel mName = new MenuNamePanel();
 		mainPanel.add(mName.MenuNamePanel());
 		
 		MainMenuPanel main = new MainMenuPanel();
-		mainPanel.add(main.MainMenuPanel());
+		mainPanel.add(main.MainMenuPanel(sql1));
 		
 
 		mainPanel.setBounds(200, 0, 884, 800);

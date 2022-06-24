@@ -24,12 +24,9 @@ import javax.swing.text.StyledDocument;
 
 public class Menu extends JPanel {	
 	
-	public Component Menu() {
+	public Component Menu(String sql) {
 		EmptyBorder border = new EmptyBorder(getInsets());
-		
-		
-		String sql = "SELECT * FROM Menu WHERE Menu_Category_IDX = 1";
-		
+	
 		ArrayList menuImage = MenuDatabase.menuImageArray(sql);
 		ArrayList menuName = MenuDatabase.menuNameArray(sql);
 		ArrayList menuIdxNum = MenuDatabase.menuIdxNum(sql);
@@ -40,7 +37,7 @@ public class Menu extends JPanel {
 		LayoutManager manager = new GridLayout(b, 3);
 
 		JPanel menuPanel = new JPanel();
-		menuPanel.setBounds(0, 550, 670, 200*b);
+		menuPanel.setBounds(0, 0, 670, 200*b);
 		menuPanel.setLayout(manager);
 		menuPanel.setBorder(border);
 

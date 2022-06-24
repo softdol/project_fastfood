@@ -14,27 +14,22 @@ import javax.swing.JScrollPane;
 
 public class MainMenuPanel extends JPanel{
 	
-	public Component MainMenuPanel() {
+	public Component MainMenuPanel(String sql) {
 		
-		LayoutManager manager = new GridLayout(4,3);
+		int a = MenuDatabase.size(sql);
 		
 		JPanel menuPanel = new JPanel();
+		menuPanel.setBounds(0, 200, 684, 600);
+		menuPanel.setLayout(null);
 		
-		menuPanel.setLayout(manager);
+		Menu menu= new Menu();
+		menuPanel.add(menu.Menu(sql));	
 		
 		JScrollPane scrollPane = new JScrollPane(menuPanel);
 		scrollPane.setBounds(0, 200, 684, 600);
 		Dimension size = new Dimension();
-				size.setSize(600,800);
+				size.setSize(600,200+(200*(a/3)+1));
 		menuPanel.setPreferredSize(size);
-		
-		for(int i = 0; i <12; ++i) {
-			
-			JButton btn3 = new JButton("¸Þ´º");
-			btn3.setFont(new Font("±Ã¼­Ã¼", Font.PLAIN,40));
-			btn3.setBackground(new Color(0xFFFFFF));
-			menuPanel.add(btn3);
-		}
 		
 		
 		return scrollPane;
