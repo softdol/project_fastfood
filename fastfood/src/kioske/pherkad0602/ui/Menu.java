@@ -32,9 +32,10 @@ public class Menu extends JPanel {
 		
 		ArrayList menuImage = new ArrayList<>();
 		ArrayList menuName = new ArrayList<>();
-		
-		ArrayList menuImage1 = MenuDatabase.menuImageArray(sql);
-		ArrayList menuName1 = MenuDatabase.menuNameArray(sql);
+		ArrayList menuIdxNum = new ArrayList<>();
+
+	//	ArrayList menuImage1 = MenuDatabase.menuImageArray(sql);
+	//	ArrayList menuName1 = MenuDatabase.menuNameArray(sql);
 
 		
 		try(
@@ -45,13 +46,15 @@ public class Menu extends JPanel {
 			while(rs.next()) {
 				menuImage.add(rs.getString(3));
 				menuName.add(rs.getString(4));
+				menuIdxNum.add(rs.getInt(1));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		int a = MenuDatabase.size("SELECT * FROM Menu WHERE Menu_Category_IDX = 1");
-
+		//int a = MenuDatabase.size(sql);
+		
+		int a = menuImage.size();
 		int b = (a/3)+1;
 		
 		LayoutManager manager = new GridLayout(b, 3);
@@ -66,6 +69,7 @@ public class Menu extends JPanel {
 			
 			JButton btn3 = new JButton();
 			btn3.setBackground(new Color(0xFFFFFF));
+			btn3.setName(String.valueOf(menuIdxNum.get(i)));
 			btn3.setBorder(border);
 			btn3.setLayout(null);
 			
