@@ -16,7 +16,7 @@ public class test {
 		
 		LayoutManager manager = new GridLayout(4, 3);
 		
-		String sql = "SELECT * FROM Menu";
+		String sql = "SELECT * FROM Menu WHERE Menu_Category_IDX = 1";
 		
 		ArrayList menuImage = new ArrayList<>();
 		ArrayList menuName = new ArrayList<>();
@@ -34,6 +34,9 @@ public class test {
 			e.printStackTrace();
 		}
 		
+		System.out.println(String.valueOf(menuImage.get(1)));
+		System.out.println(menuImage.size());
+		System.out.println(MenuDatabase.size("SELECT * FROM Menu WHERE Menu_Category_IDX = 1")); 
 	}
 
 }

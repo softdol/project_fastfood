@@ -34,7 +34,7 @@ public class Menu extends JPanel {
 		ArrayList menuName = new ArrayList<>();
 		ArrayList menuIdxNum = new ArrayList<>();
 
-	//	ArrayList menuImage1 = MenuDatabase.menuImageArray(sql);
+		ArrayList menuImage1 = MenuDatabase.menuImageArray(sql);
 	//	ArrayList menuName1 = MenuDatabase.menuNameArray(sql);
 
 		
