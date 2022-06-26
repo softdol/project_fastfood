@@ -7,11 +7,12 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 public class SubMenuPanel extends JPanel{
 	
 	public Component SubMenuPanel(String sql){
-		
+		EmptyBorder border = new EmptyBorder(getInsets());
 		
 		ArrayList menuName = MenuDatabase.menuNameArray(sql);
 		ArrayList subMenuName = SubMenuDatabase.subMenuNameArray(sql);
@@ -23,7 +24,8 @@ public class SubMenuPanel extends JPanel{
 		
 		subMenuPanel.setBounds(0, 0, 684, 100);
 		subMenuPanel.setLayout(null);
-		
+		subMenuPanel.setBackground(Color.white);
+		subMenuPanel.setBorder(border);
 	
 
 		for(int i = 0; i <a; ++i) {
