@@ -2,6 +2,8 @@ package kioske.YounukLee7;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,14 +17,14 @@ public class Card_Pay extends JFrame{
 	JPanel pCenter = new JPanel();
 	JPanel pSouth = new JPanel();
 	JLabel logo = new JLabel("∑Œ∞Ì");
-	JLabel menuName = new JLabel("≈©∏ÆΩ∫«« πˆ∞≈");
-	JLabel label1 = new JLabel("Ω≈øÎƒ´µÂ∏¶");
-	JLabel label2 = new JLabel("≈ı¿‘±∏ø° ≥÷æÓ¡÷ººø‰");
+	JLabel menuName = new JLabel("∏≈¥∫ ¿Ã∏ß");
+	JLabel word1 = new JLabel("Ω≈øÎƒ´µÂ∏¶");
+	JLabel word2 = new JLabel("≈ı¿‘±∏ø° ≥÷æÓ¡÷ººø‰");
 	JLabel label3 = new JLabel("ƒ´µÂ ∞·¡¶ ¿ÃπÃ¡ˆ");
 	JLabel allpay = new JLabel("√— ∞·¡¶±›æ◊");
 	JLabel money = new JLabel("17000ø¯");
-	JButton button1 = new JButton("∞·¡¶ «œ±‚");
-	JButton button2 = new JButton("∞·¡¶ √Îº“");
+	JButton pay_button = new JButton("∞·¡¶ «œ±‚");
+	JButton payoff_button = new JButton("∞·¡¶ √Îº“");
 	
 	public Card_Pay() {
 		pNorth.setBackground(new Color(0XFFF2DD));
@@ -41,63 +43,77 @@ public class Card_Pay extends JFrame{
 		logo.setIcon(new ImageIcon("image/logo.png"));
 		
 		menuName.setBounds(280, 50, 500, 200);
-		menuName.setFont(new Font("∏º¿∫ ∞ÌµÒ ±Ω∞‘", Font.PLAIN, 30));
+		menuName.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 30));
 		
-		label1.setFont(new Font("∏º¿∫ ∞ÌµÒ ±Ω∞‘", Font.PLAIN, 40));
-		label1.setOpaque(true);
-		label1.setForeground(Color.red);
-		label1.setBackground(new Color(0XFFE7DF));
-		label1.setBounds(345, 50, 200, 40);
+		word1.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 40));
+		word1.setOpaque(true);
+		word1.setForeground(Color.red);
+		word1.setBackground(new Color(0XFFE7DF));
+		word1.setBounds(345, 50, 200, 40);
 		
-		label2.setFont(new Font("∏º¿∫ ∞ÌµÒ ±Ω∞‘", Font.PLAIN, 40));
-		label2.setOpaque(true);
-		label2.setForeground(Color.black);
-		label2.setBackground(new Color(0XFFE7DF));
-		label2.setBounds(255, 130, 400, 40);
+		word2.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 40));
+		word2.setOpaque(true);
+		word2.setForeground(Color.black);
+		word2.setBackground(new Color(0XFFE7DF));
+		word2.setBounds(255, 130, 400, 40);
 		
 		label3.setBounds(240, 230, 400, 230);
 		label3.setIcon(new ImageIcon("image/Card_pay.png"));
 		
-		allpay.setFont(new Font("∏º¿∫ ∞ÌµÒ ±Ω∞‘", Font.PLAIN, 30));
+		allpay.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 30));
 		allpay.setOpaque(true);
 		allpay.setForeground(Color.black);
 		allpay.setBackground(new Color(0XFFF2DD));
 		allpay.setBounds(40, 30, 180, 30);
 		
-		money.setFont(new Font("∏º¿∫ ∞ÌµÒ ±Ω∞‘", Font.PLAIN, 30));
+		money.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 30));
 		money.setOpaque(true);
 		money.setForeground(Color.RED);
 		money.setBackground(new Color(0XFFF2DD));
 		money.setBounds(720, 30, 300, 30);
 	
-		button1.setForeground(new Color(0xFFFFFF));
-		button1.setBackground(new Color(0XFF0000));
-		button1.setFont(new Font("∏º¿∫ ∞ÌµÒ ±Ω∞‘", Font.PLAIN, 40));
-		button1.setBounds(450, 100, 380, 80);
+		pay_button.setForeground(new Color(0xFFFFFF));
+		pay_button.setBackground(new Color(0XFF0000));
+		pay_button.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 40));
+		pay_button.setBounds(450, 100, 380, 80);
 		
-		button2.setForeground(new Color(0xFFFFFF));
-		button2.setBackground(new Color(0X000000));
-		button2.setFont(new Font("∏º¿∫ ∞ÌµÒ ±Ω∞‘", Font.PLAIN, 40));
-		button2.setBounds(40, 100, 380, 80);
+		pay_button.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e){  
+				new Order_completed();
+				setVisible(false); 
+			}  
+		});
+		
+		payoff_button.setForeground(new Color(0xFFFFFF));
+		payoff_button.setBackground(new Color(0X000000));
+		payoff_button.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 40));
+		payoff_button.setBounds(40, 100, 380, 80);
+		
+		payoff_button.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e){  
+				new Error_Image();
+				setVisible(false); 
+			}  
+		});
 		
 		pNorth.add(logo);
 		pNorth.add(menuName);
 		
-		pCenter.add(label1);
-		pCenter.add(label2);
+		pCenter.add(word1);
+		pCenter.add(word2);
 		pCenter.add(label3);
 		
 		pSouth.add(allpay);
 		pSouth.add(money);
-		pSouth.add(button1);
-		pSouth.add(button2);
+		pSouth.add(pay_button);
+		pSouth.add(payoff_button);
 		
 		add(pNorth);
 		add(pCenter);
 		add(pSouth);
 		
 		setLayout(null);
-		setTitle("Card_Pay");
+		setTitle("ƒ´µÂ ∞·√º");
 		setBounds(510,0,900,1040);
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
