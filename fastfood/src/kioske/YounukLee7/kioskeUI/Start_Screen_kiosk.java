@@ -73,9 +73,12 @@ public class Start_Screen_kiosk extends JPanel{
 				
 				start_screen_panel.setVisible(false);
 				Main_JPanel panel = new Main_JPanel();
-				Sub_JPanel sub_JPanel = new Sub_JPanel();
-				sub_JPanel.add(panel);
-				//setVisible(false); // 다음화면으로 넘어가면 이전화면 안보이게 하기
+				Select_Takeout_up up = new Select_Takeout_up();
+				Select_Takeout_down down = new Select_Takeout_down();
+				add(up.Select_Takeout_up());
+				add(up.Select_Takeout_up());
+				
+				
 			}  
 		});
 		
