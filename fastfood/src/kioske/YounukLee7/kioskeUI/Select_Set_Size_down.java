@@ -11,15 +11,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import kioske.YounukLee7.Select_Side_Drink;
+import kioske.YounukLee7.Sub_JFrame;
 
-public class Select_Set_Size_down {
+public class Select_Set_Size_down extends JPanel{
 	
-	public JPanel Select_Set_Size_down() {
+	public Select_Set_Size_down(Sub_JFrame screen) {
 		
-		JPanel pSouth = new JPanel();
-		pSouth.setBackground(new Color(0XFFE7DF));
-		pSouth.setBounds(0,300,900,740);
-		pSouth.setLayout(null);
+		setBackground(new Color(0XFFE7DF));
+		setBounds(0,300,900,740);
+		setLayout(null);
 		
 		JLabel label = new JLabel("<html><body style='text-align:center;'>700원 추가하시면 사이드와 음료가"
 				+ "<br />라지사이즈로 변경됩니다."
@@ -37,6 +37,14 @@ public class Select_Set_Size_down {
 		no_button.setFont(new Font("HY견고딕", Font.PLAIN, 30));
 		no_button.setBounds(173, 450, 250, 60);
 		
+		no_button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				screen.veiw_Select_Side_Drink();
+			}
+		});
+		
 		JButton yes_button = new JButton("예");
 		yes_button.setForeground(new Color(0xFFFFFF));
 		yes_button.setBackground(new Color(0xFF0000));
@@ -47,16 +55,15 @@ public class Select_Set_Size_down {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new Select_Side_Drink();
+				screen.veiw_Select_Side_Drink();
 			}
 		});
 		
-		pSouth.add(no_button);
-		pSouth.add(yes_button);
-		pSouth.add(label);
-		pSouth.add(image_label);
+		add(no_button);
+		add(yes_button);
+		add(label);
+		add(image_label);
 		
-		return pSouth;
 	}
 
 }

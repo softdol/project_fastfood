@@ -11,15 +11,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import kioske.YounukLee7.Select_Set_Size;
+import kioske.YounukLee7.Sub_JFrame;
 
-public class Select_Set_down {
+public class Select_Set_down extends JPanel{
 	
-	public JPanel Select_Set_down() {
+	public Select_Set_down(Sub_JFrame screen) {
 		
-		JPanel pSouth = new JPanel();
-		pSouth.setBackground(new Color(0XFFE7DF));
-		pSouth.setBounds(0,300,900,770);
-		pSouth.setLayout(null);
+		setBackground(new Color(0XFFE7DF));
+		setBounds(0,300,900,770);
+		setLayout(null);
 		
 		JLabel select_label = new JLabel("선택해주세요");
 		select_label.setFont(new Font("HY견고딕", Font.PLAIN, 50));
@@ -29,6 +29,14 @@ public class Select_Set_down {
 		single_button.setBounds(173, 200, 250, 350);
 		single_button.setIcon(new ImageIcon("image/solo.png"));
 		
+		single_button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		
 		JButton set_button = new JButton("세트");
 		set_button.setBounds(463, 200, 250, 350);
 		set_button.setIcon(new ImageIcon("image/set.jpg"));
@@ -37,15 +45,14 @@ public class Select_Set_down {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new Select_Set_Size();
+				screen.veiw_Set_Size();
 			}
 		});
 		
-		pSouth.add(single_button);
-		pSouth.add(set_button);
-		pSouth.add(select_label);
+		add(single_button);
+		add(set_button);
+		add(select_label);
 		
-		return pSouth;
 	}
 
 }

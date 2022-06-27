@@ -7,14 +7,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Order_completed_down {
+public class Order_completed_down extends JPanel{
 	
-	public JPanel Order_completed_down() {
+	public Order_completed_down() {
 		
-		JPanel pSouth = new JPanel();
-		pSouth.setBackground(new Color(0XFFE7DF));
-		pSouth.setBounds(0,300,900,770);
-		pSouth.setLayout(null);
+		setBackground(new Color(0XFFE7DF));
+		setBounds(0,300,900,770);
+		setLayout(null);
 		
 		JLabel word1 = new JLabel("주문이 완료되었습니다!");
 		word1.setFont(new Font("HY견고딕", Font.PLAIN, 40));
@@ -41,12 +40,11 @@ public class Order_completed_down {
 		payImage.setBounds(240, 350,400,230);
 		payImage.setIcon(new ImageIcon("image/pay_exit.png"));
 		
-		pSouth.add(word1);
-		pSouth.add(word2);
-		pSouth.add(order_number);
-		pSouth.add(payImage);
+		add(word1);
+		add(word2);
+		add(order_number);
+		add(payImage);
 		
-		return pSouth;
 	}
 
 }

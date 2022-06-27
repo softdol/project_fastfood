@@ -11,13 +11,13 @@ public class Card_Pay extends JFrame{
 	public Card_Pay() {
 		
 		Logo_MenuName_Panel logo = new Logo_MenuName_Panel();
-		add(logo.Logo_MenuName_Panel());
+		add(logo);
 		
 		Card_Pay_mid mid = new Card_Pay_mid();
-		add(mid.Card_Pay_mid());
+		add(mid);
 		
 		Down_yes_no_Button button = new Down_yes_no_Button();
-		add(button.Down_yes_no_Button());
+		add(button);
 		
 		setLayout(null);
 		setTitle("카드 결체");

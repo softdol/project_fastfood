@@ -11,10 +11,10 @@ public class Select_Side_Drink extends JFrame{
 	public Select_Side_Drink() {
 		
 		Logo_MenuName_Panel logo_MenuName_Panel = new Logo_MenuName_Panel();
-		add(logo_MenuName_Panel.Logo_MenuName_Panel());
+		add(logo_MenuName_Panel);
 		
 		Select_Side_Drink_down down = new Select_Side_Drink_down();
-		add(down.Select_Side_Drink_down());
+		add(down);
 		
 		setLayout(null);
 		setTitle("사이드 또는 음료 변경 후 담기");

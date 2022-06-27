@@ -7,14 +7,13 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Select_Payment_down {
+public class Select_Payment_down extends JPanel{
 	
-	public JPanel Select_Payment_down() {
+	public Select_Payment_down() {
 		
-		JPanel pSouth = new JPanel();
-		pSouth.setBackground(new Color(0XFFF2DD));
-		pSouth.setBounds(0,800,900,240);
-		pSouth.setLayout(null);
+		setBackground(new Color(0XFFF2DD));
+		setBounds(0,800,900,240);
+		setLayout(null);
 		
 		JLabel allpay = new JLabel("ÃÑ °áÁ¦±Ý¾×");
 		allpay.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 30));
@@ -36,11 +35,10 @@ public class Select_Payment_down {
 		payoff.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 40));
 		payoff.setBounds(40, 100, 800, 80);
 		
-		pSouth.add(allpay);
-		pSouth.add(allmoney);
-		pSouth.add(payoff);
+		add(allpay);
+		add(allmoney);
+		add(payoff);
 		
-		return pSouth;
 	}
 
 }
