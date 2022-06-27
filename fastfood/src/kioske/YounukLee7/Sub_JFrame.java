@@ -12,10 +12,10 @@ public class Sub_JFrame extends JFrame {
 	Sub_JPanel panel;
 	
 	// 단품,세트 중 세트 선택 시 라지세트 선택 화면으로 감
-	public void veiw_Set_Size() {
+	public void veiw_Set_Size(int idx) {
 		ManagerCP.reFresh(panel);
 		panel.add(new Logo_MenuName_Panel());
-		panel.add(new Select_Set_Size_down(this));
+		panel.add(new Select_Set_Size_down(this, idx));
 	}
 	
 	public void veiw_Select_Side_Drink() {
@@ -26,7 +26,7 @@ public class Sub_JFrame extends JFrame {
 	
 	public Sub_JFrame() {
 		
-		panel = new Sub_JPanel(this);
+		panel = new Sub_JPanel(this,1);
 		add(panel);
 		
 		setLayout(null);

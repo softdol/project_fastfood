@@ -2,14 +2,18 @@ package kioske.YounukLee7.kioskeUI;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import kioske.YounukLee7.Last_JFrame;
+
 public class Down_yes_no_Button extends JPanel{
 	
-	public Down_yes_no_Button() {
+	public Down_yes_no_Button(Last_JFrame screen) {
 		
 		setBackground(new Color(0XFFF2DD));
 		setBounds(0,800,900,240);
@@ -36,11 +40,27 @@ public class Down_yes_no_Button extends JPanel{
 		pay_button.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 40));
 		pay_button.setBounds(450, 100, 380, 80);
 		
+		pay_button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				screen.veiw_Order_completed();
+			}
+		});
+		
 		JButton payoff_button = new JButton("∞·¡¶ √Îº“");
 		payoff_button.setForeground(new Color(0xFFFFFF));
 		payoff_button.setBackground(new Color(0X000000));
 		payoff_button.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 40));
 		payoff_button.setBounds(40, 100, 380, 80);
+		
+		payoff_button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				screen.veiw_Error();
+			}
+		});
 		
 		add(allpay);
 		add(allmoney);

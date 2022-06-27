@@ -9,14 +9,14 @@ public class Cart extends JFrame{
 	
 	public Cart() {
 		
-		Cart_up up = new Cart_up();
-		add(up);
-		
-		Cart_mid mid = new Cart_mid();
-		add(mid);
-        
-		Cart_down down = new Cart_down();
-		add(down);
+//		Cart_up up = new Cart_up();
+//		add(up);
+//		
+//		Cart_mid mid = new Cart_mid();
+//		add(mid);
+//        
+//		Cart_down down = new Cart_down();
+//		add(down);
 		
 		setLayout(null);
 		setTitle("장바구니");
