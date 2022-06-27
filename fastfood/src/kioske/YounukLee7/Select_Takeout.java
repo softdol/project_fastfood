@@ -8,11 +8,11 @@ public class Select_Takeout extends JFrame{
 	
 	public Select_Takeout() {
 		
-		Select_Takeout_up up = new Select_Takeout_up();
-		add(up);
-		
-		Select_Takeout_down down = new Select_Takeout_down();
-		add(down);
+//		Select_Takeout_up up = new Select_Takeout_up();
+//		add(up);
+//		
+//		Select_Takeout_down down = new Select_Takeout_down();
+//		add(down);
 		
 		setLayout(null);
 		setTitle("매장식사 또는 포장");
