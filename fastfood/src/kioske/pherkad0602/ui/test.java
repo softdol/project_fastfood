@@ -15,9 +15,15 @@ public class test {
 	
 			
 		
-		String sql = "SELECT * FROM Menu_subcategory WHERE menu_category_IDX = 1";
+		String sql = "SELECT * FROM Menu_subcategory";
+		
+		ArrayList name = SubMenuDatabase.subMenuName;
+		ArrayList cateIdx = SubMenuDatabase.menuCategoryIdx; 
+		
 
-		System.out.println(SubMenuDatabase.subMenuNameArray(sql)); 
+	
+		System.out.println(name);
+	
 	}
 
 }

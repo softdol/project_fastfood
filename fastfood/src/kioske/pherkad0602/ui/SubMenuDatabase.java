@@ -11,6 +11,7 @@ public class SubMenuDatabase {
 	
 	static ArrayList subMenuName = new ArrayList<>();
 	static ArrayList subMenuIdxNum = new ArrayList<>();
+	static ArrayList menuCategoryIdx = new ArrayList<>();
 
 	
 	public static void Database(String sql) {
@@ -24,6 +25,8 @@ public class SubMenuDatabase {
 			while(rs.next()) {
 				subMenuIdxNum.add(rs.getInt(1));
 				subMenuName.add(rs.getString(2));
+				menuCategoryIdx.add(rs.getInt(3));
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -46,4 +49,10 @@ public class SubMenuDatabase {
 		Database(sql);
 		return subMenuIdxNum;
 	}
+	
+	public static ArrayList menuCategoryIdxArray(String sql) {
+		Database(sql);
+		return menuCategoryIdx;
+	}
+	
 }

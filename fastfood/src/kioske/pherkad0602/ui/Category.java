@@ -15,6 +15,7 @@ import kioske.pherkad0602.action.cateAction;
 
 public class Category extends JPanel{
 	
+	
 	public Component Category() {
 		
 		EmptyBorder border = new EmptyBorder(getInsets());
@@ -41,7 +42,7 @@ public class Category extends JPanel{
 		catePanel.add(logo);
 		
 		 
-		cateAction listener = new cateAction();
+		cateAction listener = new cateAction(new MainPanel(), MainPanel.mainPanel );
 		
 		
 		for(int i = 0; i <cate.length; ++i) {
