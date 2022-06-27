@@ -1,7 +1,6 @@
 package kioske.YounukLee7.kioskeUI;
 
 import java.awt.CardLayout;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -17,16 +16,12 @@ import javax.swing.Timer;
 
 import database.OjdbcConnection;
 import kioske.YounukLee7.ImageLabel;
-import kioske.YounukLee7.Main_JPanel;
-import kioske.YounukLee7.Select_Side_Drink;
-import kioske.YounukLee7.Select_Takeout;
-import kioske.YounukLee7.Start_Screen;
-import kioske.YounukLee7.Sub_JPanel;
+import kioske.YounukLee7.Main_JFrame;
 import kioske.YounukLee7.dbtablePocket.EventPage;
 
 public class Start_Screen_kiosk extends JPanel{
 	
-	public Start_Screen_kiosk(Start_Screen screen) {
+	public Start_Screen_kiosk(Main_JFrame screen) {
 		
 		setBounds(0,0,900,1040);
 		setLayout(null);
@@ -75,9 +70,7 @@ public class Start_Screen_kiosk extends JPanel{
 		addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e){  
 				
-				
-//				new Select_Takeout();
-//				setVisible(false);
+				screen.veiw_takeout();
 				
 			}  
 		});

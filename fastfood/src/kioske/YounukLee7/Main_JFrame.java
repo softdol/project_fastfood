@@ -9,19 +9,25 @@ import kioske.YounukLee7.kioskeUI.Select_Takeout_up;
 import kioske.YounukLee7.kioskeUI.Start_Screen_kiosk;
 import manager.component.ManagerCP;
 
-public class Start_Screen extends JFrame{
+public class Main_JFrame extends JFrame{
 	
-	public void veiw() {
-		ManagerCP.reFresh(null);
+	Main_JPanel panel;
+	
+	// 첫 화면에서 -> 포장 선택 화면으로
+	public void veiw_takeout() {
+		ManagerCP.reFresh(panel);
+		panel.add(new Select_Takeout_up());
+		panel.add(new Select_Takeout_down());
 	}
+	
 
-	public Start_Screen() {
+	public Main_JFrame() {
 		
-		Main_JPanel panel = new Main_JPanel(this);
+		panel = new Main_JPanel(this);
 		add(panel);
 		
 		setLayout(null);
-		setTitle("첫 화면");
+		setTitle("Da팔아");
 		setBounds(510,0,900,1040);
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -29,6 +35,6 @@ public class Start_Screen extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		new Start_Screen();
+		new Main_JFrame();
 	}
 }
