@@ -43,6 +43,10 @@ public class SaleMonth {
 		this.iY = iY;
 	}
 	
+	public void setlPrice(Long lPrice) {
+		this.lPrice = lPrice;
+	}
+	
 	@Override
 	public String toString() {
 		return String.format("%d : %d", iMonth, lPrice);

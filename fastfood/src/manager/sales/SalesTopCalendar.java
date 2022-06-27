@@ -14,6 +14,10 @@ public class SalesTopCalendar extends JPanel {
 	SalesMain parent;
 	public static JLabel jlViewDate;
 	
+	/**
+	 * 매출 월별 탑 
+	 * @param parent
+	 */
 	public SalesTopCalendar(SalesMain parent) {
 		this.parent = parent;
 		
@@ -63,6 +67,40 @@ public class SalesTopCalendar extends JPanel {
 		add(btnClose);
 		add(btnOpenC);
 		add(btnCloseC);
+	}
+	
+	SalesGraphView parentG;
+	
+	/**
+	 * 그래프 탑
+	 * @param parentG
+	 */
+	public SalesTopCalendar(SalesGraphView parentG) {
+		this.parentG = parentG;
+		
+		setLayout(null);
+		setBounds(0, 5, parentG.getWidth(), 50);
+		JButton btnPrevY = new JButton("<<");
+		btnPrevY.setBounds(20, 5, 50, 40);
+		btnPrevY.addActionListener(new SaleActionListener(parentG, "GPY"));
+		jlViewDate = new JLabel("", 0);
+		jlViewDate.setBounds(btnPrevY.getX() + btnPrevY.getWidth() + 5, btnPrevY.getY(), 120, 40);
+		jlViewDate.setOpaque(true);
+		jlViewDate.setBackground(Color.white);
+		jlViewDate.setFont(new Font("고딕체", Font.BOLD, 20));
+		JButton btnNextY = new JButton(">>");
+		btnNextY.setBounds(jlViewDate.getX() + jlViewDate.getWidth() + 5, btnPrevY.getY(), 50, 40);
+		btnNextY.addActionListener(new SaleActionListener(parentG, "GNY"));
+		
+//		JButton btnNow = new JButton("이번년");
+//		btnNow.setBounds(btnNextY.getX() + btnNextY.getWidth() + 5, btnPrevY.getY(), 80, 40);
+//		btnNow.addActionListener(new SaleActionListener(parentG, "N"));
+		
+		
+		add(btnPrevY);
+		add(jlViewDate);
+		add(btnNextY);
+//		add(btnNow);		
 	}
 
 }
