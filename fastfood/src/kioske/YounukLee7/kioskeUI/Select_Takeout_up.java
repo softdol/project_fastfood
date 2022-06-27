@@ -17,11 +17,11 @@ import database.OjdbcConnection;
 import kioske.YounukLee7.ImageLabel;
 import kioske.YounukLee7.dbtablePocket.EventPage;
 
-public class Select_Takeout_up {
+public class Select_Takeout_up extends JPanel{
 
-	public Component Select_Takeout_up() {
-		
-		JPanel pNorth = new JPanel();
+	public Select_Takeout_up() {
+		setBounds(0,0,900,300);
+		setLayout(null);
 		
 		CardLayout cardLayout = new CardLayout();
 		
@@ -40,22 +40,24 @@ public class Select_Takeout_up {
 			e1.printStackTrace();
 		}
 		
-		pNorth.setBounds(0,0,900,300);
-        pNorth.setLayout(cardLayout);
+        
+        JPanel cardJPanel = new JPanel();
+        cardJPanel.setBounds(0,0,900,300);
+        cardJPanel.setLayout(cardLayout);
+		add(cardJPanel);
         
         Timer time = new Timer(3000, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				cardLayout.next(pNorth);
+				cardLayout.next(cardJPanel);
 			}
 		});
         
         time.start();
         
         for (int i = 0; i < event_page_list.size(); i++) {
-       	 pNorth.add(new ImageLabel(event_page_list.get(i).getSmall_event_page()));
+        	cardJPanel.add(new ImageLabel(event_page_list.get(i).getSmall_event_page()));
 		}
 		
-		return pNorth;
 	}
 }

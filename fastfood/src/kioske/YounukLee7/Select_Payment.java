@@ -11,14 +11,14 @@ public class Select_Payment extends JFrame{
 
 	public Select_Payment() {
 		
-		Logo_MenuName_Panel logo = new Logo_MenuName_Panel();
-		add(logo.Logo_MenuName_Panel());
-		
-		Select_Payment_mid mid = new Select_Payment_mid();
-		add(mid.Select_Payment_mid());
-		
-		Select_Payment_down down = new Select_Payment_down();
-		add(down.Select_Payment_down());
+//		Logo_MenuName_Panel logo = new Logo_MenuName_Panel();
+//		add(logo);
+//		
+//		Select_Payment_mid mid = new Select_Payment_mid();
+//		add(mid);
+//		
+//		Select_Payment_down down = new Select_Payment_down();
+//		add(down);
 		
 		setLayout(null);
 		setTitle("결제 선택창");

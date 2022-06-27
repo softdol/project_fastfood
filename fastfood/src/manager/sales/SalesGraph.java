@@ -15,33 +15,42 @@ import manager.component.ManagerCP;
 public class SalesGraph extends JPanel {
 	SalesGraphView main;
 	
-	ArrayList<SaleMonth> saleList;
+	ArrayList<SaleMonth> saleViewList;
 	private int maxParice;
 	
 	public SalesGraph(SalesGraphView main) {
 		this.main = main;
 		setLayout(null);		
-		setBounds(0, 0, main.getWidth(), main.getHeight());
+		setBounds(0, 50, main.getWidth(), main.getHeight());
 		
 		String sqlSelYear = "select TO_CHAR(calculate_in_date, 'mm'), sum(calculate_total_price) from calculate";
 				sqlSelYear += " where TO_CHAR(calculate_in_date, 'yyyy') = ?";
 				sqlSelYear += " group by TO_CHAR(calculate_in_date, 'mm') order by TO_CHAR(calculate_in_date, 'mm')";
 		
 		ArrayList<PsList> psList = new ArrayList<>();
-		psList.add(new PsList('S', "2022"));
+		psList.add(new PsList('S', main.topCalendar.jlViewDate.getText()));		
 		
-		saleList = ReturnModel.selCalculateYear(sqlSelYear, psList);
-		//System.out.println(saleList.size());
+		saleViewList = new ArrayList<>();
+		for(int i = 0; i < 12; i++) {
+			saleViewList.add(new SaleMonth(i + 1, 0));
+		}		
+		ArrayList<SaleMonth> saleList = ReturnModel.selCalculateYear(sqlSelYear, psList);
 		
-//		saleList = new ArrayList<>();
-//		for(int i = 0; i < 12; i++) {
-//			saleList.add(new SaleMonth(i+1, (long)(Math.random() * 95000000)));
-//		}
+		for(int i = 0; i < 12; i++) {
+			for(SaleMonth s : saleList) {
+				if(saleViewList.get(i).getiMonth() == s.getiMonth()) {
+					saleViewList.get(i).setlPrice(s.getlPrice());
+				}
+			}
+		}
+		
+		main.viewText(saleViewList);
+		
 	}
 	
 	public void paintComponent(Graphics g) {
 		//super.paintComponent(g);
-		int endRectY = super.getHeight() - 200;
+		int endRectY = super.getHeight() - 300;
 		int endRectX = super.getWidth() - 40;
 		int startRectX = 80;
 		
@@ -62,9 +71,9 @@ public class SalesGraph extends JPanel {
 			
 			add(jlMonth);
 			
-			if(i < saleList.size()) {
-				saleList.get(i).setiX(lineX);
-				maxParice = (int)Math.max(maxParice, saleList.get(i).getlPrice());
+			if(i < saleViewList.size()) {
+				saleViewList.get(i).setiX(lineX);
+				maxParice = (int)Math.max(maxParice, saleViewList.get(i).getlPrice());
 			}
 		}
 		
@@ -92,29 +101,33 @@ public class SalesGraph extends JPanel {
 		g.setColor(Color.red);
 		
 		
-		int saleCnt = saleList.size();
+		int saleCnt = saleViewList.size();
 		
-		for(int i = 0; i < saleList.size(); i++) {
-			double pointY = saleList.get(i).getlPrice() / (float)defaultParice / cntY;			
+		for(int i = 0; i < saleViewList.size(); i++) {
+			double pointY = saleViewList.get(i).getlPrice() / (float)defaultParice / cntY;			
 			int temp = endRectY - (int)(endRectY * pointY);
 			
-			g.fillOval(saleList.get(i).getiX() - 3, temp, 6, 6);
+			g.fillOval(saleViewList.get(i).getiX() - 3, temp, 6, 6);
 			
 			if(i < saleCnt - 1) {
-				double pointYN = saleList.get(i + 1).getlPrice() / (float)defaultParice / cntY;			
+				double pointYN = saleViewList.get(i + 1).getlPrice() / (float)defaultParice / cntY;			
 				int tempN = endRectY - (int)(endRectY * pointYN);
 				
-				g.drawLine(saleList.get(i).getiX(), temp, saleList.get(i+1).getiX(), tempN);
+				g.drawLine(saleViewList.get(i).getiX(), temp, saleViewList.get(i+1).getiX(), tempN);
 			}
 			
-			JLabel jlThis = new JLabel(ManagerCP.viewWon(saleList.get(i).getlPrice()),0);
-			if(i == 11) {
-				jlThis.setBounds(saleList.get(i).getiX() - 40, temp -10, 80, 40);
-			}else {
-				jlThis.setBounds(saleList.get(i).getiX(), temp -10, 80, 40);
+			if(saleViewList.get(i).getlPrice() > 0) {
+				JLabel jlThis = new JLabel(ManagerCP.viewWon(saleViewList.get(i).getlPrice()),0);
+				if(i == 11) {
+					jlThis.setBounds(saleViewList.get(i).getiX() - 40, temp -10, 80, 40);
+				}else {
+					jlThis.setBounds(saleViewList.get(i).getiX(), temp -10, 80, 40);
+				}
+				
+				add(jlThis);
 			}
 			
-			add(jlThis);
+			
 		}
 		
 	

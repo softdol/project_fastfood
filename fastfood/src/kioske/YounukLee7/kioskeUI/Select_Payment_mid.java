@@ -2,20 +2,24 @@ package kioske.YounukLee7.kioskeUI;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Select_Payment_mid {
+import kioske.YounukLee7.Card_Pay;
+import kioske.YounukLee7.Last_JFrame;
+
+public class Select_Payment_mid extends JPanel{
 	
-	public JPanel Select_Payment_mid() {
+	public Select_Payment_mid(Last_JFrame screen) {
 		
-		JPanel pCenter = new JPanel();
-		pCenter.setBackground(new Color(0XFFE7DF));
-	    pCenter.setBounds(0,300,900,500);
-	    pCenter.setLayout(null);
+		setBackground(new Color(0XFFE7DF));
+	    setBounds(0,300,900,500);
+	    setLayout(null);
 	    
 		JLabel word1 = new JLabel("결제수단을");
 		word1.setFont(new Font("HY견고딕", Font.PLAIN, 40));
@@ -37,18 +41,33 @@ public class Select_Payment_mid {
 		card.setIcon(new ImageIcon("image/card.jpg"));
 		card.setBounds(210, 240, 220, 220);
 		
+		card.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				screen.veiw_Card_Pay();
+			}
+		});
+		
 		JButton mobile = new JButton("모바일");
 		mobile.setForeground(new Color(0xFFFFFF));
 		mobile.setBackground(new Color(0XFFFFFF));
 		mobile.setIcon(new ImageIcon("image/mobile.jpg"));
 		mobile.setBounds(455, 240, 220, 220);
-	    
-	    pCenter.add(word1);
-		pCenter.add(word2);
-		pCenter.add(card);
-		pCenter.add(mobile);
 		
-		return pCenter;
+		mobile.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				screen.veiw_Mobile_Pay();
+			}
+		});
+	    
+	    add(word1);
+		add(word2);
+		add(card);
+		add(mobile);
+		
 	}
 
 }

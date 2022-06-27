@@ -11,14 +11,14 @@ public class Mobile_Pay extends JFrame{
 	
 	public Mobile_Pay() {
 		
-		Logo_MenuName_Panel logo = new Logo_MenuName_Panel();
-		add(logo.Logo_MenuName_Panel());
-		
-		Mobile_Pay_mid mid = new Mobile_Pay_mid();
-		add(mid.Mobile_Pay_mid());
-		
-		Down_yes_no_Button button = new Down_yes_no_Button();
-		add(button.Down_yes_no_Button());
+//		Logo_MenuName_Panel logo = new Logo_MenuName_Panel();
+//		add(logo);
+//		
+//		Mobile_Pay_mid mid = new Mobile_Pay_mid();
+//		add(mid);
+//		
+//		Down_yes_no_Button button = new Down_yes_no_Button();
+//		add(button);
 		
 		setLayout(null);
 		setTitle("ÄíÆù °áÁ¦");

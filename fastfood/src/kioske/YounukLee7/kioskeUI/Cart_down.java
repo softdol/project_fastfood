@@ -11,9 +11,10 @@ import javax.swing.JPanel;
 
 import kioske.YounukLee7.Last_JFrame;
 
-public class Down_yes_no_Button extends JPanel{
-	
-	public Down_yes_no_Button(Last_JFrame screen) {
+public class Cart_down extends JPanel{
+
+	public Cart_down(Last_JFrame screen) {
+		int total = 0;
 		
 		setBackground(new Color(0XFFF2DD));
 		setBounds(0,800,900,240);
@@ -27,46 +28,37 @@ public class Down_yes_no_Button extends JPanel{
 		allpay.setBackground(new Color(0XFFF2DD));
 		allpay.setBounds(40, 30, 180, 30);
 		
-		JLabel allmoney = new JLabel("17000원");
+		JLabel allmoney = new JLabel();
+		allmoney.setText(String.valueOf(total) + "원");
 		allmoney.setFont(new Font("HY견고딕", Font.PLAIN, 30));
 		allmoney.setOpaque(true);
 		allmoney.setForeground(Color.RED);
 		allmoney.setBackground(new Color(0XFFF2DD));
 		allmoney.setBounds(720, 30, 300, 30);
 	
-		JButton pay_button = new JButton("결제 하기");
-		pay_button.setForeground(new Color(0xFFFFFF));
-		pay_button.setBackground(new Color(0XFF0000));
-		pay_button.setFont(new Font("HY견고딕", Font.PLAIN, 40));
-		pay_button.setBounds(450, 100, 380, 80);
+		JButton order_completed_button = new JButton("주문 완료");
+		order_completed_button.setForeground(new Color(0xFFFFFF));
+		order_completed_button.setBackground(new Color(0XFF0000));
+		order_completed_button.setFont(new Font("HY견고딕", Font.PLAIN, 40));
+		order_completed_button.setBounds(450, 100, 380, 80);
 		
-		pay_button.addActionListener(new ActionListener() {
+		order_completed_button.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				screen.veiw_Order_completed();
+				screen.veiw_Select_Payment();
 			}
 		});
 		
-		JButton payoff_button = new JButton("결제 취소");
-		payoff_button.setForeground(new Color(0xFFFFFF));
-		payoff_button.setBackground(new Color(0X000000));
-		payoff_button.setFont(new Font("HY견고딕", Font.PLAIN, 40));
-		payoff_button.setBounds(40, 100, 380, 80);
-		
-		payoff_button.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				screen.veiw_Error();
-			}
-		});
+		JButton more_order_button = new JButton("추가 주문");
+		more_order_button.setForeground(new Color(0xFFFFFF));
+		more_order_button.setBackground(new Color(0X000000));
+		more_order_button.setFont(new Font("HY견고딕", Font.PLAIN, 40));
+		more_order_button.setBounds(40, 100, 380, 80);
 		
 		add(allpay);
 		add(allmoney);
-		add(pay_button);
-		add(payoff_button);
-		
+		add(order_completed_button);
+		add(more_order_button);
 	}
-
 }

@@ -3,7 +3,7 @@ package manager.menu;
 import javax.swing.JPanel;
 
 import manager.ManagerMain;
-import manager.sales.SalesMain;
+import manager.sales.SalesTable;
 
 public class MenuMainPanel extends JPanel{
 	
@@ -11,7 +11,7 @@ public class MenuMainPanel extends JPanel{
 		
 	public MenuMainPanel(ManagerMain main) {
 		setLayout(null);
-		setBounds(0,0,1185,730);
+		setBounds(0,0,1085,820);
 		//jpMainMiddle
 		
 		// 상품 등록
@@ -21,15 +21,15 @@ public class MenuMainPanel extends JPanel{
 		// 상품 목록
 		//menuList = new MenuList(this);
 		jpMainMiddle.setLayout(null);
-		jpMainMiddle.setBounds(0,0,1185,730);
+		jpMainMiddle.setBounds(0,0,1085,820);
 		//jpMainMiddle.add(new MenuInsertPanel(main));
 		//jpMainMiddle.add(new MenuSetList(main));
-		jpMainMiddle.add(new MenuList(main));
+		//jpMainMiddle.add(new MenuList(main));
 		//jpMainMiddle.add(new MenuSetInsert(main));
 		//jpMainMiddle.add(new MenuSetModify(main, 1));
 		//jpMainMiddle.add(new MemberMain(main));
 		//jpMainMiddle.add(new SalesMain(main));
-		//jpMainMiddle.add(new SalesTable(main));
+		jpMainMiddle.add(new SalesTable(main));
 		
 		//jpMainMiddle.add(new SalesGraphView(main));
 		
