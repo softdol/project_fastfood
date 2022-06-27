@@ -13,7 +13,7 @@ public class Pos_ManagerKey {
    public static void main(String[] args) {
       
       JFrame frame = new JFrame("°ü¸®ÀÚ Å°");
-      
+      //
       Font fontsize20 = new Font("¸¼Àº °íµñ", Font.PLAIN, 20);
       
       String storePath = "pos_image/store.png";

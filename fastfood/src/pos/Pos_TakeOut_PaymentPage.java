@@ -124,7 +124,7 @@ public class Pos_TakeOut_PaymentPage extends JFrame {
      //합계값 들어가는 라벨
      Label totallabel2= new Label();
      totallabel2.setText("       ");
-     
+     //
      totallabel2.setBackground(new Color(0xCCFFFF));
      totallabel2.setForeground(Color.white);
      totallabel2.setFont(fontsize20);

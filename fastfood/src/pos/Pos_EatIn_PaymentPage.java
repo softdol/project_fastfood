@@ -177,7 +177,7 @@ public class Pos_EatIn_PaymentPage extends JFrame {
                   // 아니오를 선택한 경우
                }
                    
-         }
+         }//
       });
       
     //카드로 결제 예 아니오 버튼 액션 리스너
