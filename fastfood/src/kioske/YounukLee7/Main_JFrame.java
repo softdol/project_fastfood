@@ -14,12 +14,17 @@ public class Main_JFrame extends JFrame{
 	Main_JPanel panel;
 	
 	
-	
 	// 첫 화면에서 -> 포장 선택 화면으로
 	public void veiw_takeout() {
 		ManagerCP.reFresh(panel);
 		panel.add(new Select_Takeout_up());
-		panel.add(new Select_Takeout_down());
+		panel.add(new Select_Takeout_down(this));
+	}
+	
+	// 형래님 홈으로 가기
+	public void veiw_Home(String check) {
+		ManagerCP.reFresh(panel);
+		
 	}
 	
 

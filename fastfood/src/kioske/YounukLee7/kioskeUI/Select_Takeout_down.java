@@ -3,6 +3,8 @@ package kioske.YounukLee7.kioskeUI;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -11,9 +13,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import kioske.YounukLee7.Main_JFrame;
+
 public class Select_Takeout_down extends JPanel{
 
-	public Select_Takeout_down() {
+	public Select_Takeout_down(Main_JFrame frame) {
 		
 		JButton storeOrder_button = new JButton("매장 식사 H");
 		JButton takeout_button = new JButton("포장 주문 T");
@@ -33,16 +37,20 @@ public class Select_Takeout_down extends JPanel{
 		takeout_button.setIcon(new ImageIcon("image/8.second.jpg"));
 		
 		
-		storeOrder_button.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e){  
-				String check = "H";
-			}  
+		storeOrder_button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.veiw_Home("H");
+			}
 		});
 		
-		takeout_button.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e){  
-				String check = "T";
-			}  
+		takeout_button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.veiw_Home("T");
+			}
 		});
 		
 		add(select_label);
