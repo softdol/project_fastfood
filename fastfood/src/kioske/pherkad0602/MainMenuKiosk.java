@@ -29,12 +29,14 @@ public class MainMenuKiosk extends JFrame {
 			
 			setLayout(null);
 			
+			String sql1 = "SELECT * FROM Menu WHERE Menu_Category_IDX = 1";
+			String sql2 = "SELECT * FROM Menu_subcategory WHERE menu_category_IDX = 1";
 			
 			Category cate = new Category();		
 			add(cate.Category());
 			
 			MenuPanel menu = new MenuPanel();
-			add(menu.MenuPanel());
+			add(menu.MenuPanel(sql1,sql2));
 			
 			PayPanel pay = new PayPanel();
 			add(pay.PayPanel());

@@ -18,11 +18,11 @@ public class HomePanel extends JPanel{
 	public Component HomePanel() {
 		EmptyBorder border = new EmptyBorder(getInsets());
 		
-		LayoutManager manager = new GridLayout(4, 3);
 		
 		JPanel mainPanel = new JPanel();
+		String sql = "SELECT * FROM Menu WHERE Menu_Category_IDX = 1";
 		
-		int a = MenuDatabase.size("SELECT * FROM Menu WHERE Menu_Category_IDX = 1");
+		int a = MenuDatabase.size(sql);
 		
 		mainPanel.setBounds(200, 0, 684, 800);
 		mainPanel.setLayout(null);
@@ -46,14 +46,22 @@ public class HomePanel extends JPanel{
 		title.setBounds(20,10,500,80);
 		title.setBackground(Color.white);
 		title.setFont(new Font("±Ã¼­Ã¼", Font.PLAIN,40));
+		titlePanel.setBorder(border);
 		titlePanel.add(title);
 		
 		mainPanel.add(titlePanel);
 		
+		JPanel menuPanel = new JPanel();
+		menuPanel.setBounds(0, 450, 684, 100);
+		menuPanel.setLayout(null);
+		menuPanel.setBackground(Color.white);
+		menuPanel.setBorder(border);
+		
+		
 		Menu menu= new Menu();
-		
-		mainPanel.add(menu.Menu());
-		
+		menuPanel.add(menu.Menu(sql));
+		menuPanel.setBounds(0,550,684,550+(200*(a/3)+1));
+		mainPanel.add(menuPanel);
 		
 		JScrollPane scrollPane = new JScrollPane(mainPanel);
 		scrollPane.setBounds(200, 0, 684, 800);
@@ -61,9 +69,8 @@ public class HomePanel extends JPanel{
 		Dimension size = new Dimension();
 				size.setSize(600,550+(200*(a/3)+1));
 		mainPanel.setPreferredSize(size);
-		
 		scrollPane.getVerticalScrollBar().setUnitIncrement(16);	
-	
+		
 		
 		return scrollPane;
 	}

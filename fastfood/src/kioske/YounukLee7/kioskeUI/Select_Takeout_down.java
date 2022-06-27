@@ -21,7 +21,7 @@ public class Select_Takeout_down {
 		JLabel select_label = new JLabel("선택해주세요");
 		
 		pSouth.setBackground(new Color(0XFFE7DF));
-		pSouth.setBounds(0,300,900,770);
+		pSouth.setBounds(0,300,900,740);
 		pSouth.setLayout(null);
 		
 		select_label.setFont(new Font("HY견고딕", Font.PLAIN, 50));

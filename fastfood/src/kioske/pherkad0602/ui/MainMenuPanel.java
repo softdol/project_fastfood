@@ -11,30 +11,30 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
 
 public class MainMenuPanel extends JPanel{
 	
-	public Component MainMenuPanel() {
-		
-		LayoutManager manager = new GridLayout(4,3);
+	public Component MainMenuPanel(String sql) {
+		EmptyBorder border = new EmptyBorder(getInsets());
+		int a = MenuDatabase.size(sql);
 		
 		JPanel menuPanel = new JPanel();
+		menuPanel.setBounds(0, 200, 684, 600);
+		menuPanel.setLayout(null);
+		menuPanel.setBackground(Color.white);
+		menuPanel.setBorder(border);
 		
-		menuPanel.setLayout(manager);
+		Menu menu= new Menu();
+		menuPanel.add(menu.Menu(sql));	
 		
 		JScrollPane scrollPane = new JScrollPane(menuPanel);
 		scrollPane.setBounds(0, 200, 684, 600);
+		scrollPane.setBackground(Color.white);
+		scrollPane.setBorder(border);
 		Dimension size = new Dimension();
-				size.setSize(600,800);
+				size.setSize(600,200+(200*(a/3)+1));
 		menuPanel.setPreferredSize(size);
-		
-		for(int i = 0; i <12; ++i) {
-			
-			JButton btn3 = new JButton("¸Þ´º");
-			btn3.setFont(new Font("±Ã¼­Ã¼", Font.PLAIN,40));
-			btn3.setBackground(new Color(0xFFFFFF));
-			menuPanel.add(btn3);
-		}
 		
 		
 		return scrollPane;
