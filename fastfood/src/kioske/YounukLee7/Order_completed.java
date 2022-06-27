@@ -10,10 +10,10 @@ public class Order_completed extends JFrame{
 	public Order_completed() {
 		
 		Logo_MenuName_Panel logo = new Logo_MenuName_Panel();
-		add(logo.Logo_MenuName_Panel());
+		add(logo);
 		
 		Order_completed_down down = new Order_completed_down();
-		add(down.Order_completed_down());
+		add(down);
 		
 		setLayout(null);
 		setTitle("주문 완료");

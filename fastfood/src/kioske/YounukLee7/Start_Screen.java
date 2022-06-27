@@ -7,13 +7,17 @@ import javax.swing.JPanel;
 import kioske.YounukLee7.kioskeUI.Select_Takeout_down;
 import kioske.YounukLee7.kioskeUI.Select_Takeout_up;
 import kioske.YounukLee7.kioskeUI.Start_Screen_kiosk;
+import manager.component.ManagerCP;
 
 public class Start_Screen extends JFrame{
 	
+	public void veiw() {
+		ManagerCP.reFresh(null);
+	}
 
 	public Start_Screen() {
 		
-		Main_JPanel panel = new Main_JPanel();
+		Main_JPanel panel = new Main_JPanel(this);
 		add(panel);
 		
 		setLayout(null);

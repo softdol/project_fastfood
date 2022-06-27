@@ -11,10 +11,10 @@ public class Select_Set_Size extends JFrame{
 	public Select_Set_Size() {
 		
 		Logo_MenuName_Panel logo = new Logo_MenuName_Panel();
-		add(logo.Logo_MenuName_Panel());
+		add(logo);
 		
 		Select_Set_Size_down down = new Select_Set_Size_down();
-		add(down.Select_Set_Size_down());
+		add(down);
 		
 		setLayout(null);
 		setTitle("일반세트 또는 라지세트");

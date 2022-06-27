@@ -7,14 +7,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Logo_MenuName_Panel {
+public class Logo_MenuName_Panel extends JPanel{
 	
-	public JPanel Logo_MenuName_Panel() {
+	public Logo_MenuName_Panel() {
 		
-		JPanel pNorth = new JPanel();
-		pNorth.setBackground(new Color(0XFFF2DD));
-        pNorth.setBounds(0,0,900,300);
-        pNorth.setLayout(null);
+		setBackground(new Color(0XFFF2DD));
+        setBounds(0,0,900,300);
+        setLayout(null);
         
 		JLabel logo = new JLabel("·Î°í");
 		logo.setBounds(50, 50, 200, 200);
@@ -24,10 +23,9 @@ public class Logo_MenuName_Panel {
 		menuName.setBounds(280, 50, 500, 200);
 		menuName.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 30));
 		
-		pNorth.add(logo);
-		pNorth.add(menuName);
+		add(logo);
+		add(menuName);
 		
-		return pNorth;
 	}
 
 }

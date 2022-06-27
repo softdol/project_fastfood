@@ -8,14 +8,13 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Select_Side_Drink_down {
+public class Select_Side_Drink_down extends JPanel{
 	
-	public JPanel Select_Side_Drink_down() {
+	public Select_Side_Drink_down() {
 		
-		JPanel pSouth = new JPanel();
-		pSouth.setBackground(new Color(0XFFE7DF));
-		pSouth.setBounds(0,300,900,740);
-		pSouth.setLayout(null);
+		setBackground(new Color(0XFFE7DF));
+		setBounds(0,300,900,740);
+		setLayout(null);
 		
 		JLabel burgerlabel = new JLabel("ÇÜ¹ö°Å »çÁø");
 		burgerlabel.setIcon(new ImageIcon("image/solo1.png"));
@@ -47,14 +46,13 @@ public class Select_Side_Drink_down {
 		cart_button.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 30));
 		cart_button.setBounds(150, 400, 590, 70);
 		
-		pSouth.add(burgerlabel);
-		pSouth.add(side_label);
-		pSouth.add(drink_label);
-		pSouth.add(side_button);
-		pSouth.add(drink_button);
-		pSouth.add(cart_button);
+		add(burgerlabel);
+		add(side_label);
+		add(drink_label);
+		add(side_button);
+		add(drink_button);
+		add(cart_button);
 		
-		return pSouth;
 	}
 
 }

@@ -11,18 +11,17 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Select_Takeout_down {
+public class Select_Takeout_down extends JPanel{
 
-	public Component Select_Takeout_down() {
+	public Select_Takeout_down() {
 		
-		JPanel pSouth = new JPanel();
 		JButton storeOrder_button = new JButton("매장 식사 H");
 		JButton takeout_button = new JButton("포장 주문 T");
 		JLabel select_label = new JLabel("선택해주세요");
 		
-		pSouth.setBackground(new Color(0XFFE7DF));
-		pSouth.setBounds(0,300,900,740);
-		pSouth.setLayout(null);
+		setBackground(new Color(0XFFE7DF));
+		setBounds(0,300,900,740);
+		setLayout(null);
 		
 		select_label.setFont(new Font("HY견고딕", Font.PLAIN, 50));
 		select_label.setBounds(280, 50, 300,200);
@@ -46,10 +45,9 @@ public class Select_Takeout_down {
 			}  
 		});
 		
-		pSouth.add(select_label);
-		pSouth.add(storeOrder_button);
-		pSouth.add(takeout_button);
+		add(select_label);
+		add(storeOrder_button);
+		add(takeout_button);
 		
-		return pSouth;
 	}
 }

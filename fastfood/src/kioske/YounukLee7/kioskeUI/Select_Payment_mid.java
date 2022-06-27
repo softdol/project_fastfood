@@ -12,14 +12,13 @@ import javax.swing.JPanel;
 
 import kioske.YounukLee7.Card_Pay;
 
-public class Select_Payment_mid {
+public class Select_Payment_mid extends JPanel{
 	
-	public JPanel Select_Payment_mid() {
+	public Select_Payment_mid() {
 		
-		JPanel pCenter = new JPanel();
-		pCenter.setBackground(new Color(0XFFE7DF));
-	    pCenter.setBounds(0,300,900,500);
-	    pCenter.setLayout(null);
+		setBackground(new Color(0XFFE7DF));
+	    setBounds(0,300,900,500);
+	    setLayout(null);
 	    
 		JLabel word1 = new JLabel("결제수단을");
 		word1.setFont(new Font("HY견고딕", Font.PLAIN, 40));
@@ -55,12 +54,11 @@ public class Select_Payment_mid {
 		mobile.setIcon(new ImageIcon("image/mobile.jpg"));
 		mobile.setBounds(455, 240, 220, 220);
 	    
-	    pCenter.add(word1);
-		pCenter.add(word2);
-		pCenter.add(card);
-		pCenter.add(mobile);
+	    add(word1);
+		add(word2);
+		add(card);
+		add(mobile);
 		
-		return pCenter;
 	}
 
 }

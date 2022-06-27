@@ -12,14 +12,13 @@ import javax.swing.JPanel;
 
 import kioske.YounukLee7.Select_Side_Drink;
 
-public class Select_Set_Size_down {
+public class Select_Set_Size_down extends JPanel{
 	
-	public JPanel Select_Set_Size_down() {
+	public Select_Set_Size_down() {
 		
-		JPanel pSouth = new JPanel();
-		pSouth.setBackground(new Color(0XFFE7DF));
-		pSouth.setBounds(0,300,900,740);
-		pSouth.setLayout(null);
+		setBackground(new Color(0XFFE7DF));
+		setBounds(0,300,900,740);
+		setLayout(null);
 		
 		JLabel label = new JLabel("<html><body style='text-align:center;'>700원 추가하시면 사이드와 음료가"
 				+ "<br />라지사이즈로 변경됩니다."
@@ -51,12 +50,11 @@ public class Select_Set_Size_down {
 			}
 		});
 		
-		pSouth.add(no_button);
-		pSouth.add(yes_button);
-		pSouth.add(label);
-		pSouth.add(image_label);
+		add(no_button);
+		add(yes_button);
+		add(label);
+		add(image_label);
 		
-		return pSouth;
 	}
 
 }
