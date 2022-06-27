@@ -1,11 +1,9 @@
 package manager.menu;
 
-import java.awt.Color;
-
 import javax.swing.JPanel;
 
 import manager.ManagerMain;
-import manager.sales.SalesGraphView;
+import manager.sales.SalesTable;
 
 public class MenuMainPanel extends JPanel{
 	
@@ -31,9 +29,9 @@ public class MenuMainPanel extends JPanel{
 		//jpMainMiddle.add(new MenuSetModify(main, 1));
 		//jpMainMiddle.add(new MemberMain(main));
 		//jpMainMiddle.add(new SalesMain(main));
-		//jpMainMiddle.add(new SalesTable(main));
+		jpMainMiddle.add(new SalesTable(main));
 		
-		jpMainMiddle.add(new SalesGraphView(main));
+		//jpMainMiddle.add(new SalesGraphView(main));
 		
 		
 		add(jpMainMiddle);

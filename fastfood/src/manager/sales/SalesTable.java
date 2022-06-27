@@ -1,5 +1,7 @@
 package manager.sales;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -7,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.DefaultCellEditor;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -14,13 +17,12 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import database.OjdbcConnection;
 import database.manager.Category;
 import database.manager.Menu;
 import database.manager.ReturnModel;
 import database.model.PsList;
 import manager.ManagerMain;
-import manager.component.ManagerCP;
+import pos.Order;
 
 public class SalesTable extends JPanel  {
 	
@@ -196,6 +198,29 @@ public class SalesTable extends JPanel  {
 		System.out.println(orderTable.getColumnModel()); 
 		
 		add(jspn);
+		
+		JButton btn = new JButton("포스 결제");
+		
+		btn.setBounds(400, 100, 120, 40);
+		btn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				ArrayList<Order> orderlist = new ArrayList<>();
+
+				for (int i = 0; i < 10; i++) {
+					int cnt = (int) (Math.random() * 10) + 1;
+					int price = (int) (Math.random() * 5) + 1;
+					price *= 1000;
+					orderlist.add(new Order("햄버거", price, cnt, cnt * price));
+				}
+				
+				new Pos_PaymentPage(orderlist);
+				
+			}
+		});
+		add(btn);
 		
 		
 	}
