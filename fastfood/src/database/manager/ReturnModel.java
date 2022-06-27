@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import database.OjdbcConnection;
 import database.model.PsList;
@@ -111,13 +112,13 @@ public class ReturnModel {
 	 * 카테고리 리스트 불러오기
 	 * @param 
 	 * @param psList
-	 * @return ArrayList<Catagory>
+	 * @return ArrayList<Category>
 	 */
 	public static ArrayList<Category> categoryList(){
 		ArrayList<Category> cateList = new ArrayList<>();
 		try(
 				Connection conn = OjdbcConnection.getConnection();
-				PreparedStatement pstmt= conn.prepareStatement("select * from menu_catagory");
+				PreparedStatement pstmt= conn.prepareStatement("select * from menu_category");
 			){
 			
 			try(ResultSet rs = pstmt.executeQuery()){
@@ -376,6 +377,114 @@ public class ReturnModel {
 				}else {
 					return null;
 				}
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+				return null;
+			}		
+			
+						
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * 정산 월 매출 정보(일별 오픈/마감/매출)목록
+	 * @param sql
+	 * @param psList
+	 * @return
+	 */
+	public static ArrayList<Calculate> selCalculateMonth(String sql, ArrayList<PsList> psList) {
+		ArrayList<Calculate> calculateList = new ArrayList<>();
+		try(
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt= conn.prepareStatement(sql);
+			){
+			
+			for(int i = 0; i < psList.size(); i++) {
+				PsList ps = psList.get(i);
+				switch(ps.getType()) {
+					case 'i': case 'I':
+						pstmt.setInt(i + 1, Integer.parseInt(ps.getVal()));
+						break;
+					case 's': case 'S':
+						pstmt.setString(i + 1, ps.getVal());
+						break;
+					case 'd': case 'D':
+						Calendar cal = Calendar.getInstance();						
+						String[] strDate = ps.getVal().split("-");
+						cal.set(Integer.parseInt(strDate[0]), Integer.parseInt(strDate[1]) - 1, 1);
+						java.sql.Date sqlDate = new java.sql.Date(cal.getTimeInMillis());						
+						pstmt.setDate(1, sqlDate);
+						break;
+					default:
+						pstmt.setString(i + 1, ps.getVal());
+						break;				
+				}
+			}
+			
+			try(ResultSet rs = pstmt.executeQuery()){
+
+				while(rs.next()) {
+					calculateList.add(new Calculate(rs));					
+				}
+				return calculateList;
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+				return null;
+			}		
+			
+						
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * 년 매출 정보 목록
+	 * @param sql
+	 * @param psList
+	 * @return
+	 */
+	public static ArrayList<SaleMonth> selCalculateYear(String sql, ArrayList<PsList> psList) {
+		ArrayList<SaleMonth> saleMonthList = new ArrayList<>();
+		try(
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt= conn.prepareStatement(sql);
+			){
+			
+			for(int i = 0; i < psList.size(); i++) {
+				PsList ps = psList.get(i);
+				switch(ps.getType()) {
+					case 'i': case 'I':
+						pstmt.setInt(i + 1, Integer.parseInt(ps.getVal()));
+						break;
+					case 's': case 'S':
+						pstmt.setString(i + 1, ps.getVal());
+						break;
+					case 'd': case 'D':
+						Calendar cal = Calendar.getInstance();						
+						String[] strDate = ps.getVal().split("-");
+						cal.set(Integer.parseInt(strDate[0]), Integer.parseInt(strDate[1]) - 1, 1);
+						java.sql.Date sqlDate = new java.sql.Date(cal.getTimeInMillis());						
+						pstmt.setDate(1, sqlDate);
+						break;
+					default:
+						pstmt.setString(i + 1, ps.getVal());
+						break;				
+				}
+			}
+			
+			try(ResultSet rs = pstmt.executeQuery()){
+
+				while(rs.next()) {
+					saleMonthList.add(new SaleMonth(rs));					
+				}
+				return saleMonthList;
 				
 			}catch(SQLException e) {
 				e.printStackTrace();

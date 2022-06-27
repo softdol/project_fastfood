@@ -3,7 +3,7 @@ package manager.menu;
 import javax.swing.JPanel;
 
 import manager.ManagerMain;
-import manager.sales.SalesGraph;
+import manager.sales.SalesMain;
 
 public class MenuMainPanel extends JPanel{
 	
@@ -24,13 +24,14 @@ public class MenuMainPanel extends JPanel{
 		jpMainMiddle.setBounds(0,0,1185,730);
 		//jpMainMiddle.add(new MenuInsertPanel(main));
 		//jpMainMiddle.add(new MenuSetList(main));
-		//jpMainMiddle.add(new MenuList(main));
+		jpMainMiddle.add(new MenuList(main));
 		//jpMainMiddle.add(new MenuSetInsert(main));
 		//jpMainMiddle.add(new MenuSetModify(main, 1));
 		//jpMainMiddle.add(new MemberMain(main));
 		//jpMainMiddle.add(new SalesMain(main));
 		//jpMainMiddle.add(new SalesTable(main));
-		jpMainMiddle.add(new SalesGraph(main));
+		
+		//jpMainMiddle.add(new SalesGraphView(main));
 		
 		
 		add(jpMainMiddle);
