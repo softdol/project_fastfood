@@ -13,6 +13,8 @@ public class Main_JFrame extends JFrame{
 	
 	Main_JPanel panel;
 	
+	
+	
 	// 첫 화면에서 -> 포장 선택 화면으로
 	public void veiw_takeout() {
 		ManagerCP.reFresh(panel);

@@ -35,13 +35,13 @@ public class Select_Takeout_down extends JPanel{
 		
 		storeOrder_button.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e){  
-				
+				String check = "H";
 			}  
 		});
 		
 		takeout_button.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e){  
-				
+				String check = "T";
 			}  
 		});
 		

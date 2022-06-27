@@ -2,14 +2,18 @@ package kioske.YounukLee7.kioskeUI;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import kioske.YounukLee7.Last_JFrame;
+
 public class Cart_down extends JPanel{
 
-	public Cart_down() {
+	public Cart_down(Last_JFrame screen) {
 		int total = 0;
 		
 		setBackground(new Color(0XFFF2DD));
@@ -37,6 +41,14 @@ public class Cart_down extends JPanel{
 		order_completed_button.setBackground(new Color(0XFF0000));
 		order_completed_button.setFont(new Font("HY견고딕", Font.PLAIN, 40));
 		order_completed_button.setBounds(450, 100, 380, 80);
+		
+		order_completed_button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				screen.veiw_Select_Payment();
+			}
+		});
 		
 		JButton more_order_button = new JButton("추가 주문");
 		more_order_button.setForeground(new Color(0xFFFFFF));

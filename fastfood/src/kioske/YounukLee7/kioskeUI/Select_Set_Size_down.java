@@ -15,7 +15,7 @@ import kioske.YounukLee7.Sub_JFrame;
 
 public class Select_Set_Size_down extends JPanel{
 	
-	public Select_Set_Size_down(Sub_JFrame screen) {
+	public Select_Set_Size_down(Sub_JFrame screen, int idx) {
 		
 		setBackground(new Color(0XFFE7DF));
 		setBounds(0,300,900,740);
