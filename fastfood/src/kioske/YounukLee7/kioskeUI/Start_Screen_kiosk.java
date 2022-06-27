@@ -26,9 +26,10 @@ import kioske.YounukLee7.dbtablePocket.EventPage;
 
 public class Start_Screen_kiosk extends JPanel{
 	
-	public Component Start_Screen_kiosk() {
+	public Start_Screen_kiosk(Start_Screen screen) {
 		
-		JPanel start_screen_panel = new JPanel();
+		setBounds(0,0,900,1040);
+		setLayout(null);
 		
 		CardLayout cardLayout = new CardLayout();
 		
@@ -48,14 +49,17 @@ public class Start_Screen_kiosk extends JPanel{
 			e1.printStackTrace();
 		}
 		
-		start_screen_panel.setBounds(0,0,900,1040);
-		start_screen_panel.setLayout(cardLayout);
+		
+		JPanel cardpanel = new JPanel();
+		cardpanel.setBounds(0,0,900,1040);
+		cardpanel.setLayout(cardLayout);
+		add(cardpanel);
 		
 		// 화면 약 3초마다 넘기기
 		Timer time = new Timer(3000, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				cardLayout.next(start_screen_panel);
+				cardLayout.next(cardpanel);
 			}
 		});
 		
@@ -65,20 +69,20 @@ public class Start_Screen_kiosk extends JPanel{
 		// 화면들 (위에 DB에서 가져온 정보에서 Big_event_page 부분만 꺼내기)
 		for (int i = 0; i < event_page_list.size(); i++) {
 			// Big_event_page만 get으로 가져오기
-			start_screen_panel.add(new ImageLabel(event_page_list.get(i).getBig_event_page()));
+			cardpanel.add(new ImageLabel(event_page_list.get(i).getBig_event_page()));
 		}
 		
-		start_screen_panel.addMouseListener(new MouseAdapter() {
+		addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e){  
 				
-				new Select_Takeout();
-				setVisible(false);
+				
+//				new Select_Takeout();
+//				setVisible(false);
 				
 			}  
 		});
 		
 		
-		return start_screen_panel;
 	}
 
 }

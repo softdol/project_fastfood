@@ -10,10 +10,10 @@ public class Select_Set extends JFrame{
 	public Select_Set() {
 		
 		Logo_MenuName_Panel logo_MenuName_Panel = new Logo_MenuName_Panel();
-		add(logo_MenuName_Panel.Logo_MenuName_Panel());
+		add(logo_MenuName_Panel);
 		
 		Select_Set_down down = new Select_Set_down();
-		add(down.Select_Set_down());
+		add(down);
 		
 		setLayout(null);
 		setTitle("단품 또는 세트");

@@ -7,14 +7,13 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Down_yes_no_Button {
+public class Down_yes_no_Button extends JPanel{
 	
-	public JPanel Down_yes_no_Button() {
+	public Down_yes_no_Button() {
 		
-		JPanel pSouth = new JPanel();
-		pSouth.setBackground(new Color(0XFFF2DD));
-		pSouth.setBounds(0,800,900,240);
-		pSouth.setLayout(null);
+		setBackground(new Color(0XFFF2DD));
+		setBounds(0,800,900,240);
+		setLayout(null);
 		
 		
 		JLabel allpay = new JLabel("ÃÑ °áÁ¦±Ý¾×");
@@ -43,12 +42,11 @@ public class Down_yes_no_Button {
 		payoff_button.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 40));
 		payoff_button.setBounds(40, 100, 380, 80);
 		
-		pSouth.add(allpay);
-		pSouth.add(allmoney);
-		pSouth.add(pay_button);
-		pSouth.add(payoff_button);
+		add(allpay);
+		add(allmoney);
+		add(pay_button);
+		add(payoff_button);
 		
-		return pSouth;
 	}
 
 }
