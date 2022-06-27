@@ -2,11 +2,15 @@ package kioske.YounukLee7.kioskeUI;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import kioske.YounukLee7.Select_Set_Size;
 
 public class Select_Set_down {
 	
@@ -28,6 +32,14 @@ public class Select_Set_down {
 		JButton set_button = new JButton("¼¼Æ®");
 		set_button.setBounds(463, 200, 250, 350);
 		set_button.setIcon(new ImageIcon("image/set.jpg"));
+		
+		set_button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new Select_Set_Size();
+			}
+		});
 		
 		pSouth.add(single_button);
 		pSouth.add(set_button);

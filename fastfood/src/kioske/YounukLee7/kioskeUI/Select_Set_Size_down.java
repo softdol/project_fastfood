@@ -2,11 +2,15 @@ package kioske.YounukLee7.kioskeUI;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import kioske.YounukLee7.Select_Side_Drink;
 
 public class Select_Set_Size_down {
 	
@@ -38,6 +42,14 @@ public class Select_Set_Size_down {
 		yes_button.setBackground(new Color(0xFF0000));
 		yes_button.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 30));
 		yes_button.setBounds(463, 450, 250, 60);
+		
+		yes_button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new Select_Side_Drink();
+			}
+		});
 		
 		pSouth.add(no_button);
 		pSouth.add(yes_button);

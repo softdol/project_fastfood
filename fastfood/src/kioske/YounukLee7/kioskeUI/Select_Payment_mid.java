@@ -2,11 +2,15 @@ package kioske.YounukLee7.kioskeUI;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import kioske.YounukLee7.Card_Pay;
 
 public class Select_Payment_mid {
 	
@@ -36,6 +40,14 @@ public class Select_Payment_mid {
 		card.setBackground(new Color(0XFFFFFF));
 		card.setIcon(new ImageIcon("image/card.jpg"));
 		card.setBounds(210, 240, 220, 220);
+		
+		card.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new Card_Pay();
+			}
+		});
 		
 		JButton mobile = new JButton("¸ð¹ÙÀÏ");
 		mobile.setForeground(new Color(0xFFFFFF));

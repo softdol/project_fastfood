@@ -71,13 +71,8 @@ public class Start_Screen_kiosk extends JPanel{
 		start_screen_panel.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e){  
 				
-				start_screen_panel.setVisible(false);
-				Main_JPanel panel = new Main_JPanel();
-				Select_Takeout_up up = new Select_Takeout_up();
-				Select_Takeout_down down = new Select_Takeout_down();
-				add(up.Select_Takeout_up());
-				add(up.Select_Takeout_up());
-				
+				new Select_Takeout();
+				setVisible(false);
 				
 			}  
 		});
