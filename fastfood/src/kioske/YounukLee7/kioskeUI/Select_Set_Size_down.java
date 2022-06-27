@@ -11,10 +11,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import kioske.YounukLee7.Select_Side_Drink;
+import kioske.YounukLee7.Sub_JFrame;
 
 public class Select_Set_Size_down extends JPanel{
 	
-	public Select_Set_Size_down() {
+	public Select_Set_Size_down(Sub_JFrame screen) {
 		
 		setBackground(new Color(0XFFE7DF));
 		setBounds(0,300,900,740);
@@ -36,6 +37,14 @@ public class Select_Set_Size_down extends JPanel{
 		no_button.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 30));
 		no_button.setBounds(173, 450, 250, 60);
 		
+		no_button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				screen.veiw_Select_Side_Drink();
+			}
+		});
+		
 		JButton yes_button = new JButton("¿¹");
 		yes_button.setForeground(new Color(0xFFFFFF));
 		yes_button.setBackground(new Color(0xFF0000));
@@ -46,7 +55,7 @@ public class Select_Set_Size_down extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new Select_Side_Drink();
+				screen.veiw_Select_Side_Drink();
 			}
 		});
 		
