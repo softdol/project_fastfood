@@ -134,7 +134,7 @@ public class MenuSetInsert extends JPanel {
 					psList.add(new PsList('I',txtPrice.getText()));
 					psList.add(new PsList('I',txtSale.getText()));
 					psList.add(new PsList('S',main.mInfo.getMember_id()));
-					psList.add(new PsList('I',repList.get(cbRep.getSelectedIndex()).getMenu_idx().toString()));
+					psList.add(new PsList('I',repList.get(cbRep.getSelectedIndex() - 1).getMenu_idx().toString()));
 					
 					String sqi_menuIns = "insert into menu_set (SET_IDX, SET_IMG_PATH, SET_NAME, SET_PRICE, SET_SALE, SET_USE_FLAG, SET_IN_DATE, SET_IN_ID, SET_REP) ";
 						   sqi_menuIns += "values(SET_IDX_SEQ.nextval, ?, ?, ?, ?, 'Y', sysdate, ?, ?)";
