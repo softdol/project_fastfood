@@ -13,6 +13,9 @@ public class Calculate {
 	private String 	calculate_close;  
 	private Integer calculate_total_price;
 	
+	public Calculate() {
+	}
+	
 	public Calculate(ResultSet rs) throws SQLException {
 		this.calculate_idx			= rs.getInt(1);    
 		this.calculate_in_date 		= rs.getDate(2);
@@ -53,6 +56,11 @@ public class Calculate {
 	
 	public int getOpenDay() {
 		return calculate_in_date.getDay();
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("open : %s, close : %s", calculate_in_date,calculate_out_date );
 	}
 
 }

@@ -1,4 +1,4 @@
-package manager.sales;
+package pos;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -14,10 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import pos.Order;
-
 public class Pos_PaymentPage extends JFrame {
-
 	public Pos_PaymentPage(ArrayList<Order> orderlist) {
 
 		String[] str = { "예", "아니오" };
@@ -228,5 +225,4 @@ public class Pos_PaymentPage extends JFrame {
 		// 주문 목록 넘겨 받아서 호출하는 부분
 		new Pos_PaymentPage(orderlist);
 	}
-	
 }

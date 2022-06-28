@@ -9,11 +9,11 @@ public class Error_Image extends JFrame{
 	
 	public Error_Image() {
 		
-		Logo_MenuName_Panel logo = new Logo_MenuName_Panel();
-		add(logo);
-		
-		Error_Image_down down = new Error_Image_down();
-		add(down);
+//		Logo_MenuName_Panel logo = new Logo_MenuName_Panel();
+//		add(logo);
+//		
+//		Error_Image_down down = new Error_Image_down();
+//		add(down);
 		
 		setLayout(null);
 		setTitle("Error_Image");
