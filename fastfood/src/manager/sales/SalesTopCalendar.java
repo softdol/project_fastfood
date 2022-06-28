@@ -12,6 +12,11 @@ import manager.actionlistener.SaleActionListener;
 public class SalesTopCalendar extends JPanel {
 	
 	SalesMain parent;
+	
+	JButton btnOpen;
+	JButton btnClose;
+	JButton btnOpenC;
+	JButton btnCloseC;
 	public static JLabel jlViewDate;
 	
 	/**
@@ -54,13 +59,13 @@ public class SalesTopCalendar extends JPanel {
 		add(btnNow);
 
 		// 오픈 마감 오픈취소 마감해지
-		JButton btnOpen = new JButton("오픈");
+		btnOpen = new JButton("오픈");
 		btnOpen.setBounds(btnNextY.getX() + btnNextY.getWidth() + 180, btnPrevY.getY(), 60, 40);
-		JButton btnClose = new JButton("마감");
+		btnClose = new JButton("마감");
 		btnClose.setBounds(btnOpen.getX() + btnOpen.getWidth() + 5, btnPrevY.getY(), 60, 40);
-		JButton btnOpenC = new JButton("오픈취소");
+		btnOpenC = new JButton("오픈취소");
 		btnOpenC.setBounds(btnClose.getX() + btnClose.getWidth() + 5, btnPrevY.getY(), 90, 40);
-		JButton btnCloseC = new JButton("마감해지");
+		btnCloseC = new JButton("마감해지");
 		btnCloseC.setBounds(btnOpenC.getX() + btnOpenC.getWidth() + 5, btnPrevY.getY(), 90, 40);
 
 		add(btnOpen);
