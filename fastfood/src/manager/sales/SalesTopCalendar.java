@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import manager.actionlistener.SaleActionListener;
+import manager.actionlistener.SalesTopMonthActionListener;
 
 public class SalesTopCalendar extends JPanel {
 	
@@ -60,18 +61,27 @@ public class SalesTopCalendar extends JPanel {
 
 		// 오픈 마감 오픈취소 마감해지
 		btnOpen = new JButton("오픈");
+		btnOpen.addActionListener(new SalesTopMonthActionListener(parent, "O"));
 		btnOpen.setBounds(btnNextY.getX() + btnNextY.getWidth() + 180, btnPrevY.getY(), 60, 40);
 		btnClose = new JButton("마감");
+		btnClose.addActionListener(new SalesTopMonthActionListener(parent, "C"));
 		btnClose.setBounds(btnOpen.getX() + btnOpen.getWidth() + 5, btnPrevY.getY(), 60, 40);
 		btnOpenC = new JButton("오픈취소");
+		btnOpenC.addActionListener(new SalesTopMonthActionListener(parent, "OC"));
 		btnOpenC.setBounds(btnClose.getX() + btnClose.getWidth() + 5, btnPrevY.getY(), 90, 40);
 		btnCloseC = new JButton("마감해지");
+		btnCloseC.addActionListener(new SalesTopMonthActionListener(parent, "CC"));
 		btnCloseC.setBounds(btnOpenC.getX() + btnOpenC.getWidth() + 5, btnPrevY.getY(), 90, 40);
 
+		btnOpen.setEnabled(false);
+		btnClose.setEnabled(false);
+		btnOpenC.setEnabled(false);
+		btnCloseC.setEnabled(false);
+		
 		add(btnOpen);
 		add(btnClose);
 		add(btnOpenC);
-		add(btnCloseC);
+		add(btnCloseC);	
 	}
 	
 	SalesGraphView parentG;

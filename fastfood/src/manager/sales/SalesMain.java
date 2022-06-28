@@ -28,8 +28,10 @@ public class SalesMain extends JPanel {
 	JPanel jpCalendar;
 	SalesTopCalendar topCalendar;
 	ArrayList<JPanel> dayPanel = new ArrayList<>();
+	Calculate selCalculate = new Calculate();
 	
 	public void selDay(Calculate c, int idx) {
+		this.selCalculate = c;
 		for(int i = 0; i < dayPanel.size(); i++) {
 			if(i == idx - 1) {
 				dayPanel.get(i).setBorder(new LineBorder(Color.RED, 3));
@@ -42,19 +44,34 @@ public class SalesMain extends JPanel {
 		topCalendar.btnOpenC.setEnabled(false);
 		topCalendar.btnCloseC.setEnabled(false);
 		
-		if(c.getCalculate_in_date() == null) {
+		if(c.getCalculate_in_date() == null) {			
 			topCalendar.btnOpen.setEnabled(true);
 		}else {
 			topCalendar.btnOpenC.setEnabled(true);
 		}
 		if(c.getCalculate_out_date() == null) {
-			topCalendar.btnClose.setEnabled(true);
+			if(c.getCalculate_in_date() != null) {
+				topCalendar.btnClose.setEnabled(true);
+			}
 		}else {
 			topCalendar.btnCloseC.setEnabled(true);
-		}
+		}		
 	}
 	
-	
+	public void setOpenClose(String sCate) {
+		switch(sCate) {
+		case "O":	//오픈 등록
+			break;
+		case "C":	//마감 등록
+			break;
+		case "OC":	//오픈 취소
+			break;
+		case "CC":	//마감 취소
+			break;
+		}
+		System.out.println(sCate);
+		System.out.println(selCalculate);
+	}
 	
 	public SalesMain(ManagerMain main) {
 		
