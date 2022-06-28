@@ -214,4 +214,19 @@ public class Pos_PaymentPage extends JFrame {
 		}
 	}
 	
+	public static void main(String[] args) {
+		
+		// 주문 목록 랜덤 생성(테스트용)
+		ArrayList<Order> orderlist = new ArrayList<>();
+		for (int i = 0; i < 10; i++) {
+			int cnt = (int) (Math.random() * 10) + 1;
+			int price = (int) (Math.random() * 5) + 1;
+			price *= 1000;
+			orderlist.add(new Order("햄버거", price, cnt, cnt * price));
+		}
+		
+		// 주문 목록 넘겨 받아서 호출하는 부분
+		new Pos_PaymentPage(orderlist);
+	}
+	
 }
