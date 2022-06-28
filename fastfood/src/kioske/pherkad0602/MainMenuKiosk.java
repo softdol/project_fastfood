@@ -39,7 +39,7 @@ public class MainMenuKiosk extends JFrame {
 //			d(menu);
 			
 			PayPanel pay = new PayPanel();
-			add(pay.PayPanel());
+			add(pay);
 		
 			
 			

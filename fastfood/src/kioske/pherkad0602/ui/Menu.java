@@ -25,17 +25,15 @@ import javax.swing.text.StyledDocument;
 import kioske.pherkad0602.action.CategoryAction;
 import kioske.pherkad0602.action.MenuSelectionAction;
 import kioske.pherkad0602.database.MenuDatabase;
+import kioske.pherkad0602.database.ReturnModel;
+import kioske.pherkad0602.database.SubMenuDatabase;
 
 public class Menu extends JPanel {	
 	
-	public Component Menu(String sql) {
+	public  Menu(ArrayList<MenuDatabase> menuList) {
 		EmptyBorder border = new EmptyBorder(getInsets());
-	
-		ArrayList menuImage = MenuDatabase.menuImageArray(sql);
-		ArrayList menuName = MenuDatabase.menuNameArray(sql);
-		ArrayList menuIdxNum = MenuDatabase.menuIdxNum(sql);
-		
-		int a = menuImage.size();
+				
+		int a = menuList.size();
 		int b = (a/3)+1;
 		
 		LayoutManager manager = new GridLayout(b, 3);
@@ -50,14 +48,15 @@ public class Menu extends JPanel {
 		
 		for(int i = 0; i <a; ++i) {
 			
+			
 			JButton btn3 = new JButton();
 			btn3.setBackground(new Color(0xFFFFFF));
-			btn3.setName(String.valueOf(menuIdxNum.get(i)));
+			btn3.setName(String.valueOf(menuList.get(i).getMenu_idx()));
 			btn3.addActionListener(listener);
 			btn3.setBorder(border);
 			btn3.setLayout(null);
 			
-			ImageIcon icon = new ImageIcon(String.valueOf(menuImage.get(i)));		
+			ImageIcon icon = new ImageIcon(String.valueOf(menuList.get(i).getImg_big_path()));		
 			Image img = icon.getImage();
 			Image changeImg = img.getScaledInstance(210, 140, Image.SCALE_SMOOTH);
 			ImageIcon changeIcon = new ImageIcon(changeImg);
@@ -70,7 +69,7 @@ public class Menu extends JPanel {
 
 			
 			JTextPane textLabel = new JTextPane();
-			textLabel.setText(String.valueOf(menuName.get(i)));
+			textLabel.setText(String.valueOf(menuList.get(i).getMenu_name()));
 			textLabel.setBounds(0,150,210,50);
 			textLabel.setBackground(Color.white);
 			textLabel.setFont(new Font("±Ã¼­Ã¼", Font.BOLD,20));
@@ -86,7 +85,6 @@ public class Menu extends JPanel {
 			menuPanel.add(btn3);
 		}
 		
-		return menuPanel;
 	}
-
+	
 }

@@ -14,30 +14,26 @@ public class HomeMenuKiosk extends JFrame{
 	
 	MainPanel main;
 	
-	public void viewMenu(int iCate) {
-		System.out.println(iCate);
-		main.cardLayoutManager.show(main, "menu" + iCate);
+	public void viewMenu(String name) {
+		main.cardLayoutManager.show(main, name);
+		System.out.println(name);
 	}
 	
 	public HomeMenuKiosk() {
 		
 		setLayout(null);
-		
-		String sql1 = "SELECT * FROM Menu WHERE Menu_Category_IDX = 1";
-		String sql2 = "SELECT * FROM Menu_subcategory WHERE menu_category_IDX = 1";
-		
 
 		Category cate = new Category(this);		
 		add(cate);
 		
-		main = new MainPanel();
+		main = new MainPanel(this);
 		//main.setBounds(200, 0, 684, 800);
 		add(main);
 		
-//		PayPanel pay = new PayPanel();
-//		add(pay.PayPanel());
+		PayPanel pay = new PayPanel();
+		add(pay);
 		
-	
+		
 		setBounds(510,0,900,1040);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
