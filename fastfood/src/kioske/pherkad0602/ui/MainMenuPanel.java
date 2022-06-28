@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import kioske.pherkad0602.database.MenuDatabase;
+
 public class MainMenuPanel extends JPanel{
 	
 	public Component MainMenuPanel(String sql) {

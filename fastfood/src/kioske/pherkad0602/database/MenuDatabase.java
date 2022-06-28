@@ -1,4 +1,4 @@
-package kioske.pherkad0602.ui;
+package kioske.pherkad0602.database;
 
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import kioske.pherkad0602.ui.ojdbcConnection;
 
 public class MenuDatabase {
 	

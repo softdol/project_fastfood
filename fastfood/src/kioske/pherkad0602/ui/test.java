@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 import javax.swing.border.EmptyBorder;
 
+import kioske.pherkad0602.database.SubMenuDatabase;
+
 public class test {
 	public static void main(String[] args) {
 	
@@ -17,12 +19,12 @@ public class test {
 		
 		String sql = "SELECT * FROM Menu_subcategory";
 		
-		ArrayList name = SubMenuDatabase.subMenuName;
-		ArrayList cateIdx = SubMenuDatabase.menuCategoryIdx; 
+//		ArrayList name = SubMenuDatabase.subMenuName;
+//		ArrayList cateIdx = SubMenuDatabase.menuCategoryIdx; 
 		
 
 	
-		System.out.println(name);
+		
 	
 	}
 

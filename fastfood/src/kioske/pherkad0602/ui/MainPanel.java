@@ -3,52 +3,77 @@ package kioske.pherkad0602.ui;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Panel;
 import java.util.ArrayList;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-public class MainPanel extends JPanel{
-	public static CardLayout cardLayoutManager = new CardLayout();
-	public static JPanel mainPanel = new JPanel();
+import database.manager.Category;
+import database.manager.ReturnModel;
+import database.model.PsList;
+import kioske.pherkad0602.database.SubMenuDatabase;
 
-	public Component MainPanel() {
+public class MainPanel extends JPanel{
+	public CardLayout cardLayoutManager = new CardLayout();
+	//public static JPanel mainPanel = new JPanel();
+
+	public MainPanel() {
 		
 		EmptyBorder border = new EmptyBorder(getInsets());
 		
-		String sql = "SELECT * FROM Menu_subcategory";
+
+		ArrayList<Category> cataList = ReturnModel.categoryList();
 		
-		ArrayList name = SubMenuDatabase.subMenuNameArray(sql);
-		ArrayList cateIdx = SubMenuDatabase.menuCategoryIdxArray(sql); 
+		
+		//ArrayList name = SubMenuDatabase.subMenuNameArray(sql);
+		//ArrayList cateIdx = SubMenuDatabase.menuCategoryIdxArray(sql); 
 		
 		HomePanel home = new HomePanel();		
-		mainPanel.add("home",home.HomePanel());
+		//add("home",home.HomePanel());
+		JPanel jp = new JPanel();
 		
-		for(int i = 1; i <4 ; i++) {
+		for(int i = 0; i < cataList.size() ; i++) {
+			//System.out.println(sList.get(i));
+//			String j = String.valueOf(cateIdx.get(i));
+			//System.out.println(cataList.get(i).getMenu_category_idx() + " : " + cataList.get(i).getMenu_category_name());
 			
-			String j = String.valueOf(cateIdx.get(i));
+			String sql = "SELECT * FROM Menu_subcategory where menu_category_IDX = ?";
 			
-			String sql1 = "SELECT * FROM Menu WHERE Menu_Category_IDX = " + i;
-			String sql2 = "SELECT * FROM Menu_subcategory WHERE menu_category_IDX = " + j;
-	
-			MenuPanel menu = new MenuPanel();
-			mainPanel.add(String.valueOf(name.get(i)),menu.MenuPanel(sql1,sql2));
-		
+			ArrayList<SubMenuDatabase> sList = new ArrayList<>();
+			ArrayList<PsList> psList = new ArrayList<>();
+			psList.add(new PsList('I', String.valueOf(cataList.get(i).getMenu_category_idx())));
+//			System.out.println();
+			sList = ReturnModel.selSubCateList(sql, psList);
+			
+			MenuPanel menu = new MenuPanel(sList);
+			add(menu,"menu" + i);
+			for(SubMenuDatabase s : sList) {
+				System.out.println(s);
+			}
+//			System.out.println();
+			
+//			
+//			String sql1 = "SELECT * FROM Menu WHERE Menu_Category_IDX = " + i;
+//			String sql2 = "SELECT * FROM Menu_subcategory WHERE menu_category_IDX = " + i;
+//	
+			
 		}
+		setLayout(cardLayoutManager);
+		jp.setBounds(0, 0, 684, 800);
+		jp.setBackground(Color.black);
+		//add(jp);
+		cardLayoutManager.show(this, "menu3");
+		setBounds(200, 0, 684, 800);
 		
+		setBackground(Color.white);
+		setBorder(border);
 		
-		mainPanel.setBounds(200, 0, 684, 800);
-		mainPanel.setLayout(cardLayoutManager);
-		mainPanel.setBackground(Color.white);
-		mainPanel.setBorder(border);
-		
-		return mainPanel;
+		//return mainPanel;
 	}
 	
+//	public static void main(String[] args) {
+//		new
+//	}
+//	
 	
 }

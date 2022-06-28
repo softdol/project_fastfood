@@ -7,11 +7,10 @@ import javax.swing.JButton;
 
 import kioske.pherkad0602.ui.OrderCheck;
 
-public class menuSelectionAction implements ActionListener{
+public class MenuSelectionAction implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e)
     {
-     
         new OrderCheck();
         }
            
