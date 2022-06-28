@@ -55,7 +55,6 @@ public class MainPanel extends JPanel{
 				psList2.add(new PsList('I', String.valueOf(i)));
 				sList2 = ReturnModel.selMenuList1(sql2, psList2);
 				
-				
 				MenuPanel menu = new MenuPanel(sList1, sList2, hMain, a);
 				add(subCateList.get(i).getMENU_SUBCATEGORY_NAME(), menu);
 				a++;
