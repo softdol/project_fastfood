@@ -22,9 +22,7 @@ public class MainMenuPanel extends JPanel{
 	public  MainMenuPanel(ArrayList<MenuDatabase> menuList) {
 		EmptyBorder border = new EmptyBorder(getInsets());
 		
-
 		int a = menuList.size();
-		
 		
 		setBounds(0, 200, 684, 600);
 		setLayout(null);

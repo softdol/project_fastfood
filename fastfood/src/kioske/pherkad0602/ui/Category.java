@@ -28,7 +28,7 @@ public class Category extends JPanel{
 		setBackground(Color.white);
 		setBorder(border);
 		
-		String[] cate = {"홈", "햄버거", "사이드", "음료", "디저트"};// 카테고리 추가하려면 여기에 추가
+		String[] cate = {"홈", "햄버거", "음료", "사이드", "디저트"};// 카테고리 추가하려면 여기에 추가
 		String[] name = {"홈", "비프" , "탄산", "튀김", "아이스크림"};
 		// 클래스화 카테고리
 		

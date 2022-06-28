@@ -14,15 +14,14 @@ public class MenuPanel extends JPanel{
 	
 	HomeMenuKiosk hMain;
 	
-	public MenuPanel(ArrayList<SubMenuDatabase> sList1, ArrayList<MenuDatabase> menuList, HomeMenuKiosk hMain){
+	public MenuPanel(ArrayList<SubMenuDatabase> sList1, ArrayList<MenuDatabase> menuList, HomeMenuKiosk hMain, int i){
 		EmptyBorder border = new EmptyBorder(getInsets());
 		this.hMain = hMain;
 
-		
 		SubMenuPanel sub = new SubMenuPanel(sList1, hMain);
 		add(sub);
 		
-		MenuNamePanel mName = new MenuNamePanel(0, sList1);
+		MenuNamePanel mName = new MenuNamePanel(i, sList1);
 		add(mName);
 		
 		MainMenuPanel main = new MainMenuPanel(menuList);
