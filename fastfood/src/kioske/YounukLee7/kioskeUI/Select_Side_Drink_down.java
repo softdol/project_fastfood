@@ -23,7 +23,7 @@ import kioske.YounukLee7.dbtablePocket.MenuPicture;
 
 public class Select_Side_Drink_down extends JPanel{
 	
-	public Select_Side_Drink_down(int idx, int setidx) {
+	public Select_Side_Drink_down(int idx, int setidx, int drinkidx, int sideidx) {
 		
 		String sql = "SELECT * FROM menu where menu_idx in (SELECT menu_idx FROM menu_set_list WHERE set_idx = ?) order by menu_idx";
 		ArrayList<Menu> menu = new ArrayList<>();
@@ -43,6 +43,28 @@ public class Select_Side_Drink_down extends JPanel{
 			e.printStackTrace();
 		}
 		
+		// 음료 변경하면 실행
+		String sql2 = "SELECT * FROM menu where menu_idx = ?";
+		Menu menu2 = null;
+		
+		if (drinkidx > 0) {
+			
+			try (
+					Connection conn = OjdbcConnection.getConnection();
+					PreparedStatement pstmt = conn.prepareStatement(sql2);
+					){
+				pstmt.setInt(1, sideidx);
+				try (ResultSet rs = pstmt.executeQuery();){
+					while (rs.next()) {
+						menu2 = new Menu(rs);
+					}
+				} catch (Exception e) {
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		
 		
 		setBackground(new Color(0XFFE7DF));
@@ -50,28 +72,40 @@ public class Select_Side_Drink_down extends JPanel{
 		setLayout(null);
 		
 		JLabel burgerlabel = new JLabel("햄버거 사진");
+		burgerlabel.setBounds(100, 150, 200, 170);
 		ImageIcon icon = new ImageIcon(menu.get(0).getIMG_BIG_PATH());
 		Image img = icon.getImage();
 		Image burgerimg = img.getScaledInstance(200, 170, Image.SCALE_SMOOTH);
 		ImageIcon burgericon = new ImageIcon(burgerimg);
 		burgerlabel.setIcon(burgericon);
-		burgerlabel.setBounds(100, 150, 200, 170);
 		
 		JLabel side_label = new JLabel("사이드 사진");
+		side_label.setBounds(350, 150, 200, 170);
 		ImageIcon icon1 = new ImageIcon(menu.get(1).getIMG_BIG_PATH());
 		Image img1 = icon1.getImage();
 		Image sideimg = img1.getScaledInstance(200, 170, Image.SCALE_SMOOTH);
 		ImageIcon sideicon = new ImageIcon(sideimg);
 		side_label.setIcon(sideicon);
-		side_label.setBounds(350, 150, 200, 170);
+		
 		
 		JLabel drink_label = new JLabel("음료 사진");
-		ImageIcon icon2 = new ImageIcon(menu.get(2).getIMG_BIG_PATH());
-		Image img2 = icon2.getImage();
-		Image drinkimg = img2.getScaledInstance(200, 170, Image.SCALE_SMOOTH);
-		ImageIcon drinkicon = new ImageIcon(drinkimg);
-		drink_label.setIcon(drinkicon);
 		drink_label.setBounds(600, 150, 200, 170);
+		
+		// 음료 변경하면 실행
+		if (drinkidx > 0) {
+			ImageIcon icon2 = new ImageIcon(menu2.getIMG_BIG_PATH());
+			Image img2 = icon2.getImage();
+			Image drinkimg = img2.getScaledInstance(200, 170, Image.SCALE_SMOOTH);
+			ImageIcon drinkicon = new ImageIcon(drinkimg);
+			drink_label.setIcon(drinkicon);
+		} else {
+			ImageIcon icon2 = new ImageIcon(menu.get(2).getIMG_BIG_PATH());
+			Image img2 = icon2.getImage();
+			Image drinkimg = img2.getScaledInstance(200, 170, Image.SCALE_SMOOTH);
+			ImageIcon drinkicon = new ImageIcon(drinkimg);
+			drink_label.setIcon(drinkicon);
+		}
+		
 		
 		JButton side_button = new JButton("사이드변경");
 		side_button.setForeground(new Color(0x000000));

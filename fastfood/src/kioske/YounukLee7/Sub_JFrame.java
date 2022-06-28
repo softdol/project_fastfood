@@ -21,7 +21,7 @@ public class Sub_JFrame extends JFrame {
 	public void veiw_Select_Side_Drink(int idx, String  set, int setidx) {
 		ManagerCP.reFresh(panel);
 		panel.add(new Logo_MenuName_Panel(idx,set));
-		panel.add(new Select_Side_Drink_down(idx,setidx));
+		panel.add(new Select_Side_Drink_down(idx,setidx,3,0));
 	}
 	
 	public Sub_JFrame() {
