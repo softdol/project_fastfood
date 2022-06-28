@@ -10,13 +10,11 @@ public class Sub_JPanel extends JPanel{
 	
 	public Sub_JPanel(Sub_JFrame screen, int idx) {
 		
-		Logo_MenuName_Panel logo_MenuName_Panel = new Logo_MenuName_Panel();
+		Logo_MenuName_Panel logo_MenuName_Panel = new Logo_MenuName_Panel(idx, null);
 		add(logo_MenuName_Panel);
 		
 		Select_Set_down down = new Select_Set_down(screen, idx);
 		add(down);
-		
-		System.out.println(idx);
 		
 		setLayout(null);
 		setBounds(0,0,900,1040);

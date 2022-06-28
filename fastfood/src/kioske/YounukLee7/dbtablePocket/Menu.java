@@ -34,17 +34,17 @@ public class Menu {
 	}
 	
 	public Menu(ResultSet rs) throws SQLException {
-		MENU_IDX = rs.getInt(1);
+		MENU_IDX = rs.getInt("MENU_IDX");
 		MENU_CATEGORY_IDX = rs.getInt("MENU_CATEGORY_IDX");
-		IMG_BIG_PATH = rs.getNString("IMG_BIG_PATH");
-		MENU_NAME = rs.getNString("MENU_NAME");
+		IMG_BIG_PATH = rs.getString("IMG_BIG_PATH");
+		MENU_NAME = rs.getString("MENU_NAME");
 		MENU_PRICE = rs.getInt("MENU_PRICE");
 		MENU_SALE = rs.getInt("MENU_SALE");
-		MENU_USE_FLAG = rs.getNString("MENU_USE_FLAG");
-		MENU_IN_DATE = rs.getNString("MENU_IN_DATE");
-		MENU_IN_ID = rs.getNString("MENU_IN_ID");
-		MENU_MOD_DATE = rs.getNString("MENU_MOD_DATE");
-		MENU_MOD_ID = rs.getNString("MENU_MOD_ID");
+		MENU_USE_FLAG = rs.getString("MENU_USE_FLAG");
+		MENU_IN_DATE = rs.getString("MENU_IN_DATE");
+		MENU_IN_ID = rs.getString("MENU_IN_ID");
+		MENU_MOD_DATE = rs.getString("MENU_MOD_DATE");
+		MENU_MOD_ID = rs.getString("MENU_MOD_ID");
 	}
 
 	public Integer getMENU_IDX() {

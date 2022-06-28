@@ -2,6 +2,7 @@ package kioske.YounukLee7.kioskeUI;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -25,9 +26,9 @@ public class Select_Set_down extends JPanel{
 	
 	public Select_Set_down(Sub_JFrame screen, int idx) {
 		
-		String sql = "SELECT s.set_img_path, m.img_big_path FROM menu m INNER JOIN menu_set s on m.menu_idx = s.set_rep WHERE menu_idx = ?";
-//		ArrayList<MenuPicture> MenuPicture_list = new ArrayList<>();
-		MenuPicture menuPicture = null;
+		String sql = "SELECT s.set_idx, m.menu_name, s.set_name, s.set_img_path, m.img_big_path FROM menu m INNER JOIN menu_set s ON m.menu_idx = s.set_rep WHERE menu_idx = ?";
+		ArrayList<MenuPicture> menuPicture = new ArrayList<>();
+//		MenuPicture menuPicture = null;
 		
 		try (
 				Connection conn = OjdbcConnection.getConnection();
@@ -37,8 +38,8 @@ public class Select_Set_down extends JPanel{
 			pstmt.setInt(1, idx);
 			try(ResultSet rs = pstmt.executeQuery();) {
 				while (rs.next()) {
-					menuPicture = new MenuPicture(rs);
-//					MenuPicture_list.add(new MenuPicture(rs));
+//					menuPicture = new MenuPicture(rs);
+					menuPicture.add(new MenuPicture(rs));
 				}
 				
 			} catch (Exception e) {
@@ -64,7 +65,13 @@ public class Select_Set_down extends JPanel{
 		
 		JButton single_button = new JButton("단품");
 		single_button.setBounds(173, 200, 250, 350);
-		single_button.setIcon(new ImageIcon(menuPicture.getImg_big_path()));
+		
+		ImageIcon icon = new ImageIcon(menuPicture.get(0).getImg_big_path());
+		Image img = icon.getImage();
+		Image soloimg = img.getScaledInstance(250, 350, Image.SCALE_SMOOTH);
+		ImageIcon soloicon = new ImageIcon(soloimg);
+		
+		single_button.setIcon(soloicon);
 		
 		single_button.addActionListener(new ActionListener() {
 			
@@ -76,13 +83,20 @@ public class Select_Set_down extends JPanel{
 		
 		JButton set_button = new JButton("세트");
 		set_button.setBounds(463, 200, 250, 350);
-		set_button.setIcon(new ImageIcon(menuPicture.getSet_img_path()));
+		
+		ImageIcon icon1 = new ImageIcon(menuPicture.get(0).getSet_img_path());
+		Image img1 = icon1.getImage();
+		Image setimg = img1.getScaledInstance(250, 350, Image.SCALE_SMOOTH);
+		ImageIcon seticon = new ImageIcon(setimg);
+		
+		set_button.setIcon(seticon);
 		
 		set_button.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				screen.veiw_Set_Size(idx);
+				                         // 세트 표시 s
+				screen.veiw_Set_Size(idx,"s");
 			}
 		});
 		

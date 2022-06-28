@@ -18,34 +18,34 @@ public class Last_JFrame extends JFrame{
 	
 	public void veiw_Select_Payment() {
 		ManagerCP.reFresh(panel);
-		panel.add(new Logo_MenuName_Panel());
+		//panel.add(new Logo_MenuName_Panel());
 		panel.add(new Select_Payment_mid(this));
 		panel.add(new Select_Payment_down(this));
 	}
 	
 	public void veiw_Card_Pay() {
 		ManagerCP.reFresh(panel);
-		panel.add(new Logo_MenuName_Panel());
+		//panel.add(new Logo_MenuName_Panel());
 		panel.add(new Card_Pay_mid());
 		panel.add(new Down_yes_no_Button(this));
 	}
 	
 	public void veiw_Mobile_Pay() {
 		ManagerCP.reFresh(panel);
-		panel.add(new Logo_MenuName_Panel());
+		//panel.add(new Logo_MenuName_Panel());
 		panel.add(new Mobile_Pay_mid());
 		panel.add(new Down_yes_no_Button(this));
 	}
 	
 	public void veiw_Error() {
 		ManagerCP.reFresh(panel);
-		panel.add(new Logo_MenuName_Panel());
+		//panel.add(new Logo_MenuName_Panel());
 		panel.add(new Error_Image_down());
 	}
 	
 	public void veiw_Order_completed() {
 		ManagerCP.reFresh(panel);
-		panel.add(new Logo_MenuName_Panel());
+		//panel.add(new Logo_MenuName_Panel());
 		panel.add(new Order_completed_down());
 	}
 	
