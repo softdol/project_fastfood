@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import kioske.pherkad0602.database.SubMenuDatabase;
+
 public class MenuNamePanel extends JPanel {
 
 	public Component MenuNamePanel(int i) {

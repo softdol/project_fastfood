@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import kioske.pherkad0602.action.cateAction;
+import kioske.pherkad0602.action.CategoryAction;
 
 public class Category extends JPanel{
 	
@@ -42,7 +42,7 @@ public class Category extends JPanel{
 		catePanel.add(logo);
 		
 		 
-		cateAction listener = new cateAction(new MainPanel(), MainPanel.mainPanel );
+		CategoryAction listener = new CategoryAction(new MainPanel(), MainPanel.mainPanel );
 		
 		
 		for(int i = 0; i <cate.length; ++i) {

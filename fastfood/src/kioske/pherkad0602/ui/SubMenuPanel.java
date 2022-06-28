@@ -9,6 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import kioske.pherkad0602.database.MenuDatabase;
+import kioske.pherkad0602.database.SubMenuDatabase;
+
 public class SubMenuPanel extends JPanel{
 	
 	public Component SubMenuPanel(String sql){

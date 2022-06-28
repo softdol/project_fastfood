@@ -1,10 +1,12 @@
-package kioske.pherkad0602.ui;
+package kioske.pherkad0602.database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import kioske.pherkad0602.ui.ojdbcConnection;
 
 public class SubMenuDatabase {
 	
@@ -16,7 +18,6 @@ public class SubMenuDatabase {
 	
 	public static void Database(String sql) {
 	
-		
 		try(
 				Connection conn = ojdbcConnection.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -31,7 +32,6 @@ public class SubMenuDatabase {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		
 	}
 	

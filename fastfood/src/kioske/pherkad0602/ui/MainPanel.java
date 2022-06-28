@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import kioske.pherkad0602.database.SubMenuDatabase;
+
 public class MainPanel extends JPanel{
 	public static CardLayout cardLayoutManager = new CardLayout();
 	public static JPanel mainPanel = new JPanel();

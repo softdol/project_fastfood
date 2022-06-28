@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 import javax.swing.border.EmptyBorder;
 
+import kioske.pherkad0602.database.SubMenuDatabase;
+
 public class test {
 	public static void main(String[] args) {
 	

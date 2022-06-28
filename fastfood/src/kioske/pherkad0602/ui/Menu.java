@@ -22,8 +22,9 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
-import kioske.pherkad0602.action.cateAction;
-import kioske.pherkad0602.action.menuSelectionAction;
+import kioske.pherkad0602.action.CategoryAction;
+import kioske.pherkad0602.action.MenuSelectionAction;
+import kioske.pherkad0602.database.MenuDatabase;
 
 public class Menu extends JPanel {	
 	
@@ -45,7 +46,7 @@ public class Menu extends JPanel {
 		menuPanel.setBorder(border);
 
 		
-		menuSelectionAction listener = new menuSelectionAction();
+		MenuSelectionAction listener = new MenuSelectionAction();
 		
 		for(int i = 0; i <a; ++i) {
 			

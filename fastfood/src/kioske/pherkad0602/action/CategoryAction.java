@@ -10,16 +10,15 @@ import javax.swing.JPanel;
 import kioske.pherkad0602.ui.MainPanel;
 import manager.ManagerMain;
 
-public class cateAction implements ActionListener{
+public class CategoryAction implements ActionListener{
 
 	private MainPanel main;
 	private JPanel Jpanel;
 	
-	public cateAction(MainPanel main, JPanel mainPanel) {
+	public CategoryAction(MainPanel main, JPanel mainPanel) {
 		this.main = main;
 		this.Jpanel = mainPanel;
 	}
-
 	
 	@Override
 
