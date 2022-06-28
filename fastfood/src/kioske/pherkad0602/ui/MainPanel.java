@@ -2,78 +2,126 @@ package kioske.pherkad0602.ui;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import database.manager.Category;
-import database.manager.ReturnModel;
 import database.model.PsList;
+import kioske.pherkad0602.HomeMenuKiosk;
+import kioske.pherkad0602.database.MenuDatabase;
+import kioske.pherkad0602.database.ReturnModel;
 import kioske.pherkad0602.database.SubMenuDatabase;
 
 public class MainPanel extends JPanel{
 	public CardLayout cardLayoutManager = new CardLayout();
-	//public static JPanel mainPanel = new JPanel();
-
-	public MainPanel() {
+	HomeMenuKiosk hMain;
+	public MainPanel(HomeMenuKiosk hMain) {
+		this.hMain = hMain;
 		
 		EmptyBorder border = new EmptyBorder(getInsets());
 		
-
+		
+		
 		ArrayList<Category> cataList = ReturnModel.categoryList();
+		ArrayList<SubMenuDatabase> subCateList = ReturnModel.subCateList("select * from menu_subcategory");
 		
+
 		
-		//ArrayList name = SubMenuDatabase.subMenuNameArray(sql);
-		//ArrayList cateIdx = SubMenuDatabase.menuCategoryIdxArray(sql); 
-		
-		HomePanel home = new HomePanel();		
-		//add("home",home.HomePanel());
-		JPanel jp = new JPanel();
-		
-		for(int i = 0; i < cataList.size() ; i++) {
-			//System.out.println(sList.get(i));
-//			String j = String.valueOf(cateIdx.get(i));
-			//System.out.println(cataList.get(i).getMenu_category_idx() + " : " + cataList.get(i).getMenu_category_name());
-			
-			String sql = "SELECT * FROM Menu_subcategory where menu_category_IDX = ?";
-			
-			ArrayList<SubMenuDatabase> sList = new ArrayList<>();
-			ArrayList<PsList> psList = new ArrayList<>();
-			psList.add(new PsList('I', String.valueOf(cataList.get(i).getMenu_category_idx())));
-//			System.out.println();
-			sList = ReturnModel.selSubCateList(sql, psList);
-			
-			MenuPanel menu = new MenuPanel(sList);
-			add(menu,"menu" + i);
-			for(SubMenuDatabase s : sList) {
-				System.out.println(s);
-			}
-//			System.out.println();
-			
-//			
-//			String sql1 = "SELECT * FROM Menu WHERE Menu_Category_IDX = " + i;
-//			String sql2 = "SELECT * FROM Menu_subcategory WHERE menu_category_IDX = " + i;
-//	
-			
-		}
 		setLayout(cardLayoutManager);
-		jp.setBounds(0, 0, 684, 800);
-		jp.setBackground(Color.black);
-		//add(jp);
+		
+		
+		for(int i = 0; i < subCateList.size() ; i++) {
+			
+			String sql1 = "SELECT * FROM Menu_subcategory where menu_category_IDX = ?";
+			String sql2 = "SELECT * FROM Menu WHERE Menu_subcategory_IDX = ? ";
+			
+			if(subCateList.get(i).getMENU_CATEGORY_IDX().equals(1)) {
+				ArrayList<SubMenuDatabase> sList1 = new ArrayList<>();
+				ArrayList<MenuDatabase> sList2 = new ArrayList<>();
+				
+				ArrayList<PsList> psList1 = new ArrayList<>();
+				ArrayList<PsList> psList2 = new ArrayList<>();
+
+				psList1.add(new PsList('I', "1"));
+				sList1 = ReturnModel.selSubCateList(sql1, psList1);
+				
+				psList2.add(new PsList('I', String.valueOf(i)));
+				sList2 = ReturnModel.selMenuList1(sql2, psList2);
+				
+				MenuPanel menu = new MenuPanel(sList1, sList2, hMain);
+				add(subCateList.get(i).getMENU_SUBCATEGORY_NAME(), menu);
+				
+				System.out.println(psList1);
+			} else if (subCateList.get(i).getMENU_CATEGORY_IDX().equals(2)) {
+				ArrayList<SubMenuDatabase> sList1 = new ArrayList<>();
+				ArrayList<MenuDatabase> sList2 = new ArrayList<>();
+				
+				ArrayList<PsList> psList1 = new ArrayList<>();
+				ArrayList<PsList> psList2 = new ArrayList<>();
+
+				
+				psList1.add(new PsList('I', "2"));
+				sList1 = ReturnModel.selSubCateList(sql1, psList1);
+				
+				psList2.add(new PsList('I', String.valueOf(i)));
+				sList2 = ReturnModel.selMenuList1(sql2, psList2);
+				
+				MenuPanel menu = new MenuPanel(sList1, sList2,hMain);
+				add(subCateList.get(i).getMENU_SUBCATEGORY_NAME() , menu);
+				
+				System.out.println(psList1);		
+			} else if (subCateList.get(i).getMENU_CATEGORY_IDX().equals(3)) {
+				ArrayList<SubMenuDatabase> sList1 = new ArrayList<>();
+				ArrayList<MenuDatabase> sList2 = new ArrayList<>();
+				
+				ArrayList<PsList> psList1 = new ArrayList<>();
+				ArrayList<PsList> psList2 = new ArrayList<>();
+
+				
+				psList1.add(new PsList('I', "3"));
+				sList1 = ReturnModel.selSubCateList(sql1, psList1);
+				
+				psList2.add(new PsList('I', String.valueOf(i)));
+				sList2 = ReturnModel.selMenuList1(sql2, psList2);
+				
+				MenuPanel menu = new MenuPanel(sList1, sList2,hMain);
+				add(subCateList.get(i).getMENU_SUBCATEGORY_NAME(), menu);
+				
+				System.out.println(psList1);		
+			} else if (subCateList.get(i).getMENU_CATEGORY_IDX().equals(4)) {
+				ArrayList<SubMenuDatabase> sList1 = new ArrayList<>();
+				ArrayList<MenuDatabase> sList2 = new ArrayList<>();
+				
+				ArrayList<PsList> psList1 = new ArrayList<>();
+				ArrayList<PsList> psList2 = new ArrayList<>();
+
+				
+				psList1.add(new PsList('I', "4"));
+				sList1 = ReturnModel.selSubCateList(sql1, psList1);
+				
+				psList2.add(new PsList('I', String.valueOf(i)));
+				sList2 = ReturnModel.selMenuList1(sql2, psList2);
+				
+				MenuPanel menu = new MenuPanel(sList1, sList2,hMain);
+				add(subCateList.get(i).getMENU_SUBCATEGORY_NAME() , menu);
+				
+				System.out.println(psList1);		
+			}
+		}
+		HomePanel home = new HomePanel();		
+		add("main0",home);
+		
 		cardLayoutManager.show(this, "menu3");
 		setBounds(200, 0, 684, 800);
 		
 		setBackground(Color.white);
 		setBorder(border);
 		
-		//return mainPanel;
+	
 	}
 	
-//	public static void main(String[] args) {
-//		new
-//	}
-//	
+
 	
 }

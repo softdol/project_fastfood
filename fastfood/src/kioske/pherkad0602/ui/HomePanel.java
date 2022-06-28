@@ -1,30 +1,40 @@
 package kioske.pherkad0602.ui;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.LayoutManager;
+import java.util.ArrayList;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import database.model.PsList;
 import kioske.pherkad0602.database.MenuDatabase;
+import kioske.pherkad0602.database.ReturnModel;
 
 public class HomePanel extends JPanel{
 
-	public Component HomePanel() {
+	public  HomePanel() {
 		EmptyBorder border = new EmptyBorder(getInsets());
 		
 		
 		JPanel mainPanel = new JPanel();
 		String sql = "SELECT * FROM Menu WHERE Menu_Category_IDX = 1";
 		
-		int a = MenuDatabase.size(sql);
+		ArrayList<MenuDatabase> sList = new ArrayList<>();
+		ArrayList<PsList> psList = new ArrayList<>();
+		
+		for(int i = 0; i < sList.size() ; i++) {
+
+		psList.add(new PsList('S', String.valueOf(sList.get(i).getImg_big_path())));
+		psList.add(new PsList('S', String.valueOf(sList.get(i).getMenu_name())));
+		psList.add(new PsList('I', String.valueOf(sList.get(i).getMenu_idx())));
+		}
+		//sList = ReturnModel.selMenuList1(sql, psList);
+		
+		int a = sList.size();
 		
 		mainPanel.setBounds(200, 0, 684, 800);
 		mainPanel.setLayout(null);
@@ -60,8 +70,8 @@ public class HomePanel extends JPanel{
 		menuPanel.setBorder(border);
 		
 		
-		Menu menu= new Menu();
-		menuPanel.add(menu.Menu(sql));
+		Menu menu= new Menu(sList);
+		menuPanel.add(menu);
 		menuPanel.setBounds(0,550,684,550+(200*(a/3)+1));
 		mainPanel.add(menuPanel);
 		
@@ -73,8 +83,6 @@ public class HomePanel extends JPanel{
 		mainPanel.setPreferredSize(size);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(16);	
 		
-		
-		return scrollPane;
 	}
 
 }

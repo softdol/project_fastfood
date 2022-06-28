@@ -29,7 +29,7 @@ public class Category extends JPanel{
 		setBorder(border);
 		
 		String[] cate = {"홈", "햄버거", "사이드", "음료", "디저트"};// 카테고리 추가하려면 여기에 추가
-		
+		String[] name = {"홈", "비프" , "탄산", "튀김", "아이스크림"};
 		// 클래스화 카테고리
 		
 			
@@ -41,10 +41,7 @@ public class Category extends JPanel{
 
 		logo.setBounds(0,0,200,100);
 		add(logo);
-		
-		 
-		//CategoryAction listener = new CategoryAction(new MainPanel(), MainPanel.mainPanel );
-		
+				
 		
 		for(int i = 0; i <cate.length; ++i) {
 			JButton btn1 = new JButton(cate[i]);
@@ -52,7 +49,8 @@ public class Category extends JPanel{
 			btn1.setBackground(new Color(0xFFFFFF));
 			btn1.setBounds(0,100*(i+1),200,100);
 			btn1.setBorder(border);
-			btn1.addActionListener(new CategoryAction(hMain, i));
+			btn1.setName(name[i]);
+			btn1.addActionListener(new CategoryAction(hMain));
 			add(btn1);
 		}
 		
