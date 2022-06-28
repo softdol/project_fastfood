@@ -52,6 +52,7 @@ public class SalesMain extends JPanel {
 		if(c.getCalculate_out_date() == null) {
 			if(c.getCalculate_in_date() != null) {
 				topCalendar.btnClose.setEnabled(true);
+				topCalendar.btnOpen.setEnabled(false);
 			}
 		}else {
 			topCalendar.btnCloseC.setEnabled(true);
@@ -71,6 +72,7 @@ public class SalesMain extends JPanel {
 		}
 		System.out.println(sCate);
 		System.out.println(selCalculate);
+		//viewMonSale();
 	}
 	
 	public SalesMain(ManagerMain main) {
