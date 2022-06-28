@@ -12,6 +12,13 @@ import kioske.pherkad0602.ui.PayPanel;
 
 public class HomeMenuKiosk extends JFrame{
 	
+	MainPanel main;
+	
+	public void viewMenu(int iCate) {
+		System.out.println(iCate);
+		main.cardLayoutManager.show(main, "menu" + iCate);
+	}
+	
 	public HomeMenuKiosk() {
 		
 		setLayout(null);
@@ -19,15 +26,16 @@ public class HomeMenuKiosk extends JFrame{
 		String sql1 = "SELECT * FROM Menu WHERE Menu_Category_IDX = 1";
 		String sql2 = "SELECT * FROM Menu_subcategory WHERE menu_category_IDX = 1";
 		
-	
-		Category cate = new Category();		
-		add(cate.Category());
+
+		Category cate = new Category(this);		
+		add(cate);
 		
-		MainPanel main = new MainPanel();
-		add(main.MainPanel());
+		main = new MainPanel();
+		//main.setBounds(200, 0, 684, 800);
+		add(main);
 		
-		PayPanel pay = new PayPanel();
-		add(pay.PayPanel());
+//		PayPanel pay = new PayPanel();
+//		add(pay.PayPanel());
 		
 	
 		setBounds(510,0,900,1040);

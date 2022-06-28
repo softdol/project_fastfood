@@ -9,6 +9,7 @@ import java.util.Calendar;
 
 import database.OjdbcConnection;
 import database.model.PsList;
+import kioske.pherkad0602.database.SubMenuDatabase;
 
 public class ReturnModel {
 	
@@ -485,6 +486,52 @@ public class ReturnModel {
 					saleMonthList.add(new SaleMonth(rs));					
 				}
 				return saleMonthList;
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+				return null;
+			}		
+			
+						
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
+	public static ArrayList<SubMenuDatabase> selSubCateList(String sql, ArrayList<PsList> psList) {
+		ArrayList<SubMenuDatabase> menuList = new ArrayList<>();
+		try(
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt= conn.prepareStatement(sql);
+			){
+			
+			for(int i = 0; i < psList.size(); i++) {
+				PsList ps = psList.get(i);
+				switch(ps.getType()) {
+					case 'i': case 'I':
+						pstmt.setInt(i + 1, Integer.parseInt(ps.getVal()));
+						break;
+					case 's': case 'S':
+						pstmt.setString(i + 1, ps.getVal());
+						break;
+					case 'd': case 'D':
+						pstmt.setDate(i + 1, java.sql.Date.valueOf(ps.getVal()));
+						break;
+					default:
+						pstmt.setString(i + 1, ps.getVal());
+						break;				
+				}
+			}
+			
+			try(ResultSet rs = pstmt.executeQuery()){
+
+				while(rs.next()) {
+					menuList.add(new SubMenuDatabase(rs));					
+				}
+				
+				return menuList;
 				
 			}catch(SQLException e) {
 				e.printStackTrace();
