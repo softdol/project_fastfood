@@ -20,10 +20,10 @@ public class Sub_JFrame extends JFrame {
 //	}
 	
 	// 형래님 홈으로 가기
-	public void veiw_Home_giveIDX(int menuidx) {
-		ManagerCP.reFresh(panel);
-		panel.add(new HomeMenuKiosk());
-	}
+//	public void veiw_Home_giveIDX(int menuidx) {
+//		ManagerCP.reFresh(panel);
+//		panel.add(new HomeMenuKiosk());
+//	}
 	
 	public void veiw_Select_Side_Drink(int idx, String  set, int setidx, int sideidx, int drinkidx) {
 		ManagerCP.reFresh(panel);

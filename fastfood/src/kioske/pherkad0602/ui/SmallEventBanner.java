@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import kioske.YounukLee7.Main_JFrame;
 import kioske.pherkad0602.HomeMenuKiosk;
 import kioske.pherkad0602.action.MenuSelAction;
 import kioske.pherkad0602.database.EventDatabase;
@@ -22,7 +23,7 @@ import kioske.pherkad0602.database.ReturnModel;
 
 public class SmallEventBanner extends JPanel{
 	
-	public Component SmallEventBanner(HomeMenuKiosk hMain, int i) {
+	public Component SmallEventBanner(HomeMenuKiosk hMain, int i, Main_JFrame frame) {
 		EmptyBorder border = new EmptyBorder(getInsets());
 		
 		String sql = "SELECT * FROM Event_Page";
@@ -35,7 +36,7 @@ public class SmallEventBanner extends JPanel{
 		evButton.setBounds(5, i*150, 650, 145);
 		evButton.setBackground(Color.white);
 		evButton.setBorder(border);
-		evButton.addActionListener(new MenuSelAction(hMain, evBanner.get(i).getMENU_IDX()));
+		evButton.addActionListener(new MenuSelAction(hMain, evBanner.get(i).getMENU_IDX()),frame);
 		ImageIcon icon = new ImageIcon(String.valueOf(evBanner.get(i).getSMALL_EVENT_PAGE()));		
 		Image img = icon.getImage();
 		Image changeImg = img.getScaledInstance(680, 150, Image.SCALE_SMOOTH);

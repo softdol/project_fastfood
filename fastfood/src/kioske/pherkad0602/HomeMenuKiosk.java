@@ -6,12 +6,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import database.model.PsList;
+import kioske.YounukLee7.Main_JFrame;
 import kioske.pherkad0602.database.MenuDatabase;
 import kioske.pherkad0602.database.ReturnModel;
 import kioske.pherkad0602.ui.Category;
 import kioske.pherkad0602.ui.MainPanel;
 import kioske.pherkad0602.ui.OrderCheck;
 import kioske.pherkad0602.ui.PayPanel;
+import oracle.net.aso.f;
 
 public class HomeMenuKiosk extends JPanel{
 	
@@ -21,8 +23,8 @@ public class HomeMenuKiosk extends JPanel{
 	int sum = 0;
 	
 	
-	public void order(int idx) {
-		new OrderCheck(this, idx);
+	public void order(int idx, Main_JFrame frame) {
+		new OrderCheck(this, idx, frame);
 	}
 	
 	public void setPrice(int idx) {
@@ -42,7 +44,7 @@ public class HomeMenuKiosk extends JPanel{
 		System.out.println(name);
 	}
 	
-	public HomeMenuKiosk() {
+	public HomeMenuKiosk(Main_JFrame frame) {
 		
 		
 		
@@ -51,7 +53,7 @@ public class HomeMenuKiosk extends JPanel{
 		Category cate = new Category(this);		
 		add(cate);
 		
-		main = new MainPanel(this);
+		main = new MainPanel(this, frame);
 		//main.setBounds(200, 0, 684, 800);
 		add(main);
 		

@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import database.OjdbcConnection;
+import kioske.YounukLee7.Main_JFrame;
 import kioske.YounukLee7.Select_Set_Size;
 import kioske.YounukLee7.Sub_JFrame;
 import kioske.YounukLee7.dbtablePocket.EventPage;
@@ -24,7 +25,7 @@ import kioske.YounukLee7.dbtablePocket.MenuPicture;
 
 public class Select_Set_down extends JPanel{
 	
-	public Select_Set_down(Sub_JFrame screen, int idx) {
+	public Select_Set_down(Main_JFrame frame, int idx) {
 		
 		String sql = "SELECT set_idx, menu_name, set_name, set_img_path, img_big_path FROM menu INNER JOIN menu_set USING (menu_idx) WHERE menu_idx = ?";
 //		ArrayList<MenuPicture> menuPicture = new ArrayList<>();

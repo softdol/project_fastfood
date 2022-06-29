@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.border.BevelBorder;
 
 import database.model.PsList;
+import kioske.YounukLee7.Main_JFrame;
 import kioske.pherkad0602.HomeMenuKiosk;
 import kioske.pherkad0602.database.ReturnModel;
 
@@ -19,10 +20,12 @@ public class OrderCheck extends JFrame{
 	PayPanel pay;
 	int idx;
 	HomeMenuKiosk hMain;
+	Main_JFrame frame;
 	
-	public OrderCheck(HomeMenuKiosk hMain, int idx) {
+	public OrderCheck(HomeMenuKiosk hMain, int idx, Main_JFrame frame) {
 		this.idx = idx;
 		this.hMain = hMain;
+		this.frame = frame;
 		
 		JFrame checkFrame = new JFrame();
 		checkFrame.setLayout(null);
@@ -58,7 +61,7 @@ public class OrderCheck extends JFrame{
 				psList.add(new PsList('I', String.valueOf(idx)));
 				System.out.println(ReturnModel.selConfirmP(sql, psList));
 				if(ReturnModel.selConfirmP(sql, psList)) {
-					
+					frame.veiw_(idx);
 					//있을떄
 				}else {	// 없을때
 					hMain.setPrice(idx);

@@ -4,6 +4,9 @@ package kioske.YounukLee7;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import kioske.YounukLee7.kioskeUI.Logo_MenuName_Panel;
+import kioske.YounukLee7.kioskeUI.Select_Set_down;
+import kioske.YounukLee7.kioskeUI.Select_Side_Drink_down;
 import kioske.YounukLee7.kioskeUI.Select_Takeout_down;
 import kioske.YounukLee7.kioskeUI.Select_Takeout_up;
 import kioske.YounukLee7.kioskeUI.Start_Screen_kiosk;
@@ -25,8 +28,15 @@ public class Main_JFrame extends JFrame{
 	// 형래님 홈으로 가기
 	public void veiw_Home(String check) {
 		ManagerCP.reFresh(panel);
-		panel.add(new HomeMenuKiosk());
+		panel.add(new HomeMenuKiosk(this));
 	}
+	
+	public void veiw_(int menuidx) {
+		ManagerCP.reFresh(panel);
+		panel.add(new Logo_MenuName_Panel(menuidx, null));
+		panel.add(new Select_Set_down(this, menuidx));
+	}
+	
 	
 
 	public Main_JFrame() {
