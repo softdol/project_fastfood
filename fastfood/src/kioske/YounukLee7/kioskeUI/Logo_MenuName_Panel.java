@@ -20,8 +20,8 @@ public class Logo_MenuName_Panel extends JPanel{
 	public Logo_MenuName_Panel(int idx,String set) {
 		
 		String sql = "SELECT set_idx, menu_name, set_name, set_img_path, img_big_path FROM menu INNER JOIN menu_set USING (menu_idx) WHERE menu_idx = ?";
-		//MenuPicture menuPicture = null;
-		ArrayList<MenuPicture> menuPicture = new ArrayList<>();
+		MenuPicture menuPicture = null;
+//		ArrayList<MenuPicture> menuPicture = new ArrayList<>();
 		
 		try (
 				Connection conn = OjdbcConnection.getConnection();
@@ -31,8 +31,8 @@ public class Logo_MenuName_Panel extends JPanel{
 			pstmt.setInt(1, idx);
 			try(ResultSet rs = pstmt.executeQuery();) {
 				while (rs.next()) {
-//					menuPicture = new MenuPicture(rs);
-					menuPicture.add(new MenuPicture(rs));
+					menuPicture = new MenuPicture(rs);
+					//menuPicture.add(new MenuPicture(rs));
 				}
 				
 			} catch (Exception e) {
@@ -51,11 +51,9 @@ public class Logo_MenuName_Panel extends JPanel{
 		
 		String check_menuName;
 		if (set == "s") {
-			check_menuName = menuPicture.get(0).getSet_name();
-		}else if (set == "l") {
-			check_menuName = menuPicture.get(1).getSet_name();
+			check_menuName = menuPicture.getSet_name();
 		}else {
-			check_menuName = menuPicture.get(0).getMenu_name();
+			check_menuName = menuPicture.getMenu_name();
 		}
 		JLabel menuName = new JLabel();
 		menuName.setText(check_menuName);

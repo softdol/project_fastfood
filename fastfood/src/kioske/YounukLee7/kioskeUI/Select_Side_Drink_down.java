@@ -17,15 +17,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import database.OjdbcConnection;
+import kioske.YounukLee7.Sub_JFrame;
 import kioske.YounukLee7.dbtablePocket.EventPage;
 import kioske.YounukLee7.dbtablePocket.Menu;
 import kioske.YounukLee7.dbtablePocket.MenuPicture;
 
 public class Select_Side_Drink_down extends JPanel{
 	
-	public Select_Side_Drink_down(int idx, int setidx, int sideidx, int drinkidx) {
+	public Select_Side_Drink_down(Sub_JFrame frame, int idx, int setidx, int sideidx, int drinkidx) {
 		
-		String sql = "SELECT * FROM menu where menu_idx in (SELECT menu_idx FROM menu_set_list WHERE set_idx = ?) order by menu_idx";
+		String sql = "SELECT * FROM menu where menu_idx in (SELECT menu_idx FROM menu_set_list WHERE set_idx = ?) order by menu_category_idx";
 		ArrayList<Menu> menu = new ArrayList<>();
 
 		try (
@@ -139,7 +140,7 @@ public class Select_Side_Drink_down extends JPanel{
 			drink_label.setIcon(drinkicon);
 		}
 		
-		
+		// 사이드변경 버튼 눌렀을 때
 		JButton side_button = new JButton("사이드변경");
 		side_button.setForeground(new Color(0x000000));
 		side_button.setBackground(new Color(0xCCCCCC));
@@ -154,6 +155,7 @@ public class Select_Side_Drink_down extends JPanel{
 			}
 		});
 		
+		// 음료버튼 눌렀을 때
 		JButton drink_button = new JButton("음료변경");
 		drink_button.setForeground(new Color(0x000000));
 		drink_button.setBackground(new Color(0xCCCCCC));
@@ -186,7 +188,7 @@ public class Select_Side_Drink_down extends JPanel{
 		}
 		
 		int sum = burgerPrice + drinkPrice + sidePrice;
-		System.out.println(sum);
+		//System.out.println(sum);
 		
 		
 		
@@ -200,7 +202,8 @@ public class Select_Side_Drink_down extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// 제품번호, 세트번호, 음료번호, 사이드번호, 가격
+				// 햄버거번호, 세트번호, 음료번호, 사이드번호, 총 가격
+				frame.veiw_Home_giveIDX(idx);
 			}
 		});
 		

@@ -3,6 +3,7 @@ package kioske.pherkad0602;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import database.model.PsList;
 import kioske.pherkad0602.database.MenuDatabase;
@@ -12,7 +13,7 @@ import kioske.pherkad0602.ui.MainPanel;
 import kioske.pherkad0602.ui.OrderCheck;
 import kioske.pherkad0602.ui.PayPanel;
 
-public class HomeMenuKiosk extends JFrame{
+public class HomeMenuKiosk extends JPanel{
 	
 	MainPanel main;
 	PayPanel pay;
@@ -58,10 +59,10 @@ public class HomeMenuKiosk extends JFrame{
 		add(pay);
 		
 		
-		setBounds(510,0,900,1040);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setBounds(0,0,900,1040);
+		//setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
-	    setResizable(false);
+	    //setResizable(false);
 
 	}
 	
