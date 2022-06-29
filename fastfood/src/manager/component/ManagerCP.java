@@ -91,5 +91,10 @@ public class ManagerCP {
 		DecimalFormat dcf = new DecimalFormat("###,###,###,###");
 		return dcf.format(num);
 	}
+	
+	public static boolean viewConfirm(String questions, String title) {
+		return JOptionPane.showConfirmDialog(null, questions, title,
+				JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+	}
 
 }
