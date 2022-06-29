@@ -3,6 +3,9 @@ package kioske.YounukLee7;
 import javax.swing.JFrame;
 
 import kioske.YounukLee7.kioskeUI.Card_Pay_mid;
+import kioske.YounukLee7.kioskeUI.Cart_down;
+import kioske.YounukLee7.kioskeUI.Cart_mid;
+import kioske.YounukLee7.kioskeUI.Cart_up;
 import kioske.YounukLee7.kioskeUI.Down_yes_no_Button;
 import kioske.YounukLee7.kioskeUI.Error_Image_down;
 import kioske.YounukLee7.kioskeUI.Logo_MenuName_Panel;
@@ -15,6 +18,13 @@ import manager.component.ManagerCP;
 public class Last_JFrame extends JFrame{
 	
 	Last_JPanel panel;
+	
+//	public void veiw_Cart() {
+//		ManagerCP.reFresh(panel);
+//		panel.add(new Cart_up());
+//		panel.add(new Cart_mid(this));
+//		panel.add(new Cart_down(this));
+//	}
 	
 	public void veiw_Select_Payment() {
 		ManagerCP.reFresh(panel);
