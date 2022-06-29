@@ -6,8 +6,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.LayoutManager;
+import java.util.ArrayList;
 
-import javax.swing.DefaultBoundedRangeModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,19 +17,30 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableModel;
+
+import database.manager.Menu;
+import database.manager.ReturnModel;
+import database.model.PsList;
+import pos.ActionListener.SubCateActionListener;
 
 public class Pos_Burger extends JFrame {
 
-
+	int idx;
+	MenuListPanel item;
 	
-	Pos_Burger() {
+	public void viewMenuList(int iCate) {
+		System.out.println(iCate);
+		item.removeAll();		
+		item.revalidate();
+		item.repaint();
+		item.add(new MenuListPanel(iCate));
+	}
+	
+	public Pos_Burger() {
 		super("메인 포스기");
 		
 		JPanel menu = new JPanel();
 		JPanel order = new JPanel();
-		JPanel item = new JPanel();
-		
 		
 		LayoutManager manager = new GridLayout(8,5,1,1);
 		
@@ -38,35 +49,30 @@ public class Pos_Burger extends JFrame {
 		// 카테고리도 db 통해서 불러올 예정 
 		String[] bigcate = { "BURGER","SET","HOT","SALE", "SIDE", "DRINK", "DESSERT" };
 		
-		// 메뉴 카테고리 패널	
-		menu.setLayout(null);
-		menu.setLocation(10,0);
-		menu.setSize(850, 120);
-		menu.setBackground(null);
-		
 		
 		// 주문번호 창 패널
 		order.setLayout(null);
 		order.setBounds(20, 100, 360, 480);		
 	
 		
-		// 아이템 패널
-		item.setLayout(manager);
-		item.setBackground(new Color(0xD9EDDF));
-		item.setBounds(400,120,455,460);
+		// 아이템 패널	
+		item = new MenuListPanel(1);
 		
-		for (int i = 0; i < 30; ++i) {
-			JButton itemBtn = new JButton();
-			itemBtn.setBounds(10, 10, 10, 10);
-			itemBtn.setText("버거이름" + i);
-			item.add(itemBtn);	
-				
-		}
 		
+		// 메뉴 카테고리 패널	
+		menu.setLayout(null);
+		menu.setLocation(10,0);
+		menu.setSize(850, 120);
+		menu.setBackground(null);
+		
+		//ArrayList<Category> cateList =
+		//sql = "select * from meun_category ";
 		
 		// 카테고리 버튼 추가 
-		for (int i = 0; i < bigcate.length; ++i) {
+		for (int i = 0; i < 4; ++i) {
 			JButton bigMenu = new JButton(bigcate[i]);
+			//idx =i + 1; 
+			bigMenu.addActionListener(new SubCateActionListener(this, i + 1));
 			bigMenu.setFont(new Font("Kristen ITC", Font.BOLD,18));
 			bigMenu.setForeground(new Color(0x2F4858)); // 글꼴 색 변경
 			bigMenu.setBorder(new LineBorder(Color .white)); // 외곽선 변경
