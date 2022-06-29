@@ -16,6 +16,7 @@ public class OrderIndex {
     
 	    
 		return orderlist;
+		
 	}
 	  
 	public static int main(String[] args) {
@@ -25,7 +26,7 @@ public class OrderIndex {
 		orderlist = new ArrayList<>();
 		int lastorder = 0;
 		
-		orderlist.add(34);
+
 		
 		try (
 				Connection conn = OjdbcConnection.getConnection();
@@ -45,7 +46,7 @@ public class OrderIndex {
 						
 					}
 				} else {
-					lastorder = 1;
+					orderlist.add(1);
 					
 				}
 			}

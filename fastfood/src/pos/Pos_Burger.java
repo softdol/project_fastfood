@@ -6,8 +6,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.LayoutManager;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,9 +21,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableModel;
 
 import database.OjdbcConnection;
+import database.manager.Menu;
+import database.manager.ReturnModel;
+import database.model.PsList;
 
 public class Pos_Burger extends JFrame {
 
@@ -67,8 +67,13 @@ public class Pos_Burger extends JFrame {
       
       
       String sql = "SELECT menu_name FROM menu WHERE menu_category_idx = ?"; 
+      ArrayList<PsList> psList = new ArrayList<>();
+      psList.add(new PsList('I', String.valueOf(1)));
       
-      try (
+      ArrayList<Menu> menuList = ReturnModel.selMenuList(sql, psList);
+      
+      /*
+     try (
             Connection conn = OjdbcConnection.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql);
          
@@ -112,7 +117,7 @@ public class Pos_Burger extends JFrame {
          // TODO Auto-generated catch block
          e.printStackTrace();
       }
-      
+      */
       
       
       int a = burger.size();
@@ -164,12 +169,12 @@ public class Pos_Burger extends JFrame {
       OrderIndex lastnumber = new OrderIndex();
       
       JPanel order_number = new JPanel();
-      JLabel order_index = new JLabel("< 주문 번호 > ");
+      JLabel order_index = new JLabel("< 주문 > ");
       
-      String order_number2 = (lastnumber.getOrderlist().size() + 1) +"";
-      
-      order_index.setText(order_number2);
-       
+
+//      
+//      order_index.setText(order_number2);
+//       
       
       
       
@@ -186,10 +191,7 @@ public class Pos_Burger extends JFrame {
       order_table.setBounds(0,80,400,475);
             
       String[] columns = new String[] {"메뉴", "수량", "단가", "금액"};
-      Object[][] data  = new Object[][] {
-         {"디럭스버거", "1", "5000", "5000"},
-         {"상하이버거", "2", "10000", "20000"}
-      };
+      Object[][] data = {{"디럭스버거","1","1000","2000"}};
       
       JTable table = new JTable(data,columns);
       table.setPreferredScrollableViewportSize(new Dimension(400,250));
@@ -199,6 +201,19 @@ public class Pos_Burger extends JFrame {
       
       order_table.add(new JScrollPane(table));
       
+      
+
+// 	for(int i=0;i<burger.length; i++) {
+// 		final int index =i;
+//		itemBtn[i].addActionListener(new ActionListener() {
+//			@Override
+//				JButton itemBtn = (JButton)e.getSource();
+// 				DefaultTableModel m = (DefaultTableModel)table.getModel();
+//  				table.addRow(new Object[]{menu[index],count,price[index],count*price[index]});
+// 			}
+//  		});
+//   });
+     
       JButton minus = new JButton("하나 취소");
       minus.setBounds(865,170,100,50);
       
@@ -301,19 +316,7 @@ public class Pos_Burger extends JFrame {
    }
    
       
-//	//
-//	for(int i=0;i<itmBtn.length;i++) {
-//		final int index =i;
-//		itmBtn[i].addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				JButton MBtn = (JButton)e.getSource();
-//				DefaultTableModel m = (DefaultTableModel)table.getModel();
-//				m.addRow(new Object[]{menu[index],count,price[index]});
-//			}
-//		});
-//	}
-   
+
    
 //   
 
