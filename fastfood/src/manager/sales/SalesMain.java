@@ -173,12 +173,7 @@ public class SalesMain extends JPanel {
 				ManagerCP.viewError("마감일이 등록 되어 있지 않습니다.", "등록 에러");
 			}
 			break;
-		}
-		
-		topCalendar.btnOpen.setEnabled(false);
-		topCalendar.btnClose.setEnabled(false);
-		topCalendar.btnOpenC.setEnabled(false);
-		topCalendar.btnCloseC.setEnabled(false);
+		}		
 	}
 	
 	public SalesMain(ManagerMain main) {
@@ -290,7 +285,7 @@ public class SalesMain extends JPanel {
 			int chkDay = i - week;
 			if(i > week && i <= endDay) {
 				dayPanel.add(jpDay);
-								
+				
 				jpDay.setBackground(Color.WHITE);
 				
 				JLabel jlDayNum = new JLabel(String.valueOf(chkDay));
@@ -304,6 +299,9 @@ public class SalesMain extends JPanel {
 				jpDay.add(jlDayNum);
 				
 				Calculate c = calculateListAll.get(chkDay - 1);				
+				if(chkDay == cal.getInstance().get(Calendar.DATE)) {					
+					selDay(c, chkDay);
+				}
 				//클릭 이벤트
 				jpDay.addMouseListener(new SalesMActionListener(this, c, chkDay));
 				String openDate = "오픈 : ";

@@ -200,7 +200,7 @@ public class MenuSetModify extends JPanel {
 							sqi_menuUpt += " ,SET_SALE = ?";
 							sqi_menuUpt += " ,SET_MOD_DATE = sysdate";
 							sqi_menuUpt += " ,SET_MOD_ID = ?";
-							sqi_menuUpt += " ,SET_REP = ?";
+							sqi_menuUpt += " ,MENU_IDX = ?";
 							sqi_menuUpt += " where SET_IDX = ?";
 		
 					if(OjdbcConnection.insert(sqi_menuUpt, psList)) {

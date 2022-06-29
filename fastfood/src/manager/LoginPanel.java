@@ -2,6 +2,8 @@ package manager;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -43,16 +45,14 @@ public class LoginPanel extends JPanel {
 		txtPassOn.setBounds(txtId.getX(), lblPass.getY(), 100, 45);
 		
 //		txtId.setFocusTraversalKeysEnabled(false);
-//		txtId.addKeyListener(new KeyAdapter() {			
-//			//키 입력시
-//			@Override
-//			public void keyPressed(KeyEvent e) {
-//				System.out.println("keyPressed");
-//				System.out.println(e.getKeyChar());
-//				if(e.getKeyCode() == KeyEvent.VK_TAB)
-//					txtPassOn.requestFocus();
-//			}
-//		});
+		txtPassOn.addKeyListener(new KeyAdapter() {			
+			//키 입력시
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER)					
+					loginCheck();
+			}
+		});
 		
 		JButton btnLogin = new JButton("로그인");
 		btnLogin.setBounds(lblId.getX(), lblPass.getY() + lblPass.getHeight() + 20, lblId.getWidth() + txtId.getWidth() + 10, 45);
@@ -60,10 +60,7 @@ public class LoginPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {				
-				ArrayList<PsList> userInfo = new ArrayList<>();
-				userInfo.add(new PsList('S', txtId.getText()));
-				userInfo.add(new PsList('S', txtPassOn.getText()));				
-				loginCheck(userInfo);
+				loginCheck();
 			}
 			
 		});
@@ -91,7 +88,7 @@ public class LoginPanel extends JPanel {
 //		login(loginInfo);
 	}
 	
-	public void loginCheck(ArrayList<PsList> loginInfo) {
+	public void loginCheck() {
 		
 		if(txtId.getText().trim().length() == 0) {
 			ManagerCP.viewError("직원 ID 를 입력해 주세요.", "입력 오류");
@@ -104,17 +101,21 @@ public class LoginPanel extends JPanel {
 			return;
 		}
 		
-		login(loginInfo);
+		login();
 	}
 	
-	public void login(ArrayList<PsList> loginInfo) {
-		Member mInfo = ReturnModel.selMember("select * from member_list where member_id = ? and member_pass = ? and MEMBER_USE_FLAG = 'Y'", loginInfo);
+	public void login() {
+		ArrayList<PsList> userInfo = new ArrayList<>();
+		userInfo.add(new PsList('S', txtId.getText()));
+		userInfo.add(new PsList('S', txtPassOn.getText()));				
+		
+		Member mInfo = ReturnModel.selMember("select * from member_list where member_id = ? and member_pass = ? and MEMBER_USE_FLAG = 'Y'", userInfo);
 		
 		if(mInfo != null) {
 			setVisible(false);
 			main.loginOn(mInfo);
 		}else {
-			JOptionPane.showMessageDialog(null, "로그인 실패", "실패",
+			JOptionPane.showMessageDialog(null, "ID 또는 패스워드가 틀립니다.", "실패",
 					JOptionPane.WARNING_MESSAGE);
 		}
 	}
