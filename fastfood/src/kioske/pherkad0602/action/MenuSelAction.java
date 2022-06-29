@@ -4,22 +4,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import kioske.pherkad0602.HomeMenuKiosk;
-import kioske.pherkad0602.ui.OrderCheck;
 
-public class MenuSelectionAction implements ActionListener{
+public class MenuSelAction implements ActionListener {
+	
 	HomeMenuKiosk hMain;
-	public MenuSelectionAction(HomeMenuKiosk hMain) {
+	int idx;
+	
+	public MenuSelAction(HomeMenuKiosk hMain, int idx) {
 		this.hMain = hMain;
+		this.idx = idx;
 		// TODO Auto-generated constructor stub
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println(1);
-		hMain.setPrice(1);
+		hMain.order(idx);
 	}
-	
-           
- }
-	
 
+}

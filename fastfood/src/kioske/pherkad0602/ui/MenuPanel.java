@@ -36,7 +36,7 @@ public class MenuPanel extends JPanel{
 		psList2.add(new PsList('I', String.valueOf(i)));
 		//sList2 = ReturnModel.selMenuList1(sql2, psList2);
 		ArrayList<MenuDatabase> menuList = ReturnModel.selMenuList1("SELECT * FROM Menu WHERE Menu_subcategory_IDX = ? ", psList2);
-		MainMenuPanel main = new MainMenuPanel(menuList);
+		MainMenuPanel main = new MainMenuPanel(menuList, hMain);
 //		System.out.println(menuList.size());
 		add(main);
 		

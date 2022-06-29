@@ -20,17 +20,17 @@ public class SetDatabase {
 	
 	
 	public SetDatabase(ResultSet rs) throws SQLException{
-		SET_IDX = rs.getInt(1);
-		SET_NAME = rs.getString(2);
-		SET_SALE  = rs.getInt(3);
-		SET_USE_FLAG = rs.getString(4);
-		MENU_SUBCATEGORY_IN_DATE = rs.getDate(5);
-		SET_IN_ID = rs.getString(6);
-		SET_MOD_DATE = rs.getDate(7);
-		SET_MOD_ID = rs.getString(8);
-		SET_PRICE = rs.getInt(9);
-		SET_IMG_PATH = rs.getString(10);
-		MENU_IDX = rs.getInt(11);
+		this.SET_IDX = rs.getInt(1);
+		this.SET_NAME = rs.getString(2);
+		this.SET_SALE  = rs.getInt(3);
+		this.SET_USE_FLAG = rs.getString(4);
+		this.MENU_SUBCATEGORY_IN_DATE = rs.getDate(5);
+		this.SET_IN_ID = rs.getString(6);
+		this.SET_MOD_DATE = rs.getDate(7);
+		this.SET_MOD_ID = rs.getString(8);
+		this.SET_PRICE = rs.getInt(9);
+		this.SET_IMG_PATH = rs.getString(10);
+		this.MENU_IDX = rs.getInt(11);
 		
 	}
 

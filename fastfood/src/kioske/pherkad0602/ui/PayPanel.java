@@ -13,19 +13,27 @@ import kioske.pherkad0602.database.MenuDatabase;
 import kioske.pherkad0602.database.ReturnModel;
 
 public class PayPanel extends JPanel {
+	public JLabel price;
+	
+	public void view_menu(String name) {
+		String a = name;
+	}
 	
 	public PayPanel() {
-		
 		String sql = "SELECT * FROM Menu";
 		ArrayList<MenuDatabase> menuList = ReturnModel.menuList(sql);
 		
 		setBounds(0, 800, 884, 200);
 		setLayout(null);
 		
-
-		JLabel price = new JLabel("총 주문 가격 : " );
+		JLabel priceName = new JLabel("총 주문 가격 : " );
+		priceName.setFont(new Font("궁서체", Font.PLAIN,40));
+		priceName.setBounds(200,20,300,80);		
+		add(priceName);
+		
+		price = new JLabel("");
 		price.setFont(new Font("궁서체", Font.PLAIN,40));
-		price.setBounds(500,20,400,80);
+		price.setBounds(600,20,200,80);		
 		add(price);
 		
 		String[] payMenu = {"처음으로", "주문내역", "도움"};
@@ -41,5 +49,7 @@ public class PayPanel extends JPanel {
 		
 	
 	}
+
+	
 	
 }

@@ -1,18 +1,40 @@
 package kioske.pherkad0602;
 
-import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
+import database.model.PsList;
+import kioske.pherkad0602.database.MenuDatabase;
+import kioske.pherkad0602.database.ReturnModel;
 import kioske.pherkad0602.ui.Category;
-import kioske.pherkad0602.ui.HomePanel;
 import kioske.pherkad0602.ui.MainPanel;
-import kioske.pherkad0602.ui.MenuPanel;
+import kioske.pherkad0602.ui.OrderCheck;
 import kioske.pherkad0602.ui.PayPanel;
 
 public class HomeMenuKiosk extends JFrame{
 	
 	MainPanel main;
+	PayPanel pay;
+	ArrayList orderList = new ArrayList<>();
+	int sum = 0;
+	
+	
+	public void order(int idx) {
+		new OrderCheck(this, idx);
+	}
+	
+	public void setPrice(int idx) {
+		orderList.add(idx);
+		
+		String sql = "SELECT * FROM Menu WHERE Menu_IDX = ?";
+		ArrayList<PsList> psList = new ArrayList<>();
+		psList.add(new PsList('I', String.valueOf(idx)));
+		ArrayList<MenuDatabase> menuList = ReturnModel.selMenuList1(sql, psList);
+		sum += menuList.get(0).getMenu_price();
+		System.out.println(idx);
+		pay.price.setText(String.valueOf(sum) +" ¿ø");
+	}
 	
 	public void viewMenu(String name) {
 		main.cardLayoutManager.show(main, name);
@@ -20,6 +42,8 @@ public class HomeMenuKiosk extends JFrame{
 	}
 	
 	public HomeMenuKiosk() {
+		
+		
 		
 		setLayout(null);
 
@@ -30,7 +54,7 @@ public class HomeMenuKiosk extends JFrame{
 		//main.setBounds(200, 0, 684, 800);
 		add(main);
 		
-		PayPanel pay = new PayPanel();
+		pay = new PayPanel();
 		add(pay);
 		
 		

@@ -1,15 +1,10 @@
 package kioske.pherkad0602.ui;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.LayoutManager;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -22,15 +17,17 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
-import kioske.pherkad0602.action.CategoryAction;
+import kioske.pherkad0602.HomeMenuKiosk;
+import kioske.pherkad0602.action.MenuSelAction;
 import kioske.pherkad0602.action.MenuSelectionAction;
 import kioske.pherkad0602.database.MenuDatabase;
-import kioske.pherkad0602.database.ReturnModel;
-import kioske.pherkad0602.database.SubMenuDatabase;
 
 public class Menu extends JPanel {	
 	
-	public  Menu(ArrayList<MenuDatabase> menuList) {
+	HomeMenuKiosk hMain;
+	
+	public  Menu(ArrayList<MenuDatabase> menuList, HomeMenuKiosk hMain) {
+		this.hMain = hMain;
 		EmptyBorder border = new EmptyBorder(getInsets());
 		
 		int a = menuList.size();
@@ -42,7 +39,7 @@ public class Menu extends JPanel {
 		setLayout(manager);
 		setBorder(border);
 
-		MenuSelectionAction listener = new MenuSelectionAction();
+		MenuSelectionAction listener = new MenuSelectionAction(hMain);
 		
 		for(int i = 0; i <a; ++i) {
 			
@@ -50,9 +47,8 @@ public class Menu extends JPanel {
 			JButton btn3 = new JButton();
 			btn3.setBackground(new Color(0xFFFFFF));
 			btn3.setName(String.valueOf(menuList.get(i).getMenu_idx()));
-			btn3.addActionListener(listener);
+			btn3.addActionListener(new MenuSelAction(hMain, menuList.get(i).getMenu_idx()));
 			btn3.setBorder(border);
-			btn3.setName(String.valueOf(menuList.get(i).getMenu_idx()));
 			btn3.setLayout(null);
 			
 			ImageIcon icon = new ImageIcon(String.valueOf(menuList.get(i).getImg_big_path()));		

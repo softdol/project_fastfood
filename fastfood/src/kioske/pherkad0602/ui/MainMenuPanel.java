@@ -14,12 +14,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import kioske.pherkad0602.HomeMenuKiosk;
 import kioske.pherkad0602.database.MenuDatabase;
 import kioske.pherkad0602.database.ReturnModel;
 
 public class MainMenuPanel extends JPanel{
 	
-	public  MainMenuPanel(ArrayList<MenuDatabase> menuList) {
+	public  MainMenuPanel(ArrayList<MenuDatabase> menuList, HomeMenuKiosk hMain) {
 		EmptyBorder border = new EmptyBorder(getInsets());
 		
 		int a = menuList.size();
@@ -31,7 +32,7 @@ public class MainMenuPanel extends JPanel{
 		mainPanel.setBackground(Color.white);
 		mainPanel.setBorder(border);
 		
-		Menu menu= new Menu(menuList);
+		Menu menu= new Menu(menuList, hMain);
 		mainPanel.add(menu);	
 		
 		JScrollPane scrollPane = new JScrollPane(mainPanel);

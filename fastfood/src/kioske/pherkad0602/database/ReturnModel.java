@@ -226,8 +226,8 @@ public class ReturnModel {
 		}
 	}
 	
-	public static ArrayList<SetDatabase> setList(String sql) {
-		ArrayList<SetDatabase> menuList = new ArrayList<>();
+	public static ArrayList<SetDatabase> setList(String sql, ArrayList<PsList> psList) {
+		ArrayList<SetDatabase> setList = new ArrayList<>();
 		try(
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt= conn.prepareStatement(sql);
@@ -254,10 +254,10 @@ public class ReturnModel {
 			try(ResultSet rs = pstmt.executeQuery()){
 
 				while(rs.next()) {
-					menuList.add(new SetDatabase(rs));					
+					setList.add(new SetDatabase(rs));					
 				}
 				
-				return menuList;
+				return setList;
 				
 			}catch(SQLException e) {
 				e.printStackTrace();
@@ -269,5 +269,102 @@ public class ReturnModel {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public static ArrayList<SetDatabase> setList(String sql){
+		ArrayList<SetDatabase> setList = new ArrayList<>();
+		try(
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt= conn.prepareStatement(sql);
+			){
+			
+			try(ResultSet rs = pstmt.executeQuery()){
+				while(rs.next()) {
+					setList.add(new SetDatabase(rs));					
+				}				
+				return setList;
+			}catch(SQLException e) {
+				e.printStackTrace();
+				return null;
+			}		
+			
+						
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}	
+	}
+	
+	/**
+	 * 결과 값이 있는지 없는지 리턴
+	 * @param sql
+	 * @param psList
+	 * @return
+	 */
+	public static boolean selConfirmP (String sql, ArrayList<PsList> psList) {		
+		try(
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt= conn.prepareStatement(sql);
+			){
+			
+			for(int i = 0; i < psList.size(); i++) {
+				PsList ps = psList.get(i);
+				switch(ps.getType()) {
+					case 'i': case 'I':
+						pstmt.setInt(i + 1, Integer.parseInt(ps.getVal()));
+						break;
+					case 's': case 'S':
+						pstmt.setString(i + 1, ps.getVal());
+						break;
+					case 'd': case 'D':
+						pstmt.setDate(i + 1, java.sql.Date.valueOf(ps.getVal()));
+						break;
+					default:
+						pstmt.setString(i + 1, ps.getVal());
+						break;				
+				}
+			}
+			
+			try(ResultSet rs = pstmt.executeQuery()){
+				if(rs.next()) {
+					return true;					
+				}else {
+					return false;
+				}
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+				return false;
+			}		
+			
+						
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public static ArrayList<EventDatabase> eventList(String sql){
+		ArrayList<EventDatabase> eventList = new ArrayList<>();
+		try(
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt= conn.prepareStatement(sql);
+			){
+			
+			try(ResultSet rs = pstmt.executeQuery()){
+				while(rs.next()) {
+					eventList.add(new EventDatabase(rs));					
+				}				
+				return eventList;
+			}catch(SQLException e) {
+				e.printStackTrace();
+				return null;
+			}		
+			
+						
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}	
 	}
 }

@@ -26,7 +26,7 @@ public class MainPanel extends JPanel{
 		
 		setLayout(cardLayoutManager);
 		
-		HomePanel home = new HomePanel();		
+		HomePanel home = new HomePanel(hMain);		
 		add("Ȩ",home);
 		
 		for(int j = 0; j < cataList.size() ; j++) {

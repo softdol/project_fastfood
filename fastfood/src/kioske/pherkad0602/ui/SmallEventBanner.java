@@ -9,43 +9,34 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.management.StringValueExp;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import kioske.pherkad0602.action.MenuSelectionAction;
+import kioske.pherkad0602.HomeMenuKiosk;
+import kioske.pherkad0602.action.MenuSelAction;
+import kioske.pherkad0602.database.EventDatabase;
+import kioske.pherkad0602.database.ReturnModel;
 
 public class SmallEventBanner extends JPanel{
 	
-	public Component SmallEventBanner(int i) {
+	public Component SmallEventBanner(HomeMenuKiosk hMain, int i) {
 		EmptyBorder border = new EmptyBorder(getInsets());
 		
-		String sql = "SELECT Small_Event_Page FROM Event_Page";
+		String sql = "SELECT * FROM Event_Page";
 		
-		ArrayList evBanner = new ArrayList<>();
-		
-		try(
-				Connection conn = ojdbcConnection.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sql);
-				ResultSet rs = pstmt.executeQuery();
-		){
-			while(rs.next()) {
-				evBanner.add(rs.getString(1));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		MenuSelectionAction listener = new MenuSelectionAction();
+		ArrayList<EventDatabase> evBanner = ReturnModel.eventList(sql);
+
+	
 		
 		JButton evButton = new JButton();
 		evButton.setBounds(5, i*150, 650, 145);
 		evButton.setBackground(Color.white);
 		evButton.setBorder(border);
-		evButton.addActionListener(listener);
-		ImageIcon icon = new ImageIcon(String.valueOf(evBanner.get(i)));		
+		evButton.addActionListener(new MenuSelAction(hMain, evBanner.get(i).getMENU_IDX()));
+		ImageIcon icon = new ImageIcon(String.valueOf(evBanner.get(i).getSMALL_EVENT_PAGE()));		
 		Image img = icon.getImage();
 		Image changeImg = img.getScaledInstance(680, 150, Image.SCALE_SMOOTH);
 		ImageIcon changeIcon = new ImageIcon(changeImg);

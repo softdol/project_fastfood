@@ -11,12 +11,13 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import database.model.PsList;
+import kioske.pherkad0602.HomeMenuKiosk;
 import kioske.pherkad0602.database.MenuDatabase;
 import kioske.pherkad0602.database.ReturnModel;
 
 public class HomePanel extends JPanel{
 
-	public  HomePanel() {
+	public  HomePanel(HomeMenuKiosk hMain) {
 		EmptyBorder border = new EmptyBorder(getInsets());
 		
 		
@@ -35,7 +36,7 @@ public class HomePanel extends JPanel{
 	
 		for(int i = 0; i <3; ++i) {
 			
-			mainPanel.add(seb.SmallEventBanner(i));
+			mainPanel.add(seb.SmallEventBanner(hMain,i));
 		}
 		
 		JPanel titlePanel = new JPanel();
@@ -61,7 +62,7 @@ public class HomePanel extends JPanel{
 		menuPanel.setBorder(border);
 		
 		
-		Menu menu= new Menu(menuList);
+		Menu menu= new Menu(menuList, hMain);
 		menuPanel.add(menu);
 		menuPanel.setBounds(0,550,684,550+(200*(a/3)+1));
 		mainPanel.add(menuPanel);
