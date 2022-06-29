@@ -17,7 +17,7 @@ public class OrderIndex {
 	    
 		return orderlist;
 	}
-	 
+	  
 	public static int main(String[] args) {
 		
 		String sql = "SELECT ORDER_IDX FROM ORDER_LIST";
