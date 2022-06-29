@@ -3,7 +3,7 @@ package manager.menu;
 import javax.swing.JPanel;
 
 import manager.ManagerMain;
-import manager.sales.SalesMain;
+import manager.member.MemberMain;
 
 public class MenuMainPanel extends JPanel{
 	

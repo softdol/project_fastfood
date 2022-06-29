@@ -24,7 +24,7 @@ public class ManagerMain extends JFrame {
 	
 	public ManagerMain() {
 		setTitle("관라지 페이지");
-		setBounds(500, 300, 300, 200);
+		setBounds(500, 300, 240, 250);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(null);
 		
