@@ -160,7 +160,7 @@ public class Pos_Burger extends JFrame {
       logoBtn.setBounds   (860,20,120,130);
       logoBtn.setBorder(new LineBorder(Color .white));
       
-      
+       
       OrderIndex lastnumber = new OrderIndex();
       
       JPanel order_number = new JPanel();
