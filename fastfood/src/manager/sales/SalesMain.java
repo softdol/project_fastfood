@@ -117,10 +117,10 @@ public class SalesMain extends JPanel {
 					psList.add(new PsList('S', closeDate));
 					
 					if (OjdbcConnection.insert(sql, psList)) {
-						ManagerCP.viewSuccess(openDate + "일 오픈이 등록 되었습니다.", "오픈 등록");
+						ManagerCP.viewSuccess(openDate + "일 마감이 등록 되었습니다.", "마감 등록");
 						viewMonSale();
 					} else {
-						ManagerCP.viewError("오픈 등록 실패", "실패");
+						ManagerCP.viewError("마감 등록 실패", "실패");
 					}
 				}
 			}else {

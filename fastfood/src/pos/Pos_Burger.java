@@ -6,10 +6,13 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.LayoutManager;
+<<<<<<< HEAD
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+=======
+>>>>>>> branch 'softdol' of https://github.com/softdol/project_fastfood.git
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -22,13 +25,21 @@ import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
 
+<<<<<<< HEAD
 import database.OjdbcConnection;
 import database.manager.Menu;
 import database.manager.ReturnModel;
 import database.model.PsList;
+=======
+import database.manager.Menu;
+import database.manager.ReturnModel;
+import database.model.PsList;
+import pos.ActionListener.SubCateActionListener;
+>>>>>>> branch 'softdol' of https://github.com/softdol/project_fastfood.git
 
 public class Pos_Burger extends JFrame {
 
+<<<<<<< HEAD
 
    
    Pos_Burger() {
@@ -171,6 +182,96 @@ public class Pos_Burger extends JFrame {
       JPanel order_number = new JPanel();
       JLabel order_index = new JLabel("< 주문 > ");
       
+=======
+	int idx;
+	MenuListPanel item;
+	
+	public void viewMenuList(int iCate) {
+		System.out.println(iCate);
+		item.removeAll();		
+		item.revalidate();
+		item.repaint();
+		item.add(new MenuListPanel(iCate));
+	}
+	
+	public Pos_Burger() {
+		super("메인 포스기");
+		
+		JPanel menu = new JPanel();
+		JPanel order = new JPanel();
+		
+		LayoutManager manager = new GridLayout(8,5,1,1);
+		
+			
+		
+		// 카테고리도 db 통해서 불러올 예정 
+		String[] bigcate = { "BURGER","SET","HOT","SALE", "SIDE", "DRINK", "DESSERT" };
+		
+		
+		// 주문번호 창 패널
+		order.setLayout(null);
+		order.setBounds(20, 100, 360, 480);		
+	
+		
+		// 아이템 패널	
+		item = new MenuListPanel(1);
+		
+		
+		// 메뉴 카테고리 패널	
+		menu.setLayout(null);
+		menu.setLocation(10,0);
+		menu.setSize(850, 120);
+		menu.setBackground(null);
+		
+		//ArrayList<Category> cateList =
+		//sql = "select * from meun_category ";
+		
+		// 카테고리 버튼 추가 
+		for (int i = 0; i < 4; ++i) {
+			JButton bigMenu = new JButton(bigcate[i]);
+			//idx =i + 1; 
+			bigMenu.addActionListener(new SubCateActionListener(this, i + 1));
+			bigMenu.setFont(new Font("Kristen ITC", Font.BOLD,18));
+			bigMenu.setForeground(new Color(0x2F4858)); // 글꼴 색 변경
+			bigMenu.setBorder(new LineBorder(Color .white)); // 외곽선 변경
+			bigMenu.setBackground(new Color(0xD9EDDF)); // 배경색 
+			bigMenu.setBounds(8+(40*(i*3)),30 ,120,60);
+			menu.add(bigMenu);
+			
+		}
+		
+		
+		
+		// 관리자 이미지 추가
+		String managerPath = "pos_image/managerBtn.png";
+		Image managerImage = new ImageIcon(managerPath).getImage();
+		
+		// 관리자 버튼 추가
+		JButton managerBtn = new JButton(new ImageIcon(managerImage.getScaledInstance(100, 100, managerImage.SCALE_SMOOTH)));
+		managerBtn.setBounds(865,480,100,100);
+		
+		// 로고 이미지 추가 
+		String logoPath = "pos_image/logo.png";
+		Image logoImage = new ImageIcon(logoPath).getImage();
+		
+		// 로고 버튼 추가 
+		JButton logoBtn = new JButton(new ImageIcon(logoImage.getScaledInstance(120, 130, logoImage.SCALE_SMOOTH)));
+		logoBtn.setBounds(860,20,120,130);
+		logoBtn.setBorder(new LineBorder(Color .white));
+		
+		
+		
+		JPanel order_number = new JPanel();
+		JLabel order_index = new JLabel("< 주문 번호 > ");
+		// 주문번호 db 인덱스를 통해서 가져올 예정 
+		
+		order_number.setBackground(new Color(0x00769E));
+		order_number.setBounds(0,0,400,85);
+			
+		order_index.setBounds(80,0, 400,100 );
+		order_index.setFont(new Font("맑은 고딕", Font.BOLD,30));
+		order_index.setForeground(Color.white);
+>>>>>>> branch 'softdol' of https://github.com/softdol/project_fastfood.git
 
 //      
 //      order_index.setText(order_number2);

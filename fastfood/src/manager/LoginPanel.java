@@ -81,11 +81,10 @@ public class LoginPanel extends JPanel {
 //		
 //		setFocusTraversalPolicy(newPolicy);
 		
-		// 자동 로그인 임시
-//		ArrayList<PsList> loginInfo = new ArrayList<>();
-//		loginInfo.add(new PsList('S', "admin"));
-//		loginInfo.add(new PsList('I', "1234"));		
-//		login(loginInfo);
+
+		txtId.setText("admin");
+		txtPassOn.setText("1234");
+		login();
 	}
 	
 	public void loginCheck() {
