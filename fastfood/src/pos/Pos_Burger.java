@@ -169,7 +169,7 @@ public class Pos_Burger extends JFrame {
       String order_number2 = (lastnumber.getOrderlist().size() + 1) +"";
       
       order_index.setText(order_number2);
-      
+       
       
       
       

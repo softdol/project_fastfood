@@ -13,11 +13,11 @@ public class OrderIndex {
 	static ArrayList <Integer> orderlist;
 	
 	public static ArrayList<Integer> getOrderlist() {
-	
-		
+    
+	    
 		return orderlist;
 	}
-	
+	 
 	public static int main(String[] args) {
 		
 		String sql = "SELECT ORDER_IDX FROM ORDER_LIST";
