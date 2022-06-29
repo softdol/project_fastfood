@@ -25,7 +25,7 @@ public class Select_Set_Size_down extends JPanel{
 	
 	public Select_Set_Size_down(Sub_JFrame screen, int idx) {
 		
-		String sql = "SELECT s.set_idx, m.menu_name, s.set_name, s.set_img_path, m.img_big_path FROM menu m INNER JOIN menu_set s ON m.menu_idx = s.set_rep WHERE menu_idx = ?";
+		String sql = "SELECT set_idx, menu_name, set_name, set_img_path, img_big_path FROM menu INNER JOIN menu_set USING (menu_idx) WHERE menu_idx = ?";
 //		MenuPicture menuPicture = null;
 		ArrayList<MenuPicture> menuPicture = new ArrayList<>();
 		
@@ -78,7 +78,7 @@ public class Select_Set_Size_down extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				// 세트 유무 "s"
 				// 매뉴 idx, tpxm idx
-				screen.veiw_Select_Side_Drink(idx, "s", menuPicture.get(0).getSet_idx());
+				screen.veiw_Select_Side_Drink(idx, "s", menuPicture.get(0).getSet_idx(),0,0);
 			}
 		});
 		
@@ -94,7 +94,7 @@ public class Select_Set_Size_down extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				// 라지세트 유무 "l"
 				// 매뉴 idx, 세트 idx
-				screen.veiw_Select_Side_Drink(idx, "l", menuPicture.get(1).getSet_idx());
+				screen.veiw_Select_Side_Drink(idx, "l", menuPicture.get(1).getSet_idx(),0,0);
 			}
 		});
 		
