@@ -3,22 +3,27 @@ package kioske.pherkad0602.ui;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import kioske.pherkad0602.database.MenuDatabase;
+import kioske.pherkad0602.database.ReturnModel;
+
 public class PayPanel extends JPanel {
 	
 	public PayPanel() {
 		
-	
+		String sql = "SELECT * FROM Menu";
+		ArrayList<MenuDatabase> menuList = ReturnModel.menuList(sql);
 		
 		setBounds(0, 800, 884, 200);
 		setLayout(null);
 		
 
-		JLabel price = new JLabel("√— ¡÷πÆ ∞°∞› : ");
+		JLabel price = new JLabel("√— ¡÷πÆ ∞°∞› : " );
 		price.setFont(new Font("±√º≠√º", Font.PLAIN,40));
 		price.setBounds(500,20,400,80);
 		add(price);

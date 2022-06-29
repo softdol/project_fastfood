@@ -24,7 +24,7 @@ public class ChangeMenuPanel extends JPanel {
 		menuPanel.setBackground(Color.white);
 		menuPanel.setBorder(border);
 		
-		Menu menu= new Menu(sql);
+		Menu menu= new Menu(sList);
 		menuPanel.add(menu);	
 		
 		JScrollPane scrollPane = new JScrollPane(menuPanel);

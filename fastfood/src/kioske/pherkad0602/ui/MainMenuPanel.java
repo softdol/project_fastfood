@@ -24,23 +24,31 @@ public class MainMenuPanel extends JPanel{
 		
 		int a = menuList.size();
 		
+		JPanel mainPanel = new JPanel();
+		
+		mainPanel.setBounds(0, 200, 684, 600);
+		mainPanel.setLayout(null);
+		mainPanel.setBackground(Color.white);
+		mainPanel.setBorder(border);
+		
+		Menu menu= new Menu(menuList);
+		mainPanel.add(menu);	
+		
+		JScrollPane scrollPane = new JScrollPane(mainPanel);
+		scrollPane.setBounds(0, 0, 684, 600);
+		scrollPane.setBackground(Color.white);
+		scrollPane.setBorder(border);
+		Dimension size = new Dimension();
+				size.setSize(600,(200*((a-1)/3)+1));
+		mainPanel.setPreferredSize(size);
+		add(scrollPane);
+	
+		System.out.println(a);
+		
 		setBounds(0, 200, 684, 600);
 		setLayout(null);
 		setBackground(Color.white);
 		setBorder(border);
-		
-		Menu menu= new Menu(menuList);
-		add(menu);	
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 200, 684, 600);
-		scrollPane.setBackground(Color.white);
-		scrollPane.setBorder(border);
-		Dimension size = new Dimension();
-				size.setSize(600,200+(200*(a/3)+1));
-		setPreferredSize(size);
-		
-		
 	}
 	
 	

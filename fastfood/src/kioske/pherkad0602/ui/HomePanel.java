@@ -22,27 +22,19 @@ public class HomePanel extends JPanel{
 		
 		JPanel mainPanel = new JPanel();
 		String sql = "SELECT * FROM Menu WHERE Menu_Category_IDX = 1";
+		ArrayList<MenuDatabase> menuList = ReturnModel.menuList(sql);
 		
-		ArrayList<MenuDatabase> sList = new ArrayList<>();
-		ArrayList<PsList> psList = new ArrayList<>();
+		int a = menuList.size();
 		
-		for(int i = 0; i < sList.size() ; i++) {
-
-		psList.add(new PsList('S', String.valueOf(sList.get(i).getImg_big_path())));
-		psList.add(new PsList('S', String.valueOf(sList.get(i).getMenu_name())));
-		psList.add(new PsList('I', String.valueOf(sList.get(i).getMenu_idx())));
-		}
-		//sList = ReturnModel.selMenuList1(sql, psList);
-		
-		int a = sList.size();
-		
-		mainPanel.setBounds(200, 0, 684, 800);
+		mainPanel.setBounds(0, 0, 684, 800);
 		mainPanel.setLayout(null);
 		mainPanel.setBackground(Color.white);
 		mainPanel.setBorder(border);
 		
 		SmallEventBanner seb = new SmallEventBanner();
+	
 		for(int i = 0; i <3; ++i) {
+			
 			mainPanel.add(seb.SmallEventBanner(i));
 		}
 		
@@ -64,24 +56,28 @@ public class HomePanel extends JPanel{
 		mainPanel.add(titlePanel);
 		
 		JPanel menuPanel = new JPanel();
-		menuPanel.setBounds(0, 450, 684, 100);
 		menuPanel.setLayout(null);
 		menuPanel.setBackground(Color.white);
 		menuPanel.setBorder(border);
 		
 		
-		Menu menu= new Menu(sList);
+		Menu menu= new Menu(menuList);
 		menuPanel.add(menu);
 		menuPanel.setBounds(0,550,684,550+(200*(a/3)+1));
 		mainPanel.add(menuPanel);
 		
 		JScrollPane scrollPane = new JScrollPane(mainPanel);
-		scrollPane.setBounds(200, 0, 684, 800);
+		scrollPane.setBounds(0, 0, 684, 800);
 		scrollPane.setBorder(border);
 		Dimension size = new Dimension();
 				size.setSize(600,550+(200*(a/3)+1));
 		mainPanel.setPreferredSize(size);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(16);	
+		add(scrollPane);
+		setBounds(0, 200, 684, 800);
+		setLayout(null);
+		setBackground(Color.white);
+		setBorder(border);
 		
 	}
 

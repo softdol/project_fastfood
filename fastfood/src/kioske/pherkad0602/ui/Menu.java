@@ -32,18 +32,16 @@ public class Menu extends JPanel {
 	
 	public  Menu(ArrayList<MenuDatabase> menuList) {
 		EmptyBorder border = new EmptyBorder(getInsets());
-				
+		
 		int a = menuList.size();
 		int b = (a/3)+1;
 		
 		LayoutManager manager = new GridLayout(b, 3);
 
-		JPanel menuPanel = new JPanel();
-		menuPanel.setBounds(0, 0, 670, 200*b);
-		menuPanel.setLayout(manager);
-		menuPanel.setBorder(border);
+		setBounds(0, 0, 670, 200*b);
+		setLayout(manager);
+		setBorder(border);
 
-		
 		MenuSelectionAction listener = new MenuSelectionAction();
 		
 		for(int i = 0; i <a; ++i) {
@@ -54,6 +52,7 @@ public class Menu extends JPanel {
 			btn3.setName(String.valueOf(menuList.get(i).getMenu_idx()));
 			btn3.addActionListener(listener);
 			btn3.setBorder(border);
+			btn3.setName(String.valueOf(menuList.get(i).getMenu_idx()));
 			btn3.setLayout(null);
 			
 			ImageIcon icon = new ImageIcon(String.valueOf(menuList.get(i).getImg_big_path()));		
@@ -82,9 +81,9 @@ public class Menu extends JPanel {
 			
 			btn3.add(textLabel);
 				
-			menuPanel.add(btn3);
+			add(btn3);
 		}
-		
+				
 	}
 	
 }

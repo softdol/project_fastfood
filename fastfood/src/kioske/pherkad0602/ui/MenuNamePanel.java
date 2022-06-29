@@ -13,7 +13,7 @@ import kioske.pherkad0602.database.SubMenuDatabase;
 
 public class MenuNamePanel extends JPanel {
 
-	public  MenuNamePanel(int i, ArrayList<SubMenuDatabase> sList) {
+	public  MenuNamePanel(String subTitle) {
 		EmptyBorder border = new EmptyBorder(getInsets());
 		
 		setBounds(0, 100, 684, 100);
@@ -22,7 +22,7 @@ public class MenuNamePanel extends JPanel {
 		setBorder(border);
 		
 		
-		JLabel mName = new JLabel("  "+String.valueOf(sList.get(i).getMENU_SUBCATEGORY_NAME()));
+		JLabel mName = new JLabel("  " + subTitle);
 		
 		mName.setBounds(20,10,500,80);
 		mName.setFont(new Font("±Ã¼­Ã¼", Font.PLAIN,55));

@@ -6,25 +6,38 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import database.model.PsList;
 import kioske.pherkad0602.HomeMenuKiosk;
 import kioske.pherkad0602.database.MenuDatabase;
+
+import kioske.pherkad0602.database.ReturnModel;
 import kioske.pherkad0602.database.SubMenuDatabase;
 
 public class MenuPanel extends JPanel{
 	
 	HomeMenuKiosk hMain;
 	
-	public MenuPanel(ArrayList<SubMenuDatabase> sList1, ArrayList<MenuDatabase> menuList, HomeMenuKiosk hMain, int i){
+	public MenuPanel(HomeMenuKiosk hMain, int i, ArrayList<SubMenuDatabase> subCateList, String subTitle){
 		EmptyBorder border = new EmptyBorder(getInsets());
 		this.hMain = hMain;
 
-		SubMenuPanel sub = new SubMenuPanel(sList1, hMain);
+		// 서브카테고리
+		SubMenuPanel sub = new SubMenuPanel(subCateList, hMain);
 		add(sub);
 		
-		MenuNamePanel mName = new MenuNamePanel(i, sList1);
+		// 서브 카테고리 타이틀
+		MenuNamePanel mName = new MenuNamePanel(subTitle);
 		add(mName);
 		
+		// 아래 목록
+		ArrayList<PsList> psList2 = new ArrayList<>();
+
+		
+		psList2.add(new PsList('I', String.valueOf(i)));
+		//sList2 = ReturnModel.selMenuList1(sql2, psList2);
+		ArrayList<MenuDatabase> menuList = ReturnModel.selMenuList1("SELECT * FROM Menu WHERE Menu_subcategory_IDX = ? ", psList2);
 		MainMenuPanel main = new MainMenuPanel(menuList);
+//		System.out.println(menuList.size());
 		add(main);
 		
 

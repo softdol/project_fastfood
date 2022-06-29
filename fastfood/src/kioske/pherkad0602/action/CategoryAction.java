@@ -10,11 +10,9 @@ import kioske.pherkad0602.HomeMenuKiosk;
 public class CategoryAction implements ActionListener{
 
 	HomeMenuKiosk hMain;
-	int iCate;
-	
+
 	public CategoryAction(HomeMenuKiosk hMain) {
 		this.hMain = hMain;
-		this.iCate = iCate;
 
 	}
 	

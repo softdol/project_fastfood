@@ -4,21 +4,34 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.border.BevelBorder;
 
+import kioske.pherkad0602.HomeMenuKiosk;
+import kioske.pherkad0602.database.MenuDatabase;
+import kioske.pherkad0602.database.ReturnModel;
+import kioske.pherkad0602.database.SetDatabase;
+
 public class OrderCheck extends JFrame{
+	
 	
 	public OrderCheck() {
 		
 		JFrame checkFrame = new JFrame();
 		checkFrame.setLayout(null);
 		BevelBorder border = new BevelBorder(BevelBorder.RAISED);
-
-
+		
+		String sql = "SELECT * FROM Menu WHERE Menu_Category_IDX = 1";
+		ArrayList<MenuDatabase> menuList = ReturnModel.menuList(sql);
+		
+		String sql2 = "SELECT & FROME MENU_SET";
+		ArrayList<SetDatabase> setList = ReturnModel.setList(sql2);
+		
+		ArrayList orderList = new ArrayList();
 		
 		JLabel label = new JLabel("장바구니에 추가하시겠습니까?");
 		label.setBounds(60,10,300,50);
@@ -34,6 +47,19 @@ public class OrderCheck extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				JButton performedButton = (JButton)e.getSource();
+				String name = performedButton.getName();
+				
+				for(int i = 0; i < setList.size(); i++ ) {
+					
+					if (setList.get(i).getMENU_IDX().equals(name)) {
+						// 세트옵션페이지로 이동
+					} else {
+						
+					}	
+				}
+				
+			
 				checkFrame.dispose();
 			}
 		});
