@@ -1,33 +1,51 @@
 package kioske.pherkad0602.ui;
 
-import java.awt.Component;
+import java.awt.Color;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import database.model.PsList;
+import kioske.pherkad0602.HomeMenuKiosk;
+import kioske.pherkad0602.database.MenuDatabase;
+
+import kioske.pherkad0602.database.ReturnModel;
+import kioske.pherkad0602.database.SubMenuDatabase;
 
 public class MenuPanel extends JPanel{
+	
+	HomeMenuKiosk hMain;
+	
+	public MenuPanel(HomeMenuKiosk hMain, int i, ArrayList<SubMenuDatabase> subCateList, String subTitle){
+		EmptyBorder border = new EmptyBorder(getInsets());
+		this.hMain = hMain;
 
-	public Component MenuPanel(){
+		// 서브카테고리
+		SubMenuPanel sub = new SubMenuPanel(subCateList, hMain);
+		add(sub);
 		
-		JPanel mainPanel = new JPanel();
+		// 서브 카테고리 타이틀
+		MenuNamePanel mName = new MenuNamePanel(subTitle);
+		add(mName);
+		
+		// 아래 목록
+		ArrayList<PsList> psList2 = new ArrayList<>();
 
-		add(mainPanel);
 		
-		String[] subMenu = {"비프","치킨","씨푸드"};// db받아오기
-		
-		SubMenuPanel sub = new SubMenuPanel();
-		mainPanel.add(sub.SubMenuPanel(subMenu));
-		
-		MenuNamePanel mName = new MenuNamePanel();
-		mainPanel.add(mName.MenuNamePanel());
-		
-		MainMenuPanel main = new MainMenuPanel();
-		mainPanel.add(main.MainMenuPanel());
+		psList2.add(new PsList('I', String.valueOf(i)));
+		//sList2 = ReturnModel.selMenuList1(sql2, psList2);
+		ArrayList<MenuDatabase> menuList = ReturnModel.selMenuList1("SELECT * FROM Menu WHERE Menu_subcategory_IDX = ? ", psList2);
+		MainMenuPanel main = new MainMenuPanel(menuList);
+//		System.out.println(menuList.size());
+		add(main);
 		
 
-		mainPanel.setBounds(200, 0, 884, 800);
-		mainPanel.setLayout(null);
-		
-		return mainPanel;
+		setBounds(200, 0, 884, 800);
+		setLayout(null);
+		setBackground(Color.white);
+		setBorder(border);
+
 	}
 
 

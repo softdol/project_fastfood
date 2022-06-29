@@ -6,38 +6,49 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
+
+import kioske.pherkad0602.database.MenuDatabase;
+import kioske.pherkad0602.database.ReturnModel;
 
 public class MainMenuPanel extends JPanel{
 	
-	public Component MainMenuPanel() {
+	public  MainMenuPanel(ArrayList<MenuDatabase> menuList) {
+		EmptyBorder border = new EmptyBorder(getInsets());
 		
-		LayoutManager manager = new GridLayout(4,3);
+		int a = menuList.size();
 		
-		JPanel menuPanel = new JPanel();
+		JPanel mainPanel = new JPanel();
 		
-		menuPanel.setLayout(manager);
+		mainPanel.setBounds(0, 200, 684, 600);
+		mainPanel.setLayout(null);
+		mainPanel.setBackground(Color.white);
+		mainPanel.setBorder(border);
 		
-		JScrollPane scrollPane = new JScrollPane(menuPanel);
-		scrollPane.setBounds(0, 200, 684, 600);
+		Menu menu= new Menu(menuList);
+		mainPanel.add(menu);	
+		
+		JScrollPane scrollPane = new JScrollPane(mainPanel);
+		scrollPane.setBounds(0, 0, 684, 600);
+		scrollPane.setBackground(Color.white);
+		scrollPane.setBorder(border);
 		Dimension size = new Dimension();
-				size.setSize(600,800);
-		menuPanel.setPreferredSize(size);
+				size.setSize(600,(200*((a-1)/3)+1));
+		mainPanel.setPreferredSize(size);
+		add(scrollPane);
+	
+		System.out.println(a);
 		
-		for(int i = 0; i <12; ++i) {
-			
-			JButton btn3 = new JButton("¸Þ´º");
-			btn3.setFont(new Font("±Ã¼­Ã¼", Font.PLAIN,40));
-			btn3.setBackground(new Color(0xFFFFFF));
-			menuPanel.add(btn3);
-		}
-		
-		
-		return scrollPane;
+		setBounds(0, 200, 684, 600);
+		setLayout(null);
+		setBackground(Color.white);
+		setBorder(border);
 	}
 	
 	

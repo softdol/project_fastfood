@@ -11,7 +11,7 @@ public class MenuMainPanel extends JPanel{
 		
 	public MenuMainPanel(ManagerMain main) {
 		setLayout(null);
-		setBounds(0,0,1185,730);
+		setBounds(0,0,1085,820);
 		//jpMainMiddle
 		
 		// 상품 등록
@@ -21,7 +21,7 @@ public class MenuMainPanel extends JPanel{
 		// 상품 목록
 		//menuList = new MenuList(this);
 		jpMainMiddle.setLayout(null);
-		jpMainMiddle.setBounds(0,0,1185,730);
+		jpMainMiddle.setBounds(0,0,1085,820);
 		//jpMainMiddle.add(new MenuInsertPanel(main));
 		//jpMainMiddle.add(new MenuSetList(main));
 		jpMainMiddle.add(new MenuList(main));

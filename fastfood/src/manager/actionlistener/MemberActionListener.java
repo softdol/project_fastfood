@@ -33,6 +33,9 @@ public class MemberActionListener implements ActionListener {
 			case 'N':
 				memberMain.newMember();
 				break;
+			case 'D':
+				memberMain.delMember(idx);
+				break;
 		}
 		
 	}

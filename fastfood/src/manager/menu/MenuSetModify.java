@@ -93,11 +93,14 @@ public class MenuSetModify extends JPanel {
 		psList.add(new PsList('I',"1"));
 		
 		repList = ReturnModel.selMenuList(sqlRep, psList);
-		
+	
 		cbRep.setBounds(txtName.getX(),lblRep.getY(),160,40);
 		cbRep.addItem("----------대표메뉴----------");
 		for(int i = 0; i < repList.size(); i++) {
 			cbRep.addItem(repList.get(i).getMenu_name() + "("+ repList.get(i).getMenu_price()  +")");
+			if(repList.get(i).getMenu_idx() == menuInfo.getSet_rep()) {
+				cbRep.setSelectedIndex(i+1);
+			}
 		}
 		
 		add(txtName);
@@ -106,7 +109,7 @@ public class MenuSetModify extends JPanel {
 		add(cbRep);
 		//JComboBox
 		
-		System.out.println(menuInfo.getSet_rep());
+		//System.out.println(menuInfo.getSet_rep());
 		
 		lblImg = new JLabel(new ImageIcon(ManagerCP.imgResize(menuInfo.getSet_img_path(),180,160)));
 		lblImg.setBorder(new LineBorder(Color.BLACK));
@@ -187,7 +190,7 @@ public class MenuSetModify extends JPanel {
 					psList.add(new PsList('I',txtPrice.getText()));
 					psList.add(new PsList('I',txtSale.getText()));
 					psList.add(new PsList('S',main.mInfo.getMember_id()));					
-					psList.add(new PsList('I',repList.get(cbRep.getSelectedIndex()).getMenu_idx().toString()));
+					psList.add(new PsList('I',repList.get(cbRep.getSelectedIndex()-1).getMenu_idx().toString()));
 					psList.add(new PsList('I',String.valueOf(menuInfo.getSet_idx())));
 					
 					String sqi_menuUpt = "update menu_set";
@@ -197,7 +200,7 @@ public class MenuSetModify extends JPanel {
 							sqi_menuUpt += " ,SET_SALE = ?";
 							sqi_menuUpt += " ,SET_MOD_DATE = sysdate";
 							sqi_menuUpt += " ,SET_MOD_ID = ?";
-							sqi_menuUpt += " ,SET_REP = ?";
+							sqi_menuUpt += " ,MENU_IDX = ?";
 							sqi_menuUpt += " where SET_IDX = ?";
 		
 					if(OjdbcConnection.insert(sqi_menuUpt, psList)) {

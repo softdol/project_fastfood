@@ -6,7 +6,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import database.model.PsList;
 
@@ -50,7 +53,11 @@ public class OjdbcConnection {
 						pstmt.setString(i + 1, ps.getVal());
 						break;
 					case 'd': case 'D':
-						pstmt.setDate(i + 1, java.sql.Date.valueOf(ps.getVal()));
+						Calendar cal = Calendar.getInstance();						
+						String[] strDate = ps.getVal().split("-");
+						cal.set(Integer.parseInt(strDate[0]), Integer.parseInt(strDate[1]) - 1, Integer.parseInt(strDate[2]));
+						java.sql.Date sqlDate = new java.sql.Date(cal.getTimeInMillis());						
+						pstmt.setDate(1, sqlDate);
 						break;
 					default:
 						pstmt.setString(i + 1, ps.getVal());

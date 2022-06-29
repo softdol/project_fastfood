@@ -49,10 +49,10 @@ public class MemberMain extends JPanel {
 	
 	public MemberMain(ManagerMain main) {
 		this.main = main;
-		main.setSize(585,730);
+		main.setSize(585,770);
 		
 		setLayout(null);
-		setBounds(0,0,565,726);
+		setBounds(0,0,565,766);
 		//setBorder(new LineBorder(Color.BLACK));
 		
 		LabelTitle lblTitle = new LabelTitle("매장 관리");
@@ -100,8 +100,8 @@ public class MemberMain extends JPanel {
 		JLabel topTitleNum = new JLabel("직원 번호",0);
 		JLabel topTitleId = new JLabel("직원 ID",0);
 		JLabel topTitleName = new JLabel("직원 이름",0);
-		JLabel topTitlePass = new JLabel("패스워드",0);
-		JLabel topTitleEtc = new JLabel("수정/삭제", 0);
+		JLabel topTitlePass = new JLabel("수정",0);
+		JLabel topTitleEtc = new JLabel("삭제", 0);
 		
 		topTitleNum.setBounds(0, 0, 70, 40);
 		topTitleNum.setBorder(new LineBorder(Color.black));
@@ -141,9 +141,39 @@ public class MemberMain extends JPanel {
 		
 		add(btnNew);
 		
+		JPanel jpTopTitleSub = new JPanel();
+		jpTopTitleSub.setLayout(null);		
+		jpTopTitleSub.setBounds(20, btnNew.getY() + btnNew.getHeight() + 10 , 540, 40);
+		
+		JLabel topTitleNum2 = new JLabel("직원 번호",0);
+		JLabel topTitleId2 = new JLabel("직원 ID",0);
+		JLabel topTitleName2 = new JLabel("직원 이름",0);
+		JLabel topTitlePass2 = new JLabel("패스워드",0);
+		JLabel topTitleEtc2 = new JLabel("등록/수정", 0);
+		
+		topTitleNum2.setBounds(0, 0, 70, 40);
+		topTitleNum2.setBorder(new LineBorder(Color.black));
+		topTitleId2.setBounds(topTitleNum2.getX() + topTitleNum2.getWidth() - 1, 0, 110, 40);
+		topTitleId2.setBorder(new LineBorder(Color.black));
+		topTitleName2.setBounds(topTitleId2.getX() + topTitleId2.getWidth() - 1, 0, 120, 40);
+		topTitleName2.setBorder(new LineBorder(Color.black));
+		topTitlePass2.setBounds(topTitleName2.getX() + topTitleName2.getWidth() - 1, 0, 100, 40);
+		topTitlePass2.setBorder(new LineBorder(Color.black));
+		topTitleEtc2.setBounds(topTitlePass2.getX() + topTitlePass2.getWidth() - 1, 0, 120, 40);
+		topTitleEtc2.setBorder(new LineBorder(Color.black));
+		
+		jpTopTitleSub.add(topTitleNum2);
+		jpTopTitleSub.add(topTitleId2);
+		jpTopTitleSub.add(topTitleName2);
+		jpTopTitleSub.add(topTitlePass2);
+		jpTopTitleSub.add(topTitleEtc2);
+		
+		add(jpTopTitleSub);
+		
+		
 		JPanel jpBottomTitle = new JPanel();
 		jpBottomTitle.setLayout(null);		
-		jpBottomTitle.setBounds(20, btnNew.getY() + btnNew.getHeight() + 10 , 540, 40);
+		jpBottomTitle.setBounds(20, jpTopTitleSub.getY() + jpTopTitleSub.getHeight() - 1 , 540, 40);
 		
 		topBottomNum = new JLabel("0",0);
 		topBottoId = new JTextField();
@@ -176,7 +206,7 @@ public class MemberMain extends JPanel {
 	}
 	public void setMember() {
 		psList = new ArrayList<>();		
-		setMemberList = ReturnModel.selMemberList("select * from member_list", psList);
+		setMemberList = ReturnModel.selMemberList("select * from member_list where MEMBER_USE_FLAG = 'Y'", psList);
 		setView();
 	}
 	
@@ -196,23 +226,25 @@ public class MemberMain extends JPanel {
 			JLabel midNum = new JLabel(m.getMember_idx().toString(),0);
 			JLabel midId = new JLabel(m.getMember_id(),0);
 			JLabel midName = new JLabel(m.getMember_name(),0);
-			JLabel midPass = new JLabel("********",0);
+			//JLabel midPass = new JLabel("********",0);
 			JButton midBtn = new JButton("수정");
-			//JButton tempBtn = new JButton("삭제");
+			JButton delBtn = new JButton("삭제");
 			
 			midNum.setBounds(0, 0, 70, 40);
 			midId.setBounds(midNum.getX() + midNum.getWidth(), 0, 110, 40);
 			midName.setBounds(midId.getX() + midId.getWidth(), 0, 120, 40);
-			midPass.setBounds(midName.getX() + midName.getWidth(), 0, 100, 40);
-			midBtn.setBounds(midPass.getX() + midPass.getWidth() + 5, 5, 60, 25);
+			//midPass.setBounds(midName.getX() + midName.getWidth(), 0, 100, 40);
+			midBtn.setBounds(topBottoPass.getX() + topBottoPass.getWidth() / 4, 5, 60, 25);
+			delBtn.setBounds(topBottoEtc.getX() + topBottoEtc.getWidth() / 4, 5, 60, 25);
 			
 			tempJp.add(midNum);
 			tempJp.add(midId);
-			tempJp.add(midName);
-			tempJp.add(midPass);
+			tempJp.add(midName);			
 			tempJp.add(midBtn);
+			tempJp.add(delBtn);
 			
 			midBtn.addActionListener(new MemberActionListener(this, i, 'U'));
+			delBtn.addActionListener(new MemberActionListener(this, i, 'D'));
 			
 			jpSetList.add(tempJp);
 		}
@@ -238,7 +270,7 @@ public class MemberMain extends JPanel {
 		psList.add(new PsList('I',storeInfo.getStore_idx().toString()));
 		
 		if(OjdbcConnection.insert(sqlUpt, psList)) {
-			ManagerCP.viewSuccess("매점 정보가 수정되었습니다.", "수정");
+			ManagerCP.viewSuccess("매장 정보가 수정되었습니다.", "수정");
 		}else {
 			ManagerCP.viewError("장애가 발생하셨습니다.", "에러");
 		}
@@ -266,8 +298,20 @@ public class MemberMain extends JPanel {
 			return;
 		}
 		
+		// 직원 아이디 체크
+		String sqlCon = "select * from member_list where MEMBER_ID = ? and MEMBER_USE_FLAG = 'Y'";
+		psList = new ArrayList<>();
+		psList.add(new PsList('S', topBottoId.getText()));
+		if(ReturnModel.selConfirm(sqlCon, psList)) {
+			ManagerCP.viewError("이미 사용중인 ID 입니다.","중복");
+			topBottoId.requestFocus();
+			return;
+		}
+
+		
 		String sqlMember = "";
 		psList = new ArrayList<>();
+		String viewVal = "";
 		if(idx > 0) {
 			sqlMember += "update member_list";
 			sqlMember += " set MEMBER_ID = ?";
@@ -278,7 +322,7 @@ public class MemberMain extends JPanel {
 			psList.add(new PsList('S',topBottoName.getText()));
 			psList.add(new PsList('S',topBottoPass.getText()));
 			psList.add(new PsList('S',topBottomNum.getText()));
-			System.out.println("직원 정보 수정 : " + idx);
+			viewVal = "수정";
 		}else {
 			sqlMember += "insert into member_list(MEMBER_IDX, STORE_IDX, MEMBER_ID, MEMBER_NAME, MEMBER_PASS, MEMBER_USE_FLAG, MEMBER_IN_DATE)";
 			sqlMember += " values(MEMBER_IDX_SEQ.nextval, ?, ?, ?, ?, 'Y', sysdate)";
@@ -286,11 +330,11 @@ public class MemberMain extends JPanel {
 			psList.add(new PsList('S',topBottoId.getText()));
 			psList.add(new PsList('S',topBottoName.getText()));
 			psList.add(new PsList('S',topBottoPass.getText()));
-			System.out.println("직원 정보 추가");
+			viewVal = "등록";
 		}
 		
 		if(OjdbcConnection.insert(sqlMember, psList)) {
-			ManagerCP.viewSuccess("매점 정보가 수정되었습니다.", "수정");
+			ManagerCP.viewSuccess("직원 정보가 "+viewVal+"되었습니다.", "수정");
 		}else {
 			ManagerCP.viewError("장애가 발생하셨습니다.", "에러");
 		}
@@ -308,6 +352,27 @@ public class MemberMain extends JPanel {
 		topBottoEtc.setText("수정");
 		
 		topBottoId.setEnabled(false);
+	}
+	
+	public void delMember(int idx) {
+		Member m = setMemberList.get(idx);
+		if(ManagerCP.viewConfirm("정말로 삭제 하시겠습니까?", "직원 삭제")) {
+			System.out.println(m.getMember_idx());
+			String delSql = "update member_list set MEMBER_USE_FLAG = 'N' where MEMBER_IDX = ?";
+			
+			psList = new ArrayList<>();
+			psList.add(new PsList('I', m.getMember_idx().toString()));
+			
+			if(OjdbcConnection.insert(delSql, psList)) {
+				ManagerCP.viewSuccess("삭제 되었습니다.", "삭제");
+				newMember();
+				setMember();
+			}else {
+				ManagerCP.viewError("장애가 발생하셨습니다.", "에러");
+			}
+		}
+		//newMember();		
+		//setMember();
 	}
 	
 	public void newMember() {

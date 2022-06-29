@@ -59,7 +59,7 @@ public class TopMenuBar extends JMenuBar {
 		//openItem.addActionListener(new OpenActionListener());
 		menuAll.add(menuTitle);
 		menuAll.add(salesTitle);
-		menuAll.add(calculateTitle);
+		//menuAll.add(calculateTitle);
 		menuAll.add(memberTitle);
 		
 		add(menuAll, LEFT_ALIGNMENT);

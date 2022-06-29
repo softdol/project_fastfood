@@ -1,18 +1,16 @@
 package kioske.pherkad0602;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.LayoutManager;
+import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+
+import kioske.pherkad0602.ui.ChangeMenuPanel;
 
 public class kiosk7 extends JFrame{
 
@@ -21,7 +19,6 @@ public class kiosk7 extends JFrame{
 	   JPanel payPanel = new JPanel();
 
 	   
-	   JLabel logo = new JLabel("로고");
 	   JLabel menuName = new JLabel("크리스피 버거");
 	 
 	   
@@ -39,8 +36,16 @@ public class kiosk7 extends JFrame{
 	      payPanel.setBounds(0,840,900,200);
 	      payPanel.setLayout(null);
 	      
-	      logo.setBounds(50, 50, 200, 200);
-	      logo.setIcon(new ImageIcon("image/logo.png"));
+	      // 이미지 추가
+	      ImageIcon icon = new ImageIcon("pos_image/logo.png");		
+	      Image img = icon.getImage();
+	      Image changeImg = img.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+	      ImageIcon changeIcon = new ImageIcon(changeImg);
+	      JLabel logo = new JLabel(changeIcon);
+
+	      logo.setBounds(50,50,200,200);
+	      //
+	      
 	      
 	      menuName.setBounds(280, 50, 500, 200);
 	      menuName.setFont(new Font("맑은 고딕 굵게", Font.PLAIN, 30));
@@ -50,34 +55,16 @@ public class kiosk7 extends JFrame{
 	     
 	      // 메뉴 패널 클래스화 해야함
 		  JLabel menuLabel = new JLabel();
-	      JPanel menuPanel = new JPanel();
-	      
-	      LayoutManager manager = new GridLayout(4, 3);
-	      
+	     
 		  menuLabel.setBounds(100,50,300,50);
 		  menuLabel.setText("햄버거 변경");
 		  menuLabel.setFont(new Font("맑은 고딕 굵게", Font.PLAIN, 30));
 		  pSouth.add(menuLabel);
 	      
-		
-		  // 메뉴 생성
-		  menuPanel.setLayout(manager);
-		  for(int i = 0; i <12; ++i) {
-				
-			  JButton btn3 = new JButton("메뉴");
-			  btn3.setFont(new Font("궁서체", Font.PLAIN,40));
-			  btn3.setBackground(new Color(0xFFFFFF));
-			  menuPanel.add(btn3);
-		  }
-		  
-		  // 스크롤 생성
-		  JScrollPane scrollPane = new JScrollPane(menuPanel);
-		  scrollPane.setBounds(100, 100, 684, 440);
-		  Dimension size = new Dimension();
-		  		size.setSize(600,900);
-		  menuPanel.setPreferredSize(size);
-		  pSouth.add(scrollPane);
-	      
+		  String sql1 = "SELECT * FROM Menu WHERE Menu_Category_IDX = 1";
+
+	//	  ChangeMenuPanel chgMenu = new ChangeMenuPanel();
+	//	  pSouth.add(chgMenu.ChangeMenuPanel(sql1));
 		 
 			
 	      

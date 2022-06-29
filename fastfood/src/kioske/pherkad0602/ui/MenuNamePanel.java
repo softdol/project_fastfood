@@ -3,27 +3,32 @@ package kioske.pherkad0602.ui;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.util.ArrayList;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import kioske.pherkad0602.database.SubMenuDatabase;
 
 public class MenuNamePanel extends JPanel {
 
-	public Component MenuNamePanel() {
+	public  MenuNamePanel(String subTitle) {
+		EmptyBorder border = new EmptyBorder(getInsets());
 		
-		JPanel mNamePanel = new JPanel();
+		setBounds(0, 100, 684, 100);
+		setLayout(null);
+		setBackground(Color.white);
+		setBorder(border);
 		
-		mNamePanel.setBounds(0, 100, 684, 100);
-		mNamePanel.setLayout(null);
 		
-		JLabel mName = new JLabel("서브 메뉴 이름");
+		JLabel mName = new JLabel("  " + subTitle);
 		
 		mName.setBounds(20,10,500,80);
-		mName.setFont(new Font("궁서체", Font.PLAIN,40));
-		mNamePanel.add(mName);
+		mName.setFont(new Font("궁서체", Font.PLAIN,55));
+		add(mName);
 		
-		return mNamePanel;
+		
 	}
 	
 }

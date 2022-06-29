@@ -10,30 +10,22 @@ import java.util.ArrayList;
 
 import javax.swing.border.EmptyBorder;
 
+import kioske.pherkad0602.database.SubMenuDatabase;
+
 public class test {
 	public static void main(String[] args) {
 	
+			
 		
-		LayoutManager manager = new GridLayout(4, 3);
+		String sql = "SELECT * FROM Menu_subcategory";
 		
-		String sql = "SELECT * FROM Menu";
+//		ArrayList name = SubMenuDatabase.subMenuName;
+//		ArrayList cateIdx = SubMenuDatabase.menuCategoryIdx; 
 		
-		ArrayList menuImage = new ArrayList<>();
-		ArrayList menuName = new ArrayList<>();
+
+	
 		
-		try(
-				Connection conn = ojdbcConnection.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sql);
-				ResultSet rs = pstmt.executeQuery();
-		){
-			while(rs.next()) {
-				menuImage.add(rs.getString(3));
-				menuName.add(rs.getString(4));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
+	
 	}
 
 }

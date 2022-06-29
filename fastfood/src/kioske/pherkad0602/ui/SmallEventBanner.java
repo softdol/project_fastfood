@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import kioske.pherkad0602.action.MenuSelectionAction;
+
 public class SmallEventBanner extends JPanel{
 	
 	public Component SmallEventBanner(int i) {
@@ -36,12 +38,13 @@ public class SmallEventBanner extends JPanel{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		MenuSelectionAction listener = new MenuSelectionAction();
 		
 		JButton evButton = new JButton();
 		evButton.setBounds(5, i*150, 650, 145);
 		evButton.setBackground(Color.white);
 		evButton.setBorder(border);
-		
+		evButton.addActionListener(listener);
 		ImageIcon icon = new ImageIcon(String.valueOf(evBanner.get(i)));		
 		Image img = icon.getImage();
 		Image changeImg = img.getScaledInstance(680, 150, Image.SCALE_SMOOTH);
@@ -49,10 +52,7 @@ public class SmallEventBanner extends JPanel{
 		JLabel logo = new JLabel(changeIcon);
 		evButton.add(logo);
 		
-	
-	
-		
-		
+
 		return evButton;
 	
 	}

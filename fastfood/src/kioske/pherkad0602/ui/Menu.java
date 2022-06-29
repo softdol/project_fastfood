@@ -22,54 +22,40 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import kioske.pherkad0602.action.CategoryAction;
+import kioske.pherkad0602.action.MenuSelectionAction;
+import kioske.pherkad0602.database.MenuDatabase;
+import kioske.pherkad0602.database.ReturnModel;
+import kioske.pherkad0602.database.SubMenuDatabase;
+
 public class Menu extends JPanel {	
 	
-	public Component Menu() {
+	public  Menu(ArrayList<MenuDatabase> menuList) {
 		EmptyBorder border = new EmptyBorder(getInsets());
 		
-		
-		String sql = "SELECT * FROM Menu WHERE Menu_Category_IDX = 1";
-		
-		ArrayList menuImage = new ArrayList<>();
-		ArrayList menuName = new ArrayList<>();
-		
-		ArrayList menuImage1 = MenuDatabase.menuImageArray(sql);
-		ArrayList menuName1 = MenuDatabase.menuNameArray(sql);
-
-		
-		try(
-				Connection conn = ojdbcConnection.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sql);
-				ResultSet rs = pstmt.executeQuery();
-		){
-			while(rs.next()) {
-				menuImage.add(rs.getString(3));
-				menuName.add(rs.getString(4));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		int a = MenuDatabase.size("SELECT * FROM Menu WHERE Menu_Category_IDX = 1");
-
+		int a = menuList.size();
 		int b = (a/3)+1;
 		
 		LayoutManager manager = new GridLayout(b, 3);
 
-		JPanel menuPanel = new JPanel();
-		menuPanel.setBounds(0, 550, 670, 200*b);
-		menuPanel.setLayout(manager);
-		menuPanel.setBorder(border);
+		setBounds(0, 0, 670, 200*b);
+		setLayout(manager);
+		setBorder(border);
 
-
+		MenuSelectionAction listener = new MenuSelectionAction();
+		
 		for(int i = 0; i <a; ++i) {
+			
 			
 			JButton btn3 = new JButton();
 			btn3.setBackground(new Color(0xFFFFFF));
+			btn3.setName(String.valueOf(menuList.get(i).getMenu_idx()));
+			btn3.addActionListener(listener);
 			btn3.setBorder(border);
+			btn3.setName(String.valueOf(menuList.get(i).getMenu_idx()));
 			btn3.setLayout(null);
 			
-			ImageIcon icon = new ImageIcon(String.valueOf(menuImage.get(i)));		
+			ImageIcon icon = new ImageIcon(String.valueOf(menuList.get(i).getImg_big_path()));		
 			Image img = icon.getImage();
 			Image changeImg = img.getScaledInstance(210, 140, Image.SCALE_SMOOTH);
 			ImageIcon changeIcon = new ImageIcon(changeImg);
@@ -82,7 +68,7 @@ public class Menu extends JPanel {
 
 			
 			JTextPane textLabel = new JTextPane();
-			textLabel.setText(String.valueOf(menuName.get(i)));
+			textLabel.setText(String.valueOf(menuList.get(i).getMenu_name()));
 			textLabel.setBounds(0,150,210,50);
 			textLabel.setBackground(Color.white);
 			textLabel.setFont(new Font("±Ã¼­Ã¼", Font.BOLD,20));
@@ -95,10 +81,9 @@ public class Menu extends JPanel {
 			
 			btn3.add(textLabel);
 				
-			menuPanel.add(btn3);
+			add(btn3);
 		}
-		
-		return menuPanel;
+				
 	}
-
+	
 }
