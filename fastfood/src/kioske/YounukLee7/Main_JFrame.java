@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import kioske.YounukLee7.kioskeUI.Select_Takeout_down;
 import kioske.YounukLee7.kioskeUI.Select_Takeout_up;
 import kioske.YounukLee7.kioskeUI.Start_Screen_kiosk;
+import kioske.pherkad0602.HomeMenuKiosk;
 import manager.component.ManagerCP;
 
 public class Main_JFrame extends JFrame{
@@ -24,7 +25,7 @@ public class Main_JFrame extends JFrame{
 	// 형래님 홈으로 가기
 	public void veiw_Home(String check) {
 		ManagerCP.reFresh(panel);
-		
+		panel.add(new HomeMenuKiosk());
 	}
 	
 

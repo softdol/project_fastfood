@@ -66,25 +66,24 @@ public class Select_Set_down extends JPanel{
 		
 		JButton single_button = new JButton("단품");
 		single_button.setBounds(173, 200, 250, 350);
-		
 		ImageIcon icon = new ImageIcon(menuPicture.getImg_big_path());
 		Image img = icon.getImage();
 		Image soloimg = img.getScaledInstance(250, 350, Image.SCALE_SMOOTH);
 		ImageIcon soloicon = new ImageIcon(soloimg);
-		
 		single_button.setIcon(soloicon);
 		
+		// 단품 눌렀을 때
 		single_button.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				// 매뉴 idx 보내기
+				screen.veiw_Home_giveIDX(idx);
 			}
 		});
 		
 		JButton set_button = new JButton("세트");
 		set_button.setBounds(463, 200, 250, 350);
-		
 		ImageIcon icon1 = new ImageIcon(menuPicture.getSet_img_path());
 		Image img1 = icon1.getImage();
 		Image setimg = img1.getScaledInstance(250, 350, Image.SCALE_SMOOTH);

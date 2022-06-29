@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import kioske.YounukLee7.kioskeUI.Logo_MenuName_Panel;
 import kioske.YounukLee7.kioskeUI.Select_Set_Size_down;
 import kioske.YounukLee7.kioskeUI.Select_Side_Drink_down;
+import kioske.pherkad0602.HomeMenuKiosk;
 import manager.component.ManagerCP;
 
 public class Sub_JFrame extends JFrame {
@@ -18,10 +19,16 @@ public class Sub_JFrame extends JFrame {
 //		panel.add(new Select_Set_Size_down(this, idx));
 //	}
 	
+	// 형래님 홈으로 가기
+	public void veiw_Home_giveIDX(int menuidx) {
+		ManagerCP.reFresh(panel);
+		panel.add(new HomeMenuKiosk());
+	}
+	
 	public void veiw_Select_Side_Drink(int idx, String  set, int setidx, int sideidx, int drinkidx) {
 		ManagerCP.reFresh(panel);
 		panel.add(new Logo_MenuName_Panel(idx,set));
-		panel.add(new Select_Side_Drink_down(idx,setidx,sideidx,drinkidx));
+		panel.add(new Select_Side_Drink_down(this, idx,setidx,sideidx,drinkidx));
 	}
 	
 	public Sub_JFrame() {
