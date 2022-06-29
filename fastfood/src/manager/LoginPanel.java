@@ -86,6 +86,9 @@ public class LoginPanel extends JPanel {
 //		loginInfo.add(new PsList('S', "admin"));
 //		loginInfo.add(new PsList('I', "1234"));		
 //		login(loginInfo);
+		txtId.setText("admin");
+		txtPassOn.setText("1234");
+		login();
 	}
 	
 	public void loginCheck() {
