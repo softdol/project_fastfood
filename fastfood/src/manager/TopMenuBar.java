@@ -142,10 +142,90 @@ public class TopMenuBar extends JMenuBar {
 		});
 		
 		menuExit.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
+			}
+		});
+		
+		menuOpenClose.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				if(main.menuMainPanel.jpMainMiddle.getComponent(0).getClass().getSimpleName().equals("SalesMain")) {
+					ManagerCP.viewError("하단 매출 달력에서 수정가능 합니다.", "안내");
+					return;
+				}
+				
+				Calendar cal = Calendar.getInstance();
+				DateFormat formatAll = new SimpleDateFormat("yyyy-MM-dd");
+				String thisDate = formatAll.format(cal.getTime());
+				
+				String sql = "select * from calculate where TO_CHAR(calculate_in_date, 'yyyy-mm-dd') = ?";
+				ArrayList<PsList> psList = new ArrayList<>();
+				psList.add(new PsList('S', thisDate));
+				
+				if(ReturnModel.selConfirm(sql, psList)) {	// 오픈일이 있으면
+					
+					sql = "select * from calculate where TO_CHAR(calculate_out_date, 'yyyy-mm-dd') = ?";
+					psList = new ArrayList<>();
+					psList.add(new PsList('S', thisDate));
+					
+					if(ReturnModel.selConfirm(sql, psList)) {	// 마감일이 있으면
+						ManagerCP.viewError("이미 마감 되었습니다.", "실패");
+						return;
+					}
+					
+					if(ManagerCP.viewConfirm(thisDate + "일을 마감 하시겠습니까?", "마감 등록")) {
+						sql = "update calculate";
+						sql += " set calculate_out_date = ?";
+						sql += " , calculate_out_id = ?";
+						sql += " , calculate_close = 'Y'";
+						sql += " , calculate_total_price = (select NVL(sum(PAYMENT_PRICE),0) from payment_list"; 
+						sql += " where TO_CHAR(PAYMENT_DATE, 'yyyy-mm-dd') = ?)";
+						sql += " where TO_CHAR(calculate_in_date, 'yyyy-mm-dd') = ?";
+						
+						psList = new ArrayList<>();
+						psList.add(new PsList('D', thisDate));
+						psList.add(new PsList('S', main.mInfo.getMember_id()));
+						psList.add(new PsList('S', thisDate));
+						psList.add(new PsList('S', thisDate));
+						
+						if (OjdbcConnection.insert(sql, psList)) {
+							ManagerCP.viewSuccess(thisDate + "일 마감이 등록 되었습니다.", "마감 등록");
+							//
+						} else {
+							ManagerCP.viewError("마감 등록 실패", "실패");
+						}						
+					}
+				}else {	// 오픈일이 없으면
+					if(ManagerCP.viewConfirm(thisDate + "일을 오픈 하시겠습니까?", "오픈 등록")) {
+						sql = "insert into calculate (CALCULATE_IDX, CALCULATE_IN_DATE, CALCULATE_IN_ID)";
+						sql += " values(CALCULATE_IDX_SEQ.nextval, ?, ?)";
+
+						psList = new ArrayList<>();
+						psList.add(new PsList('D', thisDate));
+						psList.add(new PsList('S', main.mInfo.getMember_id()));
+						if (OjdbcConnection.insert(sql, psList)) {
+							ManagerCP.viewSuccess(thisDate + "일 오픈이 등록 되었습니다.", "오픈 등록");
+							if(main.menuMainPanel.jpMainMiddle.getComponent(0).getClass().getSimpleName().equals("SalesMain")) {
+								//main.menuMainPanel.jpMainMiddle.
+								//System.out.println(main.menuMainPanel.jpMainMiddle.getComponent(0).getClass());
+							}
+							//
+						} else {
+							ManagerCP.viewError("오픈 등록 실패", "실패");
+						}
+					}
+				}
+				
+				
+				
+				
+
+
+				
 			}
 		});
 		

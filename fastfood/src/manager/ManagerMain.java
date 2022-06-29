@@ -20,7 +20,7 @@ public class ManagerMain extends JFrame {
 	public MenuMainPanel menuMainPanel;
 	LoginPanel login;
 	TopMenuBar  topBar;
-	public Member mInfo; 
+	public Member mInfo;
 	
 	public ManagerMain() {
 		setTitle("관라지 페이지");
