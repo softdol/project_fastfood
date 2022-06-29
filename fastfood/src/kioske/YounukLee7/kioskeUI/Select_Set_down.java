@@ -26,9 +26,9 @@ public class Select_Set_down extends JPanel{
 	
 	public Select_Set_down(Sub_JFrame screen, int idx) {
 		
-		String sql = "SELECT s.set_idx, m.menu_name, s.set_name, s.set_img_path, m.img_big_path FROM menu m INNER JOIN menu_set s ON m.menu_idx = s.set_rep WHERE menu_idx = ?";
-		ArrayList<MenuPicture> menuPicture = new ArrayList<>();
-//		MenuPicture menuPicture = null;
+		String sql = "SELECT set_idx, menu_name, set_name, set_img_path, img_big_path FROM menu INNER JOIN menu_set USING (menu_idx) WHERE menu_idx = ?";
+//		ArrayList<MenuPicture> menuPicture = new ArrayList<>();
+		MenuPicture menuPicture = null;
 		
 		try (
 				Connection conn = OjdbcConnection.getConnection();
@@ -38,8 +38,8 @@ public class Select_Set_down extends JPanel{
 			pstmt.setInt(1, idx);
 			try(ResultSet rs = pstmt.executeQuery();) {
 				while (rs.next()) {
-//					menuPicture = new MenuPicture(rs);
-					menuPicture.add(new MenuPicture(rs));
+					menuPicture = new MenuPicture(rs);
+//					menuPicture.add(new MenuPicture(rs));
 				}
 				
 			} catch (Exception e) {
@@ -47,6 +47,7 @@ public class Select_Set_down extends JPanel{
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
+		
 		
 //		for (int i = 0; i < MenuPicture_list.size(); i++) {
 //			System.out.println(menuPicture.getImg_big_path());
@@ -66,7 +67,7 @@ public class Select_Set_down extends JPanel{
 		JButton single_button = new JButton("단품");
 		single_button.setBounds(173, 200, 250, 350);
 		
-		ImageIcon icon = new ImageIcon(menuPicture.get(0).getImg_big_path());
+		ImageIcon icon = new ImageIcon(menuPicture.getImg_big_path());
 		Image img = icon.getImage();
 		Image soloimg = img.getScaledInstance(250, 350, Image.SCALE_SMOOTH);
 		ImageIcon soloicon = new ImageIcon(soloimg);
@@ -84,19 +85,20 @@ public class Select_Set_down extends JPanel{
 		JButton set_button = new JButton("세트");
 		set_button.setBounds(463, 200, 250, 350);
 		
-		ImageIcon icon1 = new ImageIcon(menuPicture.get(0).getSet_img_path());
+		ImageIcon icon1 = new ImageIcon(menuPicture.getSet_img_path());
 		Image img1 = icon1.getImage();
 		Image setimg = img1.getScaledInstance(250, 350, Image.SCALE_SMOOTH);
 		ImageIcon seticon = new ImageIcon(setimg);
-		
 		set_button.setIcon(seticon);
 		
+		int set_idx = menuPicture.getSet_idx();
 		set_button.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				                         // 세트 표시 s
-				screen.veiw_Set_Size(idx,"s");
+				//screen.veiw_Set_Size(idx,"s");
+				screen.veiw_Select_Side_Drink(idx, "s", set_idx, 0, 0);
 			}
 		});
 		

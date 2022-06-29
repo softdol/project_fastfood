@@ -27,13 +27,13 @@ public class Select_Side_Drink_down extends JPanel{
 		
 		String sql = "SELECT * FROM menu where menu_idx in (SELECT menu_idx FROM menu_set_list WHERE set_idx = ?) order by menu_idx";
 		ArrayList<Menu> menu = new ArrayList<>();
-		
+
 		try (
-				Connection conn = OjdbcConnection.getConnection();
+				Connection conn = OjdbcConnection.getConnection(); 
 				PreparedStatement pstmt = conn.prepareStatement(sql);
-				){
+			) {
 			pstmt.setInt(1, setidx);
-			try (ResultSet rs = pstmt.executeQuery();){
+			try (ResultSet rs = pstmt.executeQuery();) {
 				while (rs.next()) {
 					menu.add(new Menu(rs));
 				}
@@ -44,40 +44,40 @@ public class Select_Side_Drink_down extends JPanel{
 		}
 		
 		// 사이드 변경하면 실행
-				String sql2 = "SELECT * FROM menu where menu_idx = ?";
-				Menu menu2 = null;
-				
-				if (sideidx > 0) {
-					
-					try (
-							Connection conn = OjdbcConnection.getConnection();
-							PreparedStatement pstmt = conn.prepareStatement(sql2);
-							){
-						pstmt.setInt(1, sideidx);
-						try (ResultSet rs = pstmt.executeQuery();){
-							while (rs.next()) {
-								menu2 = new Menu(rs);
-							}
-						} catch (Exception e) {
-						}
-					} catch (SQLException e) {
-						e.printStackTrace();
+		String sql2 = "SELECT * FROM menu where menu_idx = ?";
+		Menu menu2 = null;
+
+		if (sideidx > 0) {
+
+			try (
+					Connection conn = OjdbcConnection.getConnection();
+					PreparedStatement pstmt = conn.prepareStatement(sql2);
+				) {
+				pstmt.setInt(1, sideidx);
+				try (ResultSet rs = pstmt.executeQuery();) {
+					while (rs.next()) {
+						menu2 = new Menu(rs);
 					}
+				} catch (Exception e) {
 				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		
 		// 음료 변경하면 실행
 		String sql3 = "SELECT * FROM menu where menu_idx = ?";
 		Menu menu3 = null;
-		
+
 		if (drinkidx > 0) {
-			
+
 			try (
 					Connection conn = OjdbcConnection.getConnection();
 					PreparedStatement pstmt = conn.prepareStatement(sql3);
-					){
+				) {
 				pstmt.setInt(1, drinkidx);
-				try (ResultSet rs = pstmt.executeQuery();){
+				try (ResultSet rs = pstmt.executeQuery();) {
 					while (rs.next()) {
 						menu3 = new Menu(rs);
 					}
@@ -168,19 +168,25 @@ public class Select_Side_Drink_down extends JPanel{
 			}
 		});
 		
+		// 가격 보여줌
 		int burgerPrice = menu.get(0).getMENU_PRICE(); // 햄버거
-		int sidePrice = menu.get(2).getMENU_PRICE(); // 사이드
-		int drinkPrice = menu.get(1).getMENU_PRICE(); // 콜라
+		int sidePrice; // 사이드 가격
+		int drinkPrice; // 콜라 가격
+		
+		if (sideidx > 0) {
+			sidePrice = menu2.getMENU_PRICE();
+		}else {
+			sidePrice = menu.get(2).getMENU_PRICE();
+		}
+		
+		if (drinkidx > 0) {
+			drinkPrice = menu3.getMENU_PRICE();
+		}else {
+			drinkPrice = menu.get(1).getMENU_PRICE();
+		}
 		
 		int sum = burgerPrice + drinkPrice + sidePrice;
-		
 		System.out.println(sum);
-		
-		
-		
-		
-		
-		
 		
 		
 		
@@ -194,7 +200,7 @@ public class Select_Side_Drink_down extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// 제품번호, 세트번호, 음료번호, 사이드번호
+				// 제품번호, 세트번호, 음료번호, 사이드번호, 가격
 			}
 		});
 		

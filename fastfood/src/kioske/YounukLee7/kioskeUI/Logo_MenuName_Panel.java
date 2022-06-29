@@ -19,7 +19,7 @@ public class Logo_MenuName_Panel extends JPanel{
 	
 	public Logo_MenuName_Panel(int idx,String set) {
 		
-		String sql = "SELECT s.set_idx, m.menu_name, s.set_name, s.set_img_path, m.img_big_path FROM menu m INNER JOIN menu_set s ON m.menu_idx = s.set_rep WHERE menu_idx = ?";
+		String sql = "SELECT set_idx, menu_name, set_name, set_img_path, img_big_path FROM menu INNER JOIN menu_set USING (menu_idx) WHERE menu_idx = ?";
 		//MenuPicture menuPicture = null;
 		ArrayList<MenuPicture> menuPicture = new ArrayList<>();
 		

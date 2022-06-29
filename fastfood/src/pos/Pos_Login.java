@@ -100,7 +100,7 @@ public class Pos_Login extends JFrame {
 								
 								if(rs.getString(1).equals(pass_check)) {
 									 JOptionPane.showMessageDialog(null, "[" + rs.getString(2) + "] " + "님으로 로그인이 되었습니다.");
-									 frame.setVisible(false);
+									 new Pos_Burger();
 									 
 									 
 									 
