@@ -10,9 +10,11 @@ import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import database.OjdbcConnection;
 import database.manager.Calculate;
 import database.manager.ReturnModel;
 import database.model.PsList;
@@ -23,6 +25,7 @@ import manager.component.ManagerCP;
 public class SalesMain extends JPanel {
 	
 	ManagerMain main;
+	int iDay;
 	
 	Calendar cal;
 	JPanel jpCalendar;
@@ -30,7 +33,12 @@ public class SalesMain extends JPanel {
 	ArrayList<JPanel> dayPanel = new ArrayList<>();
 	Calculate selCalculate = new Calculate();
 	
+	DateFormat format = new SimpleDateFormat("yyyy-MM");
+	DateFormat formatTime = new SimpleDateFormat("HH : mm");
+	DateFormat formatAll = new SimpleDateFormat("yyyy-MM-dd");
+	
 	public void selDay(Calculate c, int idx) {
+		this.iDay = idx;
 		this.selCalculate = c;
 		for(int i = 0; i < dayPanel.size(); i++) {
 			if(i == idx - 1) {
@@ -60,19 +68,117 @@ public class SalesMain extends JPanel {
 	}
 	
 	public void setOpenClose(String sCate) {
+		
+		Calendar setCal = cal;
+		
+		setCal.set(Calendar.DATE, iDay);
+				
+		String openDate = formatAll.format(setCal.getTime());
+		String closeDate = formatAll.format(setCal.getTime());
+		String sql = "";
+		ArrayList<PsList> psList = new ArrayList<>();
+		
 		switch(sCate) {
 		case "O":	//오픈 등록
+			// 오픈일로 된 날이 없으면
+			if(selCalculate.getCalculate_in_date() == null) {
+				if(ManagerCP.viewConfirm(openDate + "일을 오픈 하시겠습니까?", "오픈 등록")) {
+					sql = "insert into calculate (CALCULATE_IDX, CALCULATE_IN_DATE, CALCULATE_IN_ID)";
+					sql += " values(CALCULATE_IDX_SEQ.nextval, ?, ?)";
+					
+					psList = new ArrayList<>();
+					psList.add(new PsList('D', openDate));
+					psList.add(new PsList('S', main.mInfo.getMember_id()));
+					if (OjdbcConnection.insert(sql, psList)) {
+						ManagerCP.viewSuccess(openDate + "일 오픈이 등록 되었습니다.", "오픈 등록");
+						viewMonSale();
+					} else {
+						ManagerCP.viewError("오픈 등록 실패", "실패");
+					}
+				}
+			}
 			break;
 		case "C":	//마감 등록
+			// 오픈일로 된 날이 있으면
+			if(selCalculate.getCalculate_in_date() != null) {
+				if(ManagerCP.viewConfirm(closeDate + "일을 마감 하시겠습니까?", "마감 등록")) {
+					sql = "update calculate";
+					sql += " set calculate_out_date = ?";
+					sql += " , calculate_out_id = ?";
+					sql += " , calculate_close = 'Y'";
+					sql += " , calculate_total_price = (select NVL(sum(PAYMENT_PRICE),0) from payment_list"; 
+					sql += " where TO_CHAR(PAYMENT_DATE, 'yyyy-mm-dd') = ?)";
+					sql += " where TO_CHAR(calculate_in_date, 'yyyy-mm-dd') = ?";
+					
+					psList = new ArrayList<>();
+					psList.add(new PsList('D', closeDate));
+					psList.add(new PsList('S', main.mInfo.getMember_id()));
+					psList.add(new PsList('S', closeDate));
+					psList.add(new PsList('S', closeDate));
+					
+					if (OjdbcConnection.insert(sql, psList)) {
+						ManagerCP.viewSuccess(openDate + "일 오픈이 등록 되었습니다.", "오픈 등록");
+						viewMonSale();
+					} else {
+						ManagerCP.viewError("오픈 등록 실패", "실패");
+					}
+				}
+			}else {
+				ManagerCP.viewError("오픈일이 등록 되어 있지 않습니다.", "등록 에러");
+			}
 			break;
 		case "OC":	//오픈 취소
+			// 오픈일로 된 날이 있으면
+			if(selCalculate.getCalculate_in_date() != null) {
+				if(ManagerCP.viewConfirm(openDate + "일의 오픈을 취소 하시겠습니까?", "오픈 등록 취소")) {
+					sql = "delete from calculate";
+					sql += " where TO_CHAR(calculate_in_date, 'yyyy-mm-dd') = ?";
+					
+					psList = new ArrayList<>();
+					psList.add(new PsList('S', openDate));
+					if (OjdbcConnection.insert(sql, psList)) {
+						ManagerCP.viewSuccess(openDate + "일의 오픈이 취소 되었습니다.", "오픈 취소");
+						viewMonSale();
+					} else {
+						ManagerCP.viewError("오픈 등록 취소 실패", "실패");
+					}
+					
+				}
+			}else{
+				ManagerCP.viewError("오픈일이 등록 되어 있지 않습니다.", "등록 에러");
+			}
 			break;
 		case "CC":	//마감 취소
+			// 마감일로 된 날이 있으면
+			if(selCalculate.getCalculate_out_date() != null) {
+				if(ManagerCP.viewConfirm(openDate + "일의 마감을 해지 하시겠습니까?", "마감 등록 해지")) {
+					sql = "update calculate set CALCULATE_OUT_DATE = null";
+					sql += " , CALCULATE_OUT_ID = ?";
+					sql += " , CALCULATE_CLOSE = 'N'";					
+					sql += " , CALCULATE_TOTAL_PRICE = 0";
+					sql += " where TO_CHAR(calculate_in_date, 'yyyy-mm-dd') = ?";
+					
+					psList = new ArrayList<>();
+					
+					psList.add(new PsList('S', main.mInfo.getMember_id()));
+					psList.add(new PsList('S', openDate));
+					if (OjdbcConnection.insert(sql, psList)) {
+						ManagerCP.viewSuccess(openDate + "일의 마감이 해지 되었습니다.", "마감 해지");
+						viewMonSale();
+					} else {
+						ManagerCP.viewError("마감 해지 실패", "실패");
+					}
+				}
+			}else{
+				ManagerCP.viewError("마감일이 등록 되어 있지 않습니다.", "등록 에러");
+			}
 			break;
 		}
-		System.out.println(sCate);
-		System.out.println(selCalculate);
-		//viewMonSale();
+		
+		topCalendar.btnOpen.setEnabled(false);
+		topCalendar.btnClose.setEnabled(false);
+		topCalendar.btnOpenC.setEnabled(false);
+		topCalendar.btnCloseC.setEnabled(false);
 	}
 	
 	public SalesMain(ManagerMain main) {
@@ -140,9 +246,7 @@ public class SalesMain extends JPanel {
 	
 	public void viewMonSale() {
 		ManagerCP.reFresh(jpCalendar);
-		
-		DateFormat format = new SimpleDateFormat("yyyy-MM");
-		DateFormat formatTime = new SimpleDateFormat("HH : mm");
+		dayPanel = new ArrayList<>();
 		
 		topCalendar.jlViewDate.setText(format.format(cal.getTime()));
 		
@@ -151,19 +255,32 @@ public class SalesMain extends JPanel {
 		int endDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH) + week;
 		
 		String sqlSel = "select * from calculate";
-		sqlSel +=  " where calculate_in_date >= ? order by calculate_in_date";
+		sqlSel +=  " where TO_CHAR(calculate_in_date, 'yyyy-mm') = ? order by calculate_in_date";
 		ArrayList<PsList> psList = new ArrayList<>();
-		psList.add(new PsList('D', String.valueOf(format.format(cal.getTime()))));		
+		psList.add(new PsList('S', format.format(cal.getTime())));		
 		ArrayList<Calculate> calculateListAll = new ArrayList<>();
-		for(int i = 0; i < cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
-			calculateListAll.add(new Calculate());
-		}
 		ArrayList<Calculate> calculateList = ReturnModel.selCalculateMonth(sqlSel, psList);
-		int listMax = calculateList.size();
-		
-		for(int i = 0; i < listMax; i++) {
-			calculateListAll.set(i, calculateList.get(i));
+		//int listMax = calculateList.size();
+		Calendar allCal = cal;
+		for(int i = 0; i < cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
+			
+			allCal.set(Calendar.DATE, i + 1);
+			String orgDate = formatAll.format(allCal.getTime());
+			boolean chkDate = true;
+			
+			for(Calculate c: calculateList) {
+				if(orgDate.equals(formatAll.format(c.getCalculate_in_date()))) {
+					calculateListAll.add(c);
+					chkDate = false;
+					break;
+				}
+			}
+			
+			if(chkDate) {
+				calculateListAll.add(new Calculate());
+			}
 		}
+
 				
 		for(int i = 1; i <= 42; i++) {
 			
