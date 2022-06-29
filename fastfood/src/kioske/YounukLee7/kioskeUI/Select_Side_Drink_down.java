@@ -203,7 +203,7 @@ public class Select_Side_Drink_down extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// 햄버거번호, 세트번호, 음료번호, 사이드번호, 총 가격
-				frame.veiw_Home_giveIDX(idx);
+				//frame.veiw_Home_giveIDX(idx);
 			}
 		});
 		

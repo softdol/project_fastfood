@@ -61,7 +61,7 @@ public class OrderCheck extends JFrame{
 				psList.add(new PsList('I', String.valueOf(idx)));
 				System.out.println(ReturnModel.selConfirmP(sql, psList));
 				if(ReturnModel.selConfirmP(sql, psList)) {
-					frame.veiw_(idx);
+					frame.veiw_Select_Set(idx);
 					//있을떄
 				}else {	// 없을때
 					hMain.setPrice(idx);

@@ -26,12 +26,13 @@ public class Main_JFrame extends JFrame{
 	}
 	
 	// 형래님 홈으로 가기
-	public void veiw_Home(String check) {
+	public void veiw_Home(int idx) {
 		ManagerCP.reFresh(panel);
-		panel.add(new HomeMenuKiosk(this));
+		panel.add(new HomeMenuKiosk(this,idx));
 	}
 	
-	public void veiw_(int menuidx) {
+	// 형래님 꺼에서 부르는 것
+	public void veiw_Select_Set(int menuidx) {
 		ManagerCP.reFresh(panel);
 		panel.add(new Logo_MenuName_Panel(menuidx, null));
 		panel.add(new Select_Set_down(this, menuidx));

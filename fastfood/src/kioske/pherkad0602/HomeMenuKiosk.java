@@ -44,7 +44,7 @@ public class HomeMenuKiosk extends JPanel{
 		System.out.println(name);
 	}
 	
-	public HomeMenuKiosk(Main_JFrame frame) {
+	public HomeMenuKiosk(Main_JFrame frame, int idx) {
 		
 		
 		

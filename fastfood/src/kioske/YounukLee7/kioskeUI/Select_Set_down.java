@@ -22,6 +22,7 @@ import kioske.YounukLee7.Select_Set_Size;
 import kioske.YounukLee7.Sub_JFrame;
 import kioske.YounukLee7.dbtablePocket.EventPage;
 import kioske.YounukLee7.dbtablePocket.MenuPicture;
+import kioske.pherkad0602.HomeMenuKiosk;
 
 public class Select_Set_down extends JPanel{
 	
@@ -79,7 +80,9 @@ public class Select_Set_down extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// 매뉴 idx 보내기
-				screen.veiw_Home_giveIDX(idx);
+				frame.veiw_Home(idx);
+				HomeMenuKiosk home = new HomeMenuKiosk(frame, idx);
+				home.setPrice(idx);
 			}
 		});
 		
@@ -98,7 +101,7 @@ public class Select_Set_down extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				                         // 세트 표시 s
 				//screen.veiw_Set_Size(idx,"s");
-				screen.veiw_Select_Side_Drink(idx, "s", set_idx, 0, 0);
+				//screen.veiw_Select_Side_Drink(idx, "s", set_idx, 0, 0);
 			}
 		});
 		

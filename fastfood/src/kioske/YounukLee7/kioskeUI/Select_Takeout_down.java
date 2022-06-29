@@ -16,6 +16,8 @@ import javax.swing.JPanel;
 import kioske.YounukLee7.Main_JFrame;
 
 public class Select_Takeout_down extends JPanel{
+	
+	int idx;
 
 	public Select_Takeout_down(Main_JFrame frame) {
 		
@@ -41,7 +43,7 @@ public class Select_Takeout_down extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frame.veiw_Home("H");
+				frame.veiw_Home(idx);
 			}
 		});
 		
@@ -49,7 +51,7 @@ public class Select_Takeout_down extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frame.veiw_Home("T");
+				frame.veiw_Home(idx);
 			}
 		});
 		
