@@ -208,24 +208,12 @@ public class TopMenuBar extends JMenuBar {
 						psList.add(new PsList('D', thisDate));
 						psList.add(new PsList('S', main.mInfo.getMember_id()));
 						if (OjdbcConnection.insert(sql, psList)) {
-							ManagerCP.viewSuccess(thisDate + "일 오픈이 등록 되었습니다.", "오픈 등록");
-							if(main.menuMainPanel.jpMainMiddle.getComponent(0).getClass().getSimpleName().equals("SalesMain")) {
-								//main.menuMainPanel.jpMainMiddle.
-								//System.out.println(main.menuMainPanel.jpMainMiddle.getComponent(0).getClass());
-							}
-							//
+							ManagerCP.viewSuccess(thisDate + "일 오픈이 등록 되었습니다.", "오픈 등록");							
 						} else {
 							ManagerCP.viewError("오픈 등록 실패", "실패");
 						}
 					}
 				}
-				
-				
-				
-				
-
-
-				
 			}
 		});
 		
