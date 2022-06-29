@@ -17,6 +17,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import kioske.YounukLee7.Main_JFrame;
 import kioske.pherkad0602.HomeMenuKiosk;
 import kioske.pherkad0602.action.MenuSelAction;
 import kioske.pherkad0602.action.MenuSelectionAction;
@@ -26,7 +27,7 @@ public class Menu extends JPanel {
 	
 	HomeMenuKiosk hMain;
 	
-	public  Menu(ArrayList<MenuDatabase> menuList, HomeMenuKiosk hMain) {
+	public  Menu(ArrayList<MenuDatabase> menuList, HomeMenuKiosk hMain, Main_JFrame frame) {
 		this.hMain = hMain;
 		EmptyBorder border = new EmptyBorder(getInsets());
 		
@@ -39,7 +40,6 @@ public class Menu extends JPanel {
 		setLayout(manager);
 		setBorder(border);
 
-		MenuSelectionAction listener = new MenuSelectionAction(hMain);
 		
 		for(int i = 0; i <a; ++i) {
 			
@@ -47,7 +47,7 @@ public class Menu extends JPanel {
 			JButton btn3 = new JButton();
 			btn3.setBackground(new Color(0xFFFFFF));
 			btn3.setName(String.valueOf(menuList.get(i).getMenu_idx()));
-			btn3.addActionListener(new MenuSelAction(hMain, menuList.get(i).getMenu_idx()));
+			btn3.addActionListener(new MenuSelAction(hMain, menuList.get(i).getMenu_idx(),frame));
 			btn3.setBorder(border);
 			btn3.setLayout(null);
 			

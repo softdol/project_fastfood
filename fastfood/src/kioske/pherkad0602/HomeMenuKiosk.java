@@ -69,8 +69,6 @@ public class HomeMenuKiosk extends JPanel{
 	}
 	
 	public static void main(String[] args) {
-		
-		new HomeMenuKiosk();
 
 	}
 

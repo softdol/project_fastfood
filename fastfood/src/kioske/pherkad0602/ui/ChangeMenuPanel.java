@@ -9,12 +9,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import kioske.YounukLee7.Main_JFrame;
 import kioske.pherkad0602.HomeMenuKiosk;
 import kioske.pherkad0602.database.MenuDatabase;
 
 public class ChangeMenuPanel extends JPanel {
 	
-	public ChangeMenuPanel (ArrayList<MenuDatabase> sList, HomeMenuKiosk hMain) {
+	public ChangeMenuPanel (ArrayList<MenuDatabase> sList, HomeMenuKiosk hMain, Main_JFrame frame) {
 		
 		EmptyBorder border = new EmptyBorder(getInsets());
 		int a = sList.size();
@@ -25,7 +26,7 @@ public class ChangeMenuPanel extends JPanel {
 		menuPanel.setBackground(Color.white);
 		menuPanel.setBorder(border);
 		
-		Menu menu= new Menu(sList, hMain);
+		Menu menu= new Menu(sList, hMain, frame);
 		menuPanel.add(menu);	
 		
 		JScrollPane scrollPane = new JScrollPane(menuPanel);

@@ -36,7 +36,7 @@ public class SmallEventBanner extends JPanel{
 		evButton.setBounds(5, i*150, 650, 145);
 		evButton.setBackground(Color.white);
 		evButton.setBorder(border);
-		evButton.addActionListener(new MenuSelAction(hMain, evBanner.get(i).getMENU_IDX()),frame);
+		evButton.addActionListener(new MenuSelAction(hMain, evBanner.get(i).getMENU_IDX(),frame));
 		ImageIcon icon = new ImageIcon(String.valueOf(evBanner.get(i).getSMALL_EVENT_PAGE()));		
 		Image img = icon.getImage();
 		Image changeImg = img.getScaledInstance(680, 150, Image.SCALE_SMOOTH);

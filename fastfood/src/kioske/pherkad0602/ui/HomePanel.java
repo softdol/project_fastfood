@@ -63,7 +63,7 @@ public class HomePanel extends JPanel{
 		menuPanel.setBorder(border);
 		
 		
-		Menu menu= new Menu(menuList, hMain);
+		Menu menu= new Menu(menuList, hMain, frame);
 		menuPanel.add(menu);
 		menuPanel.setBounds(0,550,684,550+(200*(a/3)+1));
 		mainPanel.add(menuPanel);

@@ -22,7 +22,7 @@ public class MenuSelAction implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		hMain.order(idx);
+		hMain.order(idx, frame);
 	}
 
 }
