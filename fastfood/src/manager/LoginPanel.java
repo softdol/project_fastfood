@@ -2,6 +2,8 @@ package manager;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -14,10 +16,14 @@ import javax.swing.JTextField;
 import database.manager.Member;
 import database.manager.ReturnModel;
 import database.model.PsList;
+import manager.component.ManagerCP;
 
 public class LoginPanel extends JPanel {
 	
 	private ManagerMain main;
+
+	JTextField txtId;
+	JPasswordField txtPassOn;
 	
 	public LoginPanel(ManagerMain main) {
 		this.main = main;
@@ -29,37 +35,32 @@ public class LoginPanel extends JPanel {
 		lblId.setBounds(30, 30, 50, 45);
 		
 		JLabel lblPass = new JLabel("패스워드");
-		lblPass.setBounds(30, 85, 50, 45);
+		lblPass.setBounds(lblId.getX(), lblId.getY() + lblId.getHeight() + 10, 50, 45);
 		
-		JTextField txtId = new JTextField();
-		txtId.setBounds(90, 30, 80, 45);
+		txtId = new JTextField();
+		txtId.setBounds(lblId.getX() + lblId.getWidth() + 10, lblId.getY(), 100, 45);
 		txtId.requestFocus();
 		
-		JPasswordField txtPassOn = new JPasswordField();		
-		txtPassOn.setBounds(90, 85, 80, 45);
+		txtPassOn = new JPasswordField();		
+		txtPassOn.setBounds(txtId.getX(), lblPass.getY(), 100, 45);
 		
 //		txtId.setFocusTraversalKeysEnabled(false);
-//		txtId.addKeyListener(new KeyAdapter() {			
-//			//키 입력시
-//			@Override
-//			public void keyPressed(KeyEvent e) {
-//				System.out.println("keyPressed");
-//				System.out.println(e.getKeyChar());
-//				if(e.getKeyCode() == KeyEvent.VK_TAB)
-//					txtPassOn.requestFocus();
-//			}
-//		});
+		txtPassOn.addKeyListener(new KeyAdapter() {			
+			//키 입력시
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER)					
+					loginCheck();
+			}
+		});
 		
 		JButton btnLogin = new JButton("로그인");
-		btnLogin.setBounds(180, 30, 80, 100);
+		btnLogin.setBounds(lblId.getX(), lblPass.getY() + lblPass.getHeight() + 20, lblId.getWidth() + txtId.getWidth() + 10, 45);
 		btnLogin.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {				
-				ArrayList<PsList> userInfo = new ArrayList<>();
-				userInfo.add(new PsList('S', txtId.getText()));
-				userInfo.add(new PsList('S', txtPassOn.getText()));				
-				loginCheck(userInfo);
+				loginCheck();
 			}
 			
 		});
@@ -81,26 +82,40 @@ public class LoginPanel extends JPanel {
 //		setFocusTraversalPolicy(newPolicy);
 		
 		// 자동 로그인 임시
-		ArrayList<PsList> loginInfo = new ArrayList<>();
-		loginInfo.add(new PsList('S', "admin"));
-		loginInfo.add(new PsList('I', "1234"));		
-		loginCheck(loginInfo);
+//		ArrayList<PsList> loginInfo = new ArrayList<>();
+//		loginInfo.add(new PsList('S', "admin"));
+//		loginInfo.add(new PsList('I', "1234"));		
+//		login(loginInfo);
 	}
 	
-	public void loginCheck(ArrayList<PsList> loginInfo) {
+	public void loginCheck() {
 		
-		Member mInfo = ReturnModel.selMember("select * from member_list where member_id = ? and member_pass = ?", loginInfo);
+		if(txtId.getText().trim().length() == 0) {
+			ManagerCP.viewError("직원 ID 를 입력해 주세요.", "입력 오류");
+			txtId.requestFocus();
+			return;
+		}
+		if(txtPassOn.getText().trim().length() == 0) {
+			ManagerCP.viewError("비밀번호를 입력해 주세요.", "입력 오류");
+			txtPassOn.requestFocus();
+			return;
+		}
+		
+		login();
+	}
+	
+	public void login() {
+		ArrayList<PsList> userInfo = new ArrayList<>();
+		userInfo.add(new PsList('S', txtId.getText()));
+		userInfo.add(new PsList('S', txtPassOn.getText()));				
+		
+		Member mInfo = ReturnModel.selMember("select * from member_list where member_id = ? and member_pass = ? and MEMBER_USE_FLAG = 'Y'", userInfo);
 		
 		if(mInfo != null) {
-//			System.out.println("로그인 성공");
-//			System.out.println(mInfo.getMember_id() + " : " + mInfo.getMember_name());
-//			JOptionPane.showMessageDialog(null, "로그인 성공 [" + mInfo.getMember_id() + " : " + mInfo.getMember_name() + "]", "성공",
-//					JOptionPane.INFORMATION_MESSAGE);
 			setVisible(false);
 			main.loginOn(mInfo);
 		}else {
-//			System.out.println("로그인 실패");
-			JOptionPane.showMessageDialog(null, "로그인 실패", "실패",
+			JOptionPane.showMessageDialog(null, "ID 또는 패스워드가 틀립니다.", "실패",
 					JOptionPane.WARNING_MESSAGE);
 		}
 	}

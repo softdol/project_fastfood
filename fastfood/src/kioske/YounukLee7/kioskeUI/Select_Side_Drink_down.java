@@ -23,7 +23,7 @@ import kioske.YounukLee7.dbtablePocket.MenuPicture;
 
 public class Select_Side_Drink_down extends JPanel{
 	
-	public Select_Side_Drink_down(int idx, int setidx, int drinkidx, int sideidx) {
+	public Select_Side_Drink_down(int idx, int setidx, int sideidx, int drinkidx) {
 		
 		String sql = "SELECT * FROM menu where menu_idx in (SELECT menu_idx FROM menu_set_list WHERE set_idx = ?) order by menu_idx";
 		ArrayList<Menu> menu = new ArrayList<>();
@@ -43,20 +43,43 @@ public class Select_Side_Drink_down extends JPanel{
 			e.printStackTrace();
 		}
 		
+		// 사이드 변경하면 실행
+				String sql2 = "SELECT * FROM menu where menu_idx = ?";
+				Menu menu2 = null;
+				
+				if (sideidx > 0) {
+					
+					try (
+							Connection conn = OjdbcConnection.getConnection();
+							PreparedStatement pstmt = conn.prepareStatement(sql2);
+							){
+						pstmt.setInt(1, sideidx);
+						try (ResultSet rs = pstmt.executeQuery();){
+							while (rs.next()) {
+								menu2 = new Menu(rs);
+							}
+						} catch (Exception e) {
+						}
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+		
+		
 		// 음료 변경하면 실행
-		String sql2 = "SELECT * FROM menu where menu_idx = ?";
-		Menu menu2 = null;
+		String sql3 = "SELECT * FROM menu where menu_idx = ?";
+		Menu menu3 = null;
 		
 		if (drinkidx > 0) {
 			
 			try (
 					Connection conn = OjdbcConnection.getConnection();
-					PreparedStatement pstmt = conn.prepareStatement(sql2);
+					PreparedStatement pstmt = conn.prepareStatement(sql3);
 					){
-				pstmt.setInt(1, sideidx);
+				pstmt.setInt(1, drinkidx);
 				try (ResultSet rs = pstmt.executeQuery();){
 					while (rs.next()) {
-						menu2 = new Menu(rs);
+						menu3 = new Menu(rs);
 					}
 				} catch (Exception e) {
 				}
@@ -81,11 +104,21 @@ public class Select_Side_Drink_down extends JPanel{
 		
 		JLabel side_label = new JLabel("사이드 사진");
 		side_label.setBounds(350, 150, 200, 170);
-		ImageIcon icon1 = new ImageIcon(menu.get(1).getIMG_BIG_PATH());
-		Image img1 = icon1.getImage();
-		Image sideimg = img1.getScaledInstance(200, 170, Image.SCALE_SMOOTH);
-		ImageIcon sideicon = new ImageIcon(sideimg);
-		side_label.setIcon(sideicon);
+		
+		if (sideidx > 0) {
+			ImageIcon icon1 = new ImageIcon(menu2.getIMG_BIG_PATH());
+			Image img1 = icon1.getImage();
+			Image sideimg = img1.getScaledInstance(200, 170, Image.SCALE_SMOOTH);
+			ImageIcon sideicon = new ImageIcon(sideimg);
+			side_label.setIcon(sideicon);
+		}else {
+			ImageIcon icon1 = new ImageIcon(menu.get(2).getIMG_BIG_PATH());
+			Image img1 = icon1.getImage();
+			Image sideimg = img1.getScaledInstance(200, 170, Image.SCALE_SMOOTH);
+			ImageIcon sideicon = new ImageIcon(sideimg);
+			side_label.setIcon(sideicon);
+		}
+		
 		
 		
 		JLabel drink_label = new JLabel("음료 사진");
@@ -93,13 +126,13 @@ public class Select_Side_Drink_down extends JPanel{
 		
 		// 음료 변경하면 실행
 		if (drinkidx > 0) {
-			ImageIcon icon2 = new ImageIcon(menu2.getIMG_BIG_PATH());
+			ImageIcon icon2 = new ImageIcon(menu3.getIMG_BIG_PATH());
 			Image img2 = icon2.getImage();
 			Image drinkimg = img2.getScaledInstance(200, 170, Image.SCALE_SMOOTH);
 			ImageIcon drinkicon = new ImageIcon(drinkimg);
 			drink_label.setIcon(drinkicon);
 		} else {
-			ImageIcon icon2 = new ImageIcon(menu.get(2).getIMG_BIG_PATH());
+			ImageIcon icon2 = new ImageIcon(menu.get(1).getIMG_BIG_PATH());
 			Image img2 = icon2.getImage();
 			Image drinkimg = img2.getScaledInstance(200, 170, Image.SCALE_SMOOTH);
 			ImageIcon drinkicon = new ImageIcon(drinkimg);
@@ -136,8 +169,8 @@ public class Select_Side_Drink_down extends JPanel{
 		});
 		
 		int burgerPrice = menu.get(0).getMENU_PRICE(); // 햄버거
-		int drinkPrice = menu.get(1).getMENU_PRICE(); // 콜라
 		int sidePrice = menu.get(2).getMENU_PRICE(); // 사이드
+		int drinkPrice = menu.get(1).getMENU_PRICE(); // 콜라
 		
 		int sum = burgerPrice + drinkPrice + sidePrice;
 		
@@ -161,7 +194,7 @@ public class Select_Side_Drink_down extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				// 제품번호, 세트번호, 음료번호, 사이드번호
 			}
 		});
 		

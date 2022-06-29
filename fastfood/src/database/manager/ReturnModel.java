@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -417,6 +419,8 @@ public class ReturnModel {
 						Calendar cal = Calendar.getInstance();						
 						String[] strDate = ps.getVal().split("-");
 						cal.set(Integer.parseInt(strDate[0]), Integer.parseInt(strDate[1]) - 1, 1);
+						DateFormat formatAll = new SimpleDateFormat("yyyy-MM-dd");
+						System.out.println(formatAll.format(cal.getTime()));
 						java.sql.Date sqlDate = new java.sql.Date(cal.getTimeInMillis());						
 						pstmt.setDate(1, sqlDate);
 						break;
@@ -545,6 +549,54 @@ public class ReturnModel {
 		}
 	}
 	
+	/**
+	 * 결과 값이 있는지 없는지 리턴
+	 * @param sql
+	 * @param psList
+	 * @return
+	 */
+	public static boolean selConfirm (String sql, ArrayList<PsList> psList) {		
+		try(
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt= conn.prepareStatement(sql);
+			){
+			
+			for(int i = 0; i < psList.size(); i++) {
+				PsList ps = psList.get(i);
+				switch(ps.getType()) {
+					case 'i': case 'I':
+						pstmt.setInt(i + 1, Integer.parseInt(ps.getVal()));
+						break;
+					case 's': case 'S':
+						pstmt.setString(i + 1, ps.getVal());
+						break;
+					case 'd': case 'D':
+						pstmt.setDate(i + 1, java.sql.Date.valueOf(ps.getVal()));
+						break;
+					default:
+						pstmt.setString(i + 1, ps.getVal());
+						break;				
+				}
+			}
+			
+			try(ResultSet rs = pstmt.executeQuery()){
+				if(rs.next()) {
+					return true;					
+				}else {
+					return false;
+				}
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+				return false;
+			}		
+			
+						
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 	
 
 }

@@ -47,7 +47,7 @@ public class SalesTopCalendar extends JPanel {
 		btnNextY.setBounds(btnNextM.getX() + btnNextM.getWidth() + 5, btnPrevY.getY(), 50, 40);
 		btnNextY.addActionListener(new SaleActionListener(parent, "NY"));
 		
-		JButton btnNow = new JButton("ÀÌ¹ø´Þ");
+		JButton btnNow = new JButton("¿À´Ã");
 		btnNow.setBounds(btnNextY.getX() + btnNextY.getWidth() + 5, btnPrevY.getY(), 80, 40);
 		btnNow.addActionListener(new SaleActionListener(parent, "N"));
 		
