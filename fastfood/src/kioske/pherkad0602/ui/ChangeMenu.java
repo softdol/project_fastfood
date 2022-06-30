@@ -29,7 +29,7 @@ public class ChangeMenu extends JPanel{
 	
 	public ChangeMenu(ArrayList<MenuDatabase> menuList, ArrayList<MenuDatabase> menuInfo,
 			ArrayList<SetDatabase> setList, int menuidx, String  set, int setidx, int sideidx, int drinkidx, int catei
-			,kiosk7 kiosk7) {
+			,kiosk7 kiosk7, int final_price) {
 		
 		this.kiosk7 = kiosk7;
 		EmptyBorder border = new EmptyBorder(getInsets());
@@ -84,21 +84,26 @@ public class ChangeMenu extends JPanel{
 			int sale = Integer.valueOf(setList.get(0).getSET_SALE());
 
 			JTextPane priceLabel = new JTextPane();
+			int temp1 = 0;
 			if(catei == 2) {
 				if(drinkprice<0) {
 					priceLabel.setText("0원");
 				} else {
 					priceLabel.setText(String.valueOf((drinkprice*(100-sale))/100)+"원");
+					temp1 = (drinkprice*(100-sale))/100;
 				}
 			} else if(catei ==3){
 				if(sideprice<0) {
 					priceLabel.setText("0원");
 				} else {
 					priceLabel.setText(String.valueOf((sideprice*(100-sale))/100)+"원");
+					temp1 = (sideprice*(100-sale))/100;
 				}
 			}
 			
-			String addCost = priceLabel.getText();
+
+			int addCost = temp1+final_price;
+			
 			btn3.addActionListener(new MenuChangeAction(kiosk7, menuList.get(i).getMenu_idx(), addCost));
 
 			priceLabel.setBounds(0,185,210,25);

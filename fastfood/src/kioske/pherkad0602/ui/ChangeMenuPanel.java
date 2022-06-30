@@ -23,7 +23,7 @@ public class ChangeMenuPanel extends JPanel {
 
 	public ChangeMenuPanel (ArrayList<MenuDatabase> menuList, ArrayList<MenuDatabase> menuInfo,
 			ArrayList<SetDatabase> setList, int menuidx, String  set, int setidx, int sideidx, int drinkidx, int catei
-			,kiosk7 kiosk7) {
+			,kiosk7 kiosk7, int final_price) {
 		
 		EmptyBorder border = new EmptyBorder(getInsets());
 		int a = menuList.size();
@@ -35,7 +35,7 @@ public class ChangeMenuPanel extends JPanel {
 		menuPanel.setBorder(border);
 		
 		ChangeMenu menu= new ChangeMenu(menuList, menuInfo, setList, 
-				 menuidx, set, setidx, sideidx, drinkidx, catei, kiosk7);
+				 menuidx, set, setidx, sideidx, drinkidx, catei, kiosk7, final_price);
 		menuPanel.add(menu);
 		
 		JScrollPane scrollPane = new JScrollPane(menuPanel);

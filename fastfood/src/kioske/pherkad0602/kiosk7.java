@@ -27,15 +27,37 @@ public class kiosk7 extends JFrame{
 		
 	   Main_JFrame frame;
 	   int idx;
-	   kiosk7 kiosk7;
+	   kiosk7 ki7;
+	   int final_price;
+	   JLabel payLabel1 = new JLabel();
+	   JLabel payLabel2 = new JLabel();
+	   JButton payBtn1 = new JButton();
+	   JButton payBtn2 = new JButton();
 	   
-	   public void order(kiosk7 kiosk7, int idx, String addCost) {
+	   
+	   public void order(kiosk7 ki7, int idx, String addCost) {
 			// TODO Auto-generated method stub
-			new ChangeCheck(kiosk7, idx, addCost);
 		}
    
-		public void setPrice(kiosk7 kiosk7,int idx, String addCost) {
+		public void setPrice(kiosk7 ki7,int idx, int addCost) {
+			payLabel2.setText(String.valueOf(addCost)+ "¿ø");
 			
+			payBtn1.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			payBtn2.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 			
 		}
 	   
@@ -110,17 +132,15 @@ public class kiosk7 extends JFrame{
 		  pSouth.add(menuLabel);
 	      
 
-		 ChangeMenuPanel chgMenu = new ChangeMenuPanel(menuList, menuInfo, setList, 
-				 menuidx, set, setidx, sideidx, drinkidx, catei, this);
-		  pSouth.add(chgMenu);
+		
 		 
 			
 	      
 	      // °áÁ¦ÆÐ³Î Å¬·¡½ºÈ­ ÇØ¾ßÇÔ
-		   JLabel payLabel1 = new JLabel();
-		   JLabel payLabel2 = new JLabel();
-		   JButton payBtn1 = new JButton();
-		   JButton payBtn2 = new JButton();
+		  payLabel1 = new JLabel();
+		  payLabel2 = new JLabel();
+		  payBtn1 = new JButton();
+		  payBtn2 = new JButton();
 		   
 		   payLabel1.setBounds(100,20,300,50);
 		   payLabel1.setText("ÃÑ ÁÖ¹® ±Ý¾×");
@@ -132,7 +152,11 @@ public class kiosk7 extends JFrame{
 				   + Integer.valueOf(menuInfo.get(2).getMenu_price());
 		   int sale = Integer.valueOf(setList.get(0).getSET_SALE());
 		   
-		   int final_price = (price *(100-sale))/100;
+		   final_price = (price *(100-sale))/100;
+		   
+		   ChangeMenuPanel chgMenu = new ChangeMenuPanel(menuList, menuInfo, setList, 
+					 menuidx, set, setidx, sideidx, drinkidx, catei, this, final_price);
+		   pSouth.add(chgMenu);
 		   
 		   payLabel2.setBounds(700,20,300,50);
 		   payLabel2.setText(String.valueOf(final_price)+"¿ø");
@@ -141,26 +165,11 @@ public class kiosk7 extends JFrame{
 		   
 		   payBtn1.setBounds(50,100,350,50);
 		   payBtn1.setText("Ãë¼Ò");
-		   payBtn1.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
 		   payBtn1.setFont(new Font("¸¼Àº °íµñ ±½°Ô", Font.PLAIN, 30));
 		   payPanel.add(payBtn1);
 		   
 		   payBtn2.setBounds(480,100,350,50);
 		   payBtn2.setText("¿Ï·á");
-		   payBtn2.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
 		   payBtn2.setFont(new Font("¸¼Àº °íµñ ±½°Ô", Font.PLAIN, 30));
 		   payPanel.add(payBtn2);
 	      //

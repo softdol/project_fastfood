@@ -10,9 +10,9 @@ import kioske.pherkad0602.ui.OrderCheck;
 public class MenuChangeAction implements ActionListener{
 	kiosk7  kiosk7;
 	int idx;
-	String addCost;
+	int addCost;
 	
-	public MenuChangeAction	(kiosk7 kiosk7, int idx, String addCost) {
+	public MenuChangeAction	(kiosk7 kiosk7, int idx, int addCost) {
 		this.kiosk7 = kiosk7;
 		this.idx = idx;
 		this.addCost = addCost;
@@ -21,7 +21,7 @@ public class MenuChangeAction implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		kiosk7.order(kiosk7, idx, addCost);
+		kiosk7.setPrice(kiosk7, idx, addCost);
 	}
 	
            
