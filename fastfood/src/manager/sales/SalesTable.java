@@ -28,6 +28,8 @@ import pos.Pos_PaymentPage;
 public class SalesTable extends JPanel  {
 	
 	ManagerMain main;
+	Object[] orderF;
+	DefaultTableModel dfTable;
 	
 	public SalesTable(ManagerMain main) {
 		setLayout(null);
@@ -35,13 +37,13 @@ public class SalesTable extends JPanel  {
 		
 		String[] strTitle = {"상품명", "수량", "단가", "가격"};
 		
-		DefaultTableModel dfTable = new DefaultTableModel(strTitle, 0);
+		dfTable = new DefaultTableModel(strTitle, 0);
 		
 		
 		ArrayList<PsList> psList = new ArrayList<>();		
 		ArrayList<Menu> menuList = ReturnModel.selMenuList("select * from menu", psList);
 		
-		Object[] orderF = new Object[4];
+		orderF = new Object[4];
 		
 //		for(Menu m : menuList) {
 //			System.out.println(m);
@@ -59,7 +61,7 @@ public class SalesTable extends JPanel  {
 			cbList.add(jCombo);
 		}
 		
-		for(int i = 0; i < 15; i++) {
+		for(int i = 0; i < 5; i++) {
 			Menu m = menuList.get((int)(Math.random() * menuList.size()));
 			int cnt = (int)(Math.random() * 10);
 			orderF[0] = m.getMenu_name();
@@ -200,7 +202,22 @@ public class SalesTable extends JPanel  {
 		
 		add(jspn);
 		
-		JButton btn = new JButton("포스 결제");
+		JButton btn2 = new JButton("테이블 데이트 추가");
+		btn2.setBounds(400, 50, 200, 40);
+		btn2.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				orderF[0] = "1";
+				orderF[1] = "1";
+				orderF[2] = "1";
+				orderF[3] = "1";
+				dfTable.addRow(orderF);
+			}
+		});
+		
+		add(btn2);
+		JButton btn = new JButton("포스 결제");		
 		
 		btn.setBounds(400, 100, 120, 40);
 		btn.addActionListener(new ActionListener() {
