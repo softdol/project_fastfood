@@ -1,6 +1,8 @@
+
 package pos;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
@@ -10,11 +12,13 @@ import javax.swing.JPanel;
 import database.manager.Menu;
 import database.manager.ReturnModel;
 import database.model.PsList;
+import pos.ActionListener.ButtonActionListener;
 
 public class MenuListPanel extends JPanel{
+	Pos_Burger main;
 	
-	public MenuListPanel(int iCate) {
-		
+	public MenuListPanel(int iCate,Pos_Burger main) {
+		this.main = main;
 		setBackground(new Color(0xD9EDDF));
 		setBounds(400,120,455,460);
 		
@@ -24,6 +28,7 @@ public class MenuListPanel extends JPanel{
 		
 		
 		ArrayList<Menu> menuList = ReturnModel.selMenuList(sql, psList);
+		JButton itemBtn;
 		
 		int maxItem = Math.max(menuList.size(), 12);
 		setLayout(new GridLayout(maxItem/3 + 1, 3));
@@ -33,19 +38,30 @@ public class MenuListPanel extends JPanel{
 			if(i < menuList.size()) {
 				Menu m = menuList.get(i);
 				
-				JButton itemBtn = new JButton();
-				itemBtn.setBounds(10, 10, 10, 10);
+				itemBtn = new JButton();
+				itemBtn.setBounds(100, 100, 10, 10);
+				itemBtn.setPreferredSize(new Dimension(120, 80));
 				itemBtn.setText(m.getMenu_name());
+				itemBtn.addActionListener(new ButtonActionListener(main,m));
 				add(itemBtn);
+			
+				
 				
 			}else {
-				JButton itemBtn = new JButton();
-				itemBtn.setBounds(10, 10, 10, 10);
+				itemBtn = new JButton();
+				itemBtn.setBounds(100, 100, 10, 10);
+				itemBtn.setPreferredSize(new Dimension(120, 80));
 				itemBtn.setText("ÁØºñÁß");
 				add(itemBtn);
 			}
 		}
 		
+		
+		
+		
+		
+		
 	}
+
 
 }

@@ -196,7 +196,7 @@ public class SalesTable extends JPanel  {
 //		    System.out.println(rows);
 //
 //		}
-		System.out.println(orderTable.getColumnModel()); 
+		//System.out.println(orderTable.getColumnModel()); 
 		
 		add(jspn);
 		
@@ -214,8 +214,6 @@ public class SalesTable extends JPanel  {
 				ArrayList<Menu> menuList = ReturnModel.selMenuList(sql, psList);
 				for (int i = 0; i < 10; i++) {
 					int cnt = (int) (Math.random() * 10) + 1;
-					int price = (int) (Math.random() * 5) + 1;
-					price *= 1000;
 					orderlist.add(new Order(menuList.get((int)(Math.random() * menuList.size())), cnt, (int)(Math.random() * 2)));
 				}
 				

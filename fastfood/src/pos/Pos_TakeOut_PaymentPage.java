@@ -1,4 +1,4 @@
-package pos;
+upackage pos;
 
 import java.awt.Color;
 import java.awt.Font;
