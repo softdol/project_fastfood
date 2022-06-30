@@ -78,7 +78,7 @@ public class Select_Set_Size_down extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				// 세트 유무 "s"
 				// 매뉴 idx, tpxm idx
-				screen.veiw_Select_Side_Drink(idx, "s", menuPicture.get(0).getSet_idx(),0,0);
+				//screen.veiw_Select_Side_Drink(idx, "s", menuPicture.get(0).getSet_idx(),0,0);
 			}
 		});
 		
@@ -94,7 +94,7 @@ public class Select_Set_Size_down extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				// 라지세트 유무 "l"
 				// 매뉴 idx, 세트 idx
-				screen.veiw_Select_Side_Drink(idx, "l", menuPicture.get(1).getSet_idx(),0,0);
+				//screen.veiw_Select_Side_Drink(idx, "l", menuPicture.get(1).getSet_idx(),0,0);
 			}
 		});
 		

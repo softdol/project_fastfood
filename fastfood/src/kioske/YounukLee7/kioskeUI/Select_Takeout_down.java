@@ -43,7 +43,7 @@ public class Select_Takeout_down extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frame.veiw_Home(idx);
+				frame.veiw_Home();
 			}
 		});
 		
@@ -51,7 +51,7 @@ public class Select_Takeout_down extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frame.veiw_Home(idx);
+				frame.veiw_Home();
 			}
 		});
 		

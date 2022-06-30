@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import database.OjdbcConnection;
+import kioske.YounukLee7.Main_JFrame;
 import kioske.YounukLee7.Sub_JFrame;
 import kioske.YounukLee7.dbtablePocket.EventPage;
 import kioske.YounukLee7.dbtablePocket.Menu;
@@ -24,7 +25,7 @@ import kioske.YounukLee7.dbtablePocket.MenuPicture;
 
 public class Select_Side_Drink_down extends JPanel{
 	
-	public Select_Side_Drink_down(Sub_JFrame frame, int idx, int setidx, int sideidx, int drinkidx) {
+	public Select_Side_Drink_down(Main_JFrame frame, int menuidx, int setidx, int sideidx, int drinkidx) {
 		
 		String sql = "SELECT * FROM menu where menu_idx in (SELECT menu_idx FROM menu_set_list WHERE set_idx = ?) order by menu_category_idx";
 		ArrayList<Menu> menu = new ArrayList<>();
@@ -173,7 +174,7 @@ public class Select_Side_Drink_down extends JPanel{
 		// 가격 보여줌
 		int burgerPrice = menu.get(0).getMENU_PRICE(); // 햄버거
 		int sidePrice; // 사이드 가격
-		int drinkPrice; // 콜라 가격
+		int drinkPrice; // 음료 가격
 		
 		if (sideidx > 0) {
 			sidePrice = menu2.getMENU_PRICE();
@@ -203,7 +204,7 @@ public class Select_Side_Drink_down extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// 햄버거번호, 세트번호, 음료번호, 사이드번호, 총 가격
-				//frame.veiw_Home_giveIDX(idx);
+				frame.veiw_Home_set_burger(menuidx);
 			}
 		});
 		

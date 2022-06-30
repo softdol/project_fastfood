@@ -6,7 +6,7 @@ import kioske.YounukLee7.kioskeUI.Start_Screen_kiosk;
 
 public class Main_JPanel extends JPanel{
 	
-	
+	// 첫 화면 시작
 	public Main_JPanel(Main_JFrame screen) {
 		
 		Start_Screen_kiosk start_Screen_kiosk = new Start_Screen_kiosk(screen);
