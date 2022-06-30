@@ -26,7 +26,7 @@ import kioske.pherkad0602.HomeMenuKiosk;
 
 public class Select_Set_down extends JPanel{
 	
-	public Select_Set_down(Main_JFrame frame, int idx) {
+	public Select_Set_down(Main_JFrame frame, int menuidx) {
 		
 		String sql = "SELECT set_idx, menu_name, set_name, set_img_path, img_big_path FROM menu INNER JOIN menu_set USING (menu_idx) WHERE menu_idx = ?";
 //		ArrayList<MenuPicture> menuPicture = new ArrayList<>();
@@ -37,7 +37,7 @@ public class Select_Set_down extends JPanel{
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				) 
 		{
-			pstmt.setInt(1, idx);
+			pstmt.setInt(1, menuidx);
 			try(ResultSet rs = pstmt.executeQuery();) {
 				while (rs.next()) {
 					menuPicture = new MenuPicture(rs);
@@ -80,9 +80,9 @@ public class Select_Set_down extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// 매뉴 idx 보내기
-				frame.veiw_Home(idx);
-				HomeMenuKiosk home = new HomeMenuKiosk(frame, idx);
-				home.setPrice(idx);
+				frame.veiw_Home_solo_burger(menuidx);
+//				HomeMenuKiosk home = new HomeMenuKiosk(frame, idx);
+//				home.setPrice(idx);
 			}
 		});
 		
@@ -101,7 +101,7 @@ public class Select_Set_down extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				                         // 세트 표시 s
 				//screen.veiw_Set_Size(idx,"s");
-				//screen.veiw_Select_Side_Drink(idx, "s", set_idx, 0, 0);
+				frame.veiw_Select_Side_Drink(menuidx, "s", set_idx, 0, 0);
 			}
 		});
 		
