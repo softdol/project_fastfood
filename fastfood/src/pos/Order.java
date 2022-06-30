@@ -15,7 +15,7 @@ public class Order {
 	private Integer order_price_total;    
 	private Date order_mod_date;         
 	private String menu_name; 
-	private Date order_in_date;         
+	private Date order_in_date;
 	private Integer set_idx;
 	private Integer payment_idx;
 	
@@ -31,6 +31,7 @@ public class Order {
 		this.order_in_date		= rs.getDate(9);
 		this.set_idx			= rs.getInt(10);
 		this.payment_idx		= rs.getInt(10);
+
 	}
 	
 	/**
