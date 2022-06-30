@@ -628,5 +628,61 @@ public class ReturnModel {
 		}
 	}
 	
+	/**
+	 * 해당 테이블 마지막 인텍스 불러오기
+	 * @param sql
+	 * @param psList
+	 * @return int 인덱스
+	 */
+	public static long selLastIndex (String sql, ArrayList<PsList> psList) {		
+		try(
+				Connection conn = OjdbcConnection.getConnection();
+				
+			){
+			PreparedStatement pstmt= conn.prepareStatement(sql);
+			
+			for(int i = 0; i < psList.size(); i++) {
+				PsList ps = psList.get(i);
+				switch(ps.getType()) {
+					case 'i': case 'I':
+						pstmt.setInt(i + 1, Integer.parseInt(ps.getVal()));
+						break;
+					case 's': case 'S':
+						pstmt.setString(i + 1, ps.getVal());
+						break;
+					case 'd': case 'D':
+						pstmt.setDate(i + 1, java.sql.Date.valueOf(ps.getVal()));
+						break;
+					default:
+						pstmt.setString(i + 1, ps.getVal());
+						break;				
+				}
+			}
+			
+			pstmt.executeUpdate();
+			pstmt.close();
+			
+			pstmt = conn.prepareStatement("SELECT PAYMENT_LIST_SEQ.CURRVAL FROM DUAL");
+			
+			try(ResultSet rs = pstmt.executeQuery()){
+				long returnLong = 0;
+				if(rs.next()) {
+					returnLong = rs.getLong(1);					
+				}
+				pstmt.close();
+				conn.close();
+				return returnLong;
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+				return 0;
+			}
+						
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
 
 }

@@ -49,6 +49,9 @@ public class OjdbcConnection {
 					case 'i': case 'I':
 						pstmt.setInt(i + 1, Integer.parseInt(ps.getVal()));
 						break;
+					case 'l': case 'L':
+						pstmt.setLong(i + 1, Long.parseLong(ps.getVal()));
+						break;
 					case 's': case 'S':
 						pstmt.setString(i + 1, ps.getVal());
 						break;
