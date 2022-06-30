@@ -33,8 +33,13 @@ public class Sub_JFrame extends JFrame {
 	
 	public Sub_JFrame() {
 		
-		panel = new Sub_JPanel(this,1);
-		add(panel);
+//		panel = new Sub_JPanel(this,1);
+//		add(panel);
+		
+//		Main_JFrame main_JFrame = new Main_JFrame();
+//		
+//		Select_Side_Drink_down down = new Select_Side_Drink_down(main_JFrame, 0, 0, 0, 0);
+//		add(down);
 		
 		setLayout(null);
 		setTitle("Da∆»æ∆");

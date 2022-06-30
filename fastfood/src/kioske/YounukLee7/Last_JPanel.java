@@ -43,8 +43,8 @@ public class Last_JPanel extends JPanel{
 		ArrayList<Order_list> orderList2 = new ArrayList<>();
 		
 		mid = new Cart_mid(screen, orderList2);
-		
 		add(mid);
+		
 		JButton btnButton = new JButton("1");
 		btnButton.setBounds(100,200,100,50);
 		btnButton.addActionListener(new ActionListener() {
