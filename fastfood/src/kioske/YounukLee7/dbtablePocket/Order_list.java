@@ -58,6 +58,7 @@ public class Order_list {
 		this.ORDER_PRICE_TOTAL	= m.getMenu_price() * cnt;		
 		this.MENU_NAME			= m.getMenu_name();
 		this.SET_IDX			= set_idx;
+		this.img_path			= m.getImg_big_path();
 	}
 
 
