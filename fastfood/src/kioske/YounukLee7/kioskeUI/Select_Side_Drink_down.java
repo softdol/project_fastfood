@@ -104,6 +104,7 @@ public class Select_Side_Drink_down extends JPanel{
 		ImageIcon burgericon = new ImageIcon(burgerimg);
 		burgerlabel.setIcon(burgericon);
 		
+		
 		JLabel side_label = new JLabel("사이드 사진");
 		side_label.setBounds(350, 150, 200, 170);
 		
@@ -152,7 +153,7 @@ public class Select_Side_Drink_down extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				frame.veiw_Select_Side(menuidx, "s", setidx, sideidx, drinkidx);
 			}
 		});
 		
@@ -167,7 +168,7 @@ public class Select_Side_Drink_down extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				frame.veiw_Select_Drink(menuidx, "s", setidx, sideidx, drinkidx);
 			}
 		});
 		
@@ -189,9 +190,12 @@ public class Select_Side_Drink_down extends JPanel{
 		}
 		
 		int sum = burgerPrice + drinkPrice + sidePrice;
-		//System.out.println(sum);
 		
+		double price = sum - sum * (menu.get(0).getMENU_SALE() * 0.01);
 		
+		int allPrice = (int)Math.floor(price);
+		
+		//System.out.println(allPrice);
 		
 		JButton cart_button = new JButton("카트 담기");
 		cart_button.setForeground(new Color(0xFFFFFF));
@@ -207,6 +211,18 @@ public class Select_Side_Drink_down extends JPanel{
 				frame.veiw_Home_set_burger(menuidx);
 			}
 		});
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 600, 900, 140);
+		panel.setBackground(new Color(0XFFF2DD));
+		panel.setLayout(null);
+		add(panel);
+		
+		JLabel label = new JLabel("총 주문 가격 : " + allPrice + "원");
+		label.setFont(new Font("HY견고딕", Font.PLAIN, 30));
+		label.setForeground(new Color(0x000000));
+		label.setBounds(500, 30, 400, 30);
+		panel.add(label);
 		
 		add(burgerlabel);
 		add(side_label);

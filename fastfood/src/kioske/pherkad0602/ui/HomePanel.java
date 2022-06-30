@@ -65,14 +65,14 @@ public class HomePanel extends JPanel{
 		
 		Menu menu= new Menu(menuList, hMain, frame);
 		menuPanel.add(menu);
-		menuPanel.setBounds(0,550,684,550+(200*(a/3)+1));
+		menuPanel.setBounds(0,550,684,550+(210*(a/3)+1));
 		mainPanel.add(menuPanel);
 		
 		JScrollPane scrollPane = new JScrollPane(mainPanel);
 		scrollPane.setBounds(0, 0, 684, 800);
 		scrollPane.setBorder(border);
 		Dimension size = new Dimension();
-				size.setSize(600,550+(200*(a/3)+1));
+				size.setSize(600,550+(210*(a/3)+1));
 		mainPanel.setPreferredSize(size);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(16);	
 		add(scrollPane);

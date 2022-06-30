@@ -4,19 +4,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import kioske.pherkad0602.HomeMenuKiosk;
+import kioske.pherkad0602.kiosk7;
 import kioske.pherkad0602.ui.OrderCheck;
 
-public class MenuSelectionAction implements ActionListener{
-	HomeMenuKiosk hMain;
-	public MenuSelectionAction(HomeMenuKiosk hMain) {
-		this.hMain = hMain;
+public class MenuChangeAction implements ActionListener{
+	kiosk7  kiosk7;
+	int idx;
+	int addCost;
+	
+	public MenuChangeAction	(kiosk7 kiosk7, int idx, int addCost) {
+		this.kiosk7 = kiosk7;
+		this.idx = idx;
+		this.addCost = addCost;
 		// TODO Auto-generated constructor stub
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println(1);
-		hMain.setPrice(1);
+		kiosk7.setPrice(kiosk7, idx, addCost);
 	}
 	
            

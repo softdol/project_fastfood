@@ -31,14 +31,6 @@ public class OrderCheck extends JFrame{
 		checkFrame.setLayout(null);
 		BevelBorder border = new BevelBorder(BevelBorder.RAISED);
 		
-//		String sql = "SELECT * FROM Menu WHERE Menu_Category_IDX = 1";
-//		ArrayList<MenuDatabase> menuList = ReturnModel.menuList(sql);
-//		
-//		String sql2 = "SELECT * FROME MENU_SET";
-//		ArrayList<SetDatabase> setList = ReturnModel.setList(sql2);
-//		
-//		ArrayList orderList = new ArrayList();
-		
 		JLabel label = new JLabel("장바구니에 추가하시겠습니까?");
 		label.setBounds(60,10,300,50);
 		label.setFont(new Font("궁서체", Font.BOLD,20));
@@ -54,8 +46,6 @@ public class OrderCheck extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JButton performedButton = (JButton)e.getSource();
-				performedButton.getName();
-				System.out.println(idx + "안에");
 				String sql = "SELECT * FROM MENU_SET where MENU_IDX = ?";
 				ArrayList<PsList> psList = new ArrayList<>();
 				psList.add(new PsList('I', String.valueOf(idx)));
@@ -68,21 +58,6 @@ public class OrderCheck extends JFrame{
 			
 				}
 				
-				
-//				String name = performedButton.getName();
-				
-//				for(int i = 0; i < setList.size(); i++ ) {
-//					
-//					if (setList.get(i).getMENU_IDX().equals(name)) {
-//						// 세트옵션페이지로 이동
-//					} else {
-//						//pay.view_menu(name);
-//						//main.
-//						System.out.println(name);
-//					}	
-//				}
-				
-			
 				checkFrame.dispose();
 			}
 		});
@@ -100,7 +75,6 @@ public class OrderCheck extends JFrame{
 			}
 		});
 		checkFrame.add(btn2);
-		
 		
 		checkFrame.setSize(400, 200);
 		checkFrame.setLocationRelativeTo(null);

@@ -35,13 +35,10 @@ public class MenuPanel extends JPanel{
 
 		
 		psList2.add(new PsList('I', String.valueOf(i)));
-		//sList2 = ReturnModel.selMenuList1(sql2, psList2);
 		ArrayList<MenuDatabase> menuList = ReturnModel.selMenuList1("SELECT * FROM Menu WHERE Menu_subcategory_IDX = ? ", psList2);
 		MainMenuPanel main = new MainMenuPanel(menuList, hMain, frame);
-//		System.out.println(menuList.size());
 		add(main);
 		
-
 		setBounds(200, 0, 884, 800);
 		setLayout(null);
 		setBackground(Color.white);

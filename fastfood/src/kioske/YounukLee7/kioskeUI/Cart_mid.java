@@ -43,12 +43,12 @@ public class Cart_mid extends JPanel{
 		
 		//CartButton cartButton;
 		//int total = 0;
-		JPanel pCenter = new JPanel();
-		// 이 패널의 layout이 null이기 때문에 아래 코드로 사이즈를 지정해주어야 한다
-		pCenter.setPreferredSize(new Dimension(900, 2000));
-		pCenter.setBackground(new Color(0XFFE7DF));
-		pCenter.setBounds(0,300,900,2000);
-		pCenter.setLayout(null);
+//		JPanel pCenter = new JPanel();
+//		// 이 패널의 layout이 null이기 때문에 아래 코드로 사이즈를 지정해주어야 한다
+//		pCenter.setPreferredSize(new Dimension(900, 2000));
+//		pCenter.setBackground(new Color(0XFFE7DF));
+//		pCenter.setBounds(0,300,900,2000);
+//		pCenter.setLayout(null);
 		
         // 매뉴 추가한 만큼
 //		for (int i = 0; i < 3; i++) {
