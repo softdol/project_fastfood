@@ -1,7 +1,10 @@
 package kioske.YounukLee7;
 
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 
+import kioske.YounukLee7.dbtablePocket.Order_list;
 import kioske.YounukLee7.kioskeUI.Card_Pay_mid;
 import kioske.YounukLee7.kioskeUI.Cart_down;
 import kioske.YounukLee7.kioskeUI.Cart_mid;
@@ -25,6 +28,14 @@ public class Last_JFrame extends JFrame{
 //		panel.add(new Cart_mid(this));
 //		panel.add(new Cart_down(this));
 //	}
+	
+	public void viewOrder(ArrayList<Order_list> orderList) {
+		
+		ManagerCP.reFresh(panel.mid);
+		
+		 panel.mid.add(new Cart_mid(this, orderList));
+		
+	}
 	
 	public void veiw_Select_Payment() {
 		ManagerCP.reFresh(panel);

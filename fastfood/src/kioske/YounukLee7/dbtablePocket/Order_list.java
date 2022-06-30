@@ -15,6 +15,7 @@ public class Order_list {
 	private String MENU_NAME;
 	private String ORDER_IN_DATE;
 	private Integer SET_IDX;
+	private String img_path;
 	
 	public Order_list(ResultSet rs) throws SQLException {
 		ORDER_IDX			= rs.getInt("ORDER_IDX");
@@ -26,14 +27,39 @@ public class Order_list {
 		ORDER_MOD_DATE		= rs.getString("ORDER_MOD_DATE");
 		MENU_NAME			= rs.getString("MENU_NAME");
 		ORDER_IN_DATE		= rs.getString("ORDER_IN_DATE");
-		SET_IDX				= rs.getInt("SET_IDX");;
+		SET_IDX				= rs.getInt("SET_IDX");
 	}
 	
 	
-	
-	public void Order_list() {
-		
+	public void setImg_path(String img_path) {
+		this.img_path = img_path;
 	}
+	
+	public String getImg_path() {
+		return img_path;
+	}
+	
+	public Order_list(Menu m, int q, int set_idx) {
+		this.MENU_IDX			= m.getMENU_IDX();
+		this.ORDER_STATE		= 0;
+		this.ORDER_PRICE		= m.getMENU_PRICE();
+		this.ORDER_QUANTITY		= q;
+		this.ORDER_PRICE_TOTAL	= m.getMENU_PRICE() * q;		
+		this.MENU_NAME			= m.getMENU_NAME();
+		this.SET_IDX			= set_idx;
+	}
+
+	public Order_list(database.manager.Menu m, int i, int j) {
+		// TODO Auto-generated constructor stub
+		this.MENU_IDX			= m.getMenu_idx();
+		this.ORDER_STATE		= 0;
+		this.ORDER_PRICE		= m.getMenu_price();
+		this.ORDER_QUANTITY		= i;
+		this.ORDER_PRICE_TOTAL	= m.getMenu_price() * i;		
+		this.MENU_NAME			= m.getMenu_name();
+		this.SET_IDX			= j;
+	}
+
 
 	public Integer getORDER_IDX() {
 		return ORDER_IDX;
