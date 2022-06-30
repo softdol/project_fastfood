@@ -69,7 +69,7 @@ public class Start_Screen_kiosk extends JPanel{
 		
 		addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e){  
-				
+				// 포장, 매장식사 선택 화면으로 감
 				screen.veiw_takeout();
 				
 			}  

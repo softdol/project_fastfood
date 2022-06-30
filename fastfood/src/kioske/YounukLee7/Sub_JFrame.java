@@ -25,11 +25,11 @@ public class Sub_JFrame extends JFrame {
 //		panel.add(new HomeMenuKiosk());
 //	}
 	
-	public void veiw_Select_Side_Drink(int idx, String  set, int setidx, int sideidx, int drinkidx) {
-		ManagerCP.reFresh(panel);
-		panel.add(new Logo_MenuName_Panel(idx,set));
-		panel.add(new Select_Side_Drink_down(this, idx,setidx,sideidx,drinkidx));
-	}
+//	public void veiw_Select_Side_Drink(int idx, String  set, int setidx, int sideidx, int drinkidx) {
+//		ManagerCP.reFresh(panel);
+//		panel.add(new Logo_MenuName_Panel(idx,set));
+//		panel.add(new Select_Side_Drink_down(this, idx,setidx,sideidx,drinkidx));
+//	}
 	
 	public Sub_JFrame() {
 		
