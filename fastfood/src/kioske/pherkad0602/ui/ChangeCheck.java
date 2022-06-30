@@ -14,24 +14,25 @@ import javax.swing.border.BevelBorder;
 import database.model.PsList;
 import kioske.YounukLee7.Main_JFrame;
 import kioske.pherkad0602.HomeMenuKiosk;
+import kioske.pherkad0602.kiosk7;
 import kioske.pherkad0602.database.ReturnModel;
 
-public class OrderCheck extends JFrame{
+public class ChangeCheck {
+	
 	PayPanel pay;
 	int idx;
-	HomeMenuKiosk hMain;
+	kiosk7 kiosk7;
 	Main_JFrame frame;
 	
-	public OrderCheck(HomeMenuKiosk hMain, int idx, Main_JFrame frame) {
+	public ChangeCheck(kiosk7 kiosk7, int idx, String addCost) {
 		this.idx = idx;
-		this.hMain = hMain;
 		this.frame = frame;
 		
 		JFrame checkFrame = new JFrame();
 		checkFrame.setLayout(null);
 		BevelBorder border = new BevelBorder(BevelBorder.RAISED);
 		
-		JLabel label = new JLabel("장바구니에 추가하시겠습니까?");
+		JLabel label = new JLabel("메뉴를 변경하시겠습니까?");
 		label.setBounds(60,10,300,50);
 		label.setFont(new Font("궁서체", Font.BOLD,20));
 		checkFrame.add(label);
@@ -46,18 +47,7 @@ public class OrderCheck extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JButton performedButton = (JButton)e.getSource();
-				String sql = "SELECT * FROM MENU_SET where MENU_IDX = ?";
-				ArrayList<PsList> psList = new ArrayList<>();
-				psList.add(new PsList('I', String.valueOf(idx)));
-				System.out.println(ReturnModel.selConfirmP(sql, psList));
-				if(ReturnModel.selConfirmP(sql, psList)) {
-					frame.veiw_Select_Set(idx);
-					//있을떄
-				}else {	// 없을때
-					hMain.setPrice(idx);
-			
-				}
-				
+				kiosk7.setPrice(kiosk7, idx, addCost);		
 				checkFrame.dispose();
 			}
 		});

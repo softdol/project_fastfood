@@ -9,37 +9,48 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import database.model.PsList;
+import kioske.YounukLee7.Main_JFrame;
+import kioske.pherkad0602.kiosk7;
 import kioske.pherkad0602.database.MenuDatabase;
 import kioske.pherkad0602.database.ReturnModel;
+import kioske.pherkad0602.database.SetDatabase;
+import manager.menu.MenuList;
 
 public class ChangeMenuPanel extends JPanel {
 	
-	public ChangeMenuPanel (int idx, int i) {
-		
-		ArrayList<PsList> psList = new ArrayList<>();
-		String sql = "select * from menu where MENU_CATEGORY_IDX = ?";
-		psList.add(new PsList('I', String.valueOf(i)));
-		ArrayList<MenuDatabase> menuList = ReturnModel.selMenuList1(sql, psList);
+	Main_JFrame frame;
+	kiosk7 kiosk7;
+
+	public ChangeMenuPanel (ArrayList<MenuDatabase> menuList, ArrayList<MenuDatabase> menuInfo,
+			ArrayList<SetDatabase> setList, int menuidx, String  set, int setidx, int sideidx, int drinkidx, int catei
+			,kiosk7 kiosk7) {
 		
 		EmptyBorder border = new EmptyBorder(getInsets());
 		int a = menuList.size();
 		
 		JPanel menuPanel = new JPanel();
-		menuPanel.setBounds(0, 200, 684, 600);
+		menuPanel.setBounds(0, 0, 684, 600);
 		menuPanel.setLayout(null);
 		menuPanel.setBackground(Color.white);
 		menuPanel.setBorder(border);
 		
-	//	ChangeMenu menu= new ChangeMenu(menuList, idx);
-	//	menuPanel.add(menu);
+		ChangeMenu menu= new ChangeMenu(menuList, menuInfo, setList, 
+				 menuidx, set, setidx, sideidx, drinkidx, catei, kiosk7);
+		menuPanel.add(menu);
 		
 		JScrollPane scrollPane = new JScrollPane(menuPanel);
-		scrollPane.setBounds(100, 100, 684, 440);
+		scrollPane.setBounds(0, 0, 684, 440);
 		scrollPane.setBackground(Color.white);
 		scrollPane.setBorder(border);
 		Dimension size = new Dimension();
-				size.setSize(600,200+(210*(a/3)+1));
+				size.setSize(600,210+(210*(a/3)+1));
 		menuPanel.setPreferredSize(size);
+		add(scrollPane);
+		
+		setBounds(100, 80, 684, 800);
+		setLayout(null);
+		setBackground(Color.white);
+		setBorder(border);
 		
 		
 		

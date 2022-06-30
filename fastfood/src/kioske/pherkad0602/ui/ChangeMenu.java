@@ -18,15 +18,20 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 import kioske.pherkad0602.HomeMenuKiosk;
+import kioske.pherkad0602.kiosk7;
 import kioske.pherkad0602.action.MenuChangeAction;
 import kioske.pherkad0602.database.MenuDatabase;
+import kioske.pherkad0602.database.SetDatabase;
 
 public class ChangeMenu extends JPanel{
 	
-HomeMenuKiosk hMain;
+	kiosk7  kiosk7;
 	
-	public ChangeMenu(ArrayList<MenuDatabase> menuList, int idx) {
-		this.hMain = hMain;
+	public ChangeMenu(ArrayList<MenuDatabase> menuList, ArrayList<MenuDatabase> menuInfo,
+			ArrayList<SetDatabase> setList, int menuidx, String  set, int setidx, int sideidx, int drinkidx, int catei
+			,kiosk7 kiosk7) {
+		
+		this.kiosk7 = kiosk7;
 		EmptyBorder border = new EmptyBorder(getInsets());
 		
 		int a = menuList.size();
@@ -38,15 +43,13 @@ HomeMenuKiosk hMain;
 		setBackground(Color.white);
 		setLayout(manager);
 		setBorder(border);
-
+		
 		
 		for(int i = 0; i <a; ++i) {
-			
 			
 			JButton btn3 = new JButton();
 			btn3.setBackground(new Color(0xFFFFFF));
 			btn3.setName(String.valueOf(menuList.get(i).getMenu_idx()));
-			btn3.addActionListener(new MenuChangeAction(hMain, menuList.get(i).getMenu_idx(), idx));
 			btn3.setBorder(border);
 			btn3.setLayout(null);
 			
@@ -76,8 +79,28 @@ HomeMenuKiosk hMain;
 			
 			btn3.add(nameLabel);
 			
+			int drinkprice = menuList.get(i).getMenu_price()-menuInfo.get(1).getMenu_price(); 
+			int sideprice = menuList.get(i).getMenu_price()-menuInfo.get(2).getMenu_price(); 
+			int sale = Integer.valueOf(setList.get(0).getSET_SALE());
+
 			JTextPane priceLabel = new JTextPane();
-			priceLabel.setText(String.valueOf(menuList.get(i).getMenu_price() +"원"));
+			if(catei == 2) {
+				if(drinkprice<0) {
+					priceLabel.setText("0원");
+				} else {
+					priceLabel.setText(String.valueOf((drinkprice*(100-sale))/100)+"원");
+				}
+			} else if(catei ==3){
+				if(sideprice<0) {
+					priceLabel.setText("0원");
+				} else {
+					priceLabel.setText(String.valueOf((sideprice*(100-sale))/100)+"원");
+				}
+			}
+			
+			String addCost = priceLabel.getText();
+			btn3.addActionListener(new MenuChangeAction(kiosk7, menuList.get(i).getMenu_idx(), addCost));
+
 			priceLabel.setBounds(0,185,210,25);
 			priceLabel.setBackground(Color.white);
 			priceLabel.setFont(new Font("궁서체", Font.BOLD,20));
@@ -88,6 +111,7 @@ HomeMenuKiosk hMain;
 			StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
 			doc2.setParagraphAttributes(0, doc2.getLength(), center, false);
 			
+
 			btn3.add(priceLabel);
 			
 				

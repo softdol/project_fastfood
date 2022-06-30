@@ -16,7 +16,7 @@ import kioske.pherkad0602.ui.PayPanel;
 import oracle.net.aso.f;
 
 public class HomeMenuKiosk extends JPanel{
-	
+	Main_JFrame frame;
 	MainPanel main;
 	PayPanel pay;
 	ArrayList orderList = new ArrayList<>();
