@@ -19,6 +19,7 @@ import database.OjdbcConnection;
 import database.manager.Category;
 import database.manager.Menu;
 import database.manager.ReturnModel;
+import database.manager.SubCategory;
 import database.model.PsList;
 import manager.ManagerMain;
 import manager.actionlistener.ImgUpActionListener;
@@ -56,8 +57,7 @@ public class MenuModify extends JPanel {
 		ArrayList<Category> cataList = ReturnModel.categoryList();
 
 		JComboBox cateList = new JComboBox();
-		cateList.addItem("--대분류--");
-		
+		cateList.addItem("--대분류--");		
 		for(int i = 0; i < cataList.size(); i++) {
 			cateList.addItem(cataList.get(i).getMenu_category_name());			
 			if(cataList.get(i).getMenu_category_idx() == menuInfo.getMenu_category()) {
@@ -67,6 +67,21 @@ public class MenuModify extends JPanel {
 		
 		cateList.setBounds(lblTitle.getX(), lblTitle.getY() + lblTitle.getHeight() + 20 , 80, 50);
 		cateList.setFont(new Font("고딕체", Font.BOLD, 14));
+		
+		JComboBox cateSubList = new JComboBox();
+		
+		ArrayList<SubCategory> subCateList = ReturnModel.categorySubList();
+		cateSubList.addItem("--중분류--");
+		for(int i = 0; i < subCateList.size(); i++) {
+			cateSubList.addItem(subCateList.get(i).getMenu_subcategory_name());			
+			if(subCateList.get(i).getMenu_subcategory_idx() == menuInfo.getMenu_subcategory_idx()) {
+				cateSubList.setSelectedIndex(i + 1);
+			}
+		}
+		
+		cateSubList.setBounds(cateList.getX() + cateList.getWidth() + 20, cateList.getY() , 80, 50);
+		cateSubList.setFont(new Font("고딕체", Font.BOLD, 14));
+		
 		
 		LabelSub lblName = new LabelSub("메뉴명", cateList.getX(), cateList.getY() + cateList.getHeight() + 20);
 		LabelSub lblPrice = new LabelSub("가격", lblName.getX(), lblName.getY() + lblName.getHeight() + 20);
@@ -98,6 +113,12 @@ public class MenuModify extends JPanel {
 				if(cateList.getSelectedIndex() == 0) {					
 					ManagerCP.viewError("대분류를 선택해 주세요.","입력오류");					
 					cateList.requestFocus();
+					inputChk = false;
+					return;
+				}
+				if(cateSubList.getSelectedIndex() == 0) {					
+					ManagerCP.viewError("중분류를 선택해 주세요.","입력오류");					
+					cateSubList.requestFocus();
 					inputChk = false;
 					return;
 				}
@@ -151,6 +172,7 @@ public class MenuModify extends JPanel {
 					psList.add(new PsList('I',txtPrice.getText()));
 					psList.add(new PsList('I',txtSale.getText()));
 					psList.add(new PsList('S',main.mInfo.getMember_id()));
+					psList.add(new PsList('I', String.valueOf(subCateList.get(cateSubList.getSelectedIndex() - 1).getMenu_subcategory_idx())));
 					psList.add(new PsList('I',String.valueOf(menuInfo.getMenu_idx())));
 					
 					String sqi_menuUpt = "update menu";
@@ -161,6 +183,7 @@ public class MenuModify extends JPanel {
 					sqi_menuUpt += " , MENU_SALE = ?";
 					sqi_menuUpt += " , MENU_MOD_DATE = sysdate";
 					sqi_menuUpt += " , MENU_MOD_ID = ?";
+					sqi_menuUpt += " , MENU_SUBCATEGORY_IDX = ?";
 					sqi_menuUpt += " where MENU_IDX = ?";
 					
 //					System.out.println(sqi_menuUpt);
@@ -194,6 +217,7 @@ public class MenuModify extends JPanel {
 		
 		add(lblTitle);
 		add(cateList);
+		add(cateSubList);
 		
 		add(lblName);
 		add(lblPrice);

@@ -1,5 +1,7 @@
 package manager.menu;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import database.manager.ReturnModel;
 import database.model.PsList;
 import manager.ManagerMain;
 import manager.actionlistener.ModifyActionListener;
+import manager.component.LabelListMenuName;
 
 public class MenuSubList extends JPanel {
 
@@ -36,18 +39,25 @@ public class MenuSubList extends JPanel {
 			
 			if(i < menuList.size()) {
 				Menu m = menuList.get(i);
-				
+								
 				ImageIcon icon = new ImageIcon(m.getImg_big_path());
 				Image img = icon.getImage();
-				Image cimg = img.getScaledInstance(130,200,img.SCALE_SMOOTH);
+				Image cimg = img.getScaledInstance(140,200,img.SCALE_SMOOTH);
 				
 				JButton btn = new JButton(new ImageIcon(cimg));
 				btn.addActionListener(new ModifyActionListener(main,"상품수정",m.getMenu_idx()));
+				btn.setPreferredSize(new Dimension(140, 200));
+				
+				LabelListMenuName jlName = new LabelListMenuName(m.getMenu_name());
+				
+				btn.setLayout(new BorderLayout());
+				btn.add(jlName, BorderLayout.NORTH);
+				
 				
 				add(btn);
 			}else {
 				JButton btn = new JButton("준비중");
-				btn.setSize(130,200);
+				btn.setPreferredSize(new Dimension(130, 200));
 				
 				add(btn);
 			}

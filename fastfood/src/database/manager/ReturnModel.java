@@ -142,6 +142,36 @@ public class ReturnModel {
 	}
 	
 	/**
+	 * 중간 카테고리 리스트 불러오기
+	 * @param 
+	 * @param psList
+	 * @return ArrayList<SubCategory>
+	 */
+	public static ArrayList<SubCategory> categorySubList(){
+		ArrayList<SubCategory> cateList = new ArrayList<>();
+		try(
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt= conn.prepareStatement("select * from menu_subcategory");
+			){
+			
+			try(ResultSet rs = pstmt.executeQuery()){
+				while(rs.next()) {
+					cateList.add(new SubCategory(rs));					
+				}				
+				return cateList;
+			}catch(SQLException e) {
+				e.printStackTrace();
+				return null;
+			}		
+			
+						
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}	
+	}
+	
+	/**
 	 * 메뉴 목록 불러오기
 	 * @param sql
 	 * @param psList

@@ -17,6 +17,7 @@ public class Menu {
 	private String menu_in_id; 
 	private Date menu_mod_date;         
 	private String menu_mod_id;
+	private Integer menu_subcategory_idx;
 	
 	public Integer getMenu_idx() {
 		return menu_idx;
@@ -81,6 +82,10 @@ public class Menu {
 	public Date getMenu_mod_date() {
 		return menu_mod_date;
 	}
+	
+	public Integer getMenu_subcategory_idx() {
+		return menu_subcategory_idx;
+	}
 
 	public void setMenu_mod_id(String menu_mod_id) {
 		this.menu_mod_id = menu_mod_id;
@@ -98,6 +103,7 @@ public class Menu {
 		this.menu_in_id = rs.getString(9);
 		this.menu_mod_date = rs.getDate(10);
 		this.menu_mod_id = rs.getString(11);
+		this.menu_subcategory_idx = rs.getInt(12);
 	}
 	
 	@Override
