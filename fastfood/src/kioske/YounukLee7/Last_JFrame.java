@@ -9,11 +9,13 @@ import kioske.YounukLee7.kioskeUI.Card_Pay_mid;
 import kioske.YounukLee7.kioskeUI.Cart_down;
 import kioske.YounukLee7.kioskeUI.Cart_mid;
 import kioske.YounukLee7.kioskeUI.Cart_up;
+import kioske.YounukLee7.kioskeUI.Completed_up;
 import kioske.YounukLee7.kioskeUI.Down_yes_no_Button;
 import kioske.YounukLee7.kioskeUI.Error_Image_down;
 import kioske.YounukLee7.kioskeUI.Logo_MenuName_Panel;
 import kioske.YounukLee7.kioskeUI.Mobile_Pay_mid;
 import kioske.YounukLee7.kioskeUI.Order_completed_down;
+import kioske.YounukLee7.kioskeUI.Payment_up;
 import kioske.YounukLee7.kioskeUI.Select_Payment_down;
 import kioske.YounukLee7.kioskeUI.Select_Payment_mid;
 import manager.component.ManagerCP;
@@ -39,34 +41,34 @@ public class Last_JFrame extends JFrame{
 	
 	public void veiw_Select_Payment() {
 		ManagerCP.reFresh(panel);
-		//panel.add(new Logo_MenuName_Panel());
+		panel.add(new Payment_up());
 		panel.add(new Select_Payment_mid(this));
 		panel.add(new Select_Payment_down(this));
 	}
 	
 	public void veiw_Card_Pay() {
 		ManagerCP.reFresh(panel);
-		//panel.add(new Logo_MenuName_Panel());
+		panel.add(new Payment_up());
 		panel.add(new Card_Pay_mid());
 		panel.add(new Down_yes_no_Button(this));
 	}
 	
 	public void veiw_Mobile_Pay() {
 		ManagerCP.reFresh(panel);
-		//panel.add(new Logo_MenuName_Panel());
+		panel.add(new Payment_up());
 		panel.add(new Mobile_Pay_mid());
 		panel.add(new Down_yes_no_Button(this));
 	}
 	
 	public void veiw_Error() {
 		ManagerCP.reFresh(panel);
-		//panel.add(new Logo_MenuName_Panel());
+		panel.add(new Payment_up());
 		panel.add(new Error_Image_down());
 	}
 	
 	public void veiw_Order_completed() {
 		ManagerCP.reFresh(panel);
-		//panel.add(new Logo_MenuName_Panel());
+		panel.add(new Completed_up());
 		panel.add(new Order_completed_down());
 	}
 	

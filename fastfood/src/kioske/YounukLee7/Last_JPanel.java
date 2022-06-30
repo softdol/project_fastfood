@@ -32,10 +32,12 @@ public class Last_JPanel extends JPanel{
 		
 		ArrayList<Menu> menuList = ReturnModel.selMenuList(sql, psList);
 		
-		for(int i = 0; i < 2; i++) {
+		for(int i = 0; i < 3; i++) {
 			Menu m = menuList.get((int)(Math.random() * menuList.size()));
 			orderList.add(new Order_list(m, (int)(Math.random() * 5) + 1, 0));
 		}
+		
+//		System.out.println(orderList);
 		
 		//mid = new Cart_mid(screen, orderList);
 		//add(mid);
