@@ -16,8 +16,10 @@ import kioske.pherkad0602.database.ReturnModel;
 import kioske.pherkad0602.database.SubMenuDatabase;
 
 public class MainPanel extends JPanel{
+	
 	public CardLayout cardLayoutManager = new CardLayout();
 	HomeMenuKiosk hMain;
+	
 	public MainPanel(HomeMenuKiosk hMain, Main_JFrame frame) {
 		this.hMain = hMain;
 		

@@ -39,9 +39,10 @@ public class MainMenuPanel extends JPanel{
 		JScrollPane scrollPane = new JScrollPane(mainPanel);
 		scrollPane.setBounds(0, 0, 684, 600);
 		scrollPane.setBackground(Color.white);
+		scrollPane.getVerticalScrollBar().setUnitIncrement(16);	
 		scrollPane.setBorder(border);
 		Dimension size = new Dimension();
-				size.setSize(600,(200*((a-1)/3)+1));
+				size.setSize(600,(210*((a-1)/3)+1));
 		mainPanel.setPreferredSize(size);
 		add(scrollPane);
 	

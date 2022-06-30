@@ -6,9 +6,9 @@ import java.awt.event.ActionListener;
 import kioske.pherkad0602.HomeMenuKiosk;
 import kioske.pherkad0602.ui.OrderCheck;
 
-public class MenuSelectionAction implements ActionListener{
+public class MenuChangeAction implements ActionListener{
 	HomeMenuKiosk hMain;
-	public MenuSelectionAction(HomeMenuKiosk hMain) {
+	public MenuChangeAction(HomeMenuKiosk hMain, int idx1, int idx2) {
 		this.hMain = hMain;
 		// TODO Auto-generated constructor stub
 	}

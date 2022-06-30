@@ -63,8 +63,8 @@ public class kiosk7 extends JFrame{
 	      
 		  String sql1 = "SELECT * FROM Menu WHERE Menu_Category_IDX = 1";
 
-		  //ChangeMenuPanel chgMenu = new ChangeMenuPanel();
-		 // pSouth.add(chgMenu.ChangeMenuPanel(this,sql1));
+		 //ChangeMenuPanel chgMenu = new ChangeMenuPanel();
+		//  pSouth.add(chgMenu.ChangeMenuPanel(this,sql1));
 		 
 			
 	      
