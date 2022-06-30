@@ -23,6 +23,7 @@ import database.manager.ReturnModel;
 import database.model.PsList;
 import manager.ManagerMain;
 import pos.Order;
+import pos.Pos_PaymentPage;
 
 public class SalesTable extends JPanel  {
 	
@@ -209,19 +210,19 @@ public class SalesTable extends JPanel  {
 				
 				ArrayList<Order> orderlist = new ArrayList<>();
 
-				for (int i = 0; i < 10; i++) {
+				for (int i = 0; i < 3; i++) {
 					int cnt = (int) (Math.random() * 10) + 1;
 					int price = (int) (Math.random() * 5) + 1;
 					price *= 1000;
 					orderlist.add(new Order("ÇÜ¹ö°Å", price, cnt, cnt * price));
 				}
 				
-				new Pos_PaymentPage(orderlist);
+				new Pos_PaymentPageSe(orderlist, 'E');
+				//new Pos_PaymentPageSe(orderlist, 'T');
 				
 			}
 		});
 		add(btn);
-		
 		
 	}
 

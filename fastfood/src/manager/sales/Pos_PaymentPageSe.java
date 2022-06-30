@@ -16,9 +16,8 @@ import javax.swing.JTable;
 
 import pos.Order;
 
-public class Pos_PaymentPage extends JFrame {
-
-	public Pos_PaymentPage(ArrayList<Order> orderlist) {
+public class Pos_PaymentPageSe extends JFrame {
+	public Pos_PaymentPageSe(ArrayList<Order> orderlist, char orderType) {
 
 		String[] str = { "예", "아니오" };
 		setTitle("결제창");
@@ -26,7 +25,13 @@ public class Pos_PaymentPage extends JFrame {
 		Font fontsize60 = new Font("맑은 고딕", Font.PLAIN, 60);
 		Font fontsize20 = new Font("맑은 고딕", Font.PLAIN, 20);
 
-		JLabel label = new JLabel("<Take-out>");
+		String orderTitle = "<Take-out>";
+		
+		if(orderType == 'E') {
+			orderTitle = "<Eat - IN>";
+		}
+		
+		JLabel label = new JLabel(orderTitle);
 		label.setFont(fontsize60);
 		label.setBounds(80, 10, 350, 100);
 		add(label);		
@@ -65,7 +70,7 @@ public class Pos_PaymentPage extends JFrame {
 		orderlabel.setFont(fontsize20);
 		orderlabel.setBounds(600, 115, 300, 40);
 
-		add(orderlabel);
+		//add(orderlabel);
 
 		// 판매액
 		Label saleslabel = new Label();
@@ -142,7 +147,7 @@ public class Pos_PaymentPage extends JFrame {
 			rowData[i][3] = orderlist.get(i).getSumprice().toString();
 		}
 
-		String[] columnNames = { "Menu Name", "Quantity", "UnitPrice", "Price" };
+		String[] columnNames = { "메뉴", "수량", "단가", "금액" };
 
 		JTable table = new JTable(rowData, columnNames);
 
@@ -179,7 +184,7 @@ public class Pos_PaymentPage extends JFrame {
 		});
 
 		setLayout(null);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setResizable(false);
 		setBounds(250, 50, 1000, 650);
 		setVisible(true);
@@ -217,16 +222,15 @@ public class Pos_PaymentPage extends JFrame {
 	public static void main(String[] args) {
 		
 		// 주문 목록 랜덤 생성(테스트용)
-		ArrayList<Order> orderlist = new ArrayList<>();
-		for (int i = 0; i < 10; i++) {
-			int cnt = (int) (Math.random() * 10) + 1;
-			int price = (int) (Math.random() * 5) + 1;
-			price *= 1000;
-			orderlist.add(new Order("햄버거", price, cnt, cnt * price));
-		}
-		
+//		ArrayList<Order> orderlist = new ArrayList<>();
+//		for (int i = 0; i < 10; i++) {
+//			int cnt = (int) (Math.random() * 10) + 1;
+//			int price = (int) (Math.random() * 5) + 1;
+//			price *= 1000;
+//			orderlist.add(new Order("햄버거", price, cnt, cnt * price));
+//		}
+//		
 		// 주문 목록 넘겨 받아서 호출하는 부분
-		new Pos_PaymentPage(orderlist);
+//		new Pos_PaymentPage(orderlist);
 	}
-	
 }
