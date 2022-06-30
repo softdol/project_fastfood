@@ -39,12 +39,12 @@ public class Order_list {
 		return img_path;
 	}
 	
-	public Order_list(Menu m, int q, int set_idx) {
+	public Order_list(Menu m, int cnt, int set_idx) {
 		this.MENU_IDX			= m.getMENU_IDX();
 		this.ORDER_STATE		= 0;
 		this.ORDER_PRICE		= m.getMENU_PRICE();
-		this.ORDER_QUANTITY		= q;
-		this.ORDER_PRICE_TOTAL	= m.getMENU_PRICE() * q;		
+		this.ORDER_QUANTITY		= cnt;
+		this.ORDER_PRICE_TOTAL	= m.getMENU_PRICE() * cnt;		
 		this.MENU_NAME			= m.getMENU_NAME();
 		this.SET_IDX			= set_idx;
 	}
