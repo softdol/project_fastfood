@@ -208,13 +208,15 @@ public class SalesTable extends JPanel  {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				ArrayList<Order> orderlist = new ArrayList<>();
-
-				for (int i = 0; i < 3; i++) {
+				ArrayList<Order> orderlist = new ArrayList<>();				
+				ArrayList<PsList> psList = new ArrayList<>();
+				String sql = "select * from menu";
+				ArrayList<Menu> menuList = ReturnModel.selMenuList(sql, psList);
+				for (int i = 0; i < 10; i++) {
 					int cnt = (int) (Math.random() * 10) + 1;
 					int price = (int) (Math.random() * 5) + 1;
 					price *= 1000;
-					orderlist.add(new Order("ÇÜ¹ö°Å", price, cnt, cnt * price));
+					orderlist.add(new Order(menuList.get((int)(Math.random() * menuList.size())), cnt, (int)(Math.random() * 2)));
 				}
 				
 				new Pos_PaymentPageSe(orderlist, 'E');

@@ -14,6 +14,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import database.manager.Menu;
+import database.manager.ReturnModel;
+import database.model.PsList;
+
 public class Pos_TakeOut_PaymentPage extends JFrame {
       
    public static void main(String[] args) {
@@ -133,14 +137,17 @@ public class Pos_TakeOut_PaymentPage extends JFrame {
      frame.add(totallabel2);
 
        
-      ArrayList<Order> orderlist = new ArrayList<>();
-      
-      for(int i = 0 ; i < 10; i++) {
-         int cnt = (int)(Math.random() * 10) + 1;
-         int price = (int)(Math.random() * 5) + 1;
-         price *= 1000;
-         orderlist.add(new Order("햄버거", price, cnt, cnt * price));
-      }
+  // 주문 목록 랜덤 생성(테스트용)
+  		ArrayList<Order> orderlist = new ArrayList<>();				
+  		ArrayList<PsList> psList = new ArrayList<>();
+  		String sql = "select * from menu";
+  		ArrayList<Menu> menuList = ReturnModel.selMenuList(sql, psList);
+  		for (int i = 0; i < 10; i++) {
+  			int cnt = (int) (Math.random() * 10) + 1;
+  			int price = (int) (Math.random() * 5) + 1;
+  			price *= 1000;
+  			orderlist.add(new Order(menuList.get((int)(Math.random() * menuList.size())), cnt, (int)(Math.random() * 2)));
+  		}
       // 메뉴 수량 단가 금액 테이블
 //      String[][] rowData = {
 //            {"  메뉴", "  수량", "  단가", "  금액"},
@@ -151,13 +158,13 @@ public class Pos_TakeOut_PaymentPage extends JFrame {
 //      };
       String[][] rowData = new String[orderlist.size()][4];
       
-      for(int i = 0; i < orderlist.size(); i++) {
-         rowData[i][0] = orderlist.get(i).getMenu();
-         rowData[i][1] = orderlist.get(i).getMenunum().toString();
-         rowData[i][2] = orderlist.get(i).getPrice().toString();
-         rowData[i][3] = orderlist.get(i).getSumprice().toString();
-               
-      }
+//      for(int i = 0; i < orderlist.size(); i++) {
+//         rowData[i][0] = orderlist.get(i).getMenu();
+//         rowData[i][1] = orderlist.get(i).getMenunum().toString();
+//         rowData[i][2] = orderlist.get(i).getPrice().toString();
+//         rowData[i][3] = orderlist.get(i).getSumprice().toString();
+//               
+//      }
       
       String[] columnNames = {"Menu Name", "Quantity", "UnitPrice", "Price"};
       
