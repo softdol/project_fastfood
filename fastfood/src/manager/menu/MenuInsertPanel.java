@@ -18,6 +18,7 @@ import javax.swing.border.LineBorder;
 
 import database.OjdbcConnection;
 import database.manager.Category;
+import database.manager.Menu;
 import database.manager.ReturnModel;
 import database.manager.SubCategory;
 import database.model.PsList;
@@ -33,6 +34,8 @@ public class MenuInsertPanel extends JPanel {
 	public JLabel lblImg;
 	public JTextField txtImgPath;
 	ManagerMain main;
+	JComboBox cateSubList;
+	ArrayList<SubCategory> subCateList;
 	
 	public MenuInsertPanel(ManagerMain main) {
 		
@@ -54,13 +57,30 @@ public class MenuInsertPanel extends JPanel {
 		cateList.setBounds(lblTitle.getX(), lblTitle.getY() + lblTitle.getHeight() + 20 , 80, 50);
 		cateList.setFont(new Font("고딕체", Font.BOLD, 14));
 		
-		JComboBox cateSubList = new JComboBox();
-		
-		ArrayList<SubCategory> subCateList = ReturnModel.categorySubList();
+		cateSubList = new JComboBox();
 		cateSubList.addItem("--중분류--");
-		for(SubCategory c : subCateList) {
-			cateSubList.addItem(c.getMenu_subcategory_name());
-		}
+		
+		cateList.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JComboBox thisCb = (JComboBox)e.getSource();
+				if(thisCb.getSelectedIndex() != 0) {
+					int selNum = cataList.get(thisCb.getSelectedIndex()-1).getMenu_category_idx();
+					cateSubList.removeAllItems();
+					String sqlSubMenu = "select * from menu_subcategory where MENU_CATEGORY_IDX = ?";
+					ArrayList<PsList> psList = new ArrayList<>();
+					psList.add(new PsList('I', String.valueOf(selNum)));
+					
+					subCateList = ReturnModel.categorySubList(sqlSubMenu, psList);
+					
+					cateSubList.addItem("--중분류--");
+					for(SubCategory m : subCateList) {
+						cateSubList.addItem(m.getMenu_subcategory_name());
+					}
+				}
+			}
+		});
 		
 		cateSubList.setBounds(cateList.getX() + cateList.getWidth() + 20, cateList.getY() , 80, 50);
 		cateSubList.setFont(new Font("고딕체", Font.BOLD, 14));

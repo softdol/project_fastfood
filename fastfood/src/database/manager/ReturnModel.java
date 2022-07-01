@@ -147,18 +147,39 @@ public class ReturnModel {
 	 * @param psList
 	 * @return ArrayList<SubCategory>
 	 */
-	public static ArrayList<SubCategory> categorySubList(){
+	public static ArrayList<SubCategory> categorySubList(String sql, ArrayList<PsList> psList){
 		ArrayList<SubCategory> cateList = new ArrayList<>();
 		try(
 				Connection conn = OjdbcConnection.getConnection();
-				PreparedStatement pstmt= conn.prepareStatement("select * from menu_subcategory");
+				PreparedStatement pstmt= conn.prepareStatement(sql);
 			){
 			
+			for(int i = 0; i < psList.size(); i++) {
+				PsList ps = psList.get(i);
+				switch(ps.getType()) {
+					case 'i': case 'I':
+						pstmt.setInt(i + 1, Integer.parseInt(ps.getVal()));
+						break;
+					case 's': case 'S':
+						pstmt.setString(i + 1, ps.getVal());
+						break;
+					case 'd': case 'D':
+						pstmt.setDate(i + 1, java.sql.Date.valueOf(ps.getVal()));
+						break;
+					default:
+						pstmt.setString(i + 1, ps.getVal());
+						break;				
+				}
+			}
+			
 			try(ResultSet rs = pstmt.executeQuery()){
+
 				while(rs.next()) {
 					cateList.add(new SubCategory(rs));					
-				}				
+				}
+				
 				return cateList;
+				
 			}catch(SQLException e) {
 				e.printStackTrace();
 				return null;
@@ -168,7 +189,7 @@ public class ReturnModel {
 		} catch(SQLException e) {
 			e.printStackTrace();
 			return null;
-		}	
+		}
 	}
 	
 	/**
