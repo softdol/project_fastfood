@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -30,7 +31,6 @@ public class Pos_PaymentPageSe extends JFrame {
 		this.orderlist = orderlist;
 		this.main = main;
 		
-		String[] str = { "예", "아니오" };
 		setTitle("결제창");
 
 		Font fontsize60 = new Font("맑은 고딕", Font.PLAIN, 60);
@@ -50,11 +50,26 @@ public class Pos_PaymentPageSe extends JFrame {
 		JButton orderaddBtn = new JButton("추가주문");
 		orderaddBtn.setFont(fontsize20);
 		orderaddBtn.setBounds(70, 120, 150, 100);
+		orderaddBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		add(orderaddBtn);
 
 		JButton ordercancelBtn = new JButton("전체취소");
 		ordercancelBtn.setFont(fontsize20);
 		ordercancelBtn.setBounds(250, 120, 150, 100);
+		ordercancelBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				main.clearList();
+				dispose();
+			}
+		});
 		add(ordercancelBtn);
 
 		JButton pay_card = new JButton("카드결제");
@@ -268,19 +283,19 @@ public class Pos_PaymentPageSe extends JFrame {
 		}
 	}
 	
-	public static void main(String[] args) {
-		
-		// 주문 목록 랜덤 생성(테스트용)
-		ArrayList<Order> orderlist = new ArrayList<>();				
-		ArrayList<PsList> psList = new ArrayList<>();
-		String sql = "select * from menu";
-		ArrayList<Menu> menuList = ReturnModel.selMenuList(sql, psList);
-		for (int i = 0; i < 5; i++) {
-			int cnt = (int) (Math.random() * 3) + 1;
-			orderlist.add(new Order(menuList.get((int)(Math.random() * menuList.size())), cnt, (int)(Math.random() * 2)));
-		}
-		
-		// 주문 목록 넘겨 받아서 호출하는 부분
-		new Pos_PaymentPageSe(orderlist, 'C');
-	}
+//	public static void main(String[] args) {
+//		
+//		// 주문 목록 랜덤 생성(테스트용)
+//		ArrayList<Order> orderlist = new ArrayList<>();				
+//		ArrayList<PsList> psList = new ArrayList<>();
+//		String sql = "select * from menu";
+//		ArrayList<Menu> menuList = ReturnModel.selMenuList(sql, psList);
+//		for (int i = 0; i < 5; i++) {
+//			int cnt = (int) (Math.random() * 3) + 1;
+//			orderlist.add(new Order(menuList.get((int)(Math.random() * menuList.size())), cnt, (int)(Math.random() * 2)));
+//		}
+//		
+//		// 주문 목록 넘겨 받아서 호출하는 부분
+//		//new Pos_PaymentPageSe(orderlist, 'C');
+//	}
 }

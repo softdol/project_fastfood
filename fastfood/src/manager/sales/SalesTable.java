@@ -298,7 +298,7 @@ public class SalesTable extends JPanel  {
 					orderlist.add(new Order(menuList.get((int)(Math.random() * menuList.size())), cnt, (int)(Math.random() * 2)));
 				}
 				
-				new Pos_PaymentPageSe(orderlist, 'E');
+				//new Pos_PaymentPageSe(orderlist, 'E');
 				//new Pos_PaymentPageSe(orderlist, 'T');
 				
 			}
