@@ -38,7 +38,7 @@ public class SalesTable extends JPanel  {
 	    	   String selQ = String.valueOf(orderTable.getValueAt(orderTable.getSelectedRow(), orderTable.getSelectedColumn()));
 	    	   
 	    	   if(!item.equals(selQ)) {
-	    		   //orderList.get(orderTable.getSelectedRow()).setOrder_quantity(Integer.parseInt(item));
+	    		   orderList.get(orderTable.getSelectedRow()).setTotalPrice(Integer.parseInt(item));
 	    		   setOrderList();
 	    	   }
 	       }
