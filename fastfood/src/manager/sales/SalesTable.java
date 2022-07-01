@@ -2,10 +2,8 @@ package manager.sales;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 import javax.swing.DefaultCellEditor;
@@ -17,19 +15,48 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import database.manager.Category;
 import database.manager.Menu;
 import database.manager.ReturnModel;
 import database.model.PsList;
 import manager.ManagerMain;
 import pos.Order;
-import pos.Pos_PaymentPage;
 
 public class SalesTable extends JPanel  {
 	
 	ManagerMain main;
 	Object[] orderF;
 	DefaultTableModel dfTable;
+	int setQuantity;
+	JTable orderTable;
+	ArrayList<Order> orderList;
+	
+	class ItemChangeListener implements ItemListener{
+	    @Override
+	    public void itemStateChanged(ItemEvent event) {
+	       if (event.getStateChange() == ItemEvent.SELECTED) {
+	    	   String item = (String)event.getItem();
+	    	   String selQ = String.valueOf(orderTable.getValueAt(orderTable.getSelectedRow(), orderTable.getSelectedColumn()));
+	    	   
+	    	   if(!item.equals(selQ)) {
+	    		   //orderList.get(orderTable.getSelectedRow()).setOrder_quantity(Integer.parseInt(item));
+	    		   setOrderList();
+	    	   }
+	       }
+	    }
+	}
+	
+	public void setOrderList() {
+		dfTable.setNumRows(0);
+		for(int i = 0; i < orderList.size(); i++) {
+			Order o = 	orderList.get(i);		
+			
+			orderF[0] = o.getMenu_name();
+			orderF[1] = o.getOrder_quantity();
+			orderF[2] = o.getOrder_price();
+			orderF[3] = o.getOrder_price_total();
+			dfTable.addRow(orderF);
+		}
+	}
 	
 	public SalesTable(ManagerMain main) {
 		setLayout(null);
@@ -38,7 +65,8 @@ public class SalesTable extends JPanel  {
 		String[] strTitle = {"상품명", "수량", "단가", "가격"};
 		
 		dfTable = new DefaultTableModel(strTitle, 0);
-		
+		setQuantity = 0;
+		orderList = new ArrayList<>();
 		
 		ArrayList<PsList> psList = new ArrayList<>();		
 		ArrayList<Menu> menuList = ReturnModel.selMenuList("select * from menu", psList);
@@ -49,57 +77,93 @@ public class SalesTable extends JPanel  {
 //			System.out.println(m);
 //		}
 		
-		ArrayList<Category> cateList = ReturnModel.categoryList();
-		ArrayList<JComboBox<String>> cbList = new ArrayList<>();
-		for(Category c: cateList) {			
-			JComboBox<String> jCombo = new JComboBox<>();
-			for(Menu m : menuList) {
-				if(c.getMenu_category_idx() == m.getMenu_category()) {
-					jCombo.addItem(m.getMenu_name());
-				}
-			}
-			cbList.add(jCombo);
+		// 콤보박스 추가
+//		ArrayList<Category> cateList = ReturnModel.categoryList();
+//		ArrayList<JComboBox<String>> cbList = new ArrayList<>();
+//		for(Category c: cateList) {			
+//			JComboBox<String> jCombo = new JComboBox<>();
+//			for(Menu m : menuList) {
+//				if(c.getMenu_category_idx() == m.getMenu_category()) {
+//					jCombo.addItem(m.getMenu_name());
+//				}
+//			}
+//			cbList.add(jCombo);
+//		}
+		for(int i = 0; i < 8; i++) {
+			Menu m = menuList.get((int)(Math.random() * menuList.size()));
+			int cnt = (int)(Math.random() * 5) + 1;
+			orderList.add(new Order(m, cnt, 0));
 		}
 		
-		for(int i = 0; i < 5; i++) {
-			Menu m = menuList.get((int)(Math.random() * menuList.size()));
-			int cnt = (int)(Math.random() * 10);
-			orderF[0] = m.getMenu_name();
-			orderF[1] = cnt;
-			orderF[2] = m.getMenu_price();
-			orderF[3] = m.getMenu_price() * cnt;
-			dfTable.addRow(orderF);
-		}
+		setOrderList();
 		
 		JComboBox<String> jcCount = new JComboBox<>();
-		for(int i = 0; i < 50; i++) {
+		for(int i = 1; i < 100; i++) {
 			jcCount.addItem(String.valueOf(i));
 		}
+		jcCount.addItemListener(new ItemChangeListener());
+//		jcCount.addActionListener(new ActionListener() {
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				System.out.println(1);
+//			}
+//		});
 		
-		JTable orderTable = new JTable(dfTable);
+		orderTable = new JTable(dfTable);
 		
+		//컬럼 추가
 		TableColumn column = orderTable.getColumnModel().getColumn(1);
 		column.setCellEditor(new DefaultCellEditor(jcCount));
 		
-		orderTable.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if(orderTable.getSelectedColumn() == 0) {
-					System.out.println(orderTable.getSelectedRow());
-				}
-			}
-		});
+//		orderTable.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				if(orderTable.getSelectedColumn() == 0) {
+//					System.out.println(orderTable.getSelectedRow());
+//				}
+//			}
+//		});
 		
-		orderTable.addKeyListener(new KeyAdapter() {
-			
-			@Override
-			public void keyPressed(KeyEvent e) {
-				System.out.println(orderTable.getSelectedRow());
-				System.out.println(orderTable.getSelectedColumn());
-				
-			}
-			
-		});
+//		orderTable.addKeyListener(new KeyAdapter() {
+//			
+//			@Override
+//			public void keyPressed(KeyEvent e) {
+//				System.out.println(orderTable.getSelectedRow());
+//				System.out.println(orderTable.getSelectedColumn());
+//				
+//			}
+//			
+//		});
+		
+		
+		
+//		orderTable.addKeyListener(new KeyListener() {
+//			
+//			@Override
+//			public void keyTyped(KeyEvent e) {
+//				String selQ = String.valueOf(orderTable.getValueAt(orderTable.getSelectedRow(), orderTable.getSelectedColumn()));
+//				System.out.println("keyTyped : " + selQ);
+//			}
+//			
+//			@Override
+//			public void keyReleased(KeyEvent e) {
+////				System.out.println("keyReleased : " + orderTable.getSelectedRow());
+////				System.out.println("keyReleased : " + orderTable.getSelectedColumn());
+//				String selQ = String.valueOf(orderTable.getValueAt(orderTable.getSelectedRow(), orderTable.getSelectedColumn()));
+//				System.out.println("keyReleased : " + selQ);
+//			}
+//			
+//			@Override
+//			public void keyPressed(KeyEvent e) {
+////				System.out.println("keyPressed : " + orderTable.getSelectedRow());
+////				System.out.println("keyPressed : " + orderTable.getSelectedColumn());
+//				String selQ = String.valueOf(orderTable.getValueAt(orderTable.getSelectedRow(), orderTable.getSelectedColumn()));
+//				System.out.println("keyPressed : " + selQ);
+//			}
+//		});
+		
+		
 		
 		
 //		for(int j = 0; j < 100; j++) {
