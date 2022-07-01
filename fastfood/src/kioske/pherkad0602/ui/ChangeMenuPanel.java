@@ -21,7 +21,7 @@ public class ChangeMenuPanel extends JPanel {
 	Main_JFrame frame;
 	kiosk7 kiosk7;
 
-	public ChangeMenuPanel (ArrayList<MenuDatabase> menuList, ArrayList<MenuDatabase> menuInfo,
+	public ChangeMenuPanel (Main_JFrame frame, ArrayList<MenuDatabase> menuList, ArrayList<MenuDatabase> menuInfo,
 			ArrayList<SetDatabase> setList, int menuidx, String  set, int setidx, int sideidx, int drinkidx, int catei
 			,kiosk7 kiosk7, int final_price) {
 		
@@ -34,7 +34,7 @@ public class ChangeMenuPanel extends JPanel {
 		menuPanel.setBackground(Color.white);
 		menuPanel.setBorder(border);
 		
-		ChangeMenu menu= new ChangeMenu(menuList, menuInfo, setList, 
+		ChangeMenu menu= new ChangeMenu(frame, menuList, menuInfo, setList, 
 				 menuidx, set, setidx, sideidx, drinkidx, catei, kiosk7, final_price);
 		menuPanel.add(menu);
 		

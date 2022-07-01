@@ -18,12 +18,11 @@ import kioske.YounukLee7.Main_JFrame;
 import kioske.pherkad0602.database.MenuDatabase;
 import kioske.pherkad0602.database.ReturnModel;
 import kioske.pherkad0602.database.SetDatabase;
-import kioske.pherkad0602.ui.ChangeCheck;
 import kioske.pherkad0602.ui.ChangeMenuPanel;
 import kioske.pherkad0602.ui.OrderCheck;
 import kioske.pherkad0602.ui.PayPanel;
 
-public class kiosk7 extends JFrame{
+public class kiosk7 extends JPanel{
 		
 	   Main_JFrame frame;
 	   int idx;
@@ -34,22 +33,9 @@ public class kiosk7 extends JFrame{
 	   JButton payBtn1 = new JButton();
 	   JButton payBtn2 = new JButton();
 	   
-	   
-	   public void order(kiosk7 ki7, int idx, String addCost) {
-			// TODO Auto-generated method stub
-		}
-   
-		public void setPrice(kiosk7 ki7,int idx, int addCost) {
+		public void setPrice(Main_JFrame frame, kiosk7 ki7,int idx, int addCost) {
 			payLabel2.setText(String.valueOf(addCost)+ "¿ø");
 			
-			payBtn1.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-			});
 			payBtn2.addActionListener(new ActionListener() {
 				
 				@Override
@@ -59,9 +45,10 @@ public class kiosk7 extends JFrame{
 				}
 			});
 			
+			
 		}
 	   
-	   public kiosk7(int menuidx, String  set, int setidx, int sideidx, int drinkidx, int catei) {
+	   public kiosk7( Main_JFrame frame, int menuidx, String  set, int setidx, int sideidx, int drinkidx, int catei) {
 	      
 		  ArrayList<PsList> psList = new ArrayList<>();
 		  String sql = "select * from menu where MENU_CATEGORY_IDX = ?";
@@ -98,7 +85,7 @@ public class kiosk7 extends JFrame{
 	      pSouth.setBounds(0,300,900,540);
 	      pSouth.setLayout(null);
 	      
-	      payPanel.setBackground(Color.cyan);
+	      payPanel.setBackground(Color.gray);
 	      payPanel.setBounds(0,840,900,200);
 	      payPanel.setLayout(null);
 	      
@@ -111,8 +98,6 @@ public class kiosk7 extends JFrame{
 
 	      logo.setBounds(50,50,200,200);
 	      //
-	      
-	      
 	   
 	      pNorth.add(logo);
 	      pNorth.add(menuName);
@@ -124,17 +109,11 @@ public class kiosk7 extends JFrame{
 		  
 		  if (catei ==2) {
 			  menuLabel.setText("À½·á º¯°æ");
-		  } else {
+		  } else if(catei ==3) {
 			  menuLabel.setText("ÇÜ¹ö°Å º¯°æ");
-
 		  }
 		  menuLabel.setFont(new Font("¸¼Àº °íµñ ±½°Ô", Font.BOLD, 40));
-		  pSouth.add(menuLabel);
-	      
-
-		
-		 
-			
+		  pSouth.add(menuLabel);		
 	      
 	      // °áÁ¦ÆÐ³Î Å¬·¡½ºÈ­ ÇØ¾ßÇÔ
 		  payLabel1 = new JLabel();
@@ -154,7 +133,7 @@ public class kiosk7 extends JFrame{
 		   
 		   final_price = (price *(100-sale))/100;
 		   
-		   ChangeMenuPanel chgMenu = new ChangeMenuPanel(menuList, menuInfo, setList, 
+		   ChangeMenuPanel chgMenu = new ChangeMenuPanel(frame, menuList, menuInfo, setList, 
 					 menuidx, set, setidx, sideidx, drinkidx, catei, this, final_price);
 		   pSouth.add(chgMenu);
 		   
@@ -166,15 +145,27 @@ public class kiosk7 extends JFrame{
 		   payBtn1.setBounds(50,100,350,50);
 		   payBtn1.setText("Ãë¼Ò");
 		   payBtn1.setFont(new Font("¸¼Àº °íµñ ±½°Ô", Font.PLAIN, 30));
+		   payBtn1.setBackground(Color.white);
+		   payBtn1.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+		   
+		   
 		   payPanel.add(payBtn1);
 		   
 		   payBtn2.setBounds(480,100,350,50);
 		   payBtn2.setText("¿Ï·á");
 		   payBtn2.setFont(new Font("¸¼Àº °íµñ ±½°Ô", Font.PLAIN, 30));
+		   payBtn2.setBackground(Color.white);
+		  
 		   payPanel.add(payBtn2);
 	      //
-	      
-		     
+		   
 		  add(pNorth);
 		  add(pSouth);
 		  add(payPanel);
