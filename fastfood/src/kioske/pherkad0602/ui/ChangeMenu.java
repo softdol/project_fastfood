@@ -104,7 +104,7 @@ public class ChangeMenu extends JPanel{
 
 			int addCost = temp1+final_price;
 			
-			btn3.addActionListener(new MenuChangeAction(frame, kiosk7, menuList.get(i).getMenu_idx(), addCost));
+			btn3.addActionListener(new MenuChangeAction(frame, menuidx, set, setidx, sideidx, drinkidx, catei, kiosk7, menuList.get(i).getMenu_idx(), addCost));
 
 			priceLabel.setBounds(0,185,210,25);
 			priceLabel.setBackground(Color.white);

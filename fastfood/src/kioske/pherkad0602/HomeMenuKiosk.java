@@ -44,6 +44,13 @@ public class HomeMenuKiosk extends JPanel{
 		System.out.println(name);
 	}
 	
+	
+	public void orderPlus(int menuidx) {
+		// TODO Auto-generated method stub
+		orderList.add(menuidx);
+	}
+
+	
 	public HomeMenuKiosk(Main_JFrame frame, int idx) {
 		
 		
@@ -72,4 +79,5 @@ public class HomeMenuKiosk extends JPanel{
 
 	}
 
+	
 }

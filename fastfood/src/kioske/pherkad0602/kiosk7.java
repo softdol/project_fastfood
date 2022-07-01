@@ -33,15 +33,19 @@ public class kiosk7 extends JPanel{
 	   JButton payBtn1 = new JButton();
 	   JButton payBtn2 = new JButton();
 	   
-		public void setPrice(Main_JFrame frame, kiosk7 ki7,int idx, int addCost) {
+		public void setPrice(Main_JFrame frame,  int menuidx, String  set, int setidx, int sideidx, int drinkidx, int catei
+				,kiosk7 kiosk7, int idx, int addCost) {
 			payLabel2.setText(String.valueOf(addCost)+ "원");
 			
 			payBtn2.addActionListener(new ActionListener() {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					
+					if (catei == 2) {
+						frame.veiw_Select_Side_Drink(menuidx, set, setidx, sideidx, idx);
+					}else if (catei == 3){
+						frame.veiw_Select_Side_Drink(menuidx, set, setidx, idx, drinkidx);
+					}
 				}
 			});
 			
@@ -110,7 +114,7 @@ public class kiosk7 extends JPanel{
 		  if (catei ==2) {
 			  menuLabel.setText("음료 변경");
 		  } else if(catei ==3) {
-			  menuLabel.setText("햄버거 변경");
+			  menuLabel.setText("사이드 변경");
 		  }
 		  menuLabel.setFont(new Font("맑은 고딕 굵게", Font.BOLD, 40));
 		  pSouth.add(menuLabel);		
@@ -129,7 +133,7 @@ public class kiosk7 extends JPanel{
 		   int price = Integer.valueOf(menuInfo.get(0).getMenu_price())
 				   + Integer.valueOf(menuInfo.get(1).getMenu_price())
 				   + Integer.valueOf(menuInfo.get(2).getMenu_price());
-		   int sale = Integer.valueOf(setList.get(0).getSET_SALE());
+		   int sale = Integer.valueOf(menuInfo.get(0).getMenu_sale());
 		   
 		   final_price = (price *(100-sale))/100;
 		   
@@ -150,8 +154,7 @@ public class kiosk7 extends JPanel{
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					
+					frame.veiw_Select_Side_Drink(menuidx, set, setidx, sideidx, drinkidx);
 				}
 			});
 		   
@@ -171,13 +174,11 @@ public class kiosk7 extends JPanel{
 		  add(payPanel);
 		      
 	      setLayout(null);
-	      setBounds(510,0,900,1040);
-	      setResizable(false);
-	      setDefaultCloseOperation(EXIT_ON_CLOSE);
+	      setBounds(0,0,900,1040);
 	      setVisible(true);
 	   }
 	   public static void main(String[] args) {
-	      new kiosk7(1, "디럭스 버거 세트", 1, 5, 4, 2);
+	      //new kiosk7(1, "디럭스 버거 세트", 1, 5, 4, 2);
 	   }
 
 	
