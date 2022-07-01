@@ -8,27 +8,34 @@ import java.awt.Image;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
+import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
-import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import manager.sales.Pos_PaymentPageSe;
 import pos.ActionListener.SubCateActionListener;
 
 public class Pos_Burger extends JFrame {
+	
+	JTable table;
+	
+	
 
 	
 	MenuListPanel item;
@@ -37,6 +44,20 @@ public class Pos_Burger extends JFrame {
 	Object[] orderF;
 	Object qty;
 	Pos_Burger main;
+	class ItemChangeListener implements ItemListener{
+	    @Override
+	    public void itemStateChanged(ItemEvent event) {
+	       if (event.getStateChange() == ItemEvent.SELECTED) {
+	    	   String item = (String)event.getItem();
+	    	   String selQ = String.valueOf(table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()));
+	    	   
+	    	   if(!item.equals(selQ)) {
+	    		   orderlist.get(table.getSelectedRow()).setTotalPrice(Integer.parseInt(item));
+	    		   setOrderlist();
+	    	   }
+	       }
+	    }
+	}
 	
 	public void clearList() {
 		orderlist = new ArrayList<>();
@@ -67,17 +88,7 @@ public class Pos_Burger extends JFrame {
 		
 	}
 	
-	// 테이블 필드 체인지 이벤트 찾고, 
-	
 
-	// 바뀐 필드의 값이랑 몇번째 행 번호 (어레이리스트랑 똑같을 거)
-	
-	
-	// 행번호가지고 Array.getInt로 찾기 
-	
-	// 수량변경
-	
-	// setOrderlist 불러오기 
 	
 	public void viewMenuList(int iCate) {
 		System.out.println(iCate);
@@ -96,6 +107,7 @@ public class Pos_Burger extends JFrame {
 		orderlist = new ArrayList<>();
 		 orderF = new Object[4];
 		
+		
 		JPanel menu = new JPanel();
 		JPanel order = new JPanel();
 		
@@ -104,7 +116,7 @@ public class Pos_Burger extends JFrame {
 			
 		
 		// 카테고리도 db 통해서 불러올 예정 
-		String[] bigcate = { "BURGER","DRINK","SIDE","SALE", "SIDE", "DRINK", "DESSERT" };
+		String[] bigcate = { "BURGER","DRINK","SIDE","DESSERT", "SET", "", "" };
 		
 		
 		// 주문번호 창 패널
@@ -161,7 +173,7 @@ public class Pos_Burger extends JFrame {
 		
 		
 		JPanel order_number = new JPanel();
-		JLabel order_index = new JLabel("< 주문 번호 > ");
+		JLabel order_index = new JLabel("  < 주문표 > ");
 		// 주문번호 db 인덱스를 통해서 가져올 예정 
 		
 		order_number.setBackground(new Color(0x00769E));
@@ -184,7 +196,7 @@ public class Pos_Burger extends JFrame {
 		
 	
 		dfTable = new DefaultTableModel(columns, 0);
-		JTable table = new JTable(dfTable);
+		table = new JTable(dfTable);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // 단일 선택
 		
 		table.setPreferredScrollableViewportSize(new Dimension(400,250));
@@ -192,6 +204,7 @@ public class Pos_Burger extends JFrame {
 		
 		order_table.add(new JScrollPane(table));
 		
+		TableColumn comm = table.getColumnModel().getColumn(1);
 		
 		
 		
@@ -203,7 +216,11 @@ public class Pos_Burger extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JButton minus = (JButton)e.getSource();
 				//DefaultTableModel m = (DefaultTableModel)table.getModel();
-				
+				if (table.getSelectedRow() == -1) {
+					
+					JOptionPane.showMessageDialog(null, "행을 클릭해주세요");
+					
+				}
 				//m.removeRow(table.getSelectedRow());
 				orderlist.remove(table.getSelectedRow());
 				setOrderlist();
@@ -219,7 +236,8 @@ public class Pos_Burger extends JFrame {
 				//JButton all_minus = (JButton)e.getSource();
 				
 				dfTable.setRowCount(0);
-				//orderlist.removeAll(orderlist);
+				orderlist.removeAll(orderlist);
+	
 			}
 		});
 		
