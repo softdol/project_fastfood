@@ -1,6 +1,7 @@
 package kioske.YounukLee7.kioskeUI;
 
 import java.awt.CardLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -11,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -64,7 +67,20 @@ public class Start_Screen_kiosk extends JPanel{
 		// 화면들 (위에 DB에서 가져온 정보에서 Big_event_page 부분만 꺼내기)
 		for (int i = 0; i < event_page_list.size(); i++) {
 			// Big_event_page만 get으로 가져오기
-			cardpanel.add(new ImageLabel(event_page_list.get(i).getBig_event_page()));
+			
+			//cardpanel.add(new ImageLabel(event_page_list.get(i).getBig_event_page()));
+			
+			
+			JLabel image_label = new JLabel();
+			image_label.setBounds(0,0,900,1040);
+			
+			ImageIcon icon = new ImageIcon(event_page_list.get(i).getBig_event_page());
+			Image img = icon.getImage();
+			Image eventimg = img.getScaledInstance(900, 1040, Image.SCALE_SMOOTH);
+			ImageIcon eventicon = new ImageIcon(eventimg);
+			image_label.setIcon(eventicon);
+			
+			cardpanel.add(image_label);
 		}
 		
 		addMouseListener(new MouseAdapter() {
