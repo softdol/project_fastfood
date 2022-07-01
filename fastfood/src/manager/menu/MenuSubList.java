@@ -23,10 +23,10 @@ public class MenuSubList extends JPanel {
 		
 		ArrayList<PsList> psList = new ArrayList<>();
 		
-		String sql = "select * from menu";
+		String sql = "select * from menu where MENU_USE_FLAG = 'Y'";
 		
 		if(cate > 0) {
-			sql += " where MENU_CATEGORY_IDX = ?";
+			sql += " and MENU_CATEGORY_IDX = ?";
 			psList.add(new PsList('I', String.valueOf(cate)));
 		}
 		

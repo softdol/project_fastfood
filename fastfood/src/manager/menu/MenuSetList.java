@@ -36,7 +36,7 @@ public class MenuSetList extends JPanel {
 		
 		ArrayList<PsList> psList = new ArrayList<>();
 		
-		String sql = "select * from menu_set";
+		String sql = "select * from menu_set where set_use_flag = 'Y'";
 		
 		JPanel jpList = new JPanel();
 		
