@@ -36,9 +36,18 @@ public class Pos_Burger extends JFrame {
 	DefaultTableModel dfTable;
 	Object[] orderF;
 	Object qty;
+	Pos_Burger main;
+	
+	public void clearList() {
+		orderlist = new ArrayList<>();
+		dfTable.setRowCount(0);
+	}
 	
 	public void setOrderlist( ) {
 		// 테이블 초기화 꼭 넣어두기! 
+		
+		dfTable.setRowCount(0);
+		
 		for(Order o : orderlist) {
 			System.out.println(o.getMenu_name() + " " + o.getOrder_quantity() + " " + o.getOrder_price() + " " + o.getOrder_price_total() + " ");
 		
@@ -49,7 +58,7 @@ public class Pos_Burger extends JFrame {
 	        orderF[2] = o.getOrder_price();
 	        orderF[3] = o.getOrder_price_total();
 	        dfTable.addRow(orderF);
-			
+	       
 	        
 	        
 	         
@@ -78,17 +87,12 @@ public class Pos_Burger extends JFrame {
 		item.add(new MenuListPanel(iCate,this));
 	}
 	
-	public void clearMenuList() {
-		
-		DefaultTableModel m = (DefaultTableModel)table.getModel();
-		
-		m.setRowCount(0);
-		tf.setText(String.valueOf(""));
-	}
+
 	
 	
 	public Pos_Burger() {
 		super("메인 포스기");
+		this.main = this;
 		orderlist = new ArrayList<>();
 		 orderF = new Object[4];
 		
@@ -182,46 +186,7 @@ public class Pos_Burger extends JFrame {
 		dfTable = new DefaultTableModel(columns, 0);
 		JTable table = new JTable(dfTable);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // 단일 선택
-		table.addMouseListener(new MouseListener() {
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-				int row = table.getSelectedRow();
-				int column = table.getSelectedColumn();
-				
-				Object value = table.getValueAt(row, column);
-				System.out.println(value);
-				
-			
-				
-			}
-		});
+		
 		table.setPreferredScrollableViewportSize(new Dimension(400,250));
 		table.setFillsViewportHeight(true);
 		
@@ -230,18 +195,40 @@ public class Pos_Burger extends JFrame {
 		
 		
 		
-		JButton minus = new JButton("하나 취소");
+		JButton minus = new JButton("한줄 취소");
 		minus.setBounds(865,170,100,50);
+		minus.addActionListener(new ActionListener() {
+			
+				@Override
+			public void actionPerformed(ActionEvent e) {
+				JButton minus = (JButton)e.getSource();
+				//DefaultTableModel m = (DefaultTableModel)table.getModel();
+				
+				//m.removeRow(table.getSelectedRow());
+				orderlist.remove(table.getSelectedRow());
+				setOrderlist();
+			}
+		});
 		
 		JButton all_minus = new JButton("전체 취소");
 		all_minus.setBounds(865,245,100,50);
+		all_minus.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//JButton all_minus = (JButton)e.getSource();
+				
+				dfTable.setRowCount(0);
+				//orderlist.removeAll(orderlist);
+			}
+		});
 		
 		JButton in = new JButton("Eat - IN ");
 		in.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new Pos_PaymentPageSe(orderlist, 'E');
+				new Pos_PaymentPageSe(orderlist, 'E',main);
 	            //new Pos_PaymentPageSe(orderlist, 'T');
 				
 			}
@@ -253,7 +240,7 @@ public class Pos_Burger extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				new Pos_PaymentPageSe(orderlist, 'T',main);
 				
 			}
 		});
