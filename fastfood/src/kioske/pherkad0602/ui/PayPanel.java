@@ -3,23 +3,27 @@ package kioske.pherkad0602.ui;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import kioske.pherkad0602.HomeMenuKiosk;
 import kioske.pherkad0602.database.MenuDatabase;
 import kioske.pherkad0602.database.ReturnModel;
 
 public class PayPanel extends JPanel {
 	public JLabel price;
-	
+	HomeMenuKiosk hMain;
 	public void view_menu(String name) {
 		String a = name;
 	}
 	
-	public PayPanel() {
+	public PayPanel(HomeMenuKiosk hMain) {
+		this.hMain = hMain;
 		String sql = "SELECT * FROM Menu";
 		ArrayList<MenuDatabase> menuList = ReturnModel.menuList(sql);
 		
@@ -38,15 +42,41 @@ public class PayPanel extends JPanel {
 		
 		String[] payMenu = {"처음으로", "주문내역", "도움"};
 
-		for(int i = 0; i <payMenu.length; ++i) {
 			
-			JButton btn4 = new JButton(payMenu[i]);
-			btn4.setFont(new Font("궁서체", Font.PLAIN,40));
-			btn4.setBounds(40+(100*(i*3)), 100, 200, 80);
-			btn4.setBackground(new Color(0xFFFFFF));
-			add(btn4);
-		}
+		JButton payBtn1 = new JButton(payMenu[0]);
+		payBtn1.setFont(new Font("궁서체", Font.PLAIN,40));
+		payBtn1.setBounds(40, 100, 200, 80);
+		payBtn1.setBackground(new Color(0xFFFFFF));
+		payBtn1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				hMain.orderReset();
+			}
+		});
+		add(payBtn1);
 		
+		JButton payBtn2 = new JButton(payMenu[1]);
+		payBtn2.setFont(new Font("궁서체", Font.PLAIN,40));
+		payBtn2.setBounds(340, 100, 200, 80);
+		payBtn2.setBackground(new Color(0xFFFFFF));
+		payBtn2.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		add(payBtn2);
+		
+		JButton payBtn3 = new JButton(payMenu[2]);
+		payBtn3.setFont(new Font("궁서체", Font.PLAIN,40));
+		payBtn3.setBounds(640, 100, 200, 80);
+		payBtn3.setBackground(new Color(0xFFFFFF));
+		add(payBtn3);
+			
 	
 	}
 

@@ -19,7 +19,7 @@ public class HomeMenuKiosk extends JPanel{
 	Main_JFrame frame;
 	MainPanel main;
 	PayPanel pay;
-	ArrayList orderList = new ArrayList<>();
+	public ArrayList orderList = new ArrayList<>();
 	int sum = 0;
 	
 	
@@ -49,6 +49,13 @@ public class HomeMenuKiosk extends JPanel{
 		// TODO Auto-generated method stub
 		orderList.add(menuidx);
 	}
+	
+	public void orderReset() {
+		orderList.removeAll(orderList);
+		pay.price.setText(" ¿ø");
+		sum = 0;
+	}
+
 
 	
 	public HomeMenuKiosk(Main_JFrame frame, int idx) {
@@ -64,7 +71,7 @@ public class HomeMenuKiosk extends JPanel{
 		//main.setBounds(200, 0, 684, 800);
 		add(main);
 		
-		pay = new PayPanel();
+		pay = new PayPanel(this);
 		add(pay);
 		
 		
@@ -78,6 +85,7 @@ public class HomeMenuKiosk extends JPanel{
 	public static void main(String[] args) {
 
 	}
+
 
 	
 }
