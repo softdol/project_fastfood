@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import database.model.PsList;
+import kioske.YounukLee7.dbtablePocket.Order_list;
 import kioske.YounukLee7.kioskeUI.Logo_MenuName_Panel;
 import kioske.YounukLee7.kioskeUI.Select_Set_down;
 import kioske.YounukLee7.kioskeUI.Select_Side_Drink_down;
@@ -23,11 +24,12 @@ import manager.component.ManagerCP;
 
 public class Main_JFrame extends JFrame{
 	
+	HomeMenuKiosk hMain;
 	Main_JPanel panel;
 	MainPanel main;
 	PayPanel pay;
-	public ArrayList<Integer> orderList;
-	
+	//public ArrayList orderList;
+	public ArrayList<Order_list> orderList;
 	
 	/**
 	 * 첫 화면에서 -> 포장 선택 화면으로
@@ -62,8 +64,9 @@ public class Main_JFrame extends JFrame{
 	 */
 	public void veiw_Home_solo_burger(int menuidx) {
 		ManagerCP.reFresh(panel);
-		orderList.add(menuidx);
 		panel.add(new HomeMenuKiosk(this,menuidx));
+		hMain.setPrice2(menuidx);
+
 	}
 	
 	/**

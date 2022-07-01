@@ -43,12 +43,12 @@ public class Menu extends JPanel {
 
 		
 		for(int i = 0; i <a; ++i) {
-			
+			MenuDatabase menu = menuList.get(i);
 			
 			JButton btn3 = new JButton();
 			btn3.setBackground(new Color(0xFFFFFF));
 			btn3.setName(String.valueOf(menuList.get(i).getMenu_idx()));
-			btn3.addActionListener(new MenuSelAction(hMain, menuList.get(i).getMenu_idx(),frame));
+			btn3.addActionListener(new MenuSelAction(hMain, menu,frame));
 			btn3.setBorder(border);
 			btn3.setLayout(null);
 			

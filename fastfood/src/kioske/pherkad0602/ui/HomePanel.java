@@ -26,6 +26,7 @@ public class HomePanel extends JPanel{
 		String sql = "SELECT * FROM Menu WHERE Menu_Category_IDX = 1";
 		ArrayList<MenuDatabase> menuList = ReturnModel.menuList(sql);
 		
+		
 		int a = menuList.size();
 		
 		mainPanel.setBounds(0, 0, 684, 800);

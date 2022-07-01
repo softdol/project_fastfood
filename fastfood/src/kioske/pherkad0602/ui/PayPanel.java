@@ -44,6 +44,10 @@ public class PayPanel extends JPanel {
 		priceName.setBounds(200,20,300,80);		
 		add(priceName);
 		
+		for(int i = 0; i<frame.orderList.size(); i ++) {
+			
+		}
+		
 		price = new JLabel("");
 		price.setFont(new Font("±Ã¼­Ã¼", Font.PLAIN,40));
 		price.setBounds(600,20,200,80);		

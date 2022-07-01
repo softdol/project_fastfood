@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 
 import database.model.PsList;
 import kioske.YounukLee7.Main_JFrame;
+import kioske.YounukLee7.dbtablePocket.Order_list;
 import kioske.pherkad0602.database.MenuDatabase;
 import kioske.pherkad0602.database.ReturnModel;
 import kioske.pherkad0602.ui.Category;
@@ -23,24 +24,36 @@ public class HomeMenuKiosk extends JPanel{
 	int sum = 0;
 	
 	
-	public void order(int idx, Main_JFrame frame) {
-		new OrderCheck(this, idx, frame);
+	public void order(MenuDatabase menu, Main_JFrame frame) {
+		new OrderCheck(this, menu, frame);
 	}
 	
-	public void setPrice(int idx) {
-		frame.orderList.add(idx);
-		
-		String sql = "SELECT * FROM Menu WHERE Menu_IDX = ?";
-		ArrayList<PsList> psList = new ArrayList<>();
-		psList.add(new PsList('I', String.valueOf(idx)));
-		ArrayList<MenuDatabase> menuList = ReturnModel.selMenuList1(sql, psList);
-		sum += menuList.get(0).getMenu_price();
-		System.out.println(idx);
-		System.out.println(sum);
-		System.out.println(frame.orderList);
+	public void setPrice(MenuDatabase menu) {
+		frame.orderList.add(new Order_list(menu, 1, 0));
+
+		for(int i = 0; i < frame.orderList.size(); i ++) {
+			sum += frame.orderList.get(i).getORDER_PRICE();
+		}
 
 		pay.price.setText(String.valueOf(sum) +" ¿ø");
 	}
+	
+	public void setPrice2(int idx) {
+		
+		ArrayList<PsList> psList = new ArrayList<>();
+		String sql = "select * from menu where menu_idx = ?";
+	  	psList.add(new PsList('I', String.valueOf(idx)));
+	  	MenuDatabase menu = ReturnModel.menuList(sql, psList);
+		frame.orderList.add(new Order_list(menu, 1, 0));
+		for(int i = 0; i < frame.orderList.size(); i ++) {
+			sum += frame.orderList.get(i).getORDER_PRICE();
+		}
+		System.out.println(sum);
+		pay.price.setText(String.valueOf(sum) +" ¿ø");
+	}
+	
+
+
 	
 	
 	public void viewMenu(String name) {
@@ -49,9 +62,9 @@ public class HomeMenuKiosk extends JPanel{
 	}
 	
 	
-	public void orderPlus(int menuidx) {
+	public void orderPlus(MenuDatabase menu) {
 		// TODO Auto-generated method stub
-		frame.orderList.add(menuidx);
+		frame.orderList.add(new Order_list(menu, 1, 0));
 	}
 	
 	public void orderReset() {
@@ -82,6 +95,8 @@ public class HomeMenuKiosk extends JPanel{
 		//setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
 	    //setResizable(false);
+		
+		System.out.println(idx);
 
 	}
 	
