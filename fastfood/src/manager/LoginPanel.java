@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import database.manager.Member;
 import database.manager.ReturnModel;
 import database.model.PsList;
+import manager.component.FontList;
 import manager.component.ManagerCP;
 
 public class LoginPanel extends JPanel {
@@ -32,16 +33,20 @@ public class LoginPanel extends JPanel {
 		setBounds(0, 0, main.getWidth(), main.getHeight());
 		
 		JLabel lblId = new JLabel("아이디");
+		lblId.setFont(FontList.loginFont());
 		lblId.setBounds(30, 30, 50, 45);
 		
 		JLabel lblPass = new JLabel("패스워드");
+		lblPass.setFont(FontList.loginFont());
 		lblPass.setBounds(lblId.getX(), lblId.getY() + lblId.getHeight() + 10, 50, 45);
 		
 		txtId = new JTextField();
+		txtId.setFont(FontList.loginFont());
 		txtId.setBounds(lblId.getX() + lblId.getWidth() + 10, lblId.getY(), 100, 45);
 		txtId.requestFocus();
 		
-		txtPassOn = new JPasswordField();		
+		txtPassOn = new JPasswordField();
+		txtPassOn.setFont(FontList.loginFont());
 		txtPassOn.setBounds(txtId.getX(), lblPass.getY(), 100, 45);
 		
 //		txtId.setFocusTraversalKeysEnabled(false);
@@ -55,6 +60,7 @@ public class LoginPanel extends JPanel {
 		});
 		
 		JButton btnLogin = new JButton("로그인");
+		btnLogin.setFont(FontList.loginFont());
 		btnLogin.setBounds(lblId.getX(), lblPass.getY() + lblPass.getHeight() + 20, lblId.getWidth() + txtId.getWidth() + 10, 45);
 		btnLogin.addActionListener(new ActionListener() {
 			
