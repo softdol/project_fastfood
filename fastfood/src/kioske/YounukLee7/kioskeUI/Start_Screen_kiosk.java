@@ -68,7 +68,7 @@ public class Start_Screen_kiosk extends JPanel{
 		for (int i = 0; i < event_page_list.size(); i++) {
 			// Big_event_page만 get으로 가져오기
 			
-			//cardpanel.add(new ImageLabel(event_page_list.get(i).getBig_event_page()));
+//			cardpanel.add(new ImageLabel(event_page_list.get(i).getBig_event_page()));
 			
 			
 			JLabel image_label = new JLabel();
