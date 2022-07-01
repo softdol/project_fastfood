@@ -34,6 +34,11 @@ public class Order {
 
 	}
 	
+	public void setTotalPrice(int order_quantity) {
+		this.order_quantity = order_quantity;
+		this.order_price_total = this.order_quantity * order_price;
+	}
+	
 	/**
 	 * 주문 정보
 	 * @param m	메뉴 정보

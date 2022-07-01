@@ -8,6 +8,8 @@ import java.awt.Image;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -17,10 +19,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
+import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 
+import manager.sales.Pos_PaymentPageSe;
 import pos.ActionListener.SubCateActionListener;
 
 public class Pos_Burger extends JFrame {
@@ -30,24 +35,40 @@ public class Pos_Burger extends JFrame {
 	public ArrayList<Order> orderlist;
 	DefaultTableModel dfTable;
 	Object[] orderF;
+	Object qty;
 	
 	public void setOrderlist( ) {
+		// 테이블 초기화 꼭 넣어두기! 
 		for(Order o : orderlist) {
 			System.out.println(o.getMenu_name() + " " + o.getOrder_quantity() + " " + o.getOrder_price() + " " + o.getOrder_price_total() + " ");
-			// 한 줄 씩 table 추가하기 
-			
-//			DefaultTableModel order_table2=(DefaultTableModel)table.getModel();		
-//			order_table2.addRow(new Object[] {o.getMenu_name() + " ", "","",""});
+		
 			// 총합계 
 			
-			orderF[0] = "1";
-	         orderF[1] = "2";
-	         orderF[2] ="3";
-	         orderF[3] = "4";
-	         dfTable.addRow(orderF);
+			orderF[0] = o.getMenu_name();
+	        orderF[1] = o.getOrder_quantity();
+	        orderF[2] = o.getOrder_price();
+	        orderF[3] = o.getOrder_price_total();
+	        dfTable.addRow(orderF);
 			
+	        
+	        
+	         
 		};
+		
+		
 	}
+	
+	// 테이블 필드 체인지 이벤트 찾고, 
+	
+
+	// 바뀐 필드의 값이랑 몇번째 행 번호 (어레이리스트랑 똑같을 거)
+	
+	
+	// 행번호가지고 Array.getInt로 찾기 
+	
+	// 수량변경
+	
+	// setOrderlist 불러오기 
 	
 	public void viewMenuList(int iCate) {
 		System.out.println(iCate);
@@ -57,11 +78,19 @@ public class Pos_Burger extends JFrame {
 		item.add(new MenuListPanel(iCate,this));
 	}
 	
+	public void clearMenuList() {
+		
+		DefaultTableModel m = (DefaultTableModel)table.getModel();
+		
+		m.setRowCount(0);
+		tf.setText(String.valueOf(""));
+	}
 	
 	
 	public Pos_Burger() {
 		super("메인 포스기");
 		orderlist = new ArrayList<>();
+		 orderF = new Object[4];
 		
 		JPanel menu = new JPanel();
 		JPanel order = new JPanel();
@@ -152,10 +181,54 @@ public class Pos_Burger extends JFrame {
 	
 		dfTable = new DefaultTableModel(columns, 0);
 		JTable table = new JTable(dfTable);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // 단일 선택
+		table.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+				int row = table.getSelectedRow();
+				int column = table.getSelectedColumn();
+				
+				Object value = table.getValueAt(row, column);
+				System.out.println(value);
+				
+			
+				
+			}
+		});
 		table.setPreferredScrollableViewportSize(new Dimension(400,250));
 		table.setFillsViewportHeight(true);
 		
 		order_table.add(new JScrollPane(table));
+		
+		
+		
 		
 		JButton minus = new JButton("하나 취소");
 		minus.setBounds(865,170,100,50);
@@ -168,7 +241,7 @@ public class Pos_Burger extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//new Pos_PaymentPageSe(orderlist, 'E');
+				new Pos_PaymentPageSe(orderlist, 'E');
 	            //new Pos_PaymentPageSe(orderlist, 'T');
 				
 			}
