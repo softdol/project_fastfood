@@ -17,7 +17,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-public class OrderListPanel extends JPanel {
+public class OrderPanel extends JPanel {
    public JTable table;
    public Label saleslabel2;
    public Label totallabel2;
@@ -39,7 +39,7 @@ public class OrderListPanel extends JPanel {
       }
    }
 
-   public OrderListPanel(Pos_Burger main) {
+   public OrderPanel(Pos_Burger main) {
       this.main = main;
 
       // 주문번호 창 패널
