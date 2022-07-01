@@ -27,6 +27,7 @@ public class ManagerMain extends JFrame {
 		setBounds(500, 300, 240, 250);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(null);
+		setResizable(false);
 		
 		mInfo = new Member();
 		
