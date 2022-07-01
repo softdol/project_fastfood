@@ -148,7 +148,7 @@ public class Pos_Burger extends JFrame {
 		//sql = "select * from meun_category ";
 		
 		// 카테고리 버튼 추가 
-		for (int i = 0; i < 7; ++i) {
+		for (int i = 0; i < 5; ++i) {
 			JButton bigMenu = new JButton(bigcate[i]);
 			//idx =i + 1; 
 			bigMenu.addActionListener(new SubCateActionListener(this, i + 1));
