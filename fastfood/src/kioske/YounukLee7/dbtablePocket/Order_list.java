@@ -3,6 +3,8 @@ package kioske.YounukLee7.dbtablePocket;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import kioske.pherkad0602.database.MenuDatabase;
+
 public class Order_list {
 	
 	private Integer ORDER_IDX;
@@ -50,6 +52,18 @@ public class Order_list {
 	}
 
 	public Order_list(database.manager.Menu m, int cnt, int set_idx) {
+		// TODO Auto-generated constructor stub
+		this.MENU_IDX			= m.getMenu_idx();
+		this.ORDER_STATE		= 0;
+		this.ORDER_PRICE		= m.getMenu_price();
+		this.ORDER_QUANTITY		= cnt;
+		this.ORDER_PRICE_TOTAL	= m.getMenu_price() * cnt;		
+		this.MENU_NAME			= m.getMenu_name();
+		this.SET_IDX			= set_idx;
+		this.img_path			= m.getImg_big_path();
+	}
+	
+	public Order_list(MenuDatabase m, int cnt, int set_idx) {
 		// TODO Auto-generated constructor stub
 		this.MENU_IDX			= m.getMenu_idx();
 		this.ORDER_STATE		= 0;

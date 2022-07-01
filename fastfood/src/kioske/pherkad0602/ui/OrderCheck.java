@@ -13,19 +13,23 @@ import javax.swing.border.BevelBorder;
 
 import database.model.PsList;
 import kioske.YounukLee7.Main_JFrame;
+import kioske.YounukLee7.Set_Option;
+import kioske.YounukLee7.kioskeUI.Select_Set_down;
 import kioske.pherkad0602.HomeMenuKiosk;
+import kioske.pherkad0602.database.MenuDatabase;
 import kioske.pherkad0602.database.ReturnModel;
 
 public class OrderCheck extends JFrame{
 	PayPanel pay;
-	int idx;
 	HomeMenuKiosk hMain;
 	Main_JFrame frame;
+	MenuDatabase menu;
 	
-	public OrderCheck(HomeMenuKiosk hMain, int idx, Main_JFrame frame) {
-		this.idx = idx;
+	public OrderCheck(HomeMenuKiosk hMain, MenuDatabase menu, Main_JFrame frame) {
+		
 		this.hMain = hMain;
 		this.frame = frame;
+		this.menu = menu;
 		
 		JFrame checkFrame = new JFrame();
 		checkFrame.setLayout(null);
@@ -48,13 +52,13 @@ public class OrderCheck extends JFrame{
 				JButton performedButton = (JButton)e.getSource();
 				String sql = "SELECT * FROM MENU_SET where MENU_IDX = ?";
 				ArrayList<PsList> psList = new ArrayList<>();
-				psList.add(new PsList('I', String.valueOf(idx)));
+				psList.add(new PsList('I', menu.getMenu_idx().toString()));
 				System.out.println(ReturnModel.selConfirmP(sql, psList));
 				if(ReturnModel.selConfirmP(sql, psList)) {
-					frame.veiw_Select_Set(idx);
+					new Set_Option(hMain, menu.getMenu_idx(),"s");
 					//있을떄
 				}else {	// 없을때
-					hMain.setPrice(idx);
+					hMain.setPrice(menu);
 			
 				}
 				

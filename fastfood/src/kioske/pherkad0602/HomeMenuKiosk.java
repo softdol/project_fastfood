@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 
 import database.model.PsList;
 import kioske.YounukLee7.Main_JFrame;
+import kioske.YounukLee7.dbtablePocket.Order_list;
 import kioske.pherkad0602.database.MenuDatabase;
 import kioske.pherkad0602.database.ReturnModel;
 import kioske.pherkad0602.ui.Category;
@@ -21,25 +22,53 @@ public class HomeMenuKiosk extends JPanel{
 	PayPanel pay;
 //	public ArrayList orderList = new ArrayList<>();
 	int sum = 0;
+	public HomeMenuKiosk() {
+		// TODO Auto-generated constructor stub
+	}
 	
+	public void order(MenuDatabase menu, Main_JFrame frame) {
+		new OrderCheck(this, menu, frame);
+	}
 	
-	public void order(int idx, Main_JFrame frame) {
-		new OrderCheck(this, idx, frame);
+	public void setPrice(MenuDatabase menu) {
+		int sum = 0;
+		frame.orderList.add(new Order_list(menu, 1, 0));
+
+		for(int i = 0; i < frame.orderList.size(); i ++) {
+			sum += frame.orderList.get(i).getORDER_PRICE();
+		}
+
+		pay.price.setText(String.valueOf(sum) +" 원");
 	}
 	
 	public void setPrice(int idx) {
-		frame.orderList.add(idx);
-		
-		String sql = "SELECT * FROM Menu WHERE Menu_IDX = ?";
+		int sum = 0;
 		ArrayList<PsList> psList = new ArrayList<>();
-		psList.add(new PsList('I', String.valueOf(idx)));
-		ArrayList<MenuDatabase> menuList = ReturnModel.selMenuList1(sql, psList);
-		sum += menuList.get(0).getMenu_price();
-		System.out.println(idx);
-		System.out.println(sum);
-		System.out.println(frame.orderList);
-
-		pay.price.setText(String.valueOf(sum) +" 원");
+		String sql = "select * from menu where menu_idx = ?";
+	  	psList.add(new PsList('I', String.valueOf(idx)));
+	  	MenuDatabase menu = ReturnModel.menuList(sql, psList);
+		frame.orderList.add(new Order_list(menu, 1, 0));
+		for(int i = 0; i < frame.orderList.size(); i ++) {
+			sum += frame.orderList.get(i).getORDER_PRICE_TOTAL();
+		}
+		System.out.println("setPrice2 : " + sum + " : " + idx);	
+		pay.price.setText(String.valueOf(sum) +" 원");	
+	}
+	
+	public void setPrice(int idx, int setIdx) {
+		int sum1 = 0;
+		int sum2 = 0;
+		ArrayList<PsList> psList = new ArrayList<>();
+		String sql = "select * from menu where menu_idx = ?";
+	  	psList.add(new PsList('I', String.valueOf(idx)));
+	  	MenuDatabase menu = ReturnModel.menuList(sql, psList);
+		frame.orderList.add(new Order_list(menu, 1, setIdx));
+		if(frame.orderList.get(1).get)
+		for(int i = 0; i < frame.orderList.size(); i ++) {
+			sum1 += frame.orderList.get(i).getORDER_PRICE_TOTAL();
+		}
+		System.out.println("setPrice2 : " + sum + " : " + idx);	
+		pay.price.setText(String.valueOf(sum) +" 원");	
 	}
 	
 	
@@ -49,9 +78,9 @@ public class HomeMenuKiosk extends JPanel{
 	}
 	
 	
-	public void orderPlus(int menuidx) {
+	public void orderPlus(MenuDatabase menu) {
 		// TODO Auto-generated method stub
-		frame.orderList.add(menuidx);
+		frame.orderList.add(new Order_list(menu, 1, 0));
 	}
 	
 	public void orderReset() {
@@ -64,6 +93,8 @@ public class HomeMenuKiosk extends JPanel{
 	public HomeMenuKiosk(Main_JFrame frame, int idx) {
 		
 		this.frame = frame;
+		pay = new PayPanel(this, frame);
+		add(pay);
 		
 		setLayout(null);
 
@@ -74,14 +105,15 @@ public class HomeMenuKiosk extends JPanel{
 		//main.setBounds(200, 0, 684, 800);
 		add(main);
 		
-		pay = new PayPanel(this, frame);
-		add(pay);
+		
 		
 		
 		setBounds(0,0,900,1040);
 		//setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
 	    //setResizable(false);
+		
+		System.out.println(idx);
 
 	}
 	

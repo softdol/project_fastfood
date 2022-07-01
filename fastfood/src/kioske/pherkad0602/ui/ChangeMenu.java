@@ -18,6 +18,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 import kioske.YounukLee7.Main_JFrame;
+import kioske.YounukLee7.Set_Option;
 import kioske.pherkad0602.HomeMenuKiosk;
 import kioske.pherkad0602.kiosk7;
 import kioske.pherkad0602.action.MenuChangeAction;
@@ -28,7 +29,7 @@ public class ChangeMenu extends JPanel{
 	
 	kiosk7  kiosk7;
 	
-	public ChangeMenu(Main_JFrame frame, ArrayList<MenuDatabase> menuList, ArrayList<MenuDatabase> menuInfo,
+	public ChangeMenu(Set_Option option, ArrayList<MenuDatabase> menuList, ArrayList<MenuDatabase> menuInfo,
 			ArrayList<SetDatabase> setList, int menuidx, String  set, int setidx, int sideidx, int drinkidx, int catei
 			,kiosk7 kiosk7, int final_price) {
 		
@@ -104,7 +105,7 @@ public class ChangeMenu extends JPanel{
 
 			int addCost = temp1+final_price;
 			
-			btn3.addActionListener(new MenuChangeAction(frame, menuidx, set, setidx, sideidx, drinkidx, catei, kiosk7, menuList.get(i).getMenu_idx(), addCost));
+			btn3.addActionListener(new MenuChangeAction(option, menuidx, set, setidx, sideidx, drinkidx, catei, kiosk7, menuList.get(i).getMenu_idx(), addCost));
 
 			priceLabel.setBounds(0,185,210,25);
 			priceLabel.setBackground(Color.white);

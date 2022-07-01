@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Label;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,13 +29,15 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import manager.component.ManagerCP;
 import manager.sales.Pos_PaymentPageSe;
 import pos.ActionListener.SubCateActionListener;
 
 public class Pos_Burger extends JFrame {
 	
 	JTable table;
-	
+	Label saleslabel2;
+	Label totallabel2;
 	
 
 	
@@ -44,6 +47,7 @@ public class Pos_Burger extends JFrame {
 	Object[] orderF;
 	Object qty;
 	Pos_Burger main;
+	int sum;
 	class ItemChangeListener implements ItemListener{
 	    @Override
 	    public void itemStateChanged(ItemEvent event) {
@@ -62,12 +66,16 @@ public class Pos_Burger extends JFrame {
 	public void clearList() {
 		orderlist = new ArrayList<>();
 		dfTable.setRowCount(0);
+		sum = 0;
+		saleslabel2.setText("0");
+		totallabel2.setText("0");
 	}
 	
 	public void setOrderlist( ) {
 		// 테이블 초기화 꼭 넣어두기! 
 		
 		dfTable.setRowCount(0);
+		sum = 0;
 		
 		for(Order o : orderlist) {
 			System.out.println(o.getMenu_name() + " " + o.getOrder_quantity() + " " + o.getOrder_price() + " " + o.getOrder_price_total() + " ");
@@ -80,11 +88,13 @@ public class Pos_Burger extends JFrame {
 	        orderF[3] = o.getOrder_price_total();
 	        dfTable.addRow(orderF);
 	       
-	        
+	        sum += o.getOrder_price_total();
 	        
 	         
 		};
 		
+		saleslabel2.setText(ManagerCP.viewWon(sum));
+		totallabel2.setText(ManagerCP.viewWon(sum));
 		
 	}
 	
@@ -105,8 +115,8 @@ public class Pos_Burger extends JFrame {
 		super("메인 포스기");
 		this.main = this;
 		orderlist = new ArrayList<>();
-		 orderF = new Object[4];
-		
+		orderF = new Object[4];
+
 		
 		JPanel menu = new JPanel();
 		JPanel order = new JPanel();
@@ -206,6 +216,69 @@ public class Pos_Burger extends JFrame {
 		
 		TableColumn comm = table.getColumnModel().getColumn(1);
 		
+		JComboBox<String> jcCount = new JComboBox<>();
+		for(int i = 1; i < 100; i++) {
+			jcCount.addItem(String.valueOf(i));
+		}
+		jcCount.addItemListener(new ItemChangeListener());
+		
+		comm.setCellEditor(new DefaultCellEditor(jcCount));
+		
+		// 판매액
+		Label saleslabel= new Label();
+	    
+	    saleslabel.setText("      판매액");
+	    saleslabel.setBackground(new Color(0x00769E));
+	    saleslabel.setForeground(Color.white);
+	    saleslabel.setBounds(0,358,180, 40);
+	    saleslabel.setFont(new Font("맑은 고딕", Font.BOLD,20));
+	     
+
+	     
+	     //할인액
+	    Label discountlabel= new Label();
+	     
+	    discountlabel.setText("      할인액"); 
+	    discountlabel.setBackground(new Color(0x00769E));
+	    discountlabel.setForeground(Color.white);
+	    discountlabel.setBounds(0,398,180, 40);
+	    discountlabel.setFont(new Font("맑은 고딕", Font.BOLD,20));
+	     
+
+	     
+	     //합계
+	    Label totallabel= new Label();
+	    totallabel.setText("      합계");	     
+	    totallabel.setBackground(new Color(0x00769E));
+	    totallabel.setForeground(Color.white);
+	    totallabel.setBounds(0,438,180, 40);
+	    totallabel.setFont(new Font("맑은 고딕", Font.BOLD,20));
+	     
+	     //----------------------------------------------------
+	     //판매액값 들어가는 라벨
+	    saleslabel2= new Label();
+	      
+	    saleslabel2.setText(String.valueOf(sum));
+	    saleslabel2.setBackground(new Color(0xCCFFFF));
+	    saleslabel2.setBounds(180,358,180, 40);
+	    saleslabel2.setFont(new Font("맑은 고딕", Font.BOLD,25));
+	    
+	     
+	     //할인액값 들어가는 라벨
+	     Label discountlabel2= new Label();	     
+	     discountlabel2.setText("0 "); 
+	     discountlabel2.setBackground(new Color(0xCCFFFF));
+	     discountlabel2.setBounds(180,398,180, 40);
+	     discountlabel2.setFont(new Font("맑은 고딕", Font.BOLD,25));
+	     
+	     
+	     //합계값 들어가는 라벨
+	     totallabel2= new Label();
+	     totallabel2.setText(String.valueOf(sum));	     
+	     totallabel2.setBackground(new Color(0xCCFFFF));
+	     totallabel2.setBounds(180,438,180, 40);
+	     totallabel2.setFont(new Font("맑은 고딕", Font.BOLD,25));
+
 		
 		
 		JButton minus = new JButton("한줄 취소");
@@ -219,7 +292,7 @@ public class Pos_Burger extends JFrame {
 				if (table.getSelectedRow() == -1) {
 					
 					JOptionPane.showMessageDialog(null, "행을 클릭해주세요");
-					
+					return;
 				}
 				//m.removeRow(table.getSelectedRow());
 				orderlist.remove(table.getSelectedRow());
@@ -237,6 +310,8 @@ public class Pos_Burger extends JFrame {
 				
 				dfTable.setRowCount(0);
 				orderlist.removeAll(orderlist);
+				saleslabel2.setText("0");
+				totallabel2.setText("0");
 	
 			}
 		});
@@ -286,6 +361,12 @@ public class Pos_Burger extends JFrame {
 		add(out);
 		add(logoBtn);
 		add(scPane);
+		order.add(saleslabel);
+		order.add(discountlabel);
+		order.add(totallabel);
+		order.add(saleslabel2);
+		order.add(discountlabel2);
+		order.add(totallabel2);
 		order.add(order_index);
 		order.add(order_number);
 		order.add(order_table);

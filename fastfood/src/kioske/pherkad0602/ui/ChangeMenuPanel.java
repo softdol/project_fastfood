@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import database.model.PsList;
 import kioske.YounukLee7.Main_JFrame;
+import kioske.YounukLee7.Set_Option;
 import kioske.pherkad0602.kiosk7;
 import kioske.pherkad0602.database.MenuDatabase;
 import kioske.pherkad0602.database.ReturnModel;
@@ -18,10 +19,10 @@ import manager.menu.MenuList;
 
 public class ChangeMenuPanel extends JPanel {
 	
-	Main_JFrame frame;
+	Set_Option option;
 	kiosk7 kiosk7;
 
-	public ChangeMenuPanel (Main_JFrame frame, ArrayList<MenuDatabase> menuList, ArrayList<MenuDatabase> menuInfo,
+	public ChangeMenuPanel (Set_Option option, ArrayList<MenuDatabase> menuList, ArrayList<MenuDatabase> menuInfo,
 			ArrayList<SetDatabase> setList, int menuidx, String  set, int setidx, int sideidx, int drinkidx, int catei
 			,kiosk7 kiosk7, int final_price) {
 		
@@ -34,7 +35,7 @@ public class ChangeMenuPanel extends JPanel {
 		menuPanel.setBackground(Color.white);
 		menuPanel.setBorder(border);
 		
-		ChangeMenu menu= new ChangeMenu(frame, menuList, menuInfo, setList, 
+		ChangeMenu menu= new ChangeMenu(option, menuList, menuInfo, setList, 
 				 menuidx, set, setidx, sideidx, drinkidx, catei, kiosk7, final_price);
 		menuPanel.add(menu);
 		
