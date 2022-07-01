@@ -125,7 +125,7 @@ public class Main_JFrame extends JFrame{
 		
 		setLayout(null);
 		setTitle("Da∆»æ∆");
-		setBounds(510,0,900,1040);
+		setBounds(510,0,900,1070);
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
