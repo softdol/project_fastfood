@@ -22,13 +22,16 @@ public class HomeMenuKiosk extends JPanel{
 	PayPanel pay;
 //	public ArrayList orderList = new ArrayList<>();
 	int sum = 0;
-	
+	public HomeMenuKiosk() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public void order(MenuDatabase menu, Main_JFrame frame) {
 		new OrderCheck(this, menu, frame);
 	}
 	
 	public void setPrice(MenuDatabase menu) {
+		int sum = 0;
 		frame.orderList.add(new Order_list(menu, 1, 0));
 
 		for(int i = 0; i < frame.orderList.size(); i ++) {
@@ -38,22 +41,35 @@ public class HomeMenuKiosk extends JPanel{
 		pay.price.setText(String.valueOf(sum) +" 원");
 	}
 	
-	public void setPrice2(int idx) {
-		
+	public void setPrice(int idx) {
+		int sum = 0;
 		ArrayList<PsList> psList = new ArrayList<>();
 		String sql = "select * from menu where menu_idx = ?";
 	  	psList.add(new PsList('I', String.valueOf(idx)));
 	  	MenuDatabase menu = ReturnModel.menuList(sql, psList);
 		frame.orderList.add(new Order_list(menu, 1, 0));
 		for(int i = 0; i < frame.orderList.size(); i ++) {
-			sum += frame.orderList.get(i).getORDER_PRICE();
+			sum += frame.orderList.get(i).getORDER_PRICE_TOTAL();
 		}
-		System.out.println(sum);
-		pay.price.setText(String.valueOf(sum) +" 원");
+		System.out.println("setPrice2 : " + sum + " : " + idx);	
+		pay.price.setText(String.valueOf(sum) +" 원");	
 	}
 	
-
-
+	public void setPrice(int idx, int setIdx) {
+		int sum1 = 0;
+		int sum2 = 0;
+		ArrayList<PsList> psList = new ArrayList<>();
+		String sql = "select * from menu where menu_idx = ?";
+	  	psList.add(new PsList('I', String.valueOf(idx)));
+	  	MenuDatabase menu = ReturnModel.menuList(sql, psList);
+		frame.orderList.add(new Order_list(menu, 1, setIdx));
+		if(frame.orderList.get(1).get)
+		for(int i = 0; i < frame.orderList.size(); i ++) {
+			sum1 += frame.orderList.get(i).getORDER_PRICE_TOTAL();
+		}
+		System.out.println("setPrice2 : " + sum + " : " + idx);	
+		pay.price.setText(String.valueOf(sum) +" 원");	
+	}
 	
 	
 	public void viewMenu(String name) {
@@ -77,6 +93,8 @@ public class HomeMenuKiosk extends JPanel{
 	public HomeMenuKiosk(Main_JFrame frame, int idx) {
 		
 		this.frame = frame;
+		pay = new PayPanel(this, frame);
+		add(pay);
 		
 		setLayout(null);
 
@@ -87,8 +105,7 @@ public class HomeMenuKiosk extends JPanel{
 		//main.setBounds(200, 0, 684, 800);
 		add(main);
 		
-		pay = new PayPanel(this, frame);
-		add(pay);
+		
 		
 		
 		setBounds(0,0,900,1040);

@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 
 import database.model.PsList;
 import kioske.YounukLee7.Main_JFrame;
+import kioske.YounukLee7.Set_Option;
 import kioske.pherkad0602.database.MenuDatabase;
 import kioske.pherkad0602.database.ReturnModel;
 import kioske.pherkad0602.database.SetDatabase;
@@ -24,7 +25,6 @@ import kioske.pherkad0602.ui.PayPanel;
 
 public class kiosk7 extends JPanel{
 		
-	   Main_JFrame frame;
 	   int idx;
 	   kiosk7 ki7;
 	   int final_price;
@@ -33,7 +33,7 @@ public class kiosk7 extends JPanel{
 	   JButton payBtn1 = new JButton();
 	   JButton payBtn2 = new JButton();
 	   
-		public void setPrice(Main_JFrame frame,  int menuidx, String  set, int setidx, int sideidx, int drinkidx, int catei
+		public void setPrice(Set_Option option,  int menuidx, String  set, int setidx, int sideidx, int drinkidx, int catei
 				,kiosk7 kiosk7, int idx, int addCost) {
 			payLabel2.setText(String.valueOf(addCost)+ "¿ø");
 			
@@ -42,9 +42,9 @@ public class kiosk7 extends JPanel{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if (catei == 2) {
-						frame.veiw_Select_Side_Drink(menuidx, set, setidx, sideidx, idx);
+						option.veiw_Select_Side_Drink(menuidx, set, setidx, sideidx, idx);
 					}else if (catei == 3){
-						frame.veiw_Select_Side_Drink(menuidx, set, setidx, idx, drinkidx);
+						option.veiw_Select_Side_Drink(menuidx, set, setidx, idx, drinkidx);
 					}
 				}
 			});
@@ -52,7 +52,7 @@ public class kiosk7 extends JPanel{
 			
 		}
 	   
-	   public kiosk7( Main_JFrame frame, int menuidx, String  set, int setidx, int sideidx, int drinkidx, int catei) {
+	   public kiosk7(Set_Option option, int menuidx, String  set, int setidx, int sideidx, int drinkidx, int catei) {
 	      
 		  ArrayList<PsList> psList = new ArrayList<>();
 		  String sql = "select * from menu where MENU_CATEGORY_IDX = ?";
@@ -137,7 +137,7 @@ public class kiosk7 extends JPanel{
 		   
 		   final_price = (price *(100-sale))/100;
 		   
-		   ChangeMenuPanel chgMenu = new ChangeMenuPanel(frame, menuList, menuInfo, setList, 
+		   ChangeMenuPanel chgMenu = new ChangeMenuPanel(option, menuList, menuInfo, setList, 
 					 menuidx, set, setidx, sideidx, drinkidx, catei, this, final_price);
 		   pSouth.add(chgMenu);
 		   
@@ -154,7 +154,7 @@ public class kiosk7 extends JPanel{
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					frame.veiw_Select_Side_Drink(menuidx, set, setidx, sideidx, drinkidx);
+					option.veiw_Select_Side_Drink(menuidx, set, setidx, sideidx, drinkidx);
 				}
 			});
 		   

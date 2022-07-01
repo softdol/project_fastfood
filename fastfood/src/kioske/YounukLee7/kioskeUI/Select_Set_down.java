@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,20 +16,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import database.OjdbcConnection;
-import kioske.YounukLee7.Main_JFrame;
-import kioske.YounukLee7.Select_Set_Size;
-import kioske.YounukLee7.Sub_JFrame;
-import kioske.YounukLee7.dbtablePocket.EventPage;
+import kioske.YounukLee7.Set_Option;
 import kioske.YounukLee7.dbtablePocket.MenuPicture;
 import kioske.pherkad0602.HomeMenuKiosk;
 
 public class Select_Set_down extends JPanel{
 	
-	HomeMenuKiosk home;
+	HomeMenuKiosk hMain;
+	Set_Option option;
 	
-	
-	public Select_Set_down(Main_JFrame frame, int menuidx) {
-		this.home = home;
+	public Select_Set_down(HomeMenuKiosk hMain, int menuidx, Set_Option option) {
+		this.hMain = hMain;
+		this.option = option;
 		String sql = "SELECT set_idx, menu_name, set_name, set_img_path, img_big_path FROM menu INNER JOIN menu_set USING (menu_idx) WHERE menu_idx = ?";
 //		ArrayList<MenuPicture> menuPicture = new ArrayList<>();
 		MenuPicture menuPicture = null;
@@ -60,10 +57,10 @@ public class Select_Set_down extends JPanel{
 //		}
 		
 //		System.out.println("set down: " + idx);
-		
 		setBackground(new Color(0XFFE7DF));
 		setBounds(0,300,900,770);
 		setLayout(null);
+		setVisible(true);
 		
 		JLabel select_label = new JLabel("선택해주세요");
 		select_label.setFont(new Font("HY견고딕", Font.PLAIN, 50));
@@ -83,10 +80,12 @@ public class Select_Set_down extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// 매뉴 idx 보내기
-				frame.veiw_Home_solo_burger(menuidx);
+				//frame.veiw_Home_solo_burger(menuidx);
 				//home.orderPlus(menuidx);
 //				HomeMenuKiosk home = new HomeMenuKiosk(frame, idx);
 //				home.setPrice(idx);
+				hMain.setPrice(menuidx);
+				option.dispose();
 			}
 		});
 		
@@ -105,7 +104,7 @@ public class Select_Set_down extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				                         // 세트 표시 s
 				//screen.veiw_Set_Size(idx,"s");
-				frame.veiw_Select_Side_Drink(menuidx, "s", set_idx, 5, 4);
+				option.veiw_Select_Side_Drink(menuidx, "s", set_idx, 5, 4);
 			}
 		});
 		
