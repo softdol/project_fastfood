@@ -6,11 +6,13 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.function.BiConsumer;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import kioske.YounukLee7.Main_JFrame;
 import kioske.pherkad0602.HomeMenuKiosk;
 import kioske.pherkad0602.database.MenuDatabase;
 import kioske.pherkad0602.database.ReturnModel;
@@ -18,12 +20,19 @@ import kioske.pherkad0602.database.ReturnModel;
 public class PayPanel extends JPanel {
 	public JLabel price;
 	HomeMenuKiosk hMain;
+	Main_JFrame frame;
 	public void view_menu(String name) {
 		String a = name;
 	}
 	
-	public PayPanel(HomeMenuKiosk hMain) {
+	public void name(int sum) {
+		price.setText(sum + "¿ø");
+	}
+	
+	public PayPanel(HomeMenuKiosk hMain, Main_JFrame frame) {
+
 		this.hMain = hMain;
+		this.frame = frame;
 		String sql = "SELECT * FROM Menu";
 		ArrayList<MenuDatabase> menuList = ReturnModel.menuList(sql);
 		

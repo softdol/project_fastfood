@@ -24,7 +24,6 @@ import database.OjdbcConnection;
 import kioske.YounukLee7.Last_JFrame;
 import kioske.YounukLee7.dbtablePocket.Menu;
 import kioske.YounukLee7.kioskeUI.Cart_mid;
-import kioske.pherkad0602.MainMenuKiosk;
 
 public class CartButton {
 	
