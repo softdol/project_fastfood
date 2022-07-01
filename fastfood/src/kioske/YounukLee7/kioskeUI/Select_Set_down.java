@@ -26,8 +26,11 @@ import kioske.pherkad0602.HomeMenuKiosk;
 
 public class Select_Set_down extends JPanel{
 	
+	HomeMenuKiosk home;
+	
+	
 	public Select_Set_down(Main_JFrame frame, int menuidx) {
-		
+		this.home = home;
 		String sql = "SELECT set_idx, menu_name, set_name, set_img_path, img_big_path FROM menu INNER JOIN menu_set USING (menu_idx) WHERE menu_idx = ?";
 //		ArrayList<MenuPicture> menuPicture = new ArrayList<>();
 		MenuPicture menuPicture = null;
@@ -81,6 +84,7 @@ public class Select_Set_down extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				// 매뉴 idx 보내기
 				frame.veiw_Home_solo_burger(menuidx);
+				//home.orderPlus(menuidx);
 //				HomeMenuKiosk home = new HomeMenuKiosk(frame, idx);
 //				home.setPrice(idx);
 			}
@@ -101,7 +105,7 @@ public class Select_Set_down extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				                         // 세트 표시 s
 				//screen.veiw_Set_Size(idx,"s");
-				frame.veiw_Select_Side_Drink(menuidx, "s", set_idx, 0, 0);
+				frame.veiw_Select_Side_Drink(menuidx, "s", set_idx, 5, 4);
 			}
 		});
 		

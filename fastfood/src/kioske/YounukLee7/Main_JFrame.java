@@ -11,6 +11,7 @@ import kioske.YounukLee7.kioskeUI.Select_Takeout_down;
 import kioske.YounukLee7.kioskeUI.Select_Takeout_up;
 import kioske.YounukLee7.kioskeUI.Start_Screen_kiosk;
 import kioske.pherkad0602.HomeMenuKiosk;
+import kioske.pherkad0602.kiosk7;
 import manager.component.ManagerCP;
 
 public class Main_JFrame extends JFrame{
@@ -77,10 +78,9 @@ public class Main_JFrame extends JFrame{
 	 * @param sideidx - 0이 들어있을 예정
 	 * @param drinkidx
 	 */
-	public void veiw_Select_Side(int menuidx, String  set, int setidx, int sideidx, int drinkidx) {
+	public void veiw_Select_Side(int menuidx, String  set, int setidx, int sideidx, int drinkidx, int cartidx) {
 		ManagerCP.reFresh(panel);
-		panel.add(new Logo_MenuName_Panel(menuidx,set));
-		
+		panel.add(new kiosk7(this, menuidx, set, setidx, sideidx, drinkidx, cartidx));
 	}
 	
 	/**
@@ -92,10 +92,9 @@ public class Main_JFrame extends JFrame{
 	 * @param sideidx
 	 * @param drinkidx
 	 */
-	public void veiw_Select_Drink(int menuidx, String  set, int setidx, int sideidx, int drinkidx) {
+	public void veiw_Select_Drink(int menuidx, String  set, int setidx, int sideidx, int drinkidx, int cartidx) {
 		ManagerCP.reFresh(panel);
-		panel.add(new Logo_MenuName_Panel(menuidx,set));
-		
+		panel.add(new kiosk7(this, menuidx, set, setidx, sideidx, drinkidx, cartidx));
 	}
 	
 	/**

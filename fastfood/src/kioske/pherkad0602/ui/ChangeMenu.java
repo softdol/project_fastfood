@@ -81,7 +81,7 @@ public class ChangeMenu extends JPanel{
 			
 			int drinkprice = menuList.get(i).getMenu_price()-menuInfo.get(1).getMenu_price(); 
 			int sideprice = menuList.get(i).getMenu_price()-menuInfo.get(2).getMenu_price(); 
-			int sale = Integer.valueOf(setList.get(0).getSET_SALE());
+			int sale = Integer.valueOf(menuInfo.get(0).getMenu_sale());
 
 			JTextPane priceLabel = new JTextPane();
 			int temp1 = 0;
@@ -104,7 +104,7 @@ public class ChangeMenu extends JPanel{
 
 			int addCost = temp1+final_price;
 			
-			btn3.addActionListener(new MenuChangeAction(frame, kiosk7, menuList.get(i).getMenu_idx(), addCost));
+			btn3.addActionListener(new MenuChangeAction(frame, menuidx, set, setidx, sideidx, drinkidx, catei, kiosk7, menuList.get(i).getMenu_idx(), addCost));
 
 			priceLabel.setBounds(0,185,210,25);
 			priceLabel.setBackground(Color.white);

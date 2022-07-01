@@ -41,10 +41,16 @@ public class ChangeMenuPanel extends JPanel {
 		JScrollPane scrollPane = new JScrollPane(menuPanel);
 		scrollPane.setBounds(0, 0, 684, 440);
 		scrollPane.setBackground(Color.white);
+		scrollPane.getVerticalScrollBar().setUnitIncrement(16);	
 		scrollPane.setBorder(border);
 		Dimension size = new Dimension();
 				size.setSize(600,210+(210*(a/3)+1));
 		menuPanel.setPreferredSize(size);
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			   public void run() {
+			       scrollPane.getVerticalScrollBar().setValue(0);
+			   }
+			});
 		add(scrollPane);
 		
 		setBounds(100, 80, 684, 800);

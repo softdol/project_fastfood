@@ -153,7 +153,7 @@ public class Select_Side_Drink_down extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frame.veiw_Select_Side(menuidx, "s", setidx, sideidx, drinkidx);
+				frame.veiw_Select_Side(menuidx, "s", setidx, sideidx, drinkidx, 3);
 			}
 		});
 		
@@ -168,7 +168,7 @@ public class Select_Side_Drink_down extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frame.veiw_Select_Drink(menuidx, "s", setidx, sideidx, drinkidx);
+				frame.veiw_Select_Drink(menuidx, "s", setidx, sideidx, drinkidx, 2);
 			}
 		});
 		
