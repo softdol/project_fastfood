@@ -15,6 +15,7 @@ import kioske.pherkad0602.ui.MainPanel;
 import kioske.pherkad0602.ui.OrderCheck;
 import kioske.pherkad0602.ui.PayPanel;
 import oracle.net.aso.f;
+import oracle.security.o3logon.a;
 
 public class HomeMenuKiosk extends JPanel{
 	Main_JFrame frame;
@@ -35,7 +36,12 @@ public class HomeMenuKiosk extends JPanel{
 		frame.orderList.add(new Order_list(menu, 1, 0));
 
 		for(int i = 0; i < frame.orderList.size(); i ++) {
-			sum += frame.orderList.get(i).getORDER_PRICE();
+			
+			if(frame.orderList.get(i).getSET_IDX()!= 0) {
+				sum += (frame.orderList.get(i).getORDER_PRICE_TOTAL() * (100- frame.orderList.get(0).getMenu_sale()))/100;
+			} else {
+				sum += frame.orderList.get(i).getORDER_PRICE_TOTAL();
+			}
 		}
 
 		pay.price.setText(String.valueOf(sum) +" ¿ø");
@@ -49,25 +55,44 @@ public class HomeMenuKiosk extends JPanel{
 	  	MenuDatabase menu = ReturnModel.menuList(sql, psList);
 		frame.orderList.add(new Order_list(menu, 1, 0));
 		for(int i = 0; i < frame.orderList.size(); i ++) {
-			sum += frame.orderList.get(i).getORDER_PRICE_TOTAL();
+			
+			if(frame.orderList.get(i).getSET_IDX()!= 0) {
+				sum += (frame.orderList.get(i).getORDER_PRICE_TOTAL() * (100- frame.orderList.get(0).getMenu_sale()))/100;
+			} else {
+				sum += frame.orderList.get(i).getORDER_PRICE_TOTAL();
+			}
 		}
 		System.out.println("setPrice2 : " + sum + " : " + idx);	
 		pay.price.setText(String.valueOf(sum) +" ¿ø");	
 	}
 	
-	public void setPrice(int idx, int setIdx) {
-		int sum1 = 0;
-		int sum2 = 0;
-		ArrayList<PsList> psList = new ArrayList<>();
-		String sql = "select * from menu where menu_idx = ?";
-	  	psList.add(new PsList('I', String.valueOf(idx)));
-	  	MenuDatabase menu = ReturnModel.menuList(sql, psList);
-		frame.orderList.add(new Order_list(menu, 1, setIdx));
-		if(frame.orderList.get(1).get)
-		for(int i = 0; i < frame.orderList.size(); i ++) {
-			sum1 += frame.orderList.get(i).getORDER_PRICE_TOTAL();
+	public void setPrice(int menuIdx, int drinkIdx, int sideIdx,  int setIdx) {
+		int sum = 0;
+		int[] temp = new int[3];
+
+		temp[0] = menuIdx;
+		temp[1] = drinkIdx;
+		temp[2] = sideIdx;
+		
+		for (int i = 0; i < temp.length; i++) {
+			ArrayList<PsList> psList = new ArrayList<>();
+			String sql = "select * from menu where menu_idx = ?";
+		  	psList.add(new PsList('I', String.valueOf(temp[i])));
+		  	MenuDatabase menu = ReturnModel.menuList(sql, psList);
+			frame.orderList.add(new Order_list(menu, 1, setIdx));
+			System.out.println("[[[[" + menu.getMenu_name() + " : " + menu.getMenu_price());
+
 		}
-		System.out.println("setPrice2 : " + sum + " : " + idx);	
+		
+		for(int i = 0; i < frame.orderList.size(); i ++) {
+			
+			if(frame.orderList.get(i).getSET_IDX()!= 0) {
+				sum += (frame.orderList.get(i).getORDER_PRICE_TOTAL() * (100- frame.orderList.get(0).getMenu_sale()))/100;
+			} else {
+				sum += frame.orderList.get(i).getORDER_PRICE_TOTAL();
+			}
+		}
+		System.out.println("setPrice2 : " + sum + " : " +menuIdx);	
 		pay.price.setText(String.valueOf(sum) +" ¿ø");	
 	}
 	

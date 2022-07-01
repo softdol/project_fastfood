@@ -18,6 +18,7 @@ public class Order_list {
 	private String ORDER_IN_DATE;
 	private Integer SET_IDX;
 	private String img_path;
+	private Integer MENU_SALE;
 	
 	public Order_list(ResultSet rs) throws SQLException {
 		ORDER_IDX			= rs.getInt("ORDER_IDX");
@@ -30,6 +31,7 @@ public class Order_list {
 		MENU_NAME			= rs.getString("MENU_NAME");
 		ORDER_IN_DATE		= rs.getString("ORDER_IN_DATE");
 		SET_IDX				= rs.getInt("SET_IDX");
+		MENU_SALE			= rs.getInt("MENU_SALE");
 	}
 	
 	
@@ -61,6 +63,7 @@ public class Order_list {
 		this.MENU_NAME			= m.getMenu_name();
 		this.SET_IDX			= set_idx;
 		this.img_path			= m.getImg_big_path();
+		this.MENU_SALE			= m.getMenu_sale();
 	}
 	
 	public Order_list(MenuDatabase m, int cnt, int set_idx) {
@@ -73,6 +76,8 @@ public class Order_list {
 		this.MENU_NAME			= m.getMenu_name();
 		this.SET_IDX			= set_idx;
 		this.img_path			= m.getImg_big_path();
+		this.MENU_SALE			= m.getMenu_sale();
+
 	}
 
 
@@ -114,6 +119,10 @@ public class Order_list {
 
 	public Integer getSET_IDX() {
 		return SET_IDX;
+	}
+	
+	public Integer getMenu_sale() {
+		return MENU_SALE;
 	}
 	
 	

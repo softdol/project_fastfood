@@ -64,6 +64,7 @@ public class kiosk7 extends JPanel{
 	  	  psList2.add(new PsList('I', String.valueOf(menuidx)));
 	  	  psList2.add(new PsList('I', String.valueOf(sideidx)));
 	  	  psList2.add(new PsList('I', String.valueOf(drinkidx)));
+	  	  
 		  ArrayList<MenuDatabase> menuInfo = ReturnModel.selMenuList1(sql2, psList2);
 
 		  ArrayList<PsList> psList3 = new ArrayList<>();

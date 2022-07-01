@@ -13,6 +13,7 @@ import javax.swing.ScrollPaneConstants;
 import database.manager.Category;
 import database.manager.ReturnModel;
 import manager.ManagerMain;
+import manager.component.FontList;
 import manager.component.ManagerCP;
 
 public class MenuList extends JPanel {
@@ -37,6 +38,7 @@ public class MenuList extends JPanel {
 		menuCategory.setBounds(0, 0, 565, 50);
 		JButton cateAllBtn = new JButton("ÀüÃ¼");
 		menuCategory.add(cateAllBtn);
+		cateAllBtn.setFont(FontList.cateButtonFont());
 		cateAllBtn.addActionListener(new ActionListener() {
 			
 			@Override
@@ -47,6 +49,7 @@ public class MenuList extends JPanel {
 		
 		for(Category c : cataList) {
 			JButton cateBtn = new JButton(c.getMenu_category_name());
+			cateBtn.setFont(FontList.cateButtonFont());
 			cateBtn.addActionListener(new ActionListener() {				
 				@Override
 				public void actionPerformed(ActionEvent e) {
