@@ -15,6 +15,7 @@ import database.OjdbcConnection;
 import database.manager.ReturnModel;
 import database.model.PsList;
 import manager.actionlistener.BarActionListener;
+import manager.component.FontList;
 import manager.component.ManagerCP;
 import manager.component.bar.BarMenuSubItem;
 import manager.component.bar.BarMenuSubTitle;
@@ -78,8 +79,10 @@ public class TopMenuBar extends JMenuBar {
 		JButton menuBanner = new JButton("              로고 이미지");
 		menuBanner.setEnabled(false);
 		JButton menuOrder = new JButton("주문관리");
-		JButton menuOpenClose = new JButton("오픈마감");
+		JButton menuOpenClose = new JButton("오픈/마감");
+		menuOpenClose.setFont(FontList.topButtonFont());
 		JButton menuExit = new JButton("닫기");
+		menuExit.setFont(FontList.topButtonFont());
 		
 		menuExit.addActionListener(new ActionListener() {
 			@Override
@@ -157,7 +160,7 @@ public class TopMenuBar extends JMenuBar {
 			}
 		});
 		
-		add(menuBanner);
+		//add(menuBanner);
 		//add(menuOrder);
 		add(menuOpenClose);
 		add(menuExit, RIGHT_ALIGNMENT);
