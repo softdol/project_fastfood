@@ -33,6 +33,8 @@ public class MenuModify extends JPanel {
 	public JLabel lblImg;
 	public JTextField txtImgPath;
 	ManagerMain main;
+	JComboBox cateSubList;
+	ArrayList<SubCategory> subCateList;
 	
 	public MenuModify(ManagerMain main, int idx) {
 		this.main = main;
@@ -68,16 +70,45 @@ public class MenuModify extends JPanel {
 		cateList.setBounds(lblTitle.getX(), lblTitle.getY() + lblTitle.getHeight() + 20 , 80, 50);
 		cateList.setFont(new Font("고딕체", Font.BOLD, 14));
 		
-		JComboBox cateSubList = new JComboBox();
-		
-		ArrayList<SubCategory> subCateList = ReturnModel.categorySubList();
+		cateSubList = new JComboBox();
 		cateSubList.addItem("--중분류--");
+		String sqlSubMenu = "select * from menu_subcategory where MENU_CATEGORY_IDX = ?";
+		psList = new ArrayList<>();
+		psList.add(new PsList('I', String.valueOf(menuInfo.getMenu_category())));
+		
+		subCateList = ReturnModel.categorySubList(sqlSubMenu, psList);
+		
 		for(int i = 0; i < subCateList.size(); i++) {
 			cateSubList.addItem(subCateList.get(i).getMenu_subcategory_name());			
 			if(subCateList.get(i).getMenu_subcategory_idx() == menuInfo.getMenu_subcategory_idx()) {
 				cateSubList.setSelectedIndex(i + 1);
 			}
 		}
+		
+		cateList.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JComboBox thisCb = (JComboBox)e.getSource();
+				if(thisCb.getSelectedIndex() != 0) {
+					int selNum = cataList.get(thisCb.getSelectedIndex()-1).getMenu_category_idx();
+					cateSubList.removeAllItems();
+					String sqlSubMenu = "select * from menu_subcategory where MENU_CATEGORY_IDX = ?";
+					ArrayList<PsList> psList = new ArrayList<>();
+					psList.add(new PsList('I', String.valueOf(selNum)));
+					
+					subCateList = ReturnModel.categorySubList(sqlSubMenu, psList);
+					
+					cateSubList.addItem("--중분류--");
+					for(int i = 0; i < subCateList.size(); i++) {
+						cateSubList.addItem(subCateList.get(i).getMenu_subcategory_name());			
+						if(subCateList.get(i).getMenu_subcategory_idx() == menuInfo.getMenu_subcategory_idx()) {
+							cateSubList.setSelectedIndex(i + 1);
+						}
+					}
+				}
+			}
+		});
 		
 		cateSubList.setBounds(cateList.getX() + cateList.getWidth() + 20, cateList.getY() , 80, 50);
 		cateSubList.setFont(new Font("고딕체", Font.BOLD, 14));
