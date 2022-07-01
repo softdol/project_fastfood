@@ -74,7 +74,12 @@ public class HomePanel extends JPanel{
 		Dimension size = new Dimension();
 				size.setSize(600,550+(210*(a/3)+1));
 		mainPanel.setPreferredSize(size);
-		scrollPane.getVerticalScrollBar().setUnitIncrement(16);	
+		scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			   public void run() {
+			       scrollPane.getVerticalScrollBar().setValue(0);
+			   }
+			});
 		add(scrollPane);
 		setBounds(0, 200, 684, 800);
 		setLayout(null);

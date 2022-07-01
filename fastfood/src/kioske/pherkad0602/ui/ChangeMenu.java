@@ -81,7 +81,7 @@ public class ChangeMenu extends JPanel{
 			
 			int drinkprice = menuList.get(i).getMenu_price()-menuInfo.get(1).getMenu_price(); 
 			int sideprice = menuList.get(i).getMenu_price()-menuInfo.get(2).getMenu_price(); 
-			int sale = Integer.valueOf(setList.get(0).getSET_SALE());
+			int sale = Integer.valueOf(menuInfo.get(0).getMenu_sale());
 
 			JTextPane priceLabel = new JTextPane();
 			int temp1 = 0;
