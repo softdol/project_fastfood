@@ -22,7 +22,7 @@ public class MenuListPanel extends JPanel{
 		setBackground(new Color(0xD9EDDF));
 		setBounds(400,120,455,460);
 		
-		String sql = "select * from menu where menu_category_idx = ?";
+		String sql = "select * from menu where menu_use_flag = 'Y' AND menu_category_idx = ?";
 		ArrayList<PsList> psList = new ArrayList<>();
 		psList.add(new PsList('I', String.valueOf(iCate)));
 		
