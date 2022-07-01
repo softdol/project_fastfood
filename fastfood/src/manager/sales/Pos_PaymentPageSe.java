@@ -20,13 +20,15 @@ import database.manager.ReturnModel;
 import database.model.PsList;
 import manager.component.ManagerCP;
 import pos.Order;
+import pos.Pos_Burger;
 
 public class Pos_PaymentPageSe extends JFrame {
-	
+	Pos_Burger main;
 	ArrayList<Order> orderlist;
 	long sumPrice;
-	public Pos_PaymentPageSe(ArrayList<Order> orderlist, char orderType) {
+	public Pos_PaymentPageSe(ArrayList<Order> orderlist, char orderType, Pos_Burger main) {
 		this.orderlist = orderlist;
+		this.main = main;
 		
 		String[] str = { "예", "아니오" };
 		setTitle("결제창");
@@ -255,6 +257,7 @@ public class Pos_PaymentPageSe extends JFrame {
 					}
 				}
 				ManagerCP.viewSuccess("결제가 완료 되었습니다.", "결제 완료");
+				main.clearList();
 				dispose();
 				
 			} else {
