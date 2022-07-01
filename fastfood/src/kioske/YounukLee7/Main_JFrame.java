@@ -1,9 +1,12 @@
 package kioske.YounukLee7;
 
 
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import database.model.PsList;
 import kioske.YounukLee7.kioskeUI.Logo_MenuName_Panel;
 import kioske.YounukLee7.kioskeUI.Select_Set_down;
 import kioske.YounukLee7.kioskeUI.Select_Side_Drink_down;
@@ -12,11 +15,18 @@ import kioske.YounukLee7.kioskeUI.Select_Takeout_up;
 import kioske.YounukLee7.kioskeUI.Start_Screen_kiosk;
 import kioske.pherkad0602.HomeMenuKiosk;
 import kioske.pherkad0602.kiosk7;
+import kioske.pherkad0602.database.MenuDatabase;
+import kioske.pherkad0602.database.ReturnModel;
+import kioske.pherkad0602.ui.MainPanel;
+import kioske.pherkad0602.ui.PayPanel;
 import manager.component.ManagerCP;
 
 public class Main_JFrame extends JFrame{
 	
 	Main_JPanel panel;
+	MainPanel main;
+	PayPanel pay;
+	public ArrayList<Integer> orderList;
 	
 	
 	/**
@@ -52,6 +62,7 @@ public class Main_JFrame extends JFrame{
 	 */
 	public void veiw_Home_solo_burger(int menuidx) {
 		ManagerCP.reFresh(panel);
+		orderList.add(menuidx);
 		panel.add(new HomeMenuKiosk(this,menuidx));
 	}
 	
@@ -108,7 +119,7 @@ public class Main_JFrame extends JFrame{
 	}
 
 	public Main_JFrame() {
-		
+		orderList = new ArrayList<>();
 		panel = new Main_JPanel(this);
 		add(panel);
 		

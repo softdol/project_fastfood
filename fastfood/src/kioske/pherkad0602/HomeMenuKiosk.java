@@ -19,7 +19,7 @@ public class HomeMenuKiosk extends JPanel{
 	Main_JFrame frame;
 	MainPanel main;
 	PayPanel pay;
-	ArrayList orderList = new ArrayList<>();
+//	public ArrayList orderList = new ArrayList<>();
 	int sum = 0;
 	
 	
@@ -28,7 +28,7 @@ public class HomeMenuKiosk extends JPanel{
 	}
 	
 	public void setPrice(int idx) {
-		orderList.add(idx);
+		frame.orderList.add(idx);
 		
 		String sql = "SELECT * FROM Menu WHERE Menu_IDX = ?";
 		ArrayList<PsList> psList = new ArrayList<>();
@@ -36,8 +36,12 @@ public class HomeMenuKiosk extends JPanel{
 		ArrayList<MenuDatabase> menuList = ReturnModel.selMenuList1(sql, psList);
 		sum += menuList.get(0).getMenu_price();
 		System.out.println(idx);
+		System.out.println(sum);
+		System.out.println(frame.orderList);
+
 		pay.price.setText(String.valueOf(sum) +" ¿ø");
 	}
+	
 	
 	public void viewMenu(String name) {
 		main.cardLayoutManager.show(main, name);
@@ -47,13 +51,19 @@ public class HomeMenuKiosk extends JPanel{
 	
 	public void orderPlus(int menuidx) {
 		// TODO Auto-generated method stub
-		orderList.add(menuidx);
+		frame.orderList.add(menuidx);
+	}
+	
+	public void orderReset() {
+		frame.orderList.removeAll(frame.orderList);
+		pay.price.setText(" ¿ø");
+		sum = 0;
 	}
 
 	
 	public HomeMenuKiosk(Main_JFrame frame, int idx) {
 		
-		
+		this.frame = frame;
 		
 		setLayout(null);
 
@@ -64,7 +74,7 @@ public class HomeMenuKiosk extends JPanel{
 		//main.setBounds(200, 0, 684, 800);
 		add(main);
 		
-		pay = new PayPanel();
+		pay = new PayPanel(this, frame);
 		add(pay);
 		
 		
@@ -78,6 +88,7 @@ public class HomeMenuKiosk extends JPanel{
 	public static void main(String[] args) {
 
 	}
+
 
 	
 }
