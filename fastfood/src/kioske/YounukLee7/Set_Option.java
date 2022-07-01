@@ -17,7 +17,7 @@ public class Set_Option extends JFrame{
 	public void veiw_Select_Side_Drink(int menuidx, String  set, int setidx, int sideidx, int drinkidx) {
 		ManagerCP.reFresh(panel);
 		panel.add(new Logo_MenuName_Panel(menuidx,set));
-		panel.add(new Select_Side_Drink_down(this, menuidx, setidx, sideidx, drinkidx));
+		panel.add(new Select_Side_Drink_down(this, menuidx, setidx, sideidx, drinkidx,hMain));
 	}
 	
 	/**

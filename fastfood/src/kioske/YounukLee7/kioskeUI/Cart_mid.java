@@ -184,11 +184,27 @@ public class Cart_mid extends JPanel{
 			
 		//jPanel.add(new CartButton(main.get(i), pCenter, i));
 		}
+//		
+//		JScrollPane scrollPane = new JScrollPane(jPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+//		scrollPane.getVerticalScrollBar().setUnitIncrement(150);
+//		scrollPane.setBounds(0, 0, 885, 500);
+//		
 		
-		JScrollPane scrollPane = new JScrollPane(jPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.getVerticalScrollBar().setUnitIncrement(150);
-		scrollPane.setBounds(0, 0, 885, 500);
+		//
 		
+		JScrollPane scrollPane = new JScrollPane(jPanel);
+		scrollPane.setBounds(0, 0, 684, 600);
+		scrollPane.setBackground(Color.white);
+		scrollPane.getVerticalScrollBar().setUnitIncrement(16);	
+		//scrollPane.setBorder(border);
+		Dimension size = new Dimension();
+				size.setSize(600,1200);
+				jPanel.setPreferredSize(size);
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			   public void run() {
+			       scrollPane.getVerticalScrollBar().setValue(0);
+			   }
+			});
 		add(scrollPane);
 
 	}

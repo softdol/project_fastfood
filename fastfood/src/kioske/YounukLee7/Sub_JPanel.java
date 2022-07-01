@@ -18,8 +18,8 @@ public class Sub_JPanel extends JPanel{
 //		add(down);
 		Main_JFrame main_JFrame = new Main_JFrame();
 		
-		Select_Side_Drink_down down = new Select_Side_Drink_down(main_JFrame, 0, 0, 0, 0);
-		add(down);
+//		Select_Side_Drink_down down = new Select_Side_Drink_down(main_JFrame, 0, 0, 0, 0);
+//		add(down);
 		
 		setLayout(null);
 		setBounds(0,0,900,1040);
