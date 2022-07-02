@@ -9,11 +9,15 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import kioske.YounukLee7.Insert_List;
 import kioske.YounukLee7.Last_JFrame;
+import kioske.YounukLee7.Main_JFrame;
 
 public class Down_yes_no_Button extends JPanel{
 	
-	public Down_yes_no_Button(Last_JFrame screen) {
+	Insert_List insert;
+	
+	public Down_yes_no_Button(Main_JFrame screen, String pay) {
 		
 		setBackground(new Color(0XFFF2DD));
 		setBounds(0,800,900,240);
@@ -27,7 +31,20 @@ public class Down_yes_no_Button extends JPanel{
 		allpay.setBackground(new Color(0XFFF2DD));
 		allpay.setBounds(40, 30, 180, 30);
 		
-		JLabel allmoney = new JLabel("17000¿ø");
+		
+		int sum = 0;
+		for(int i = 0; i < screen.orderList.size(); i ++) {
+			
+			if(screen.orderList.get(i).getSET_IDX()!= 0) {
+				sum += (screen.orderList.get(i).getORDER_PRICE_TOTAL() * (100- screen.orderList.get(0).getMenu_sale()))/100;
+			} else {
+				sum += screen.orderList.get(i).getORDER_PRICE_TOTAL();
+			}
+		}
+		
+		
+		JLabel allmoney = new JLabel();
+		allmoney.setText(String.valueOf(sum) + "¿ø");
 		allmoney.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 30));
 		allmoney.setOpaque(true);
 		allmoney.setForeground(Color.RED);
@@ -44,6 +61,7 @@ public class Down_yes_no_Button extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				insert = new Insert_List(screen, pay);
 				screen.veiw_Order_completed();
 			}
 		});
@@ -58,7 +76,7 @@ public class Down_yes_no_Button extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				screen.veiw_Error();
+				screen.veiw_Home();
 			}
 		});
 		

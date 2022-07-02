@@ -10,10 +10,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import kioske.YounukLee7.Last_JFrame;
+import kioske.YounukLee7.Main_JFrame;
 
 public class Select_Payment_down extends JPanel{
 	
-	public Select_Payment_down(Last_JFrame screen) {
+	public Select_Payment_down(Main_JFrame screen) {
 		
 		setBackground(new Color(0XFFF2DD));
 		setBounds(0,800,900,240);
@@ -26,7 +27,20 @@ public class Select_Payment_down extends JPanel{
 		allpay.setBackground(new Color(0XFFF2DD));
 		allpay.setBounds(40, 30, 180, 30);
 		
-		JLabel allmoney = new JLabel("17000¿ø");
+		
+		int sum = 0;
+		for(int i = 0; i < screen.orderList.size(); i ++) {
+			
+			if(screen.orderList.get(i).getSET_IDX()!= 0) {
+				sum += (screen.orderList.get(i).getORDER_PRICE_TOTAL() * (100- screen.orderList.get(0).getMenu_sale()))/100;
+			} else {
+				sum += screen.orderList.get(i).getORDER_PRICE_TOTAL();
+			}
+		}
+		
+		
+		JLabel allmoney = new JLabel();
+		allmoney.setText(String.valueOf(sum) + "¿ø");
 		allmoney.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 30));
 		allmoney.setOpaque(true);
 		allmoney.setForeground(Color.RED);
@@ -43,7 +57,7 @@ public class Select_Payment_down extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				screen.veiw_Error();
+				screen.veiw_Final_payment();
 			}
 		});
 		

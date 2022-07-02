@@ -8,7 +8,15 @@ import javax.swing.JPanel;
 
 import database.model.PsList;
 import kioske.YounukLee7.dbtablePocket.Order_list;
+import kioske.YounukLee7.kioskeUI.Card_Pay_mid;
+import kioske.YounukLee7.kioskeUI.Completed_up;
+import kioske.YounukLee7.kioskeUI.Down_yes_no_Button;
 import kioske.YounukLee7.kioskeUI.Logo_MenuName_Panel;
+import kioske.YounukLee7.kioskeUI.Mobile_Pay_mid;
+import kioske.YounukLee7.kioskeUI.Order_completed_down;
+import kioske.YounukLee7.kioskeUI.Payment_up;
+import kioske.YounukLee7.kioskeUI.Select_Payment_down;
+import kioske.YounukLee7.kioskeUI.Select_Payment_mid;
 import kioske.YounukLee7.kioskeUI.Select_Set_down;
 import kioske.YounukLee7.kioskeUI.Select_Side_Drink_down;
 import kioske.YounukLee7.kioskeUI.Select_Takeout_down;
@@ -118,9 +126,46 @@ public class Main_JFrame extends JFrame{
 	 * 이때 형래님이 필요한 정보들 상의해서 추가 (줄수있는 정보 : 햄버거번호, 세트번호, 음료번호, 사이드번호, 각자 가격, 총 가격)
 	 * @param menuidx 임시로 햄버거 idx 추가함
 	 */
-	public void veiw_Home_set_burger(int menuidx) {
+//	public void veiw_Home_set_burger(int menuidx) {
+//		ManagerCP.reFresh(panel);
+//		panel.add(new HomeMenuKiosk(this,menuidx));
+//	}
+	
+	/**
+	 * 홈 화면에서 주문내역 클릭 시 -> 최종주문창으로 이동
+	 */
+	public void veiw_Final_payment() {
 		ManagerCP.reFresh(panel);
-		panel.add(new HomeMenuKiosk(this,menuidx));
+		panel.add(new Last_JPanel(this, hMain));
+	}
+	
+	// 최종주문창에서 주문완료 선택 시 -> 결제 선택 화면으로 이동
+	public void veiw_Select_Payment() {
+		// 여기서부터 frame 끝가지 가지고 가야합니다
+		ManagerCP.reFresh(panel);
+		panel.add(new Payment_up());
+		panel.add(new Select_Payment_mid(this));
+		panel.add(new Select_Payment_down(this));
+	}
+	
+	public void veiw_Card_Pay(String card) {
+		ManagerCP.reFresh(panel);
+		panel.add(new Payment_up());
+		panel.add(new Card_Pay_mid());
+		panel.add(new Down_yes_no_Button(this,card));
+	}
+	
+	public void veiw_Mobile_Pay(String mobile) {
+		ManagerCP.reFresh(panel);
+		panel.add(new Payment_up());
+		panel.add(new Mobile_Pay_mid());
+		panel.add(new Down_yes_no_Button(this,mobile));
+	}
+	
+	public void veiw_Order_completed() {
+		ManagerCP.reFresh(panel);
+		panel.add(new Completed_up());
+		panel.add(new Order_completed_down());
 	}
 
 	public Main_JFrame() {

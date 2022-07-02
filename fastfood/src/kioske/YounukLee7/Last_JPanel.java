@@ -26,9 +26,9 @@ public class Last_JPanel extends JPanel{
 	HomeMenuKiosk hMain;
 
 	
-	public Last_JPanel(Last_JFrame screen, Main_JFrame frame,  HomeMenuKiosk hMain) {
+	public Last_JPanel(Main_JFrame frame,  HomeMenuKiosk hMain) {
 		this.frame = frame;
-		this.screen = screen;
+		//this.screen = screen;
 		this.hMain = hMain;
 		
 		Cart_up up = new Cart_up();

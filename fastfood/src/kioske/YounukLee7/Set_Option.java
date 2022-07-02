@@ -53,10 +53,10 @@ public class Set_Option extends JFrame{
 	 * 이때 형래님이 필요한 정보들 상의해서 추가 (줄수있는 정보 : 햄버거번호, 세트번호, 음료번호, 사이드번호, 각자 가격, 총 가격)
 	 * @param menuidx 임시로 햄버거 idx 추가함
 	 */
-	public void veiw_Home_set_burger(int menuidx) {
-		ManagerCP.reFresh(panel);
-		//panel.add(new HomeMenuKiosk(this,menuidx));
-	}
+//	public void veiw_Home_set_burger(int menuidx) {
+//		ManagerCP.reFresh(panel);
+//		//panel.add(new HomeMenuKiosk(this,menuidx));
+//	}
 	
 	public Set_Option(HomeMenuKiosk hMain, int idx, String set) {
 		this.hMain = hMain;

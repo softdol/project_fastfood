@@ -67,7 +67,8 @@ public class Cart_down extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				screen.veiw_Select_Payment(frame);
+				frame.veiw_Select_Payment();
+				//screen.veiw_Select_Payment(frame);
 			}
 		});
 		
@@ -80,9 +81,9 @@ public class Cart_down extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-				screen.dispose();
-				hMain.setPrice();
+				frame.veiw_Home();
+				//screen.dispose();
+				//hMain.setPrice();
 			}
 		});
 		

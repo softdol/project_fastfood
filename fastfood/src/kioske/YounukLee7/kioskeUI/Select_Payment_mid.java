@@ -12,10 +12,11 @@ import javax.swing.JPanel;
 
 import kioske.YounukLee7.Card_Pay;
 import kioske.YounukLee7.Last_JFrame;
+import kioske.YounukLee7.Main_JFrame;
 
 public class Select_Payment_mid extends JPanel{
 	
-	public Select_Payment_mid(Last_JFrame screen) {
+	public Select_Payment_mid(Main_JFrame screen) {
 		
 		setBackground(new Color(0XFFE7DF));
 	    setBounds(0,300,900,500);
@@ -45,7 +46,7 @@ public class Select_Payment_mid extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				screen.veiw_Card_Pay();
+				screen.veiw_Card_Pay("S");
 			}
 		});
 		
@@ -59,7 +60,7 @@ public class Select_Payment_mid extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				screen.veiw_Mobile_Pay();
+				screen.veiw_Mobile_Pay("B");
 			}
 		});
 	    

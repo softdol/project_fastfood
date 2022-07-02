@@ -79,7 +79,8 @@ public class PayPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new Last_JFrame(frame, hMain);
+				frame.veiw_Final_payment();
+				//new Last_JFrame(frame, hMain);
 			}
 		});
 		add(payBtn2);

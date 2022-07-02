@@ -41,28 +41,28 @@ public class Last_JFrame extends JFrame{
 //		
 //	}
 	
-	public void veiw_Select_Payment(Main_JFrame frame) {
-		
-		// 여기서부터 frame 끝가지 가지고 가야합니다
-		ManagerCP.reFresh(panel);
-		panel.add(new Payment_up());
-		panel.add(new Select_Payment_mid(this));
-		panel.add(new Select_Payment_down(this));
-	}
+//	public void veiw_Select_Payment(Main_JFrame frame) {
+//		
+//		// 여기서부터 frame 끝가지 가지고 가야합니다
+//		ManagerCP.reFresh(panel);
+//		panel.add(new Payment_up());
+//		panel.add(new Select_Payment_mid(this));
+//		panel.add(new Select_Payment_down(this));
+//	}
 	
-	public void veiw_Card_Pay() {
-		ManagerCP.reFresh(panel);
-		panel.add(new Payment_up());
-		panel.add(new Card_Pay_mid());
-		panel.add(new Down_yes_no_Button(this));
-	}
-	
-	public void veiw_Mobile_Pay() {
-		ManagerCP.reFresh(panel);
-		panel.add(new Payment_up());
-		panel.add(new Mobile_Pay_mid());
-		panel.add(new Down_yes_no_Button(this));
-	}
+//	public void veiw_Card_Pay() {
+//		ManagerCP.reFresh(panel);
+//		panel.add(new Payment_up());
+//		panel.add(new Card_Pay_mid());
+//		panel.add(new Down_yes_no_Button(this));
+//	}
+//	
+//	public void veiw_Mobile_Pay() {
+//		ManagerCP.reFresh(panel);
+//		panel.add(new Payment_up());
+//		panel.add(new Mobile_Pay_mid());
+//		panel.add(new Down_yes_no_Button(this));
+//	}
 	
 	public void veiw_Error() {
 		ManagerCP.reFresh(panel);
@@ -81,7 +81,7 @@ public class Last_JFrame extends JFrame{
 	public Last_JFrame(Main_JFrame frame, HomeMenuKiosk hMain) {
 		this.frame = frame;
 		this.hMain = hMain;
-		panel = new Last_JPanel(this, frame, hMain);
+		panel = new Last_JPanel(frame, hMain);
 		add(panel);
 		
 		setLayout(null);
