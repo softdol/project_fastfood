@@ -10,10 +10,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import kioske.YounukLee7.Last_JFrame;
+import kioske.YounukLee7.Main_JFrame;
+import kioske.pherkad0602.HomeMenuKiosk;
 
 public class Cart_down extends JPanel{
-
-	public Cart_down(Last_JFrame screen) {
+	
+	HomeMenuKiosk hMain;
+	Main_JFrame frame;
+	Last_JFrame screen;
+	public JLabel allmoney;
+	
+	
+	public Cart_down(Last_JFrame screen, Main_JFrame frame,  HomeMenuKiosk hMain) {
+		this.screen = screen;
+		this.frame = frame;
+		this.hMain = hMain;
 		int total = 0;
 		
 		setBackground(new Color(0XFFF2DD));
@@ -28,8 +39,18 @@ public class Cart_down extends JPanel{
 		allpay.setBackground(new Color(0XFFF2DD));
 		allpay.setBounds(40, 30, 180, 30);
 		
-		JLabel allmoney = new JLabel();
-		allmoney.setText(String.valueOf(total) + "¿ø");
+		
+		int sum = 0;
+		for(int i = 0; i < frame.orderList.size(); i ++) {
+			
+			if(frame.orderList.get(i).getSET_IDX()!= 0) {
+				sum += (frame.orderList.get(i).getORDER_PRICE_TOTAL() * (100- frame.orderList.get(0).getMenu_sale()))/100;
+			} else {
+				sum += frame.orderList.get(i).getORDER_PRICE_TOTAL();
+			}
+		}
+		allmoney = new JLabel();
+		allmoney.setText(String.valueOf(sum) + "¿ø");
 		allmoney.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 30));
 		allmoney.setOpaque(true);
 		allmoney.setForeground(Color.RED);
@@ -46,7 +67,7 @@ public class Cart_down extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				screen.veiw_Select_Payment();
+				screen.veiw_Select_Payment(frame);
 			}
 		});
 		
@@ -55,10 +76,21 @@ public class Cart_down extends JPanel{
 		more_order_button.setBackground(new Color(0X000000));
 		more_order_button.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 40));
 		more_order_button.setBounds(40, 100, 380, 80);
+		more_order_button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+				screen.dispose();
+				hMain.setPrice();
+			}
+		});
 		
 		add(allpay);
 		add(allmoney);
 		add(order_completed_button);
 		add(more_order_button);
 	}
+
+	
 }

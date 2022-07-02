@@ -16,11 +16,14 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 import database.manager.Menu;
-import database.manager.ReturnModel;
 import database.model.PsList;
 import kioske.YounukLee7.Last_JFrame;
+import kioske.YounukLee7.Last_JPanel;
+import kioske.YounukLee7.Main_JFrame;
 import kioske.YounukLee7.cartButton.CartButton;
 import kioske.YounukLee7.dbtablePocket.Order_list;
+import kioske.pherkad0602.database.MenuDatabase;
+import kioske.pherkad0602.database.ReturnModel;
 import manager.component.ManagerCP;
 
 public class Cart_mid extends JPanel{
@@ -31,8 +34,14 @@ public class Cart_mid extends JPanel{
 //		screen.add(new Cart_mid(screen));
 //	}
 	
-	public Cart_mid(Last_JFrame screen, ArrayList<Order_list> orderList) {
+	Cart_down down;
+	Last_JPanel lPanel;
+	Main_JFrame frame;
+	
+	public Cart_mid(Last_JPanel lPanel, Main_JFrame frame) {
 		
+		this.frame = frame;
+		this.lPanel = lPanel;
 		//setBackground(new Color(0XFFE7DF));
 		setBackground(Color.BLACK);
 		//setBounds(0,300,900,500);
@@ -60,15 +69,15 @@ public class Cart_mid extends JPanel{
 		
 				
 		JPanel jPanel = new JPanel();
-		jPanel.setPreferredSize(new Dimension(900, 2000));
+	//	jPanel.setPreferredSize(new Dimension(900, 2000));
 		jPanel.setBackground(new Color(0XFFE7DF));
-		jPanel.setBounds(0,300,900,2000);
+//		jPanel.setBounds(300,300,900,2000);
 		jPanel.setLayout(null);
 //		add(jPanel);
 		
 		
-		for(int i = 0; i < orderList.size(); i++) {
-			Order_list o = orderList.get(i);
+		for(int i = 0; i < frame.orderList.size(); i++) {
+			Order_list o = frame.orderList.get(i);
 //			jPanel.add(jp1);
 			JPanel panel = new JPanel(); 
 			panel.setBounds(0, 150 * i, 900, 150);
@@ -80,12 +89,12 @@ public class Cart_mid extends JPanel{
 			cancel.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 20));
 			cancel.setBackground(Color.black);
 			cancel.setForeground(Color.white);
-			
+			int c = i;
 			cancel.addActionListener(new ActionListener() {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					
+					frame.orderList.remove(c);
 				}
 			});
 			
@@ -96,7 +105,7 @@ public class Cart_mid extends JPanel{
 
 			ImageIcon icon = new ImageIcon(o.getImg_path());
 			Image img = icon.getImage();
-			Image sideimg = img.getScaledInstance(200, 170, Image.SCALE_SMOOTH);
+			Image sideimg = img.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
 			ImageIcon sideicon = new ImageIcon(sideimg);
 			menuImg.setIcon(sideicon);
 			
@@ -122,7 +131,8 @@ public class Cart_mid extends JPanel{
 			cnt_label.setBackground(new Color(0XFFFFFF));			
 			panel.add(cnt_label);
 			
-			JLabel menuMoney = new JLabel(ManagerCP.viewWon(o.getORDER_PRICE()));
+	//		JLabel menuMoney = new JLabel(ManagerCP.viewWon(o.getORDER_PRICE()));
+			JLabel menuMoney = new JLabel(ManagerCP.viewWon(o.getORDER_PRICE_TOTAL()));
 			menuMoney.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 30));
 			menuMoney.setOpaque(true);
 			menuMoney.setForeground(Color.RED);
@@ -131,23 +141,50 @@ public class Cart_mid extends JPanel{
 		
 			
 			panel.add(menuMoney);
-//			
-//			JButton minus = new JButton("-");
-//			minus.setBounds(280, 80, 100, 50);
-//			minus.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 20));
-//			minus.setBackground(Color.black);
-//			minus.setForeground(Color.white);
-//			
+			
+			JButton minus = new JButton("-");
+			minus.setBounds(280, 80, 100, 50);
+			minus.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 20));
+			minus.setBackground(Color.black);
+			minus.setForeground(Color.white);
+			panel.add(minus);
 //			int menuPrice = 0;
 //			if (arrayList.size() == 1) {
 //				menuPrice = menu.getMENU_PRICE();
 //			}
 //			int price = menuPrice;
-//			minus.addActionListener(new ActionListener() {
-//				@Override
-//				public void actionPerformed(ActionEvent e) {
-//					
-//					
+			
+			
+			minus.addActionListener(new ActionListener() {
+				
+				int cnt = o.getORDER_QUANTITY();
+				int idx = o.getMENU_IDX();
+				int setIdx = o.getSET_IDX();
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					
+				
+					if (cnt>1) {
+						--cnt;
+
+					  	if(setIdx == 0){
+					  		o.setORDER_QUANTITY(cnt);
+					  		o.setORDER_PRICE_TOTAL(cnt * o.getORDER_PRICE());
+					  		menuMoney.setText(o.getORDER_PRICE_TOTAL().toString());
+					  		cnt_label.setText(o.getORDER_QUANTITY().toString());
+					  		lPanel.SetPrice();
+					  	} else {
+					  		o.setORDER_QUANTITY(cnt);
+					  		o.setORDER_PRICE_TOTAL(cnt * o.getORDER_PRICE());
+					  		menuMoney.setText(String.valueOf((o.getORDER_PRICE_TOTAL() * (100- o.getMenu_sale()))/100));
+					  		cnt_label.setText(o.getORDER_QUANTITY().toString());
+					  		lPanel.SetPrice();
+
+					  	}
+
+					}
+					
+					
 //					if (count == 1) {
 //						cnt_label.setText(String.valueOf(count));
 //						menuMoney.setText(price + "¿ø");
@@ -157,26 +194,54 @@ public class Cart_mid extends JPanel{
 //						sub_money = sub_money - money;
 //						menuMoney.setText(price + "¿ø");
 //					}
-//				}
-//			});
-//			
-//			JButton plus = new JButton("+");
-//			plus.setBounds(480, 80, 100, 50);
-//			plus.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 20));
-//			plus.setBackground(Color.black);
-//			plus.setForeground(Color.white);
-//			
-//			plus.addActionListener(new ActionListener() {
-//				@Override
-//				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			
+			JButton plus = new JButton("+");
+			plus.setBounds(480, 80, 100, 50);
+			plus.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 20));
+			plus.setBackground(Color.black);
+			plus.setForeground(Color.white);
+			panel.add(plus);
+			plus.addActionListener(new ActionListener() {
+				int cnt = o.getORDER_QUANTITY();
+				int idx = o.getMENU_IDX();
+				int setIdx = o.getSET_IDX();
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					++cnt;
+					int sum = 0;
+					for(int i = 0; i < frame.orderList.size(); i++) {
+						sum += frame.orderList.get(i).getORDER_PRICE_TOTAL();
+					}
+			
+					
+				  	if(setIdx == 0){
+				  		o.setORDER_QUANTITY(cnt);
+				  		o.setORDER_PRICE_TOTAL(cnt * o.getORDER_PRICE());
+				  		menuMoney.setText(o.getORDER_PRICE_TOTAL().toString());
+				  		cnt_label.setText(o.getORDER_QUANTITY().toString());				 
+				  		lPanel.SetPrice();
+
+				  	} else {
+				  		o.setORDER_QUANTITY(cnt);
+				  		o.setORDER_PRICE_TOTAL(cnt * o.getORDER_PRICE());
+				  		menuMoney.setText(String.valueOf((o.getORDER_PRICE_TOTAL() * (100- o.getMenu_sale()))/100));
+				  		cnt_label.setText(o.getORDER_QUANTITY().toString());
+				  		lPanel.SetPrice();
+				  	}
+					System.out.println(frame.orderList.get(c));
+
+				}
 //					count = count + 1;
 //					cnt_label.setText(String.valueOf(count));
 //					
 //					sub_money = sub_money + money;
 //					menuMoney.setText(String.valueOf(sub_money) + "¿ø");
 //				}
-//			});
-			
+			});
+	
 			panel.add(cancel);
 			panel.add(menuImg);
 
@@ -193,12 +258,12 @@ public class Cart_mid extends JPanel{
 		//
 		
 		JScrollPane scrollPane = new JScrollPane(jPanel);
-		scrollPane.setBounds(0, 0, 684, 600);
+		scrollPane.setBounds(0, 0, 884, 500);
 		scrollPane.setBackground(Color.white);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(16);	
 		//scrollPane.setBorder(border);
 		Dimension size = new Dimension();
-				size.setSize(600,1200);
+				size.setSize(865,150*frame.orderList.size());
 				jPanel.setPreferredSize(size);
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			   public void run() {

@@ -18,28 +18,32 @@ import kioske.YounukLee7.kioskeUI.Order_completed_down;
 import kioske.YounukLee7.kioskeUI.Payment_up;
 import kioske.YounukLee7.kioskeUI.Select_Payment_down;
 import kioske.YounukLee7.kioskeUI.Select_Payment_mid;
+import kioske.pherkad0602.HomeMenuKiosk;
 import manager.component.ManagerCP;
 
 public class Last_JFrame extends JFrame{
 	
 	Last_JPanel panel;
-	
+	Main_JFrame frame;
+	HomeMenuKiosk hMain;
 //	public void veiw_Cart() {
 //		ManagerCP.reFresh(panel);
 //		panel.add(new Cart_up());
 //		panel.add(new Cart_mid(this));
 //		panel.add(new Cart_down(this));
 //	}
+//	
+//	public void viewOrder(ArrayList<Order_list> orderList) {
+//		
+//		ManagerCP.reFresh(panel.mid);
+//		
+//	//	 panel.mid.add(new Cart_mid(this, orderList));
+//		
+//	}
 	
-	public void viewOrder(ArrayList<Order_list> orderList) {
+	public void veiw_Select_Payment(Main_JFrame frame) {
 		
-		ManagerCP.reFresh(panel.mid);
-		
-		 panel.mid.add(new Cart_mid(this, orderList));
-		
-	}
-	
-	public void veiw_Select_Payment() {
+		// 여기서부터 frame 끝가지 가지고 가야합니다
 		ManagerCP.reFresh(panel);
 		panel.add(new Payment_up());
 		panel.add(new Select_Payment_mid(this));
@@ -74,9 +78,10 @@ public class Last_JFrame extends JFrame{
 	
 	
 	
-	public Last_JFrame() {
-		
-		panel = new Last_JPanel(this);
+	public Last_JFrame(Main_JFrame frame, HomeMenuKiosk hMain) {
+		this.frame = frame;
+		this.hMain = hMain;
+		panel = new Last_JPanel(this, frame, hMain);
 		add(panel);
 		
 		setLayout(null);
@@ -87,6 +92,6 @@ public class Last_JFrame extends JFrame{
 		setVisible(true);
 	}
 	public static void main(String[] args) {
-		new Last_JFrame();
+		//new Last_JFrame();
 	}
 }
