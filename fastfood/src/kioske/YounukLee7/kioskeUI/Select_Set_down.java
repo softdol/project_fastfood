@@ -104,7 +104,7 @@ public class Select_Set_down extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				                         // 세트 표시 s
 				//screen.veiw_Set_Size(idx,"s");
-				option.veiw_Select_Side_Drink(menuidx, "s", set_idx, 5, 4);
+				option.veiw_Select_Side_Drink(menuidx, "s", set_idx, 201, 158);
 			}
 		});
 		
