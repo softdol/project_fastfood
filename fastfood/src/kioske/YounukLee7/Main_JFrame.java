@@ -2,6 +2,7 @@ package kioske.YounukLee7;
 
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -165,7 +166,12 @@ public class Main_JFrame extends JFrame{
 	public void veiw_Order_completed() {
 		ManagerCP.reFresh(panel);
 		panel.add(new Completed_up());
-		panel.add(new Order_completed_down());
+		panel.add(new Order_completed_down(this));
+	}
+	
+	public void veiw_back_first_screen() {
+		ManagerCP.reFresh(panel);
+		panel.add(new Main_JPanel(this));
 	}
 
 	public Main_JFrame() {

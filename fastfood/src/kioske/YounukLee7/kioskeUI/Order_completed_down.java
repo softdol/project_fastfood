@@ -2,14 +2,20 @@ package kioske.YounukLee7.kioskeUI;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import kioske.YounukLee7.Main_JFrame;
+
 public class Order_completed_down extends JPanel{
 	
-	public Order_completed_down() {
+	Main_JFrame frame;
+	
+	public Order_completed_down(Main_JFrame frame) {
+		this.frame = frame;
 		
 		setBackground(new Color(0XFFE7DF));
 		setBounds(0,300,900,770);
@@ -44,6 +50,7 @@ public class Order_completed_down extends JPanel{
 		add(word2);
 		add(order_number);
 		add(payImage);
+		
 		
 	}
 
