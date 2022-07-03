@@ -18,6 +18,8 @@ public class Order_list {
 	private String ORDER_IN_DATE;
 	private Integer SET_IDX;
 	private String img_path;
+	private Integer MENU_CATEGORY_IDX;
+	
 	public Integer getMENU_SALE() {
 		return MENU_SALE;
 	}
@@ -91,6 +93,7 @@ public class Order_list {
 		ORDER_IN_DATE		= rs.getString("ORDER_IN_DATE");
 		SET_IDX				= rs.getInt("SET_IDX");
 		MENU_SALE			= rs.getInt("MENU_SALE");
+		MENU_CATEGORY_IDX	= rs.getInt("MENU_CATEGORY_IDX");
 	}
 	
 	
@@ -110,6 +113,7 @@ public class Order_list {
 		this.ORDER_PRICE_TOTAL	= m.getMENU_PRICE() * cnt;		
 		this.MENU_NAME			= m.getMENU_NAME();
 		this.SET_IDX			= set_idx;
+		this.MENU_CATEGORY_IDX	= m.getMENU_CATEGORY_IDX();
 	}
 
 	public Order_list(database.manager.Menu m, int cnt, int set_idx) {
@@ -123,6 +127,8 @@ public class Order_list {
 		this.SET_IDX			= set_idx;
 		this.img_path			= m.getImg_big_path();
 		this.MENU_SALE			= m.getMenu_sale();
+		this.MENU_CATEGORY_IDX	= m.getMenu_category();
+
 	}
 	
 	public Order_list(MenuDatabase m, int cnt, int set_idx) {
@@ -136,7 +142,18 @@ public class Order_list {
 		this.SET_IDX			= set_idx;
 		this.img_path			= m.getImg_big_path();
 		this.MENU_SALE			= m.getMenu_sale();
+		this.MENU_CATEGORY_IDX	= m.getMenu_category();
 
+	}
+
+
+	public Integer getMENU_CATEGORY_IDX() {
+		return MENU_CATEGORY_IDX;
+	}
+
+
+	public void setMENU_CATEGORY_IDX(Integer mENU_CATEGORY_IDX) {
+		MENU_CATEGORY_IDX = mENU_CATEGORY_IDX;
 	}
 
 
