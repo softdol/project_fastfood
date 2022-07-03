@@ -24,6 +24,7 @@ import kioske.pherkad0602.kiosk7;
 import kioske.pherkad0602.action.MenuChangeAction;
 import kioske.pherkad0602.database.MenuDatabase;
 import kioske.pherkad0602.database.SetDatabase;
+import manager.component.ManagerCP;
 
 public class ChangeMenu extends JPanel{
 	
@@ -70,7 +71,7 @@ public class ChangeMenu extends JPanel{
 			nameLabel.setText(String.valueOf(menuList.get(i).getMenu_name()));
 			nameLabel.setBounds(0,150,210,35);
 			nameLabel.setBackground(Color.white);
-			if(menuList.get(i).getMenu_name().length() >12) {
+			if(menuList.get(i).getMenu_name().length() >10) {
 				nameLabel.setFont(new Font("궁서체", Font.BOLD,15));
 			} else {
 				nameLabel.setFont(new Font("궁서체", Font.BOLD,20));
@@ -84,26 +85,21 @@ public class ChangeMenu extends JPanel{
 			
 			btn3.add(nameLabel);
 			
-			int drinkprice = menuList.get(i).getMenu_price()-menuInfo.get(1).getMenu_price(); 
-			int sideprice = menuList.get(i).getMenu_price()-menuInfo.get(2).getMenu_price(); 
+			int drinkprice = menuList.get(i).getMenu_price()-menuInfo.get(2).getMenu_price(); 
+			int sideprice = menuList.get(i).getMenu_price()-menuInfo.get(1).getMenu_price(); 
 			int sale = Integer.valueOf(menuInfo.get(0).getMenu_sale());
 
 			JTextPane priceLabel = new JTextPane();
 			int temp1 = 0;
 			if(catei == 2) {
-				if(drinkprice<0) {
-					priceLabel.setText("0원");
-				} else {
-					priceLabel.setText(String.valueOf((drinkprice*(100-sale))/100)+"원");
-					temp1 = (drinkprice*(100-sale))/100;
-				}
+			
+				priceLabel.setText(ManagerCP.viewWon((drinkprice*(100-sale))/100)+"원");
+				temp1 = (drinkprice*(100-sale))/100;
+				
 			} else if(catei ==3){
-				if(sideprice<0) {
-					priceLabel.setText("0원");
-				} else {
-					priceLabel.setText(String.valueOf((sideprice*(100-sale))/100)+"원");
-					temp1 = (sideprice*(100-sale))/100;
-				}
+				priceLabel.setText(ManagerCP.viewWon((sideprice*(100-sale))/100)+"원");
+				temp1 = (sideprice*(100-sale))/100;
+				
 			}
 			
 

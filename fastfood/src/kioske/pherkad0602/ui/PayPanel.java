@@ -17,18 +17,12 @@ import kioske.YounukLee7.Main_JFrame;
 import kioske.pherkad0602.HomeMenuKiosk;
 import kioske.pherkad0602.database.MenuDatabase;
 import kioske.pherkad0602.database.ReturnModel;
+import manager.component.ManagerCP;
 
 public class PayPanel extends JPanel {
 	public JLabel price;
 	HomeMenuKiosk hMain;
 	Main_JFrame frame;
-	public void view_menu(String name) {
-		String a = name;
-	}
-	
-	public void name(int sum) {
-		price.setText(sum + "원");
-	}
 	
 	public PayPanel(HomeMenuKiosk hMain, Main_JFrame frame) {
 
@@ -59,7 +53,7 @@ public class PayPanel extends JPanel {
 				sum += frame.orderList.get(i).getORDER_PRICE_TOTAL();
 			}
 		}
-		price.setText(String.valueOf(sum) +" 원");	
+		price.setText(ManagerCP.viewWon(sum) +" 원");	
 		price.setFont(new Font("궁서체", Font.PLAIN,40));
 		price.setBounds(600,20,200,80);	
 		price.setHorizontalAlignment(JLabel.RIGHT);

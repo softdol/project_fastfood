@@ -16,6 +16,7 @@ import kioske.YounukLee7.kioskeUI.Cart_down;
 import kioske.YounukLee7.kioskeUI.Cart_mid;
 import kioske.YounukLee7.kioskeUI.Cart_up;
 import kioske.pherkad0602.HomeMenuKiosk;
+import manager.component.ManagerCP;
 
 public class Last_JPanel extends JPanel{
 	
@@ -77,6 +78,6 @@ public class Last_JPanel extends JPanel{
 				sum += frame.orderList.get(i).getORDER_PRICE_TOTAL();
 			}
 		}
-		down.allmoney.setText(String.valueOf(sum) + "¿ø");
+		down.allmoney.setText(ManagerCP.viewWon(sum) + "¿ø");
 	}
 }

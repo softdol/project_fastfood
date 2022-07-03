@@ -119,7 +119,7 @@ public class Cart_mid extends JPanel{
 				
 				int saleMenuMoney = (o.getORDER_PRICE_TOTAL()+o2.getORDER_PRICE_TOTAL()+ o3.getORDER_PRICE_TOTAL())* (100-o.getMenu_sale())/100;
 				System.out.println(o.getORDER_PRICE_TOTAL() + "  " + o2.getORDER_PRICE_TOTAL() + "  "+ o3.getORDER_PRICE_TOTAL());
-				JLabel menuMoney = new JLabel(ManagerCP.viewWon(saleMenuMoney));
+				JLabel menuMoney = new JLabel(ManagerCP.viewWon(saleMenuMoney) +"원");
 				menuMoney.setFont(new Font("HY견고딕", Font.PLAIN, 30));
 				menuMoney.setOpaque(true);
 				menuMoney.setForeground(Color.RED);
@@ -152,7 +152,7 @@ public class Cart_mid extends JPanel{
 						  	o3.setORDER_QUANTITY(cnt);
 						  	o3.setORDER_PRICE_TOTAL(cnt * o3.getORDER_PRICE());			  	
 							int saleMenuMoney = (o.getORDER_PRICE_TOTAL()+o2.getORDER_PRICE_TOTAL()+ o3.getORDER_PRICE_TOTAL())* (100-o.getMenu_sale())/100;
-						  	menuMoney.setText(ManagerCP.viewWon(saleMenuMoney));
+						  	menuMoney.setText(ManagerCP.viewWon(saleMenuMoney)+"원");
 						  	cnt_label.setText(o.getORDER_QUANTITY().toString());
 						  	lPanel.SetPrice();
 						  	
@@ -182,7 +182,7 @@ public class Cart_mid extends JPanel{
 					  	o3.setORDER_QUANTITY(cnt);
 					  	o3.setORDER_PRICE_TOTAL(cnt * o3.getORDER_PRICE());
 					  	int saleMenuMoney = (o.getORDER_PRICE_TOTAL()+o2.getORDER_PRICE_TOTAL()+ o3.getORDER_PRICE_TOTAL())* (100-o.getMenu_sale())/100;
-					  	menuMoney.setText(ManagerCP.viewWon(saleMenuMoney));
+					  	menuMoney.setText(ManagerCP.viewWon(saleMenuMoney)+"원");
 					  	cnt_label.setText(o.getORDER_QUANTITY().toString());
 					  	lPanel.SetPrice();	
 
@@ -251,7 +251,7 @@ public class Cart_mid extends JPanel{
 				cnt_label.setBackground(new Color(0XFFFFFF));			
 				panel.add(cnt_label);
 								
-				JLabel menuMoney = new JLabel(ManagerCP.viewWon(o.getORDER_PRICE_TOTAL()));
+				JLabel menuMoney = new JLabel(ManagerCP.viewWon(o.getORDER_PRICE_TOTAL())+"원");
 				menuMoney.setFont(new Font("HY견고딕", Font.PLAIN, 30));
 				menuMoney.setOpaque(true);
 				menuMoney.setForeground(Color.RED);
@@ -278,7 +278,7 @@ public class Cart_mid extends JPanel{
 							--cnt;
 						  	o.setORDER_QUANTITY(cnt);
 						  	o.setORDER_PRICE_TOTAL(cnt * o.getORDER_PRICE());
-					  		menuMoney.setText(String.valueOf((o.getORDER_PRICE_TOTAL() * (100- o.getMenu_sale()))/100));
+					  		menuMoney.setText(ManagerCP.viewWon((o.getORDER_PRICE_TOTAL() * (100- o.getMenu_sale()))/100)+"원");
 						  	cnt_label.setText(o.getORDER_QUANTITY().toString());
 					  		lPanel.SetPrice();
 						  	
@@ -301,7 +301,7 @@ public class Cart_mid extends JPanel{
 						++cnt;
 					  	o.setORDER_QUANTITY(cnt);
 				 		o.setORDER_PRICE_TOTAL(cnt * o.getORDER_PRICE());
-				 		menuMoney.setText(String.valueOf((o.getORDER_PRICE_TOTAL() * (100- o.getMenu_sale()))/100));
+				 		menuMoney.setText(ManagerCP.viewWon((o.getORDER_PRICE_TOTAL() * (100- o.getMenu_sale()))/100)+"원");
 				  		cnt_label.setText(o.getORDER_QUANTITY().toString());
 				  		lPanel.SetPrice();
 					  	

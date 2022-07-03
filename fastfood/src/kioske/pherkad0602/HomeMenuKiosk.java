@@ -14,6 +14,7 @@ import kioske.pherkad0602.ui.Category;
 import kioske.pherkad0602.ui.MainPanel;
 import kioske.pherkad0602.ui.OrderCheck;
 import kioske.pherkad0602.ui.PayPanel;
+import manager.component.ManagerCP;
 import oracle.net.aso.f;
 import oracle.security.o3logon.a;
 
@@ -44,7 +45,7 @@ public class HomeMenuKiosk extends JPanel{
 			}
 		}
 
-		pay.price.setText(String.valueOf(sum) +" 원");
+		pay.price.setText(ManagerCP.viewWon(sum) +" 원");
 	}
 	
 	public void setPrice(int idx) {
@@ -63,7 +64,7 @@ public class HomeMenuKiosk extends JPanel{
 			}
 		}
 		System.out.println("setPrice2 : " + sum + " : " + idx);	
-		pay.price.setText(String.valueOf(sum) +" 원");	
+		pay.price.setText(ManagerCP.viewWon(sum) +" 원");	
 	}
 	
 	public void setPrice(int menuIdx, int drinkIdx, int sideIdx,  int setIdx) {
@@ -93,7 +94,7 @@ public class HomeMenuKiosk extends JPanel{
 			}
 		}
 		System.out.println("setPrice2 : " + sum + " : " +menuIdx);	
-		pay.price.setText(String.valueOf(sum) +" 원");	
+		pay.price.setText(ManagerCP.viewWon(sum) +" 원");	
 	}
 	
 	public void setPrice() {
@@ -107,7 +108,7 @@ public class HomeMenuKiosk extends JPanel{
 			}
 		}
 
-		pay.price.setText(String.valueOf(sum) +" 원");	
+		pay.price.setText(ManagerCP.viewWon(sum) +" 원");	
 	}
 	
 	public void viewMenu(String name) {
