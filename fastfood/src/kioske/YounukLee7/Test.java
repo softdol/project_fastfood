@@ -1,31 +1,62 @@
 package kioske.YounukLee7;
 
-import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Scanner;
 
-import kioske.YounukLee7.dbtablePocket.Order_list;
+import kioske.pherkad0602.ui.ojdbcConnection;
 
 public class Test {
 
 	public static void main(String[] args) {
-		String[] strings = {"1","2","3"};
 		
-//		Order_list[] list = new Order_list[3];
-//		list[0] = new Order_list();
-		
-		ArrayList<String> list2 = new ArrayList<>();
-		list2.add("1");
-		list2.add("2");
-		list2.add("3");
-		
-		ArrayList<Order_list> list3 = new ArrayList<>();
-//		list3.add(new Order_list(1, 1,1000));
-//		list3.add(new Order_list(1, 2,2000));
-//		list3.add(new Order_list(1, 3,3000));
-		
-		for (int i = 0; i < list3.size(); i++) {
-			list3.get(i);
-			System.out.println(list3.get(i).getMENU_IDX() + " " + list3.get(i).getORDER_PRICE());
+		String sql ="INSERT INTO PAYMENT_LIST "
+				   + "VALUES (PAYMENT_LIST_SEQ.nextval,?,'N',?,sysdate)";
+
+		try(
+				Connection conn = ojdbcConnection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+		){	
+			conn.setAutoCommit(false);
+
+			
+			pstmt.setString(1, "P");
+			pstmt.setInt(2, 20000);
+			System.out.println("PAYMENET_LIST 추가");
+			pstmt.executeUpdate();
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.out.println("PAYMENT_LIST 추가가 오류났음");
+			e.printStackTrace();
 		}
 		
+		String sql2 = "INSERT INTO ORDER_List "
+					+ "VALUES (ORDER_IDX_SEQ.nextval,?,0,?,?,?,null,?,sysdate,?,PAYMENT_LIST_SEQ.currval)";
+		
+		try (
+				Connection conn = ojdbcConnection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql2);
+		){
+			
+			conn.setAutoCommit(false);
+
+			pstmt.setInt(1, 3);
+			pstmt.setInt(2, 5000);
+			pstmt.setInt(3, 4);
+			pstmt.setInt(4, 20000);
+			pstmt.setString(5,"테스트 버거");
+			pstmt.setInt(6, 1);
+			
+			System.out.println("ORDER_LIST 추가");
+//			System.out.println(list.getMENU_IDX() +" "+ list.getORDER_PRICE() + " " + list.getORDER_QUANTITY()
+//			+ " "+ list.getORDER_PRICE_TOTAL() +" " + list.getMENU_NAME() + " " + list.getSET_IDX() );
+			pstmt.executeUpdate();
+			conn.commit();
+		} catch (SQLException e) {
+			System.out.println("ORDER_List 추가가 오류났음");
+			e.printStackTrace();
+		}
 	}
 }
