@@ -18,6 +18,7 @@ public class Down_yes_no_Button extends JPanel{
 	
 	Insert_List insert;
 	Main_JFrame frame;
+	int sum;
 	
 	public Down_yes_no_Button(Main_JFrame frame, String pay) {
 		this.frame = frame;
@@ -35,7 +36,7 @@ public class Down_yes_no_Button extends JPanel{
 		allpay.setBounds(40, 30, 180, 30);
 		
 		
-		int sum = 0;
+		sum = 0;
 		for(int i = 0; i < frame.orderList.size(); i ++) {
 			
 			if(frame.orderList.get(i).getSET_IDX()!= 0) {
@@ -64,7 +65,7 @@ public class Down_yes_no_Button extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				insert = new Insert_List(frame, pay);
+				insert = new Insert_List(frame, pay, sum);
 				frame.veiw_Order_completed();
 			}
 		});
