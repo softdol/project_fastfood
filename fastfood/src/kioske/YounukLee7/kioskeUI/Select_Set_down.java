@@ -68,6 +68,7 @@ public class Select_Set_down extends JPanel{
 		
 		JButton single_button = new JButton("단품");
 		single_button.setBounds(173, 200, 250, 350);
+		single_button.setBackground(Color.white);
 		ImageIcon icon = new ImageIcon(menuPicture.getImg_big_path());
 		Image img = icon.getImage();
 		Image soloimg = img.getScaledInstance(250, 350, Image.SCALE_SMOOTH);
@@ -91,6 +92,7 @@ public class Select_Set_down extends JPanel{
 		
 		JButton set_button = new JButton("세트");
 		set_button.setBounds(463, 200, 250, 350);
+		set_button.setBackground(Color.white);
 		ImageIcon icon1 = new ImageIcon(menuPicture.getSet_img_path());
 		Image img1 = icon1.getImage();
 		Image setimg = img1.getScaledInstance(250, 350, Image.SCALE_SMOOTH);

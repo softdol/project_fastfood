@@ -7,6 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorCompletionService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
@@ -76,6 +79,16 @@ public class Order_completed_down extends JPanel{
 		add(order_number);
 		add(payImage);
 		
+		
+		new java.util.Timer().schedule( 
+		        new java.util.TimerTask() {
+		            @Override
+		            public void run() {
+		                frame.veiw_back_first_screen();
+		            }
+		        }, 
+		        3000 
+		);
 		
 	}
 

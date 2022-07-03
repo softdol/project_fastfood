@@ -2,71 +2,82 @@ package kioske.YounukLee7;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import database.OjdbcConnection;
+import kioske.YounukLee7.dbtablePocket.Dual;
+import kioske.YounukLee7.dbtablePocket.EventPage;
 import kioske.YounukLee7.dbtablePocket.Order_list;
+import kioske.YounukLee7.dbtablePocket.Payment_List;
 import kioske.pherkad0602.ui.ojdbcConnection;
 
 public class Insert_List {
 	
 	Main_JFrame frame;
+	Insert_List_Second second;
 
-	public Insert_List(Main_JFrame frame, String payment) {
+	public Insert_List(Main_JFrame frame, String payment, int sum) {
 		this.frame = frame;
-		
-		for (int i = 0; i < frame.orderList.size(); i++) {
-			Order_list list = frame.orderList.get(i);
-		
-		String sql = "INSERT INTO PAYMENT_LIST "
-				   + "VALUES (PAYMENT_LIST_SEQ.nextval,?,'N',?,sysdate)";
-		
-		try (
-				Connection conn = ojdbcConnection.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sql);
-		){	
-			conn.setAutoCommit(false);
 
+//		String sql = "SELECT PAYMENT_LIST_SEQ.nextval FROM dual";
+//
+//		Dual dual = null;
+//
+//		try (
+//				Connection conn = OjdbcConnection.getConnection();
+//				PreparedStatement pstmt = conn.prepareStatement(sql);
+//				ResultSet rs = pstmt.executeQuery();
+//			) {
+//			while (rs.next()) {
+//				dual = new Dual(rs);
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//
+//		int payment_idx = Integer.valueOf(dual.getDummy());
+		
+			String sql1 = "INSERT INTO PAYMENT_LIST " + "VALUES (PAYMENT_LIST_SEQ.nextval,?,'N',?,sysdate)";
+
+			try (
+					Connection conn = ojdbcConnection.getConnection();
+					PreparedStatement pstmt = conn.prepareStatement(sql1);
+				) {
+				conn.setAutoCommit(false);
+
+				pstmt.setString(1, payment);
+				pstmt.setInt(2, sum);
+				System.out.println("PAYMENET_LIST 추가");
+				pstmt.executeUpdate();
+
+				conn.commit();
+
+			} catch (SQLException e) {
+				System.out.println("PAYMENT_LIST 추가가 오류났음");
+				e.printStackTrace();
+			}
 			
-			pstmt.setString(1, payment);
-			pstmt.setInt(2, list.getORDER_PRICE_TOTAL());
-			System.out.println("PAYMENET_LIST 추가");
-			pstmt.executeUpdate();
-
-			conn.commit();
-
-		} catch (SQLException e) {
-			System.out.println("PAYMENT_LIST 추가가 오류났음");
-			e.printStackTrace();
-		}
+	
+		String sql2 = "select * from PAYMENT_LIST order by payment_idx desc";
 		
-		String sql2 = "INSERT INTO ORDER_List "
-					+ "VALUES (ORDER_IDX_SEQ.nextval,?,0,?,?,?,null,?,sysdate,?,PAYMENT_LIST_SEQ.currval)";
+		ArrayList<Payment_List> payment_List = new ArrayList<>();
 		
 		try (
-				Connection conn = ojdbcConnection.getConnection();
+				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql2);
+				ResultSet rs = pstmt.executeQuery();
 		){
-			
-			conn.setAutoCommit(false);
-
-			pstmt.setInt(1, list.getMENU_IDX());
-			pstmt.setInt(2, list.getORDER_PRICE());
-			pstmt.setInt(3, list.getORDER_QUANTITY());
-			pstmt.setInt(4, list.getORDER_PRICE_TOTAL());
-			pstmt.setString(5, list.getMENU_NAME());
-			pstmt.setInt(6, list.getSET_IDX());
-			
-			System.out.println("ORDER_LIST 추가");
-			System.out.println(list.getMENU_IDX() +" "+ list.getORDER_PRICE() + " " + list.getORDER_QUANTITY()
-			+ " "+ list.getORDER_PRICE_TOTAL() +" " + list.getMENU_NAME() + " " + list.getSET_IDX() );
-			pstmt.executeUpdate();
-
-			conn.commit();
+			while (rs.next()) {
+				payment_List.add(new Payment_List(rs));
+			}
 		} catch (SQLException e) {
-			System.out.println("ORDER_List 추가가 오류났음");
 			e.printStackTrace();
 		}
-		}
+		
+		int payment_idx = payment_List.get(0).getPayment_idx();
+		
+		second = new Insert_List_Second(frame, payment_idx);
 	}
 }
