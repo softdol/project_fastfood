@@ -410,4 +410,28 @@ public class ReturnModel {
 			return null;
 		}	
 	}
+	
+	public static ArrayList<OrderDatabase> orderList(String sql){
+		ArrayList<OrderDatabase> orderList = new ArrayList<>();
+		try(
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt= conn.prepareStatement(sql);
+			){
+			
+			try(ResultSet rs = pstmt.executeQuery()){
+				while(rs.next()) {
+					orderList.add(new OrderDatabase(rs));					
+				}				
+				return orderList;
+			}catch(SQLException e) {
+				e.printStackTrace();
+				return null;
+			}		
+			
+						
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}	
+	}
 }

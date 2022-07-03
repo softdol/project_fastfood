@@ -33,7 +33,7 @@ public class SmallEventBanner extends JPanel{
 	
 		
 		JButton evButton = new JButton();
-		evButton.setBounds(5, i*150, 650, 145);
+		evButton.setBounds(5, 100+(i*150), 650, 145);
 		evButton.setBackground(Color.white);
 		evButton.setBorder(border);
 		evButton.addActionListener(new MenuSelAction(hMain, evBanner.get(i).getMENU_IDX(),frame));

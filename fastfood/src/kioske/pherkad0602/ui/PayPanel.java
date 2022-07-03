@@ -49,9 +49,22 @@ public class PayPanel extends JPanel {
 			
 		}
 		
-		price = new JLabel("");
+		price = new JLabel();
+		int sum = 0;
+		for(int i = 0; i < frame.orderList.size(); i ++) {
+			
+			if(frame.orderList.get(i).getSET_IDX()!= 0) {
+				sum += (frame.orderList.get(i).getORDER_PRICE_TOTAL() * (100- frame.orderList.get(0).getMenu_sale()))/100;
+			} else {
+				sum += frame.orderList.get(i).getORDER_PRICE_TOTAL();
+			}
+		}
+		price.setText(String.valueOf(sum) +" 원");	
 		price.setFont(new Font("궁서체", Font.PLAIN,40));
-		price.setBounds(600,20,200,80);		
+		price.setBounds(600,20,200,80);	
+		price.setHorizontalAlignment(JLabel.RIGHT);
+
+
 		add(price);
 		
 		String[] payMenu = {"처음으로", "주문내역", "도움"};

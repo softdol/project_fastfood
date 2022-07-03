@@ -68,9 +68,13 @@ public class ChangeMenu extends JPanel{
 			
 			JTextPane nameLabel = new JTextPane();
 			nameLabel.setText(String.valueOf(menuList.get(i).getMenu_name()));
-			nameLabel.setBounds(0,160,210,25);
+			nameLabel.setBounds(0,150,210,35);
 			nameLabel.setBackground(Color.white);
-			nameLabel.setFont(new Font("±Ã¼­Ã¼", Font.BOLD,20));
+			if(menuList.get(i).getMenu_name().length() >12) {
+				nameLabel.setFont(new Font("±Ã¼­Ã¼", Font.BOLD,15));
+			} else {
+				nameLabel.setFont(new Font("±Ã¼­Ã¼", Font.BOLD,20));
+			}
 			nameLabel.setBorder(border);
 			
 			StyledDocument doc1 = nameLabel.getStyledDocument();
