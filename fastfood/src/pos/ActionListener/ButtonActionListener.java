@@ -2,7 +2,8 @@ package pos.ActionListener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.JButton;
 
@@ -31,7 +32,12 @@ public class ButtonActionListener implements ActionListener{
 		
 		// ORDERLIST에 메뉴리스트를 넣어라 
 		
-		main.orderlist.add(new Order(m,1,0));
+		int qty = 1;
+		
+		
+		main.orderlist.add(new Order(m,qty,0));
+	
+		
 		
 //		for(Order o : main.orderlist) {
 //			System.out.println(o.getMenu_name() + " " + o.getMenu_idx());

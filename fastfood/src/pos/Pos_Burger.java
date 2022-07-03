@@ -1,33 +1,25 @@
 package pos;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Label;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 import manager.component.ManagerCP;
 import manager.sales.Pos_PaymentPageSe;
@@ -58,18 +50,20 @@ public class Pos_Burger extends JFrame {
       
       orderTable.dfTable.setRowCount(0);
       sum = 0;
+      int count = 1;
       
       for(Order o : orderlist) {
          System.out.println(o.getMenu_name() + " " + o.getOrder_quantity() + " " + o.getOrder_price() + " " + o.getOrder_price_total() + " ");
-      
-         // ÃÑÇÕ°è 
          
-         orderF[0] = o.getMenu_name();
+         
+         // ÃÑÇÕ°è 
+          
+         
+           orderF[0] = o.getMenu_name();
            orderF[1] = o.getOrder_quantity();
            orderF[2] = o.getOrder_price();
            orderF[3] = o.getOrder_price_total();
            orderTable.dfTable.addRow(orderF);
-          
            sum += o.getOrder_price_total();
            
             

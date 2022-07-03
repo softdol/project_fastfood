@@ -45,21 +45,21 @@ public class OrderListPanel extends JPanel {
       // 주문번호 창 패널
       setLayout(null);
       setBounds(20, 100, 360, 480);
-      setBackground(Color.black);
+      setBackground(Color.white);
 
       JPanel order_number = new JPanel();
       JLabel order_index = new JLabel("  < 주문표 > ");
       // 주문번호 db 인덱스를 통해서 가져올 예정
 
       order_number.setBackground(new Color(0x00769E));
-      order_number.setBounds(0, 0, 400, 85);
+      order_number.setBounds(0, 20, 400, 55);
 
       order_index.setBounds(80, 0, 400, 100);
       order_index.setFont(new Font("맑은 고딕", Font.BOLD, 30));
       order_index.setForeground(Color.white);
 
       JPanel order_table = new JPanel();
-      order_table.setBounds(0, 80, 400, 475);
+      order_table.setBounds(0, 70, 404, 320);
 
       String[] columns = new String[] { "메뉴", "수량", "단가", "금액" };
       Object[][] data = new Object[][] { { "", "", "", "" }, { "", "", "", "" } };
@@ -68,8 +68,14 @@ public class OrderListPanel extends JPanel {
       table = new JTable(dfTable);
       table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // 단일 선택
 
-      table.setPreferredScrollableViewportSize(new Dimension(400, 250));
+      table.setPreferredScrollableViewportSize(new Dimension(400, 255));
       table.setFillsViewportHeight(true);
+
+      table.getColumn("수량").setPreferredWidth(5);
+  
+      
+      
+     
 
       order_table.add(new JScrollPane(table));
 

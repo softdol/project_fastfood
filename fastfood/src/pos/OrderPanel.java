@@ -67,11 +67,17 @@ public class OrderPanel extends JPanel {
       dfTable = new DefaultTableModel(columns, 0);
       table = new JTable(dfTable);
       table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // 단일 선택
-
+  
+     
       table.setPreferredScrollableViewportSize(new Dimension(400, 250));
       table.setFillsViewportHeight(true);
+   
+      
 
       order_table.add(new JScrollPane(table));
+     
+      
+
 
       TableColumn comm = table.getColumnModel().getColumn(1);
 
