@@ -16,8 +16,10 @@ import kioske.YounukLee7.Main_JFrame;
 public class Down_yes_no_Button extends JPanel{
 	
 	Insert_List insert;
+	Main_JFrame frame;
 	
-	public Down_yes_no_Button(Main_JFrame screen, String pay) {
+	public Down_yes_no_Button(Main_JFrame frame, String pay) {
+		this.frame = frame;
 		
 		setBackground(new Color(0XFFF2DD));
 		setBounds(0,800,900,240);
@@ -33,12 +35,12 @@ public class Down_yes_no_Button extends JPanel{
 		
 		
 		int sum = 0;
-		for(int i = 0; i < screen.orderList.size(); i ++) {
+		for(int i = 0; i < frame.orderList.size(); i ++) {
 			
-			if(screen.orderList.get(i).getSET_IDX()!= 0) {
-				sum += (screen.orderList.get(i).getORDER_PRICE_TOTAL() * (100- screen.orderList.get(0).getMenu_sale()))/100;
+			if(frame.orderList.get(i).getSET_IDX()!= 0) {
+				sum += (frame.orderList.get(i).getORDER_PRICE_TOTAL() * (100- frame.orderList.get(0).getMenu_sale()))/100;
 			} else {
-				sum += screen.orderList.get(i).getORDER_PRICE_TOTAL();
+				sum += frame.orderList.get(i).getORDER_PRICE_TOTAL();
 			}
 		}
 		
@@ -61,8 +63,8 @@ public class Down_yes_no_Button extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				insert = new Insert_List(screen, pay);
-				screen.veiw_Order_completed();
+				insert = new Insert_List(frame, pay);
+				frame.veiw_Order_completed();
 			}
 		});
 		
@@ -76,7 +78,7 @@ public class Down_yes_no_Button extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				screen.veiw_Home();
+				frame.veiw_Home();
 			}
 		});
 		

@@ -62,7 +62,7 @@ public class Set_Option extends JFrame{
 		this.hMain = hMain;
 		panel = new JPanel();
 		add(panel);
-		Logo_MenuName_Panel logo = new Logo_MenuName_Panel(idx, set);
+		Logo_MenuName_Panel logo = new Logo_MenuName_Panel(idx, "o");
 		panel.add(logo);
 		
 		Select_Set_down selSet = new Select_Set_down(hMain, idx, this);
