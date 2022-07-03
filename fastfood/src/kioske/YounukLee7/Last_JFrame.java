@@ -70,11 +70,11 @@ public class Last_JFrame extends JFrame{
 		panel.add(new Error_Image_down());
 	}
 	
-	public void veiw_Order_completed() {
-		ManagerCP.reFresh(panel);
-		panel.add(new Completed_up());
-		panel.add(new Order_completed_down());
-	}
+//	public void veiw_Order_completed() {
+//		ManagerCP.reFresh(panel);
+//		panel.add(new Completed_up());
+//		panel.add(new Order_completed_down());
+//	}
 	
 	
 	
