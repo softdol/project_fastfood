@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import manager.ManagerMain;
 
 public class Pos_ManagerKey extends JFrame {
-	
+	//
 	public Pos_ManagerKey() {
 		JFrame frame = new JFrame("관리자 키");
 		frame.getContentPane().setBackground(Color.WHITE);
