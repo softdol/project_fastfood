@@ -185,7 +185,7 @@ public class OrderPanel extends JPanel {
 
 		// ----------------------------------------------------
 		// 판매액값 들어가는 라벨
-		saleslabel2 = new Label();
+		saleslabel2 = new Label("0");
 
 		// saleslabel2.setText(String.valueOf(sum));
 		saleslabel2.setBackground(new Color(0xCCFFFF));
@@ -193,14 +193,13 @@ public class OrderPanel extends JPanel {
 		saleslabel2.setFont(new Font("맑은 고딕", Font.BOLD, 25));
 
 		// 할인액값 들어가는 라벨
-		Label discountlabel2 = new Label();
-		discountlabel2.setText("0 ");
+		Label discountlabel2 = new Label("0");
 		discountlabel2.setBackground(new Color(0xCCFFFF));
 		discountlabel2.setBounds(180, 398, 180, 40);
 		discountlabel2.setFont(new Font("맑은 고딕", Font.BOLD, 25));
 
 		// 합계값 들어가는 라벨
-		totallabel2 = new Label();
+		totallabel2 = new Label("0");
 		// totallabel2.setText(String.valueOf(sum));
 		totallabel2.setBackground(new Color(0xCCFFFF));
 		totallabel2.setBounds(180, 438, 180, 40);
