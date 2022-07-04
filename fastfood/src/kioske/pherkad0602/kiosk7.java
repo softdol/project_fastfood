@@ -83,18 +83,18 @@ public class kiosk7 extends JPanel{
 		   
 		  JLabel menuName = new JLabel(menuInfo.get(0).getMenu_name() + " ¼¼Æ®");
 		  menuName.setBounds(280, 50, 500, 200);
-		   menuName.setFont(new Font("¸¼Àº °íµñ ±½°Ô", Font.BOLD, 50));
+		   menuName.setFont(new Font("¸¼Àº °íµñ ±½°Ô", Font.BOLD, 30));
 		 
 		  
 	      pNorth.setBackground(new Color(0XFFF2DD));
 	      pNorth.setBounds(0,0,900,300);
 	      pNorth.setLayout(null);
 	        
-	      pSouth.setBackground(new Color(0XFFE7DF));
+	      pSouth.setBackground(Color.white);
 	      pSouth.setBounds(0,300,900,540);
 	      pSouth.setLayout(null);
 	      
-	      payPanel.setBackground(Color.gray);
+	      payPanel.setBackground(new Color(0xdcdcdc));
 	      payPanel.setBounds(0,840,900,200);
 	      payPanel.setLayout(null);
 	      
@@ -104,7 +104,7 @@ public class kiosk7 extends JPanel{
 	      Image changeImg = img.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
 	      ImageIcon changeIcon = new ImageIcon(changeImg);
 	      JLabel logo = new JLabel(changeIcon);
-
+	      logo.setBackground(new Color(0XFFF2DD));
 	      logo.setBounds(50,50,200,200);
 	      //
 	   

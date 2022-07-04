@@ -53,7 +53,7 @@ public class HomePanel extends JPanel{
 		
 		eventTitle.setBounds(20,10,500,80);
 		eventTitle.setBackground(Color.white);
-		eventTitle.setFont(new Font("±√º≠√º", Font.PLAIN,40));
+		eventTitle.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN,40));
 		eventTitlePanel.add(eventTitle);
 		
 		mainPanel.add(eventTitlePanel);
@@ -78,11 +78,11 @@ public class HomePanel extends JPanel{
 		titlePanel.setBackground(Color.white);
 		titlePanel.setBorder(border);
 		
-		JLabel title = new JLabel(" ¿Œ±‚ ∏ﬁ¥∫");
+		JLabel title = new JLabel("¿Œ±‚ ∏ﬁ¥∫");
 		
 		title.setBounds(20,10,500,80);
 		title.setBackground(Color.white);
-		title.setFont(new Font("±√º≠√º", Font.PLAIN,40));
+		title.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN,40));
 		titlePanel.setBorder(border);
 		titlePanel.add(title);
 		
@@ -96,14 +96,14 @@ public class HomePanel extends JPanel{
 		
 		Menu menu= new Menu(menuList, hMain, frame);
 		menuPanel.add(menu);
-		menuPanel.setBounds(0,650,684,550+(210*(a/3)+1));
+		menuPanel.setBounds(0,650,684,550+(220*(a/3)+1));
 		mainPanel.add(menuPanel);
 		
 		JScrollPane scrollPane = new JScrollPane(mainPanel);
 		scrollPane.setBounds(0, 0, 684, 800);
 		scrollPane.setBorder(border);
 		Dimension size = new Dimension();
-				size.setSize(600,650+(210*(a/3)+1));
+				size.setSize(600,650+(220*(a/3)+1));
 		mainPanel.setPreferredSize(size);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(16);
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {

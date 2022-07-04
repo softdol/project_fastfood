@@ -57,7 +57,7 @@ public class Select_Set_down extends JPanel{
 //		}
 		
 //		System.out.println("set down: " + idx);
-		setBackground(new Color(0XFFE7DF));
+		setBackground(Color.white);
 		setBounds(0,300,900,770);
 		setLayout(null);
 		setVisible(true);

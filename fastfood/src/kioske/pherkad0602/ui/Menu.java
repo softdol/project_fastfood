@@ -37,7 +37,7 @@ public class Menu extends JPanel {
 		
 		LayoutManager manager = new GridLayout(b, 3);
 
-		setBounds(0, 0, 670, 210*b);
+		setBounds(0, 0, 670, 220*b);
 		setBackground(Color.white);
 		setLayout(manager);
 		setBorder(border);
@@ -67,13 +67,13 @@ public class Menu extends JPanel {
 			
 			JTextPane nameLabel = new JTextPane();
 			nameLabel.setText(String.valueOf(menuList.get(i).getMenu_name()));
-			nameLabel.setBounds(0,150,210,35);
+			nameLabel.setBounds(0,160,210,35);
 			nameLabel.setBackground(Color.white);
 			
 			if(menuList.get(i).getMenu_name().length() > 10) {
-				nameLabel.setFont(new Font("±Ã¼­Ã¼", Font.BOLD,13));
+				nameLabel.setFont(new Font("HY°ß°íµñ", Font.BOLD,13));
 			} else {
-				nameLabel.setFont(new Font("±Ã¼­Ã¼", Font.BOLD,20));
+				nameLabel.setFont(new Font("HY°ß°íµñ", Font.BOLD,20));
 			}
 			nameLabel.setBorder(border);
 			
@@ -86,9 +86,9 @@ public class Menu extends JPanel {
 			
 			JTextPane priceLabel = new JTextPane();
 			priceLabel.setText(String.valueOf(ManagerCP.viewWon(menuList.get(i).getMenu_price()) +"¿ø"));
-			priceLabel.setBounds(0,185,210,25);
+			priceLabel.setBounds(0,195,210,25);
 			priceLabel.setBackground(Color.white);
-			priceLabel.setFont(new Font("±Ã¼­Ã¼", Font.BOLD,20));
+			priceLabel.setFont(new Font("HY°ß°íµñ", Font.BOLD,20));
 			priceLabel.setBorder(border);
 			
 

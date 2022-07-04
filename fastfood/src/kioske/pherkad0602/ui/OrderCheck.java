@@ -42,7 +42,7 @@ public class OrderCheck extends JFrame{
 		
 		JButton btn1 = new JButton("³×");
 		btn1.setBounds(35,80,130,50);
-		btn1.setFont(new Font("±Ã¼­Ã¼", Font.BOLD,20));
+		btn1.setFont(new Font("HY°ß°íµñ", Font.BOLD,20));
 		btn1.setBackground(new Color(240,240,240));
 		btn1.setBorder(border);
 		btn1.addActionListener(new ActionListener() {
@@ -69,7 +69,7 @@ public class OrderCheck extends JFrame{
 		
 		JButton btn2 = new JButton("¾Æ´Ï¿À");
 		btn2.setBounds(220,80,130,50);
-		btn2.setFont(new Font("±Ã¼­Ã¼", Font.BOLD,20));
+		btn2.setFont(new Font("HY°ß°íµñ", Font.BOLD,20));
 		btn2.setBackground(new Color(240,240,240));
 		btn2.setBorder(border);
 		btn2.addActionListener(new ActionListener() {

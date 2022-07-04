@@ -34,7 +34,7 @@ public class SubMenuPanel extends JPanel{
 			
 			JButton btn4 = new JButton(sList.get(i).getMENU_SUBCATEGORY_NAME());
 			btn4.setName(sList.get(i).getMENU_SUBCATEGORY_NAME());
-			btn4.setFont(new Font("±Ã¼­Ã¼", Font.PLAIN,20));
+			btn4.setFont(new Font("HY°ß°íµñ", Font.PLAIN,20));
 			btn4.setBounds(15+(i*170), 30, 150, 50);
 			btn4.setBackground(new Color(0xFFFFFF));
 			btn4.addActionListener(new CategoryAction(hMain));

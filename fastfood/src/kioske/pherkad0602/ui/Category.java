@@ -45,7 +45,7 @@ public class Category extends JPanel{
 		
 		for(int i = 0; i <cate.length; ++i) {
 			JButton btn1 = new JButton(cate[i]);
-			btn1.setFont(new Font("±Ã¼­Ã¼", Font.PLAIN,40));
+			btn1.setFont(new Font("HY°ß°íµñ", Font.PLAIN,40));
 			btn1.setBackground(new Color(0xFFFFFF));
 			btn1.setBounds(0,100*(i+1),200,100);
 			btn1.setBorder(border);

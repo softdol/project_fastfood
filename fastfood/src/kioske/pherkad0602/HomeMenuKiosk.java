@@ -141,17 +141,11 @@ public class HomeMenuKiosk extends JPanel{
 		add(cate);
 		
 		main = new MainPanel(this, frame);
-		//main.setBounds(200, 0, 684, 800);
-		add(main);
-		
-		
-		
+		add(main);	
 		
 		setBounds(0,0,900,1040);
-		//setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
-	    //setResizable(false);
-		
+	
 		System.out.println(idx);
 
 	}

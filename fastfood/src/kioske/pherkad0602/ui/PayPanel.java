@@ -33,15 +33,12 @@ public class PayPanel extends JPanel {
 		
 		setBounds(0, 800, 884, 200);
 		setLayout(null);
+		setBackground(new Color(0xdcdcdc));
 		
 		JLabel priceName = new JLabel("√— ¡÷πÆ ∞°∞› : " );
-		priceName.setFont(new Font("±√º≠√º", Font.PLAIN,40));
+		priceName.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN,40));
 		priceName.setBounds(200,20,300,80);		
 		add(priceName);
-		
-		for(int i = 0; i<frame.orderList.size(); i ++) {
-			
-		}
 		
 		price = new JLabel();
 		int sum = 0;
@@ -54,10 +51,9 @@ public class PayPanel extends JPanel {
 			}
 		}
 		price.setText(ManagerCP.viewWon(sum) +" ø¯");	
-		price.setFont(new Font("±√º≠√º", Font.PLAIN,40));
+		price.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN,40));
 		price.setBounds(600,20,200,80);	
 		price.setHorizontalAlignment(JLabel.RIGHT);
-
 
 		add(price);
 		
@@ -65,7 +61,7 @@ public class PayPanel extends JPanel {
 
 			
 		JButton payBtn1 = new JButton(payMenu[0]);
-		payBtn1.setFont(new Font("±√º≠√º", Font.PLAIN,40));
+		payBtn1.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN,40));
 		payBtn1.setBounds(40, 100, 200, 80);
 		payBtn1.setBackground(new Color(0xFFFFFF));
 		payBtn1.addActionListener(new ActionListener() {
@@ -79,7 +75,7 @@ public class PayPanel extends JPanel {
 		add(payBtn1);
 		
 		JButton payBtn2 = new JButton(payMenu[1]);
-		payBtn2.setFont(new Font("±√º≠√º", Font.PLAIN,40));
+		payBtn2.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN,40));
 		payBtn2.setBounds(340, 100, 200, 80);
 		payBtn2.setBackground(new Color(0xFFFFFF));
 		payBtn2.addActionListener(new ActionListener() {
@@ -93,7 +89,7 @@ public class PayPanel extends JPanel {
 		add(payBtn2);
 		
 		JButton payBtn3 = new JButton(payMenu[2]);
-		payBtn3.setFont(new Font("±√º≠√º", Font.PLAIN,40));
+		payBtn3.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN,40));
 		payBtn3.setBounds(640, 100, 200, 80);
 		payBtn3.setBackground(new Color(0xFFFFFF));
 		add(payBtn3);

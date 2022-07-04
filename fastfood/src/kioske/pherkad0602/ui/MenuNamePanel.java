@@ -25,7 +25,7 @@ public class MenuNamePanel extends JPanel {
 		JLabel mName = new JLabel("  " + subTitle);
 		
 		mName.setBounds(20,10,500,80);
-		mName.setFont(new Font("±Ã¼­Ã¼", Font.PLAIN,55));
+		mName.setFont(new Font("HY°ß°íµñ", Font.PLAIN,55));
 		add(mName);
 		
 		

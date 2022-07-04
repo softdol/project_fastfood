@@ -25,7 +25,7 @@ public class Select_Takeout_down extends JPanel{
 		JButton takeout_button = new JButton("포장 주문 T");
 		JLabel select_label = new JLabel("선택해주세요");
 		
-		setBackground(new Color(0XFFE7DF));
+		setBackground(Color.white);
 		setBounds(0,300,900,740);
 		setLayout(null);
 		
