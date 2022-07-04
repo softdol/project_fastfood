@@ -85,14 +85,14 @@ public class ChangeMenu extends JPanel{
 			
 			btn3.add(nameLabel);
 			
-			int drinkprice = menuList.get(i).getMenu_price()-menuInfo.get(2).getMenu_price(); 
-			int sideprice = menuList.get(i).getMenu_price()-menuInfo.get(1).getMenu_price(); 
+			int drinkprice = menuList.get(i).getMenu_price()-menuInfo.get(1).getMenu_price(); 
+			int sideprice = menuList.get(i).getMenu_price()-menuInfo.get(2).getMenu_price(); 
 			int sale = Integer.valueOf(menuInfo.get(0).getMenu_sale());
 
 			JTextPane priceLabel = new JTextPane();
 			int temp1 = 0;
 			if(catei == 2) {
-			
+
 				priceLabel.setText(ManagerCP.viewWon((drinkprice*(100-sale))/100)+"¿ø");
 				temp1 = (drinkprice*(100-sale))/100;
 				
