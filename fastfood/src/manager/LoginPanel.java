@@ -88,9 +88,9 @@ public class LoginPanel extends JPanel {
 //		setFocusTraversalPolicy(newPolicy);
 		
 
-		txtId.setText("admin");
-		txtPassOn.setText("1234");
-		login();
+//		txtId.setText("admin");
+//		txtPassOn.setText("1234");
+//		login();
 	}
 	
 	public void loginCheck() {
