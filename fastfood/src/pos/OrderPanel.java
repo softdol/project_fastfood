@@ -65,7 +65,7 @@ public class OrderPanel extends JPanel {
 		setBackground(Color.black);
 
 		JPanel order_number = new JPanel();
-		JLabel order_index = new JLabel("  < 주문표 > ", 0);
+		JLabel order_index = new JLabel("  < 주문확인 > ", 0);
 		// 주문번호 db 인덱스를 통해서 가져올 예정
 
 		order_number.setBackground(new Color(0x00769E));
