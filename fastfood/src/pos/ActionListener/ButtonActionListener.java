@@ -26,7 +26,7 @@ public class ButtonActionListener implements ActionListener{
 		//클릭했을 때 메뉴 정보 가져오기 
 	
 		JButton itemBtn = (JButton)e.getSource();
-		System.out.println(itemBtn.getText());
+		//System.out.println(itemBtn.getText());
 		
 		String product = itemBtn.getText();
 		

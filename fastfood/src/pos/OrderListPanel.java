@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -71,13 +72,15 @@ public class OrderListPanel extends JPanel {
       table.setPreferredScrollableViewportSize(new Dimension(400, 255));
       table.setFillsViewportHeight(true);
 
-      table.getColumn("¼ö·®").setPreferredWidth(5);
-  
-      
-      
-     
 
-      order_table.add(new JScrollPane(table));
+      //order_table.add(new JScrollPane(table));
+      
+      JScrollPane scPane = new JScrollPane(table, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		
+		scPane.getVerticalScrollBar().setUnitIncrement(16);		
+		scPane.setBounds(0, 85, 360, 274);
+		add(scPane);
 
       TableColumn comm = table.getColumnModel().getColumn(1);
 
