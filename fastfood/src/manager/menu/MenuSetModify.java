@@ -86,7 +86,7 @@ public class MenuSetModify extends JPanel {
 		TextFieldSub txtSale = new TextFieldSub(String.valueOf(menuInfo.getSet_sale()), txtName.getX(), lblSale.getY());
 		JComboBox cbRep = new JComboBox();
 		
-		String sqlRep = "select * from menu where MENU_CATEGORY_IDX = ?";
+		String sqlRep = "select * from menu where MENU_USE_FLAG = 'Y' AND MENU_CATEGORY_IDX = ?";
 		repList = new ArrayList<>();
 		
 		psList = new ArrayList<>();
@@ -98,8 +98,10 @@ public class MenuSetModify extends JPanel {
 		cbRep.addItem("----------대표메뉴----------");
 		for(int i = 0; i < repList.size(); i++) {
 			cbRep.addItem(repList.get(i).getMenu_name() + "("+ repList.get(i).getMenu_price()  +")");
-			if(repList.get(i).getMenu_idx() == menuInfo.getSet_rep()) {
-				cbRep.setSelectedIndex(i+1);
+			//System.out.println(menuInfo.getSet_rep() + " : rep =" + repList.get(i).getMenu_idx());
+			if(repList.get(i).getMenu_idx().equals(menuInfo.getSet_rep())) {
+				cbRep.setSelectedIndex(i + 1);
+				
 			}
 		}
 		
