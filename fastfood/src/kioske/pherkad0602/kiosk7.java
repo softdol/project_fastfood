@@ -22,6 +22,7 @@ import kioske.pherkad0602.database.SetDatabase;
 import kioske.pherkad0602.ui.ChangeMenuPanel;
 import kioske.pherkad0602.ui.OrderCheck;
 import kioske.pherkad0602.ui.PayPanel;
+import manager.component.ManagerCP;
 
 public class kiosk7 extends JPanel{
 		
@@ -59,8 +60,10 @@ public class kiosk7 extends JPanel{
 	  	  psList.add(new PsList('I', String.valueOf(catei)));
 		  ArrayList<MenuDatabase> menuList = ReturnModel.selMenuList1(sql, psList);
 		   
+		  System.out.println(menuidx + "  " +  sideidx + " " + drinkidx);
+		  
 		  ArrayList<PsList> psList2 = new ArrayList<>();
-		  String sql2 = "select * from menu where MENU_IDX IN (?,?,?)";
+		  String sql2 = "select * from menu where MENU_IDX IN (?,?,?) ORDER BY menu_category_idx";
 	  	  psList2.add(new PsList('I', String.valueOf(menuidx)));
 	  	  psList2.add(new PsList('I', String.valueOf(sideidx)));
 	  	  psList2.add(new PsList('I', String.valueOf(drinkidx)));
@@ -75,7 +78,8 @@ public class kiosk7 extends JPanel{
 		  JPanel pNorth = new JPanel();
 		  JPanel pSouth = new JPanel();
 		  JPanel payPanel = new JPanel();
-
+		  System.out.println("0 :" +menuInfo.get(0).getMenu_name()+ " 1 :"+
+		  menuInfo.get(1).getMenu_name() +" 2 "+ menuInfo.get(2).getMenu_name() );
 		   
 		  JLabel menuName = new JLabel(menuInfo.get(0).getMenu_name() + " ¼¼Æ®");
 		  menuName.setBounds(280, 50, 500, 200);
@@ -143,7 +147,7 @@ public class kiosk7 extends JPanel{
 		   pSouth.add(chgMenu);
 		   
 		   payLabel2.setBounds(700,20,300,50);
-		   payLabel2.setText(String.valueOf(final_price)+"¿ø");
+		   payLabel2.setText(ManagerCP.viewWon(final_price)+"¿ø");
 		   payLabel2.setFont(new Font("¸¼Àº °íµñ ±½°Ô", Font.PLAIN, 30));
 		   payPanel.add(payLabel2);
 		   

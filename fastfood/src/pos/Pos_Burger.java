@@ -21,6 +21,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
 
+import manager.ManagerMain;
 import manager.component.ManagerCP;
 import manager.sales.Pos_PaymentPageSe;
 import pos.ActionListener.SubCateActionListener;
@@ -146,6 +147,16 @@ public class Pos_Burger extends JFrame {
       // 관리자 버튼 추가
       JButton managerBtn = new JButton(new ImageIcon(managerImage.getScaledInstance(100, 100, managerImage.SCALE_SMOOTH)));
       managerBtn.setBounds(865,480,100,100);
+      
+      // 관리자 버튼 클릭시 관리자 화면으로 이동되는 기능
+      managerBtn.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        new Pos_ManagerKey();
+		        setVisible(false); 
+		    }
+		});
+      
       
       // 로고 이미지 추가 
       String logoPath = "pos_image/logo.png";

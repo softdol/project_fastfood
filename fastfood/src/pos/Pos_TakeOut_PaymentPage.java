@@ -1,10 +1,14 @@
-upackage pos;
+package pos;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -19,10 +23,46 @@ import database.manager.ReturnModel;
 import database.model.PsList;
 
 public class Pos_TakeOut_PaymentPage extends JFrame {
-      
+//    Connection con = null;
+//    PreparedStatement pstmt = null;
+//    ResultSet rs = null;
+//    private void connect() {
+//  	  try {
+//  		  Class.forName("oracle.jdbc.driver.OracleDriver");
+//  		  String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+//  		  
+//  		  con = DriverManager.getConnection(url, "fastfood", "fastfood!@");
+//  		  System.out.println();
+//  	  } catch(Exception e) {
+//  		  System.out.println("오류");
+//  	  }
+//    }
+//    
+//   public void select() {
+//	   try {
+//		   String sql = "select * from payment_list";
+//		   pstmt = con.prepareStatement(sql);
+//		   rs = pstmt.executeQuery();
+//		   
+//		   while(rs.next()) {
+//			   String paymenttype = rs.getString("paymenttype");
+//			   String payment_idx = rs.getString("payment_idx");
+//			   String payment_price = rs.getString("payment_price");
+//			   String order_idx = rs.getString("order_idx");
+//			   
+//			   Object data[] = {paymenttype, payment_idx, payment_price, order_idx};
+//			   frame.addRow(data);
+//			   
+//		   }
+//		   
+//	   }catch(Exception e) {
+//		   System.out.println("오류");
+//	   }
+//   }
    public static void main(String[] args) {
       
-     String[] str = {"예", "아니오"};
+   
+      
       JFrame frame = new JFrame("결제창");
 
       Font fontsize60 = new Font("맑은 고딕", Font.PLAIN, 60);

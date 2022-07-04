@@ -2,14 +2,31 @@ package kioske.YounukLee7.kioskeUI;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutorCompletionService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import database.OjdbcConnection;
+import kioske.YounukLee7.Main_JFrame;
+import kioske.YounukLee7.dbtablePocket.MenuPicture;
+import kioske.YounukLee7.dbtablePocket.Payment_List;
+
 public class Order_completed_down extends JPanel{
 	
-	public Order_completed_down() {
+	Main_JFrame frame;
+	
+	public Order_completed_down(Main_JFrame frame) {
+		this.frame = frame;
 		
 		setBackground(new Color(0XFFE7DF));
 		setBounds(0,300,900,770);
@@ -26,7 +43,24 @@ public class Order_completed_down extends JPanel{
 		word2.setBackground(new Color(0XFFE7DF));
 		word2.setBounds(380, 150, 300, 30);
 		
-		int order_num = 1;
+		String sql = "select * from PAYMENT_LIST order by payment_idx desc";
+		//Payment_List list = null;
+		ArrayList<Payment_List> list = new ArrayList<>();
+		
+		try (
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery();
+		){
+			while (rs.next()) {
+				list.add(new Payment_List(rs));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		int order_num = list.get(0).getPayment_idx();
 		JLabel order_number = new JLabel();
 		order_number.setText(String.valueOf(order_num));
 		order_number.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 150));
@@ -44,6 +78,17 @@ public class Order_completed_down extends JPanel{
 		add(word2);
 		add(order_number);
 		add(payImage);
+		
+		
+		new java.util.Timer().schedule( 
+		        new java.util.TimerTask() {
+		            @Override
+		            public void run() {
+		                frame.veiw_back_first_screen();
+		            }
+		        }, 
+		        3000 
+		);
 		
 	}
 

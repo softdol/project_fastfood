@@ -22,6 +22,7 @@ import kioske.pherkad0602.HomeMenuKiosk;
 import kioske.pherkad0602.action.MenuSelAction;
 import kioske.pherkad0602.action.MenuChangeAction;
 import kioske.pherkad0602.database.MenuDatabase;
+import manager.component.ManagerCP;
 
 public class Menu extends JPanel {	
 	
@@ -66,9 +67,14 @@ public class Menu extends JPanel {
 			
 			JTextPane nameLabel = new JTextPane();
 			nameLabel.setText(String.valueOf(menuList.get(i).getMenu_name()));
-			nameLabel.setBounds(0,160,210,25);
+			nameLabel.setBounds(0,150,210,35);
 			nameLabel.setBackground(Color.white);
-			nameLabel.setFont(new Font("±Ã¼­Ã¼", Font.BOLD,20));
+			
+			if(menuList.get(i).getMenu_name().length() > 10) {
+				nameLabel.setFont(new Font("±Ã¼­Ã¼", Font.BOLD,13));
+			} else {
+				nameLabel.setFont(new Font("±Ã¼­Ã¼", Font.BOLD,20));
+			}
 			nameLabel.setBorder(border);
 			
 			StyledDocument doc1 = nameLabel.getStyledDocument();
@@ -79,7 +85,7 @@ public class Menu extends JPanel {
 			btn3.add(nameLabel);
 			
 			JTextPane priceLabel = new JTextPane();
-			priceLabel.setText(String.valueOf(menuList.get(i).getMenu_price() +"¿ø"));
+			priceLabel.setText(String.valueOf(ManagerCP.viewWon(menuList.get(i).getMenu_price()) +"¿ø"));
 			priceLabel.setBounds(0,185,210,25);
 			priceLabel.setBackground(Color.white);
 			priceLabel.setFont(new Font("±Ã¼­Ã¼", Font.BOLD,20));

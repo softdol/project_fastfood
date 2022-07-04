@@ -4,16 +4,24 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import kioske.YounukLee7.Insert_List;
 import kioske.YounukLee7.Last_JFrame;
+import kioske.YounukLee7.Main_JFrame;
 
 public class Down_yes_no_Button extends JPanel{
 	
-	public Down_yes_no_Button(Last_JFrame screen) {
+	Insert_List insert;
+	Main_JFrame frame;
+	int sum;
+	
+	public Down_yes_no_Button(Main_JFrame frame, String pay) {
+		this.frame = frame;
 		
 		setBackground(new Color(0XFFF2DD));
 		setBounds(0,800,900,240);
@@ -27,7 +35,20 @@ public class Down_yes_no_Button extends JPanel{
 		allpay.setBackground(new Color(0XFFF2DD));
 		allpay.setBounds(40, 30, 180, 30);
 		
-		JLabel allmoney = new JLabel("17000¿ø");
+		
+		sum = 0;
+		for(int i = 0; i < frame.orderList.size(); i ++) {
+			
+			if(frame.orderList.get(i).getSET_IDX()!= 0) {
+				sum += (frame.orderList.get(i).getORDER_PRICE_TOTAL() * (100- frame.orderList.get(0).getMenu_sale()))/100;
+			} else {
+				sum += frame.orderList.get(i).getORDER_PRICE_TOTAL();
+			}
+		}
+		
+		
+		JLabel allmoney = new JLabel();
+		allmoney.setText(String.valueOf(sum) + "¿ø");
 		allmoney.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 30));
 		allmoney.setOpaque(true);
 		allmoney.setForeground(Color.RED);
@@ -44,7 +65,8 @@ public class Down_yes_no_Button extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				screen.veiw_Order_completed();
+				insert = new Insert_List(frame, pay, sum);
+				frame.veiw_Order_completed();
 			}
 		});
 		
@@ -58,7 +80,7 @@ public class Down_yes_no_Button extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				screen.veiw_Error();
+				frame.veiw_Home();
 			}
 		});
 		

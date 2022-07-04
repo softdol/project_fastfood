@@ -12,22 +12,17 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import kioske.YounukLee7.Last_JFrame;
 import kioske.YounukLee7.Main_JFrame;
 import kioske.pherkad0602.HomeMenuKiosk;
 import kioske.pherkad0602.database.MenuDatabase;
 import kioske.pherkad0602.database.ReturnModel;
+import manager.component.ManagerCP;
 
 public class PayPanel extends JPanel {
 	public JLabel price;
 	HomeMenuKiosk hMain;
 	Main_JFrame frame;
-	public void view_menu(String name) {
-		String a = name;
-	}
-	
-	public void name(int sum) {
-		price.setText(sum + "원");
-	}
 	
 	public PayPanel(HomeMenuKiosk hMain, Main_JFrame frame) {
 
@@ -48,9 +43,22 @@ public class PayPanel extends JPanel {
 			
 		}
 		
-		price = new JLabel("");
+		price = new JLabel();
+		int sum = 0;
+		for(int i = 0; i < frame.orderList.size(); i ++) {
+			
+			if(frame.orderList.get(i).getSET_IDX()!= 0) {
+				sum += (frame.orderList.get(i).getORDER_PRICE_TOTAL() * (100- frame.orderList.get(0).getMenu_sale()))/100;
+			} else {
+				sum += frame.orderList.get(i).getORDER_PRICE_TOTAL();
+			}
+		}
+		price.setText(ManagerCP.viewWon(sum) +" 원");	
 		price.setFont(new Font("궁서체", Font.PLAIN,40));
-		price.setBounds(600,20,200,80);		
+		price.setBounds(600,20,200,80);	
+		price.setHorizontalAlignment(JLabel.RIGHT);
+
+
 		add(price);
 		
 		String[] payMenu = {"처음으로", "주문내역", "도움"};
@@ -78,8 +86,8 @@ public class PayPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				frame.veiw_Final_payment();
+				//new Last_JFrame(frame, hMain);
 			}
 		});
 		add(payBtn2);

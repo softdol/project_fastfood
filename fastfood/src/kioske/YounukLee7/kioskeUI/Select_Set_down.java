@@ -68,6 +68,7 @@ public class Select_Set_down extends JPanel{
 		
 		JButton single_button = new JButton("단품");
 		single_button.setBounds(173, 200, 250, 350);
+		single_button.setBackground(Color.white);
 		ImageIcon icon = new ImageIcon(menuPicture.getImg_big_path());
 		Image img = icon.getImage();
 		Image soloimg = img.getScaledInstance(250, 350, Image.SCALE_SMOOTH);
@@ -91,6 +92,7 @@ public class Select_Set_down extends JPanel{
 		
 		JButton set_button = new JButton("세트");
 		set_button.setBounds(463, 200, 250, 350);
+		set_button.setBackground(Color.white);
 		ImageIcon icon1 = new ImageIcon(menuPicture.getSet_img_path());
 		Image img1 = icon1.getImage();
 		Image setimg = img1.getScaledInstance(250, 350, Image.SCALE_SMOOTH);
@@ -104,7 +106,7 @@ public class Select_Set_down extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				                         // 세트 표시 s
 				//screen.veiw_Set_Size(idx,"s");
-				option.veiw_Select_Side_Drink(menuidx, "s", set_idx, 5, 4);
+				option.veiw_Select_Side_Drink(menuidx, "s", set_idx, 201, 158);
 			}
 		});
 		
