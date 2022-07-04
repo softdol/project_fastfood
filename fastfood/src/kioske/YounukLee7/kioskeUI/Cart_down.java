@@ -27,7 +27,7 @@ public class Cart_down extends JPanel{
 		this.hMain = hMain;
 		int total = 0;
 		
-		setBackground(new Color(0XFFF2DD));
+		setBackground(new Color(0Xdcdcdc));
 		setBounds(0,800,900,240);
 		setLayout(null);
 		
@@ -36,7 +36,7 @@ public class Cart_down extends JPanel{
 		allpay.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 30));
 		allpay.setOpaque(true);
 		allpay.setForeground(Color.black);
-		allpay.setBackground(new Color(0XFFF2DD));
+		allpay.setBackground(new Color(0Xdcdcdc));
 		allpay.setBounds(40, 30, 180, 30);
 		
 		
@@ -54,7 +54,7 @@ public class Cart_down extends JPanel{
 		allmoney.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 30));
 		allmoney.setOpaque(true);
 		allmoney.setForeground(Color.RED);
-		allmoney.setBackground(new Color(0XFFF2DD));
+		allmoney.setBackground(new Color(0Xdcdcdc));
 		allmoney.setBounds(720, 30, 300, 30);
 	
 		JButton order_completed_button = new JButton("ÁÖ¹® ¿Ï·á");

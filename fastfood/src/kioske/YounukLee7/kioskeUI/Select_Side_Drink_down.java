@@ -98,7 +98,7 @@ public class Select_Side_Drink_down extends JPanel{
 		
 		
 		
-		setBackground(new Color(0XFFE7DF));
+		setBackground(new Color(0XFFFFFF));
 		setBounds(0,300,900,740);
 		setLayout(null);
 		

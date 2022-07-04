@@ -23,7 +23,7 @@ public class Down_yes_no_Button extends JPanel{
 	public Down_yes_no_Button(Main_JFrame frame, String pay) {
 		this.frame = frame;
 		
-		setBackground(new Color(0XFFF2DD));
+		setBackground(new Color(0Xdcdcdc));
 		setBounds(0,800,900,240);
 		setLayout(null);
 		
@@ -32,7 +32,7 @@ public class Down_yes_no_Button extends JPanel{
 		allpay.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 30));
 		allpay.setOpaque(true);
 		allpay.setForeground(Color.black);
-		allpay.setBackground(new Color(0XFFF2DD));
+		allpay.setBackground(new Color(0Xdcdcdc));
 		allpay.setBounds(40, 30, 180, 30);
 		
 		
@@ -52,7 +52,7 @@ public class Down_yes_no_Button extends JPanel{
 		allmoney.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 30));
 		allmoney.setOpaque(true);
 		allmoney.setForeground(Color.RED);
-		allmoney.setBackground(new Color(0XFFF2DD));
+		allmoney.setBackground(new Color(0Xdcdcdc));
 		allmoney.setBounds(720, 30, 300, 30);
 	
 		JButton pay_button = new JButton("∞·¡¶ «œ±‚");
