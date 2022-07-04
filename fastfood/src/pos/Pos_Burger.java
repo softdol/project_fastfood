@@ -1,37 +1,26 @@
 package pos;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Label;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
-import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
-import manager.ManagerMain;
 import manager.component.ManagerCP;
 import manager.sales.Pos_PaymentPageSe;
+import pos.ActionListener.LeftViewActionListener;
 import pos.ActionListener.SubCateActionListener;
 
 public class Pos_Burger extends JFrame {
@@ -44,7 +33,7 @@ public class Pos_Burger extends JFrame {
    int sum;
    
    OrderListPanel orderTable;
-   
+   OrderPanel orderResultTable;
    
    public void clearList() {
       orderlist = new ArrayList<>();
@@ -52,6 +41,10 @@ public class Pos_Burger extends JFrame {
       sum = 0;
       orderTable.saleslabel2.setText("0");
       orderTable.totallabel2.setText("0");
+      minus.setEnabled(true);
+      all_minus.setEnabled(true);
+      in.setEnabled(true);
+      out.setEnabled(true);
    }
    
    public void setOrderlist( ) {
@@ -61,7 +54,7 @@ public class Pos_Burger extends JFrame {
       sum = 0;
       
       for(Order o : orderlist) {
-         System.out.println(o.getMenu_name() + " " + o.getOrder_quantity() + " " + o.getOrder_price() + " " + o.getOrder_price_total() + " ");
+         //System.out.println(o.getMenu_name() + " " + o.getOrder_quantity() + " " + o.getOrder_price() + " " + o.getOrder_price_total() + " ");
       
          // 총합계 
          
@@ -81,15 +74,36 @@ public class Pos_Burger extends JFrame {
       
    }
    
-
+   JButton minus;
+   JButton all_minus;
+   JButton in;
+   JButton out;
    
    public void viewMenuList(int iCate) {
-      System.out.println(iCate);
+      //System.out.println(iCate);
       item.removeAll();      
       item.revalidate();
       item.repaint();
       item.add(new MenuListPanel(iCate,this));
    }
+   
+   public void viewLeftList(int idx) {
+		if (idx == 5) {
+			orderTable.setVisible(true);
+			orderResultTable.setVisible(false);
+			clearList();
+		} else {
+			orderTable.setVisible(false);
+			orderResultTable.setVisible(true);
+			ManagerCP.reFresh(orderResultTable);
+			orderResultTable.add(new OrderPanel(this));
+			orderResultTable.setLocation(20, 100);
+			minus.setEnabled(false);
+			all_minus.setEnabled(false);
+			in.setEnabled(false);
+			out.setEnabled(false);
+		}
+	}
    
 
    
@@ -109,7 +123,7 @@ public class Pos_Burger extends JFrame {
          
       
       // 카테고리도 db 통해서 불러올 예정 
-      String[] bigcate = { "BURGER","DRINK","SIDE","DESSERT", "SET", "", "" };
+      String[] bigcate = { "BURGER", "DRINK", "SIDE", "DESSERT", "SET", "ORDER", "CONFIRM" };
       
       
       // 주문번호 창 패널
@@ -144,6 +158,18 @@ public class Pos_Burger extends JFrame {
          
       }
       
+      for (int i = 5; i < 7; ++i) {
+			JButton bigMenu = new JButton(bigcate[i]);
+			// idx =i + 1;
+			bigMenu.addActionListener(new LeftViewActionListener(this, i));
+			bigMenu.setFont(new Font("Kristen ITC", Font.BOLD, 18));
+			bigMenu.setForeground(new Color(0x2F4858)); // 글꼴 색 변경
+			bigMenu.setBorder(new LineBorder(Color.white)); // 외곽선 변경
+			bigMenu.setBackground(new Color(0xD9EDDF)); // 배경색
+			bigMenu.setBounds(8 + (40 * (i * 3)), 30, 120, 60);
+			menu.add(bigMenu);
+		}
+      
       
       
       // 관리자 이미지 추가
@@ -177,13 +203,23 @@ public class Pos_Burger extends JFrame {
       //JPanel jpOrder = new JPanel();
       //jpOrder.setLayout(null);
       //jpOrder.setBounds(0, 0, 360, 480);
+      //orderTable = new OrderListPanel(this);
+      
       orderTable = new OrderListPanel(this);
+	  orderResultTable = new OrderPanel(this);
+
+	  // jpOrder.add(orderTable);
+	  // add(jpOrder);
+	  orderTable.setVisible(true);
+	  orderResultTable.setVisible(false);
+	  add(orderTable);
+	  add(orderResultTable);
       
       //jpOrder.add(orderTable);
       //add(jpOrder);
       add(orderTable);
       
-      JButton minus = new JButton("한줄 취소");
+      minus = new JButton("한줄 취소");
       minus.setBounds(865,170,100,50);
       minus.addActionListener(new ActionListener() {
          
@@ -202,7 +238,7 @@ public class Pos_Burger extends JFrame {
          }
       });
       
-      JButton all_minus = new JButton("전체 취소");
+      all_minus = new JButton("전체 취소");
       all_minus.setBounds(865,245,100,50);
       all_minus.addActionListener(new ActionListener() {
          
@@ -218,7 +254,7 @@ public class Pos_Burger extends JFrame {
          }
       });
       
-      JButton in = new JButton("Eat - IN ");
+      in = new JButton("Eat - IN ");
       in.addActionListener(new ActionListener() {
          
          @Override
@@ -230,7 +266,7 @@ public class Pos_Burger extends JFrame {
       });
       in.setBounds(865,320,100,50);
       
-      JButton out = new JButton("Take - Out");
+      out = new JButton("Take - Out");
       out.addActionListener(new ActionListener() {
          
          @Override
