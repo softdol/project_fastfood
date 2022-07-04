@@ -45,7 +45,7 @@ public class ChangeMenuPanel extends JPanel {
 		scrollPane.getVerticalScrollBar().setUnitIncrement(16);	
 		scrollPane.setBorder(border);
 		Dimension size = new Dimension();
-				size.setSize(600,210+(210*(a/3)+1));
+				size.setSize(600,210+(220*(a/3)+1));
 		menuPanel.setPreferredSize(size);
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			   public void run() {
